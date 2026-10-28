@@ -5,7 +5,7 @@ Seth Douglas and Nidhal Mghirbi — October 2026.
 [Read the manuscript](paper/main.pdf) · [TeX source](paper/main.tex) ·
 [Machine checks](verification/README.md)
 
-Version 1.0.0, October 2026.
+Version 1.0.0, October 2026. DOI: [10.5281/zenodo.23719180](https://doi.org/10.5281/zenodo.23719180) (concept DOI, all versions: [10.5281/zenodo.23719179](https://doi.org/10.5281/zenodo.23719179)).
 
 A quantum channel says what happens to each input, not when inputs arrive, when outputs leave for good, or what must
 be handed back. We show that for every finite schedule in which each carrier returns with its Hamiltonian and the

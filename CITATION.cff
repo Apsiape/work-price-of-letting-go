@@ -3,6 +3,7 @@ message: "Please cite the manuscript; this repository supplies its source and ve
 type: software
 title: "The thermodynamics of deadlines: one law for the work cost of acting in time"
 version: 1.0.0
+doi: "10.5281/zenodo.23719180"
 date-released: 2026-10-27
 license:
   - CC-BY-4.0
@@ -90,6 +91,7 @@ references:
         given-names: Nidhal
     year: 2026
 preferred-citation:
+  doi: "10.5281/zenodo.23719180"
   type: generic
   title: "The thermodynamics of deadlines: one law for the work cost of acting in time"
   authors:
