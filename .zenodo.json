@@ -1,0 +1,61 @@
+{
+  "title": "The thermodynamics of deadlines: one law for the work cost of acting in time",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "Douglas, Seth"
+    },
+    {
+      "name": "Mghirbi, Nidhal"
+    }
+  ],
+  "description": "<p>A quantum channel says what happens to each input, not when inputs arrive, when outputs leave for good, or what must be handed back. We show that for every finite schedule in which each carrier returns with its Hamiltonian and the controller comes back, the optimal work per use at vanishing error is the least entropy one implementation must add to its own record, plus the energy it hands over, against the most demanding observer. Landauer's bound, the thermodynamic capacity of Faist, Berta and Brandão in the time-covariant case, and the real-time costs of channels and processes are this law on different schedules. The cost survives arbitrarily slow operation: order, not speed, sets it. Releasing each output of a repeated memoryless channel before the next input arrives costs nothing extra for classical channels, a positive amount for partial reset at every temperature, and k<sub>B</sub>T ln 3 per use for the Werner–Holevo qutrit at zero Hamiltonian, which is essentially free in batch. For a classical task with zero Hamiltonians that releases a past and later answers a question about it, the real-time and held prices are logarithms of two fiber counts; for reversible questions they differ by the logarithm of the number of classes of pasts that later questions tell apart. With a returned clock, the batch cost of every channel is a single-letter quantity, equal to the capacity when the environment can carry the channel's energy change; otherwise the clock's spread must grow at least linearly with the number of uses. Freeness is decidable in batch for exact algebraic data and undecidable in real time, already in a fixed dimension. A two-qubit process that is free when held costs every early-release device at least 0.87 k<sub>B</sub>T ln 2 per episode at one percent error and budgets of 0.025 k<sub>B</sub>T ln 2; for a classical version we propose a three-arm feedback-trap protocol.</p><p>This record archives the manuscript, its TeX source and its machine checks (Python, and Lean with Mathlib). The manuscript is the authority for exact statements and hypotheses; the verification notes list what is checked by machine and what is proved only in the text. How the work was done, including the use of AI models, is described in the manuscript.</p><p>Most of the results first appeared in four papers, which this paper brings together: <em>The price of time order</em> (<a href=\"https://doi.org/10.5281/zenodo.23310622\">doi:10.5281/zenodo.23310622</a>); <em>Only quantum channels save work by waiting</em> (<a href=\"https://doi.org/10.5281/zenodo.23310624\">doi:10.5281/zenodo.23310624</a>; its title concerns repeated uses of one memoryless channel, and classical tasks with memory can pay for early release); <em>The work cost of answering in real time</em> (<a href=\"https://doi.org/10.5281/zenodo.23310628\">doi:10.5281/zenodo.23310628</a>); <em>The price of keeping time</em> (<a href=\"https://doi.org/10.5281/zenodo.23310632\">doi:10.5281/zenodo.23310632</a>). A short letter summarizes them (<a href=\"https://doi.org/10.5281/zenodo.23323808\">doi:10.5281/zenodo.23323808</a>).</p><p><strong>Scoped licenses:</strong> the manuscript, PDF and TeX source are licensed under Creative Commons Attribution 4.0 International (CC-BY-4.0). The software and machine-readable verification artifacts are additionally available under the MIT License. See RIGHTS.md in the archive.</p>",
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "version": "1.0.0",
+  "language": "eng",
+  "keywords": [
+    "quantum thermodynamics",
+    "time order",
+    "Landauer principle",
+    "thermodynamic capacity",
+    "quantum channels",
+    "quantum clocks",
+    "release rank",
+    "resource theories"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23310622",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23310624",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23310628",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23310632",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23323808",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    }
+  ],
+  "notes": "CC BY 4.0 applies to the manuscript, its TeX source and the documentation; the software and verification artifacts are additionally available under the MIT License. RIGHTS.md specifies the scopes."
+}

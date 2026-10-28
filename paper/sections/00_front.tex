@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{array,longtable}
+\usepackage{enumitem,booktabs,graphicx,tikz,placeins}
+\usepackage[protrusion=false,expansion=false]{microtype}
+\setlength{\emergencystretch}{1.5em}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\input{sections/title}
+\hypersetup{pdftitle={\papertitle},pdfauthor={Seth Douglas and Nidhal Mghirbi}}
+
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\kB}{k_{\mathrm B}}
+\newcommand{\Trt}{\kappa_\beta}
+\newcommand{\Tcap}{\mathcal T}
+\newcommand{\Pp}{\mathcal P}
+\newcommand{\Pt}{\widetilde{\mathcal P}}
+\newcommand{\Kb}{K_\beta}
+\newcommand{\Dil}{\mathcal C}
+\providecommand{\tr}{\operatorname{tr}}
+\providecommand{\R}{\mathcal R}
+\providecommand{\G}{\mathcal G}
+\providecommand{\K}{\mathcal K}
+\providecommand{\eps}{\varepsilon}
+\providecommand{\id}{\operatorname{id}}
+\newcommand{\PROV}[1]{}
+\providecommand{\supp}{\operatorname{supp}}
+\providecommand{\Span}{\operatorname{span}}
+\providecommand{\osc}{\operatorname{osc}}
+\providecommand{\h}{h_2}
+\providecommand{\T}{\tfrac12\|\cdot\|_1}
+\providecommand{\D}{D_{\mathrm{nat}}}
+
+\title{\textbf{\papertitle}\ifx\papersubtitle\empty\else\\[6pt]\large\papersubtitle\fi}
+\author{Seth Douglas \and Nidhal Mghirbi}
+\date{October 2026 \\[2pt] {\small Version 1.0.0}}
+
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A quantum channel says what happens to each input, not when inputs arrive, when outputs leave for good, or what must be handed back. We show that for every finite schedule in which each carrier returns with its Hamiltonian and the controller comes back, the optimal work per use at vanishing error is the least entropy one implementation must add to its own record, plus the energy it hands over, against the most demanding observer. Landauer's bound, the thermodynamic capacity of Faist, Berta and Brand\~ao in the time-covariant case, and the real-time costs of channels and processes are this law on different schedules. The cost survives arbitrarily slow operation: order, not speed, sets it. Releasing each output of a repeated memoryless channel before the next input arrives costs nothing extra for classical channels, a positive amount for partial reset at every temperature, and $k_{\mathrm B}T\ln3$ per use for the Werner--Holevo qutrit at zero Hamiltonian, which is essentially free in batch. For a classical task with zero Hamiltonians that releases a past and later answers a question about it, the real-time and held prices are logarithms of two fiber counts; for reversible questions they differ by the logarithm of the number of classes of pasts that later questions tell apart. With a returned clock, the batch cost of every channel is a single-letter quantity, equal to the capacity when the environment can carry the channel's energy change; otherwise the clock's spread must grow at least linearly with the number of uses. Freeness is decidable in batch for exact algebraic data and undecidable in real time, already in a fixed dimension. A two-qubit process that is free when held costs every early-release device at least $0.87\,k_{\mathrm B}T\ln2$ per episode at one percent error and budgets of $0.025\,k_{\mathrm B}T\ln2$; for a classical version we propose a three-arm feedback-trap protocol.
+\end{abstract}
+
+\noindent\emph{The authors developed this work with AI models from more than one developer and take responsibility for every claim. The whole paper has been reviewed nine times by a model from a developer other than that of the models that helped write it, and the fixes from those reviews, and from a review of the experimental design, are applied. How the work was done, and what the machine checks cover, is described at the end of the paper.}
+
+\setcounter{tocdepth}{1}
+{\small\tableofcontents}

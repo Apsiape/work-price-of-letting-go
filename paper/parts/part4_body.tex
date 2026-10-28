@@ -1,0 +1,310 @@
+\subsection{Setting}\label{kt:sec:setting}
+
+We use the model of Appendix~\ref{app:channels}. There $\Trt(\Phi)$ denotes the optimal real-time work rate, in bits; its general formula is not needed here, and for a unitary $U$ it equals $\beta\lambda_{\max}(U^*HU-H)/\ln2$. A device consists of a controller $C$, a battery $B$ and Gibbs reservoirs, all declared in advance; every operation is a unitary that conserves the total energy of the systems it acts on, and there is no external coherence. The controller holds all hardware, including the clock. The battery is \emph{stationary} if it starts in a state that commutes with its Hamiltonian, as an energy eigenstate does. Throughout this part the battery is stationary, so that every phase reference the device holds is in its controller: a battery in a broad superposition of energy levels would itself be a clock, which the device could spend without returning it (Appendix~\ref{app:channels}). Errors lie in $[0,1]$: the error $\varepsilon$ is the complete strategy distance to $n$ ideal uses, the largest half trace distance over adaptive observers who keep quantum references; in batch it is the half diamond distance $\tfrac12\|\widetilde\Phi_n-\Phi^{\otimes n}\|_\diamond$ of the implemented channel $\widetilde\Phi_n$, with $U^{\otimes n}$ for a gate. Work is the mean energy the battery loses. It is \emph{deterministic}, as in Section~\ref{sec:contract}, when the battery starts in an energy eigenstate, ends in a fixed eigenstate with probability tending to one, and its mean absolute deviation from that eigenvalue is $o(n)$. The last clause matters when the controller returns only approximately. Without it, a broad reference could lend the device its energy and be refilled from the battery in one rare, large event, leaving the battery's typical endpoint untouched. The constructions that attain the rates of this part meet this condition; where they convert purity into work with the protocols of~\cite{HorodeckiOppenheim13}, the battery misses its endpoint only with vanishing probability, and then by at most the $O(n)$ work converted. Some lower bounds need only the weaker, signed condition that the battery's mean energy differ from that eigenvalue by $o(n)$: Theorem~\ref{kt:thm:batchlaw}, Proposition~\ref{kt:bp-lower} and Corollary~\ref{kt:cor:embezzle} state their converses under it, which makes those converses stronger and leaves the contract unchanged. The two conditions are not equivalent: excursions of $\pm n^2$ from the endpoint, each with probability $1/(2n)$, leave the signed deviation at zero and make the absolute one $n$. Theorem~\ref{kt:thm:dichotomy}(b) is recalled from Appendix~\ref{app:channels}, and Table~\ref{tab:exceptions} gives the battery condition of its real-time constructions.
+
+A controller \emph{returns approximately} if, uniformly over observers, its final joint state with all other systems is within $\eta\to0$ in trace distance of $\alpha_C$ tensored with their final state, and its mean energy and its entropy change by $o(n)$. Trace-distance closeness alone would not suffice. As Faist, Oppenheim and Renner warned, a catalyst returned only approximately can embezzle work~\cite{FOR15}: here a broad reference could hand over energy of order $n$ while staying close to its initial state, and would then act as a second battery. Section~\ref{kt:sec:embezzle} gives the exact free-energy ledger of such a controller. The controller may start with any declared amount of phase reference. Entropies are in nats when they appear as $\kB T\,S$ and in bits when they appear as $\kB T\ln2\,S$. Write $D=U^*HU-H$, $\mathrm{span}(X)$ for the difference between the largest and smallest eigenvalues of $X$, and $g$ for the spread of the diagonal of $D$ in an energy eigenbasis. If $U$ does not commute with $H$, then $g>0$ (Appendix~\ref{kt:app:proofs}). The thermodynamic capacity $\mathcal T(\Phi)$ is an energy here; it equals $\kB T\ln2$ times the capacity in bits used in Section~\ref{sec:law} and Appendix~\ref{app:channels}. The batch cost $B(\Phi)$ is also an energy, and $\beta B(\Phi)/\ln2$ is its rate in bits. Time evolutions are written with $\hbar=1$; the interaction strength of Proposition~\ref{kt:prop:clockcost} restores it. Table~\ref{kt:tab:contract} lists the conditions that each group of results uses.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
+\toprule
+Results & Controller starts & Controller returns & Battery & Error and conclusion\\
+\midrule
+Batch law (Theorems~\ref{kt:thm:balanced} and~\ref{kt:thm:batchlaw}, Proposition~\ref{kt:prop:single}) & in any declared state; its free energy is invested capital & the whole controller, jointly with everything else, with actual energy and entropy changes $o(n)$ & starts in an energy eigenstate; ends with entropy and mean absolute energy deviation from its nominal endpoint $o(n)$; the converse needs only a signed mean deviation $o(n)$ & error tending to zero against entangled inputs; optimal work $B(\Phi)$ per use, the capacity when $D$ lies in the span of the $A_i^*A_j$\\
+Clock spread (Propositions~\ref{kt:prop:capital-converse}, \ref{kt:prop:broadclock} and~\ref{kt:prop:clocksize}) & in any state; the spread $s_n$ of its capital is what is bounded & not required at fixed error; for vanishing error, independent of everything else within $\eta_n$, uniformly over inputs & starts in a state commuting with its Hamiltonian; any work, or work below the capacity in Proposition~\ref{kt:prop:capital-converse} & below the spreads of Table~\ref{kt:tab:clocksize}, error tending to one\\
+Gate resources (Propositions~\ref{kt:prop:clockcost} and~\ref{kt:prop:lottery}) & in any state & approximately, within $\eta$, for the capital and bath bounds; the lottery needs no return, and its variance bound only a mean refund & sharp for the capital and bath bounds; in the lottery every system but the controller starts stationary & error $\varepsilon$; capital of order $n/(\varepsilon+\eta)$, bath range and interaction strength of order $n/\sqrt\varepsilon$, controller energy moving by order $n$\\
+Free-energy ledger (Corollary~\ref{kt:cor:embezzle}) & in any declared state & no condition for (a); for (b), its own state within $\eta_n$ of $\alpha_C$ on every input, with no refund of energy or entropy; in (c), jointly within $\eta_n+o(1)$, entropy refunded, energy not & as for the batch law & error tending to zero; battery and controller together supply at least $nB(\Phi)-o(n)$ on the most demanding input\\
+\bottomrule
+\end{tabular}
+\caption{The contracts of the four groups of results; all hold in batch as well as in real time, except the batch law and the free-energy ledger, which are batch statements. Every error is a complete strategy distance, a half diamond distance in batch, against observers that keep quantum references. Startup capital is declared and is not part of the work. Constructions are built for a known number $n$ of uses, and each channel has the same Hamiltonian at input and output.}\label{kt:tab:contract}
+\end{table}
+
+% =====================================================================
+\FloatBarrier
+\subsection{The dichotomy}\label{kt:sec:dichotomy}
+
+\begin{theorem}[Exact and approximate return (Appendix~\ref{app:channels}); (a) after~\cite{MarvianSpekkens19,LostaglioMuller19}]\label{kt:thm:dichotomy}
+\begin{enumerate}[label=(\alph*)]
+\item If the controller returns exactly and the battery is stationary, every implementation of a channel $\Phi$ has error at least $\frac14\sup_t\|J_\Phi-e^{-\mathrm itG}J_\Phi e^{\mathrm itG}\|_1$, with $J_\Phi$ the Choi state and $G=H_O-H_I^T$; this is positive exactly when $\Phi$ is not time-covariant.
+\item If the controller returns approximately, the optimal real-time work per use at vanishing error is $\kB T\ln2\,\Trt(\Phi)$ for every channel $\Phi$. For a unitary it is exactly $\lambda_{\max}(D)$, with the battery reaching its target on every branch.
+\end{enumerate}
+\end{theorem}
+
+The construction behind (b) rests on one primitive. With $w=\lambda_{\max}(D)$ and $B=wI-D\ge0$, a thermal qubit with a large gap $M$ absorbs the input-dependent energy $-D$ by a rare excitation: a rotation between payload and qubit by the angle whose sine is $\sqrt{B/M}$ changes the payload channel by only $O(\|B\|/M)$, yet takes up the energy $B$ on average. The constant $w$ is supplied by a sharp battery, and lifting the whole contact with a phase reference, as in the construction of Chiribella, Yang and Renner~\cite{ChiribellaYangRenner21} after {\AA}berg~\cite{Aberg14}, makes it conserve energy exactly. For the Hadamard gate, a reference of two sine-shaped packets, the reference state of~\cite{ChiribellaYangRenner21}, with widths $(n+1)^8$ and $(n+1)^4$ gives work exactly $nE/\sqrt2$ with errors $O(n^{-3})$; the rest of this part shows that such large resources are not an accident of the construction.
+
+% =====================================================================
+\subsection{What the clock costs}\label{kt:sec:costs}
+
+The operating work is the formula of Theorem~\ref{kt:thm:dichotomy}, but the clock and the baths are not cheap.
+
+\begin{proposition}[What the clock costs]\label{kt:prop:clockcost}
+Let $U$ be a unitary that does not commute with $H$, let $D=U^*HU-H$, and let $g>0$ be the spread of the diagonal of $D$ in an energy eigenbasis. Consider any implementation of $n$ uses whose controller returns approximately, with error $\varepsilon$ and return error $\eta$, $\varepsilon+\eta\le1/16$, Gibbs reservoirs and a sharp battery.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Capital.} For all large $n$, the controller's initial free energy above its Gibbs state satisfies
+\[
+\beta^{-1}D(\alpha_C\|\gamma_C)\ \ge\ \frac{g\,n}{2048(\varepsilon+\eta)}-\frac{\ln2}\beta;
+\]
+for the Hadamard gate, $nE/(256(\varepsilon+\eta))-\ln2/\beta$ for every $n$.
+\item \emph{Baths.} On the two products of extreme eigenvectors of $D$, the laws of the heat $Q$ absorbed by the baths are within $2\sqrt{2\varepsilon}$ in total variation, while their means differ by $L_n=n(\lambda_{\max}-\lambda_{\min})(D)-2n\varepsilon\,\mathrm{span}(H)-o(n)$. So the baths' total energy range is at least $L_n/(2\sqrt{2\varepsilon})$. If every interaction that changes the baths' energy acts on cells of total energy span at most $q_0$, there are at least $L_n/(4q_0\sqrt{2\varepsilon})$ such interactions, and, if $\varepsilon\le1/(8e^2)$, their integrated strength $A_n=\int\sum_l\|h_l(t)\|\,dt/\hbar$ satisfies
+\[
+A_n\ \ge\ \frac{L_n/(8q_0\sqrt{2\varepsilon})-\ln\bigl(1/(2\sqrt{2\varepsilon})\bigr)}{2(\sqrt e-1)},
+\]
+which grows like $n/\sqrt\varepsilon$.
+\end{enumerate}
+Both parts hold for batch implementations too.
+\end{proposition}
+
+The ideas are simple (Appendix~\ref{kt:app:proofs}). For (a), an observer feeds $K$ uses half of a GHZ state whose partner carries compensating energy, so that everything except the controller starts stationary. The ideal outputs then carry coherence $1/2$ at frequency $KE$, and only the controller can supply it. As in the argument of Chiribella, Yang and Renner~\cite{ChiribellaYangRenner21}, a clock that returns approximately can be reused, here for about $1/(8(\varepsilon+\eta))$ blocks of $n$ uses, so $K$ grows as $n/(\varepsilon+\eta)$. For (b), accuracy forces the baths' final state to be nearly independent of the input, while energy conservation forces their mean heat to depend on it. A bounded-span interaction of total strength $A$ gives the heat exponential tails of scale $A$, which forces $A$ to be large.
+
+The capital bound is nearly tight at slowly vanishing error. For the Hadamard gate there are implementations with work exactly $nE/\sqrt2$, errors $O(1/\log n)$ and capital $O(E\,n\log^2n/\log\log n)$, and the rare high-energy qubits can be replaced by blocks of ordinary qubits of gap $E$, flipped together (Appendix~\ref{kt:app:proofs}). Errors alone force capital of order $n/\sqrt\varepsilon$, by the energy, coherence and free-energy cost laws of Chiribella, Yang and Renner, of Tajima, Shiraishi and Saito, and of Tajima, Yamaguchi, Takagi and Kuramochi~\cite{ChiribellaYangRenner21,TSS20,TYTK25}, applied to $n$ uses. Chiribella, Yang and Renner show that for a fixed register a battery recycled through a circuit needs energy independent of the number of gates; here each use acts on a fresh input, so the register, and with it the capital, grows with $n$. In (a) the return error enters linearly because a clock that returns can be reused; in our constructions $\eta$ is of order $\sqrt\varepsilon$, and the two scalings agree. In real time, asymmetry is paid in invested free energy, which comes back, in the range of the baths and in interaction effort, never in operating work; in batch, Section~\ref{kt:sec:batch} shows that it can also cost operating work.
+
+% =====================================================================
+\subsection{The clock's energy is a lottery}\label{kt:sec:lottery}
+
+In the construction of Appendix~\ref{app:channels}, for any input other than the top eigenvector of $D$, the controller typically ends with energy higher by order $n$; rare branches in which a high-gap thermal qubit absorbs a large quantum balance this on average. This is not an accident of the construction.
+
+\begin{proposition}[The clock's energy is a lottery]\label{kt:prop:lottery}
+Let $U$ be a unitary that is not time-covariant, let $d_i=\langle i|(U^*HU-H)|i\rangle$ in an energy eigenbasis of $H$, and let $g=\max_id_i-\min_id_i$; then $g>0$. Take any energy-conserving implementation of $n$ uses of $U$ with error $\varepsilon$ in which every system other than the controller starts in a state that commutes with its Hamiltonian. Feed $|i\rangle^{\otimes n}$, with $i$ maximizing or minimizing $d_i$, and let $q$ be the energy gained by the controller, read off from energy measurements of everything else at the start and at the end. Let $p_{\max}$ and $p_{\min}$ be the probabilities that $|q|>an$ on the two feeds. Then for every $0<a<g/2$,
+\[
+p_{\max}+p_{\min}\ \ge\ 1-2\sqrt{2\varepsilon}-2\varepsilon-4e^{-n(g-2a)^2/(2\,\mathrm{span}(H)^2)}.
+\]
+If in addition the controller's mean energy changes by at most $u$ on both feeds, then on one of them the standard deviation of $q$ is at least
+\[
+\frac{\bigl(ng-2n\varepsilon\,\mathrm{span}(H)-2u\bigr)\sqrt{1-16\varepsilon}}{8\sqrt\varepsilon}-\Bigl(\frac{\sqrt n}2+\sqrt\varepsilon\,n\Bigr)\mathrm{span}(H).
+\]
+\end{proposition}
+
+The measurement that defines $q$ never touches the controller. Everything else starts in a stationary state, so measuring its energy first changes nothing. Each outcome then shifts the controller's energy by exactly $q$, whatever its coherence, and the first two moments of $q$ are those of the operator $V^*H_CV-H_C$, where $V$ is the whole circuit. The proof combines two facts (Appendix~\ref{kt:app:proofs}). Accurate service makes the final state of the heat baths and the battery nearly independent of the input, while energy conservation requires the input-dependent part of the energy, of size about $ng$, to go somewhere. If the controller's energy change were small on both feeds, two nearly identical heat distributions would have to concentrate on intervals about $ng$ apart. So no accurate clock returns its energy branch by branch. One that returns it on average does so through a lottery, in which rare, large transfers balance a typical change of order $n$.
+
+The bounds are sharp in order. The construction of Appendix~\ref{app:channels} has a standard deviation of order $n/\sqrt\varepsilon$, and the value $1/2$ for the larger of the two probabilities cannot be improved; only the size of $q$ is forced, not its sign. On a coherent input, the variance of $V^*H_CV-H_C$ is at least $n^2[\mathrm{span}(U^*HU-H)-4\varepsilon\,\mathrm{span}(H)]^2/4$, with no condition on its mean. Chiribella, Yang and Renner bound the clock's initial mean energy, energy range and energy spread, and Tajima, Shiraishi and Saito its initial coherence~\cite{ChiribellaYangRenner21,TSS20}; Proposition~\ref{kt:prop:lottery} bounds its energy change.
+
+\paragraph{Capital and reliability.} Capital also decides whether a device that saves work must fail. With an approximately returning controller, a broad energy bank can make loans that depend on the branch and cancel in the mean, and so run a covariant reset at half the vanishing-error rate with error exactly $1/2$, even with a sharp battery. Only a broad bank can do this: what matters is the spread of the controller's capital, not its size.
+
+\begin{proposition}[Strong converse with a reusable controller]\label{kt:prop:capital-converse}
+Let $\Phi$ be a channel on a finite-dimensional system with Hamiltonian $H$ and thermodynamic capacity $\mathcal T(\Phi)=\max_\rho[F(\Phi(\rho))-F(\rho)]$, where $F(\rho)=\Tr H\rho-\beta^{-1}S(\rho)$ with $S$ in nats, and let $\rho$ be a maximizer. Consider implementations of $n$ uses of $\Phi$, in batch or in real time, in which the battery starts in an energy eigenstate $|i\rangle$ and ends in a fixed energy eigenstate $|f\rangle$ except with probability $q_n$, with $E_i-E_f\le n\,(\mathcal T(\Phi)-\Delta)$ for a fixed $\Delta>0$. Let the controller start in $\alpha_C=\sum_a\lambda_a|a\rangle\langle a|$, with Gibbs state $\gamma_C=\sum_b\mu_b|b\rangle\langle b|$, and call
+\[
+s_n=\min_c\ \sum_{a,b}\lambda_a|\langle a|b\rangle|^2\,\Bigl|\ln\frac{\lambda_a}{\mu_b}-c\Bigr|
+\]
+the spread of its capital. There are $b>0$ and $f_n\to0$, depending only on $\Phi$, $\beta$ and $\Delta$, such that the error $\varepsilon_n$ satisfies:
+\begin{enumerate}
+\item[(a)] $1-\varepsilon_n-q_n\le e^{D_{\max}(\alpha_C\|\gamma_C)-bn}+f_n$;
+\item[(b)] if on the input $\rho^{\otimes n}$ the controller returns independently of everything else, $\tfrac12\|\Omega_{C,\mathrm{rest}}-\alpha_C\otimes\Omega_{\mathrm{rest}}\|_1\le\eta_n$, then
+\[
+1-\varepsilon_n-q_n\ \le\ 51\sqrt{\eta_n}\,\max\Bigl\{1,\Bigl(\frac{8s_n}{\beta\Delta n}\Bigr)^2\Bigr\}+f_n;
+\]
+\item[(c)] under the return condition of (b), also
+\[
+1-\varepsilon_n-q_n\ \le\ C\,\eta_n\,\max\Bigl\{1,\Bigl(\frac{8s_n}{\beta\Delta n}\Bigr)^2\Bigr\}+f_n,
+\]
+with $C=2^{17}$, and $C=36$ if $\alpha_C$ commutes with $H_C$ and the maximizer $\rho$ commutes with $H$. A maximizer that commutes with $H$ exists whenever $\Phi$ is time-covariant; for other channels the bound with $C=36$ holds with $\mathcal T(\Phi)$ replaced by the largest value of $[D(\Phi(\rho)\|\gamma)-D(\rho\|\gamma)]/\beta$ over states $\rho$ that commute with $H$.
+\end{enumerate}
+In particular, if $q_n\to0$, $\eta_n\to0$ and $s_n=o(n/\sqrt{\eta_n})$, then $\varepsilon_n\to1$. No time covariance is assumed.
+\end{proposition}
+
+Part (a) needs no return: capital below $bn$ cannot help, which extends the converses for a controller that starts in its Gibbs state (Appendix~\ref{app:channels}). Parts (b) and (c) are the reusable case, and they charge the spread of the capital, not its size. Mean capital of order $n$ is enough, since $s_n\le D(\alpha_C\|\gamma_C)+2/e$, and so is every controller with $\ln\dim C=O(n)$ and an energy span of order $n$. A controller in an energy eigenstate has $s_n=0$ however much energy it holds, and for a pure controller $s_n$ is $\beta$ times the mean absolute deviation of its energy from a median. The threshold in the last sentence of the proposition is sharp up to constants: a flat energy bank of spread about $0.159\,n\eta_n^{-1/2}$ runs $n$ resets at half the vanishing-error rate with error exactly $1/2$, while its mean energy and entropy return exactly (Appendix~\ref{kt:pf:capital}). What the bank lends is energy variance, not energy or entropy. Approximately returned catalysts are usually controlled through the product of their return error and their size, $\eta_nK$ with $K=\beta\,\mathrm{span}(H_C)+\ln\dim C$~\cite{BrandaoSecondLaws15,NgCatalysis15}. For reliability this is not enough: for the flat bank $\eta_nK$ tends to zero when its number of levels grows faster than $n$, and the quantity that decides reliability is $\eta_ns_n^2/n^2$. The proof uses the spread only to keep the characteristic function of the controller's log-likelihood law at least $1/2$ in modulus near zero, so what matters is how concentrated that law is: a controller that puts weight at least $3/4$ on a single value of the log-likelihood is covered whatever its spread. Reliability can be broken only by a broad bank, but breadth alone is not enough. The converse is at the capacity; Proposition~\ref{kt:prop:broadclock} extends it to the batch cost $B(\Phi)$ of Section~\ref{kt:sec:batch}. For a gate, Proposition~\ref{kt:prop:clockcost} shows that vanishing error already needs capital of order $n/(\varepsilon+\eta)$, more than linear, so the proposition bears on covariant channels and on noisy channels whose clocks are cheap, such as the channel of Proposition~\ref{kt:prop:reach} at slowly vanishing error. The proof is in Appendix~\ref{kt:app:proofs}.
+
+% =====================================================================
+\subsection{Batch with a returned clock}\label{kt:sec:batch}
+
+A batch device may hold all its outputs until the end and erase its baths using them as side information; this is how Faist, Berta and Brand\~ao reach the thermodynamic capacity of time-covariant channels with thermal operations~\cite[Sec.~7]{FBB21}; with Gibbs-preserving maps they reach it for every channel~\cite[Sec.~6]{FBB21}. For channels that are not time-covariant, whether thermal operations reach the capacity is their open question~\cite{FBB19},~\cite[Sec.~9]{FBB21}, and Faist, Oppenheim and Renner asked more generally whether thermal operations with a time reference can match Gibbs-preserving maps~\cite{FOR15}. For a clock that must return, this section answers both questions at the level of work per use in batch: the batch cost of every channel is a single-letter quantity, which equals the capacity whenever the environment can carry the channel's energy change, and for a Gibbs-preserving channel only then. The expectation of Faist, Berta and Brand\~ao that a very large amount of coherence is needed is borne out for gates (Proposition~\ref{kt:prop:clockcost}); and when the coherence must be returned, even unlimited coherence does not reach the capacity of some channels (Theorem~\ref{kt:thm:batch}). A reference that is not returned, or that comes back only in state, such as an embezzling state, can lower the battery's share of the work, even below the capacity, but not the total: it pays the difference from its own free energy (Section~\ref{kt:sec:embezzle}).
+
+\subsubsection{Inputs the environment cannot tell apart}
+
+If two inputs $\rho$ and $\sigma$ of a channel $\Phi$ leave the same state in its environment, then every implementation of $n$ uses whose controller returns approximately spends at least
+\[
+n\Bigl[\Tr H\bigl(\Phi(\rho)-\rho\bigr)+\kB T\ln2\,\bigl(S(\sigma)-S(\Phi(\sigma))\bigr)\Bigr]-o(n),
+\]
+with entropies in bits. The idea is this. The inert purifier of the device's entire initial internal state does not depend on the input. If the environment cannot tell $\rho$ from $\sigma$, accurate service forces the outputs on $\rho$ to look, to that purifier, like the outputs on $\sigma$. Continuity of conditional entropy on the outputs then forbids the device's internal entropy from falling by more than $\sigma$ allows, so the energy that $\rho$ requires cannot be drawn from the baths' entropy beyond that amount and must come from the battery. Nothing depends on the dimension of the controller or on the tails of the heat. For a unitary every input leaves the environment unchanged, and the bound is the capacity.
+
+The best bound of this kind is single-letter. Write $\Psi$ for a complementary channel of $\Phi$, $D=\Phi^*(H)-H$, and
+\[
+B(\Phi)=\max\bigl\{\Tr\rho D+\kB T\,[S(\sigma)-S(\Phi(\sigma))]\;:\;\Psi(\rho)=\Psi(\sigma)\bigr\},
+\]
+with entropies in nats. For example, for qubit dephasing in the $X$ basis with $H=E|1\rangle\langle1|$, the ground state and the maximally mixed state leave the environment in the same state. The first requires the channel to supply energy $E/2$; the second offers no entropy decrease to pay for it. So $B(\Phi_X)\ge E/2$, above the capacity $\beta^{-1}\ln\cosh(\beta E/2)$, and Theorem~\ref{kt:thm:batch} shows that this is the cost.
+
+\begin{proposition}[A single-letter batch bound]\label{kt:prop:single}
+Consider implementations of $n$ uses whose controller returns approximately, with its actual energy and entropy changing by $o(n)$, and whose battery starts in an energy eigenstate and ends with entropy $o(n)$.
+\begin{enumerate}[label=(\alph*)]
+\item Every implementation spends at least $nB(\Phi)-o(n)$, and $B(\Phi^{\otimes N})=NB(\Phi)$: neither entangled inputs nor pairs whose environment states differ by a vanishing amount give more.
+\item $B(\Phi)$ is at least the thermodynamic capacity, with equality whenever $D$ lies in the range of $\Psi^*$, in particular for every covariant channel and every channel whose complementary channel is injective.
+\item $B(\Phi)=0$ if and only if $\Phi(\gamma)=\gamma$ and $D$ lies in the range of $\Psi^*$. For a qubit this holds exactly when $\Phi$ is Gibbs-preserving.
+\end{enumerate}
+\end{proposition}
+
+The range of $\Psi^*$ is the span of the products $A_i^*A_j$ of Kraus operators, and $D$ lies in it exactly when some dilation conserves mean energy for a suitable environment Hamiltonian: the environment can carry the energy change, input by input on average. We call such a channel \emph{balanced}; balance concerns the mean energy and does not make the channel time-covariant. Covariant channels always satisfy this. The criterion makes precise the obstruction that Faist, Berta and Brand\~ao anticipated: for superposed inputs of different energy, the environment must compensate the energy difference without disturbing the process~\cite{FBB19}.
+
+\subsubsection{The batch law}
+
+\begin{theorem}[A returned clock reaches the capacity]\label{kt:thm:balanced}
+Suppose $\Phi^*(H)+\Psi^*(K)=H$ for some Hermitian $K$ on the environment of a Stinespring dilation of $\Phi$; equivalently, $D$ lies in the span of the products $A_i^*A_j$. Then, with a returned clock, the optimal batch work per use is the thermodynamic capacity, attained with deterministic work. In particular, a Gibbs-preserving channel costs no work per use in batch with a returned clock if and only if $H-\Phi^*(H)$ lies in the span of the $A_i^*A_j$, and every Gibbs-preserving qubit channel costs none. For time-covariant channels the rate is that of~\cite[Thm.~7.1]{FBB21}, which is stated there with an information battery.
+\end{theorem}
+
+The construction prepares the environment in a zero-energy eigenstate of $K$, runs the dilation with the clock absorbing the energy of each branch, which on average is zero for every input, and then erases the environment using the held outputs as side information, recovering the preparation cost up to the capacity. A returned clock can supply phase, but it cannot provide net extensive energy: for every observer its actual mean energy change must be sublinear, although it can still make large loans that depend on the branch, as long as their mean is refunded. So thermal operations with a returned time reference implement a Gibbs-preserving channel at zero work per use in batch exactly when its energy change lies in the span of its Kraus products.
+
+When the environment cannot carry the whole energy change, the remainder must be paid, and the bound of Proposition~\ref{kt:prop:single} says exactly how much.
+
+\begin{theorem}[The batch law]\label{kt:thm:batchlaw}
+For every channel $\Phi$ on a finite-dimensional system with Hamiltonian $H$ at input and output, and every $0<T<\infty$, consider batch implementations of $n$ uses that hold all outputs until cleanup, with independently supplied Gibbs reservoirs, a controller in any declared initial state whose free energy is counted as invested capital, a battery that starts in an energy eigenstate, and finite energy-conserving gates. Require that the error, against inputs entangled across uses and with a reference, tend to zero, that the whole controller, not only the clock, return jointly with everything else, with actual energy and entropy changes $o(n)$, and that the battery end with entropy $o(n)$ and with mean energy within $o(n)$ of its nominal endpoint. The optimal work per use, the drop of the battery's nominal energy, is $B(\Phi)$. A single family attains it with a common nominal battery endpoint, reached except with vanishing probability, and with battery entropy and mean absolute deviation from that endpoint $o(n)$; its reservoirs, capital and running time grow with $n$. For time-covariant channels, where $B(\Phi)$ is the capacity, the rate is that of~\cite[Thm.~7.1]{FBB21}, which is stated there with an information battery.
+\end{theorem}
+
+The dual form of $B$ shows how. For every Hermitian $Y$ on the environment,
+\[
+B(\Phi)\le\lambda_{\max}\bigl(D-\Psi^*(Y)\bigr)+\max_\sigma\bigl[\kB T\bigl(S(\sigma)-S(\Phi(\sigma))\bigr)+\Tr\sigma\Psi^*(Y)\bigr],
+\]
+with one $\sigma$ serving both terms of the inner maximum, and the infimum over $Y$ is $B(\Phi)$. Write $t_Y$ and $g_Y$ for the two terms on the right, so that $B(\Phi)=\inf_Y(t_Y+g_Y)$. Each $Y$ is a device. Give the environment the Hamiltonian $\lambda_{\max}(Y)I-Y$ and prepare it in its ground state; the environment then carries the part $\Psi^*(Y)$ of the energy change. Pay the part it cannot carry, $D-\Psi^*(Y)$, at its top eigenvalue by rare excitations of a thermal qubit of large gap; run the dilation with a returned clock; and erase the environment using the held outputs as side information. The erasure step uses an energy-conserving decoder. Every input leaves the environment with conditional free energy $\Tr\Psi(\rho)H_E-\kB T[S(\rho)-S(\Phi(\rho))]\ge\lambda_{\max}(Y)-g_Y$, directly from the definition of $g_Y$. So one energy-conserving test, invariant under the energy and accepting every code state uniformly in operator norm, separates the code from a thermal environment at that rate; with Gibbs-weighted rejection and the thermal-operation form of position-based decoding~\cite{AnshuJainWarsi19,FBB21} it erases the environment, and an exact mechanical factory converts the resulting information label into work. When $D$ lies in the range of $\Psi^*$, the rare excitations are unnecessary and the device is that of Theorem~\ref{kt:thm:balanced}. The complete construction, with its physical ledger, is in Appendix~\ref{kt:app:batchphys}. It uses large capital and reservoirs; it shows what is possible in principle, not an efficient engine.
+
+\paragraph{How large the clock must be.} The balanced case is also the case of small clocks.
+
+\begin{proposition}[Unbalanced channels need a broad clock]\label{kt:prop:broadclock}
+Let $\Phi$ be a channel whose energy change $D=\Phi^*(H)-H$ lies outside the span of the products $A_i^*A_j$ of its Kraus operators. Consider implementations of $n$ uses of $\Phi$, at any work, whose battery, like the Gibbs reservoirs, starts in a state that commutes with its Hamiltonian, and let $s_n$ be the spread of the controller's capital, as in Proposition~\ref{kt:prop:capital-converse}. If $s_n=o(n)$, the error tends to one. If the controller returns independently of everything else, uniformly over all inputs and references, with return error $\eta_n$, the error also tends to one whenever $\eta_n\max\{1,(s_n/n)^2\}\to0$; and if $\eta_n>0$, there are $b,c,N>0$ depending only on $\Phi$ and $H$ such that $s_n\ge c\,\beta n/\sqrt{\eta_n(\varepsilon_n+\eta_n)}$ whenever $n\ge N$ and $\varepsilon_n+\eta_n\le b$. Consequently, for every channel, nominal work below $n[B(\Phi)-\Delta]$ with a fixed $\Delta>0$ and the battery as in Proposition~\ref{kt:prop:capital-converse}, together with $q_n\to0$, $\eta_n\to0$ and $s_n=o(n/\sqrt{\eta_n})$, forces the error to one.
+\end{proposition}
+
+The second statement combines the first with Proposition~\ref{kt:prop:capital-converse}, since $B(\Phi)$ is the capacity when $D$ lies in the span. The reason is metrological. The generator $i\sum_iA_i^*\dot A_i$ of the channel's orbit under time evolution is exactly $D$, and when it lies outside the span of the $A_i^*A_j$, that orbit can be estimated at the Heisenberg limit, with phase resolution of order $1/n$ rather than the $1/\sqrt n$ of the standard quantum limit, using error correction~\cite{ZhouZhangPreskillJiang18,ZhouJiang21}: inputs that the environment cannot tell apart differ in the energy the channel adds, $\Tr\rho D$, and a code built from them turns $n$ uses into a probe of phase with resolution $1/n$. Related metrological arguments limit codes that are covariant under a continuous symmetry~\cite{KubicaDemkowicz21,ZhouLiuJiang21}. Rotating the controller rotates the implemented channel along that orbit, so a device that implements $\Phi$ reliably reads its own clock to within $1/n$. A clock of spread $o(n)$ cannot be read that finely at all, and a clock that returns within $\eta_n$ needs spread of order $n/\sqrt{\eta_n}$ even at fixed error. To make the error vanish it must be broader still: passing one logical qubit through about $1/(\varepsilon_n+\eta_n)$ consecutive runs before reading its phase multiplies the signal while the noise grows only at second order, so every reliable implementation has $s_n\sqrt{\eta_n}/n\to\infty$, with spread at least of order $n/\eta_n$ when $\varepsilon_n=O(\eta_n)$. Since $s_n\le D(\alpha_C\|\gamma_C)+2/e$, the same bound holds for the capital; for a gate it improves Proposition~\ref{kt:prop:clockcost}(a) whenever $\eta_n=o(\varepsilon_n)$. When $D$ lies in the span there is no such probe, since the quantum Fisher information of $n$ uses then grows only linearly in $n$~\cite{FujiwaraImai08,DKG12,DemkowiczMaccone14,SSKD17,ZhouJiang21}, as under Markovian noise inside the Lindblad span~\cite{DemkowiczCzajkowskiSekatski17}, and the clock can be small: the channel of Proposition~\ref{kt:prop:reach} needs spread only of order $\sqrt n$ at fixed error. The balanced criterion of Theorem~\ref{kt:thm:balanced} is therefore also the line between clocks that may be small and clocks that must be read at the Heisenberg limit. $X$-dephasing lies on the far side: every reliable implementation, at any work, needs a clock whose spread grows faster than $n/\sqrt{\eta_n}$. The proof is in Appendix~\ref{kt:app:proofs}.
+
+\paragraph{The exponent of the clock.} The span criterion also sets how the clock must grow with $n$. Proposition~\ref{kt:prop:broadclock} gives the linear lower bound for unbalanced channels; the next proposition gives the rest. Its parts (a) and (b) use only the time orbit of the channel and the standard quantum limit, part (c) a lift whose errors cancel between uses, and part (d) the code of Proposition~\ref{kt:prop:broadclock} together with the no-programming theorem~\cite{NielsenChuang97,KubickiPalazuelosPerezGarcia19}.
+
+\begin{proposition}[How large the clock must be]\label{kt:prop:clocksize}
+Let $\Phi$ be a channel that is not time-covariant, consider implementations whose battery, like the Gibbs reservoirs, starts in a state that commutes with its Hamiltonian, and let $s_n$, $\varepsilon_n$ and $\eta_n$ be as in Proposition~\ref{kt:prop:broadclock}. There are constants $c,C,N>0$, depending only on $\Phi$, $H$ and $\beta$, such that the following hold, in batch and in real time.
+\begin{enumerate}[label=(\alph*)]
+\item At any work, and without any return of the controller, $s_n=o(\sqrt n)$ forces $\varepsilon_n\to1$.
+\item If the controller returns independently of everything else, uniformly over all inputs and references, then $s_n\ge c\sqrt{n/(\varepsilon_n+\eta_n)}$ whenever $n\ge N$ and $\varepsilon_n+\eta_n\le1/32$.
+\item If $D$ lies in the span of the $A_i^*A_j$, then for every $a\in(0,1]$ and every $n$ there is a batch implementation of $n$ uses with error at most $a/2$, whose whole controller returns jointly with everything else within $2a$, with actual changes $o(1)$ of its mean energy and $O(\log n)$ of its entropy, whose battery starts in an energy eigenstate and ends in a fixed one except with probability at most $1/n$, and with $s_n\le C\sqrt n/a$.
+\item For $X$-dephasing, $\Phi_X(\rho)=(\rho+X\rho X)/2$ with $H=E|1\rangle\langle1|$: at any work and without return, $s_n\ge\beta En/(512\sqrt{\varepsilon_n})$ whenever $n\ge4096$ and $0<\varepsilon_n\le1/4096$. Conversely, for all $\varepsilon,\eta\in(0,1]$ there is a real-time implementation with error below $\varepsilon$, return error below $\eta$, actual changes $o(n)$ of the controller's mean energy and entropy, work exactly $E/2$ per use on every branch, and $s_n=O(\beta En/\min\{\eta,\sqrt\varepsilon\})$.
+\end{enumerate}
+\end{proposition}
+
+Table~\ref{kt:tab:clocksize} collects the bounds. For $X$-dephasing with $\varepsilon_n=O(\eta_n)$ they match: the optimal spread is of order $\beta En\max\{\eta_n^{-1},\varepsilon_n^{-1/2}\}$, and it is reached at the optimal work $E/2$ per use. When $\varepsilon_n\ll\eta_n^2$ the bound of (d) decides it, and when $\eta_n^2\lesssim\varepsilon_n\lesssim\eta_n$ the reliable bound of Proposition~\ref{kt:prop:broadclock}; when $\eta_n\ll\varepsilon_n$ the two sides differ by a factor $\sqrt{\varepsilon_n/\eta_n}$. The construction in (c) spends work of order $n\log(n/a)$, which is not the batch rate, and for irrational gaps its controller is astronomically large, although its spread is not. Without return, vanishing error need not cost a balanced channel any extra spread: the replacement channel $\rho\mapsto|+\rangle\langle+|$, which is balanced, is run exactly by swapping in a stock of $|+\rangle$ states, whose spread is about $\beta E\sqrt{n/(2\pi)}$. For $X$-dephasing, which is unbalanced, it must: by Proposition~\ref{kt:prop:broadclock} and (d), its spread is at least of order $n$, and of order $n/\sqrt{\varepsilon_n}$ as the error vanishes.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{3.0cm}p{2.6cm}p{8.4cm}}
+\toprule
+Channel & Fixed error & Vanishing error, controller returned\\
+\midrule
+Time-covariant & no clock & no clock\\
+Balanced, not covariant & $s_n\asymp\sqrt n$ & $\sqrt{n/(\varepsilon_n+\eta_n)}\lesssim s_n\lesssim\sqrt n\,\max\{\eta_n^{-1},\varepsilon_n^{-1}\}$\\
+Unbalanced & $s_n\gtrsim n$ & $s_n\gtrsim n/\sqrt{\eta_n(\varepsilon_n+\eta_n)}$\\
+\quad $X$-dephasing & $s_n\asymp n$ & $s_n\asymp n\max\{\eta_n^{-1},\varepsilon_n^{-1/2}\}$ if $\varepsilon_n=O(\eta_n)$\\
+\bottomrule
+\end{tabular}
+\caption{The spread of the clock needed for $n$ uses of a fixed channel (Propositions~\ref{kt:prop:broadclock} and~\ref{kt:prop:clocksize}), with constants depending on $\Phi$, $H$ and $\beta$. At fixed error $0<\varepsilon<1$ the lower bounds are strong converses and need no return. The balanced upper bound is a batch construction whose work is of order $n\log(n/a)$, not the batch rate; the $X$-dephasing upper bound runs in real time at the optimal work. All lower bounds assume a battery that starts in a state commuting with its Hamiltonian.}\label{kt:tab:clocksize}
+\end{table}
+
+\subsubsection{Examples}
+
+\begin{theorem}[For $X$-dephasing, batch costs as much as real time]\label{kt:thm:batch}
+Let $\Phi_X(\rho)=(\rho+X\rho X)/2$ on a qubit with $H=E|1\rangle\langle1|$; its thermodynamic capacity is $\mathcal T(\Phi_X)=\beta^{-1}\ln\cosh(\beta E/2)<E/2$. Among implementations of $n$ uses at vanishing error whose controller returns approximately, with its actual energy and entropy changing by $o(n)$, the optimal work per use is $E/2$, in batch and in real time alike. The lower bound allows any controller, however much entropy it holds, reservoirs of any spectrum, any amount of phase reference, and cleanup assisted by the outputs; it uses only that the controller's free energy comes back up to $o(n)$ and that the battery's entropy changes by $o(n)$, so it covers catalysts returned only as marginals too. The upper bound is attained by a finite construction with deterministic work.
+\end{theorem}
+
+Here $B(\Phi_X)=E/2$, with $\rho=|0\rangle\langle0|$ and $\sigma=I/2$. The batch cost therefore exceeds the capacity by $\beta^{-1}\ln[2/(1+e^{-\beta E})]$, and waiting saves nothing. On the ground-state input, $\Phi_X$ must deliver the maximally mixed state while preserving the eigenstates of $X$ on the other inputs, and the environment cannot tell the ground state from the maximally mixed state.
+
+The necessary condition settles two families of non-covariant channels exactly. In the first, $\sigma$ is the input with its coherences removed; in the second, it is the input with its discarded part decorrelated.
+
+\begin{proposition}[Which channels reach the capacity in batch]\label{kt:prop:families}
+Consider implementations as in Theorem~\ref{kt:thm:batch}.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Phase noise.} If $\Phi$ fixes every state of an orthonormal basis, every implementation of $n$ uses spends at least $nw-o(n)$, where $w=\lambda_{\max}(\Phi^*(H)-H)$. If $\Phi=\sum_jp_jV_j(\cdot)V_j^*$ with commuting unitaries $V_j$ and $p_j>0$, then $w$ is the optimal work per use, in batch and in real time, and $\Phi$ reaches its thermodynamic capacity if and only if the top eigenspace of $\Phi^*(H)-H$ contains a common eigenvector of all $V_j^*V_k$. In particular, a projective pinching reaches its capacity if and only if it is time-covariant, while a Hadamard gate on one qubit tensored with energy dephasing on another, with additive $H$, reaches it although it is neither covariant nor unitary.
+\item \emph{A protected subsystem.} Let $\Phi=\mathrm{id}_A\otimes R_B$, where $R_B$ replaces $B$ by its maximally mixed state, and let $H$ act on $AB$. Every implementation spends at least $nL-o(n)$, where
+\[
+L=\max_\rho\Bigl\{\Tr\bigl[(\Phi^*(H)-H)\rho\bigr]+\kB T\bigl[S(\rho_B)-\ln d_B\bigr]\Bigr\},
+\]
+with entropies in nats, and $L$ is also the optimal real-time rate of Appendix~\ref{app:channels}. The capacity equals $L$ if and only if $H=H_A\otimes I+I\otimes H_B$, equivalently if and only if $\Phi$ is time-covariant.
+\end{enumerate}
+\end{proposition}
+
+For instance, let $H=E(I-|\Phi^+\rangle\langle\Phi^+|)$ on two qubits and $\Phi=\mathrm{id}_A\otimes R_B$. Every output is mixed. The batch and real-time work is $3E/4$ per use at every temperature, attained by a finite construction with deterministic work, while the capacity is $-E/4+\beta^{-1}\ln[(e^{\beta E}+3)/4]$, about $0.072E$ at $\beta E=\ln2$. So the obstruction does not come from pure outputs. In both families, the capacity is reached exactly when an energetically optimal input gives the environment nothing beyond what its decohered or decorrelated version gives: a clock that must return can lend asymmetry, but it cannot recover information the channel throws away. The gaps are strict at every finite temperature and close as $T\to0$.
+
+\begin{proposition}[Gibbs preservation is not enough]\label{kt:prop:gpqutrit}
+On a qutrit with $H=\mathrm{diag}(0,E_1,E_2)$, let $K_1=x|0\rangle\langle1|+y|1\rangle\langle0|$ and $K_0=\mathrm{diag}(\sqrt{1-y^2},\sqrt{1-x^2},1)$ with $x^2=y^2e^{\beta E_1}\le1$. This channel is Gibbs-preserving, so its capacity is zero, yet with a returned clock every implementation spends at least $ny^2E_1-o(n)$.
+\end{proposition}
+
+The environment learns that a jump happened but not its direction. So the ground state, which must be excited, looks to the environment exactly like a stationary mixture with the third level, from which no entropy can be drawn. Gibbs preservation, which makes a channel free in the framework of~\cite{FBB21}, therefore does not make it free for a device whose clock must return. Tajima and Takagi showed that some Gibbs-preserving maps need unbounded coherence, and Tajima, Yamaguchi, Takagi and Kuramochi that some need free energy and work diverging as the error vanishes when the resource is consumed~\cite{TajimaTakagi25,TYTK25}, which leaves the corresponding work cost open. Here the coherence is unlimited and returned, and the cost is a work rate that does not depend on the error.
+
+Channels that only create coherence, like the example of Faist, Oppenheim and Renner~\cite{FOR15}, are the opposite case, and they show that a returned clock can be cheap.
+
+\begin{proposition}[A Gibbs-preserving channel that reaches its capacity]\label{kt:prop:reach}
+Let $H=E|1\rangle\langle1|$ with $\beta E=\ln3$, so that $\gamma=\mathrm{diag}(3/4,1/4)$, and let $\Phi(\rho)=\langle0|\rho|0\rangle\sigma_0+\langle1|\rho|1\rangle\sigma_1$ with
+\[
+\sigma_0=\begin{pmatrix}3/4&\sqrt3/12\\ \sqrt3/12&1/4\end{pmatrix},\qquad \sigma_1=\begin{pmatrix}3/4&-\sqrt3/4\\ -\sqrt3/4&1/4\end{pmatrix}.
+\]
+This channel, the map of Faist, Oppenheim and Renner~\cite{FOR15} for a pure target with the populations of $\gamma$, preserves $\gamma$, is not time-covariant, and has thermodynamic capacity zero. With a returned clock its optimal batch work per use is zero, attained with deterministic work. In the implementation, the clock's energy changes by a sum of $n$ independent increments in $\{-E,0,E\}$ with mean zero and variance $3E^2/8$ each, whatever the input, and a clock in a uniform superposition of $L\ge2\sqrt{3n/8}/\varepsilon^2$ consecutive levels, with $n$ spare levels on each side, returns within $\varepsilon$ plus the error of the rest of the construction, jointly with everything else.
+\end{proposition}
+
+The channel reads only populations and writes coherence: $\Phi$ ignores the coherences of its input, and the populations of its output are $\gamma$ whatever the input. Tajima and Takagi bounded the coherence cost of the qubit maps of~\cite{FOR15}, which include this channel, by a finite amount~\cite[Suppl.\ Sec.~IV]{TajimaTakagi25}. So the clock lends coherence but never has to absorb an energy that depends on the input, and its energy spreads like $\sqrt n$ rather than $n$. The costs of Propositions~\ref{kt:prop:clockcost} and~\ref{kt:prop:lottery} are therefore those of gates; noisy channels can need far less.
+
+None of this contradicts the theorem of Faist, Berta and Brand\~ao. For channels that are not time-covariant they reach the capacity with Gibbs-preserving maps, which are free by assumption and need not be realizable by energy-conserving interactions with Gibbs reservoirs~\cite{FBB19,FOR15,TajimaTakagi25}; with thermal operations they treat time-covariant channels, for which $B(\Phi)$ equals the capacity. Nor does it contradict their thermal-operation implementation of any channel on a fixed, known i.i.d.\ input~\cite[Prop.~8.3]{FBB21}, which consumes a coherence source of sublinear size. They treat that source as disposable, but by the overlap bound in their proof of Lemma~8.1~\cite[Eq.~(8.25)]{FBB21} it returns approximately, jointly with the rest, and its energy and entropy change by $o(n)$, so it meets our return condition, and their conclusion that Gibbs-preserving maps and thermal operations become asymptotically equivalent on given i.i.d.\ inputs~\cite{FBB19} stands. What the batch law prices is a device that must be correct on every input and return its controller's energy and entropy; for such devices the equivalence fails (Proposition~\ref{kt:prop:gpqutrit}).
+
+% =====================================================================
+\subsection{A process and its time reverse}\label{kt:sec:arrow}
+
+For a Gibbs-preserving channel $\Phi$, the reverse process of quantum fluctuation theorems is its Petz map~\cite{Crooks08,KwonKim19}
+\[
+\Phi^\sharp(\sigma)=\gamma^{1/2}\Phi^*(\gamma^{-1/2}\sigma\gamma^{-1/2})\gamma^{1/2},
+\]
+which also preserves $\gamma$. Thermal operations are closed under this reversal: the reverse of $\Tr_B[U(\cdot\otimes\gamma_B)U^*]$ is $\Tr_B[U^*(\cdot\otimes\gamma_B)U]$~\cite{Crooks08,AWWW18}, and Aw, Zaw, Balanz\'o-Juand\'o and Scarani showed that the Petz map of any channel is obtained by reversing a dilation once system--bath correlations are accounted for~\cite{AwZawBalanzoScarani24}. Once a clock must be returned, they need not be.
+
+\begin{proposition}[A process and its reverse can cost differently]\label{kt:prop:arrow}\leavevmode\\
+On a qutrit with $\gamma=\mathrm{diag}(1/2,1/3,1/6)$ and $H=\kB T\,\mathrm{diag}(0,\ln\tfrac32,\ln3)$, let $|\pm\rangle=(|0\rangle\pm|1\rangle)/\sqrt2$, $P_\pm=|\pm\rangle\langle\pm|$, $P_2=|2\rangle\langle2|$, and
+\[
+\mathcal N(\rho)=\sum_{i=0}^2\Tr(M_i\rho)\,|i\rangle\langle i|,\qquad M_0=P_++\tfrac12P_2,\quad M_1=\tfrac45P_-,\quad M_2=\tfrac15P_-+\tfrac12P_2.
+\]
+Both $\mathcal N$ and its Petz reverse $\mathcal N^\sharp$ preserve $\gamma$ and have capacity zero. With a returned clock, $\mathcal N^\sharp$ costs no work per use in batch, while $\mathcal N$ costs exactly $c\,\kB T$ per use, where $c=0.15471030022\ldots$ is the value of a strictly concave three-variable maximization, given explicitly in terms of the unique positive solution of two equations, in Appendix~\ref{kt:pf:arrow}.
+\end{proposition}
+
+The reverse reads only populations, so its energy change is diagonal and lies in the span of its Kraus products. The forward channel reads the populations of $|\pm\rangle$; its Kraus products have no matrix element between $|+\rangle$ and $|-\rangle$, while $H$ does, so inputs that differ only in their $|+\rangle\langle-|$ coherence are indistinguishable to the environment but differ in energy. The value is $B(\mathcal N)$, reached by Theorem~\ref{kt:thm:batchlaw}.
+
+In coherence the same pair is already asymmetric. The inputs $|+\rangle$ and $|-\rangle$ of $\mathcal N$ have orthogonal outputs and $\langle+|H-\mathcal N^*(H)|-\rangle=-\tfrac12\kB T\ln\tfrac32\neq0$, so by the theorem of Tajima and Takagi an implementation of $\mathcal N$ by thermal operations needs coherence that diverges as the error vanishes, while $\mathcal N^\sharp$, which reads energy populations and prepares coherent states, can be implemented with finite coherence by their construction for the qubit maps of~\cite{FOR15}, which applies here as well~\cite[Suppl.\ Sec.~IV]{TajimaTakagi25}. Proposition~\ref{kt:prop:arrow} shows that this asymmetry between detecting and creating coherence survives in work when the coherence is supplied by a clock that must return, and that the two channels are each other's thermodynamic time reverse.
+
+Which direction is free is decided by linear algebra. Write $\Phi(X)=\sum_iA_iXA_i^*$. The Petz reverse has Kraus operators $\gamma^{1/2}A_i^*\gamma^{-1/2}$, so the criterion of Theorem~\ref{kt:thm:balanced} for $\Phi^\sharp$ can be written in terms of $\Phi$ alone:
+\[
+\text{forward free}\iff H-\Phi^*(H)\in\mathrm{span}\{A_i^*A_j\},\qquad
+\text{reverse free}\iff \gamma H-\Phi(\gamma H)\in\mathrm{span}\{A_i\gamma A_j^*\}.
+\]
+Both, one or neither of the two tests can hold.
+
+\begin{proposition}[The asymmetry is not generic]\label{kt:prop:generic}
+If a Gibbs-preserving channel $\Phi$ has a Choi matrix of full rank, then $\Phi$ and $\Phi^\sharp$ both cost nothing in batch with a returned clock. In particular, for every Gibbs-preserving $\Phi$ and every $0<\delta\le1$, the channel $(1-\delta)\Phi+\delta\,\gamma\Tr$ and its reverse both cost nothing. Separated pairs lie on the boundary of the Gibbs-preserving channels, in continuous families: replacing $|\pm\rangle$ in Proposition~\ref{kt:prop:arrow} by $\cos\theta|0\rangle+\sin\theta|1\rangle$ and $-\sin\theta|0\rangle+\cos\theta|1\rangle$, with $M_0=P_{u_\theta}+zP_2$, $M_1=\tfrac2{2+z}P_{v_\theta}$, $M_2=\tfrac{z}{2+z}P_{v_\theta}+(1-z)P_2$ and $z=\sin^2\theta$, gives a separated pair for every $0<\theta<\pi/2$.
+\end{proposition}
+
+So the cost of the forward channel jumps from $c\,\kB T$ to zero under any fixed amount of full-rank thermal noise. Tajima and Takagi found the same geometry for coherence: every Gibbs-preserving map that needs unbounded coherence lies on the boundary of the Gibbs-preserving channels, and every map in their relative interior has finite coherence cost~\cite{TajimaTakagi25}. For a finite device, what matters is the expected number of noisy uses.
+
+\begin{proposition}[Noise horizon]\label{kt:prop:noise-horizon}
+Let $\Phi$ be Gibbs-preserving with $B(\Phi)>0$, and let $\Phi_\delta=(1-\delta)\Phi+\delta\,\gamma\Tr$. Call a family of batch implementations of $\Phi_{\delta_N}^{\otimes N}$ admissible if its error tends to zero, its controller returns approximately with actual energy and entropy changes $o(N)$, and its battery starts in an energy eigenstate and ends with entropy and mean absolute deviation from its nominal endpoint $o(N)$; write $W_N$ for its nominal work. Although $\Phi_\delta$ costs nothing for every fixed $\delta>0$, the noise helps only through the expected number $N\delta_N$ of replacements:
+\begin{enumerate}[label=(\alph*)]
+\item if $N\delta_N\to0$, every admissible family has $W_N\ge NB(\Phi)-o(N)$, and some has $W_N\le NB(\Phi)+o(N)$;
+\item some admissible family has $W_N=o(N)$ if and only if $N\delta_N\to\infty$, and then one has $W_N=O\bigl(N(N\delta_N)^{-1/4}+\log N\bigr)$;
+\item for $\lambda\in(0,\infty)$, let $L(\lambda)$ and $U(\lambda)$ be the infima of $\liminf_NW_N/N$ and of $\limsup_NW_N/N$ over admissible families with $N\delta_N\to\lambda$; they do not depend on the sequence. Then $0<L(\lambda)\le U(\lambda)\le B(\Phi)$; both are nonincreasing, $\lambda L(\lambda)$ and $\lambda U(\lambda)$ are nondecreasing, and both tend to $B(\Phi)$ as $\lambda\to0$.
+\end{enumerate}
+\end{proposition}
+
+So the asymmetry of Proposition~\ref{kt:prop:arrow} is invisible to fixed noise but not to a finite device whose noise per use is small compared with the inverse of the number of uses. Tajima and Takagi found a related sensitivity, in the coherence some Gibbs-preserving maps need as the error vanishes~\cite{TajimaTakagi25}; here it is work, and the noise rather than the error sets the threshold. The positivity of $L(\lambda)$ is qualitative: its constant can be very small. The proof is in Appendix~\ref{kt:app:batchphys}. The asymmetry is an implementation asymmetry created by the obligation to return the clock, not a violation of any fluctuation theorem: those compare a protocol with its reversed protocol, not the cheapest devices for a channel and for its reverse. Nor is it carried by the clock, whose entropy changes by $o(n)$. On the equilibrium input $\gamma^{\otimes n}$, which both channels fix, the work of a deterministic implementation equals the correlations it leaves plus the departure of its reservoirs from equilibrium, up to $o(n)$; with ideal reservoirs this is ordinary entropy production in the baths. For qubits the asymmetry cannot occur, since every Gibbs-preserving qubit channel costs nothing; likewise, the construction of Tajima and Takagi of cost-diverging maps on a single system needs at least three distinct energies~\cite{TajimaTakagi25}.
+
+% =====================================================================
+\subsection{A controller that returns only in state}\label{kt:sec:embezzle}
+
+The batch law requires the controller to come back jointly with everything else and to refund its actual energy and entropy up to $o(n)$. The refund is not a technicality: a broad reference could hand over energy of order $n$ while staying close to its initial state (Section~\ref{kt:sec:setting}). We say that a controller \emph{comes back only in state} if its final state is close to its initial one in trace distance, with no condition on its energy or entropy, and we ask what such a controller buys. Write
+\[
+F_C(\varrho)=\Tr H_C\,\varrho-\kB T\,S(\varrho)
+\]
+for the free energy of a state $\varrho$ of the controller, with the entropy in nats, and $R_n$ for the largest drop $F_C(\alpha_C)-F_C(\alpha_C')$ over inputs, where $\alpha_C'$ is the controller's final state on that input. As in Section~\ref{kt:sec:lottery}, the size of the controller is $K=\beta\,\mathrm{span}(H_C)+\ln d_C$, where $\mathrm{span}(H_C)$ is its energy range and $d_C$ its dimension.
+
+\begin{corollary}[A controller returned only in state is a second battery]\label{kt:cor:embezzle}
+Consider batch implementations of $n$ uses of a channel $\Phi$ with error tending to zero, independently supplied Gibbs reservoirs, finite energy-conserving gates, a controller in any declared initial state, and a battery that starts in an energy eigenstate and ends with entropy $o(n)$ and with mean energy within $o(n)$ of its nominal endpoint. Write $W_n$ for the nominal work.
+\begin{enumerate}[label=(\alph*)]
+\item Whatever the controller does, $W_n+R_n\ge nB(\Phi)-o(n)$.
+\item If, on every input, the final state of the controller is within $\eta_n>0$ of $\alpha_C$ in trace distance, then
+\[
+R_n\le\kB T\,[\eta_nK+r_0(\eta_n)],\qquad r_0(x)=(1+x)\ln(1+x)-x\ln x.
+\]
+So if $W_n\le n[B(\Phi)-\Delta]$ with a fixed $\Delta>0$, the size of the controller is at least $K\ge[\beta n\Delta-r_0(\eta_n)-o(n)]/\eta_n$.
+\item For every real $w\le B(\Phi)$, every energy $\omega>0$ and every sequence $\eta_n\in(0,1]$, some family meets the conditions of Theorem~\ref{kt:thm:batchlaw} on the error and the battery and has nominal work $nw+o(n)$; its whole controller returns jointly with everything else within $\eta_n+o(1)$ in trace distance, with entropy change $o(n)$, but its free energy drops by $n[B(\Phi)-w]+o(n)$ on every input. The part that pays is a classical ladder of spacing $\omega$ and energy range at most $(1+1/\eta_n)\,(n[B(\Phi)-w]+\omega)$.
+\end{enumerate}
+\end{corollary}
+
+Part (a) is Proposition~\ref{kt:bp-lower} with the controller's actual change of free energy kept rather than bounded. Part (b) is the usual control of an approximately returned catalyst by the product of its return error and its size~\cite{BrandaoSecondLaws15,NgCatalysis15}, applied to that change. Part (c) adds to the device of Theorem~\ref{kt:thm:batchlaw} a ladder in a uniform mixture of $N$ levels, which pays the battery in advance by one energy-conserving swap and moves by $k/N$ in trace distance when it is lowered by $k$ levels. Applied to the ladder alone, the bound of (b) is then met up to a factor $1+\eta_n$ and terms of lower order, so it cannot be improved by more than that factor, and it is sharp as $\eta_n\to0$. The payment needs no coherence; a pure ladder in a sine-shaped superposition also works, at a range larger by a factor that approaches $\pi$ as $\eta_n\to0$. The proof is in Appendix~\ref{kt:pf:embezzle}.
+
+This answers, under both ways of counting, the case left aside in Section~\ref{kt:sec:batch}. A controller that comes back only in state, whether it holds a coherent reference, an embezzling state or a plain store of energy, lets the battery's work reach the capacity, or any smaller value, negative ones included, so the battery's work alone has no meaningful optimum. What it cannot do is lower the total. Counting its free energy, no batch implementation, with any time reference, returned or not, draws less than $nB(\Phi)-o(n)$ from battery and controller together on its most demanding input, and the returned clock of Theorem~\ref{kt:thm:batchlaw} attains this. So $B(\Phi)$ is the batch cost of $\Phi$ with every time reference; it exceeds the capacity for $X$-dephasing (Theorem~\ref{kt:thm:batch}) and for the Gibbs-preserving qutrit channel of Proposition~\ref{kt:prop:gpqutrit}. A controller that comes back only in state is a second battery, and hiding its payment behind a small return error takes size: to pay a fixed amount of work per use within return error $\eta$, it needs a size $K$ at least of order $n/\eta$.
+
+% =====================================================================

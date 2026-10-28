@@ -1,0 +1,68 @@
+# Machine checks
+
+`python verification/run_all.py` runs every check below and exits with status 0 only if all pass. The Python checks
+need the packages in `requirements.txt`; `check_lean.py` needs Lean 4.30.0 and Mathlib v4.30.0 (see the end of this
+file). Each script prints what it verifies.
+
+The manuscript is the authority for the statements and their proofs. The checks fall into two kinds. **Formal
+proofs** in Lean are complete proofs of the stated lemmas for all parameters. **Exact and numerical computations**
+in Python establish some identities symbolically or in exact rational arithmetic and check others in 40-digit arithmetic or
+numerically to a tolerance of 1e-9 (identities at a numerically optimized state to 1e-5), recompute the numbers quoted in the text (apart from those listed below as not checked),
+and test inequalities on many random or perturbed instances, including instances close to equality; a computation of
+this second kind checks the instances it runs, not the general statement. Wherever a quantity is optimized, it is
+bracketed from both sides: the batch cost B(Φ) by a feasible pair (a lower bound, with the inner maximum solved as a
+semidefinite program) and by a dual operator Y (an upper bound, with the concave inner maximum bounded from above by
+its Frank–Wolfe gap), and capacities in the same way.
+
+## Formal proofs (Lean 4 with Mathlib)
+
+| File | What is proved | Manuscript |
+|---|---|---|
+| `lean/Constants.lean` | The capital chain for the Hadamard gate: `m = ⌊1/(8(ε+η))⌋` blocks give tester error `≤ 1/8` and `nE/(256(ε+η))`; the scalar step `d(p‖r) ≥ pb − ln 2` of the capital lemma; the Hoeffding exponent of the lottery; the constants 51 and 36 and the chain `η ≤ 2^{-14}`, `m = ⌊1/(8192η)⌋`, `2mη ≤ 1/4096`, `τ ≤ 1/12`, `16/(3m) ≤ 2^{17}η` of the strong converse; the chain of the clock-size bound (b) ending in `9βλ/(1024√2)·√(n/ζ)`; the chain of (d) for `n ≥ 4096`, `ε ≤ 1/4096` (`nE²t²/4 ≤ ε/4`, `φ ≤ 1`, `2√ε + 2√(2ε) < 8√ε`, `f ≤ π/8`, `s > β/(8t) = βEn/(512√ε)`); and `f_0(x_*) ≤ c/2` for the choice of `x_*` | Propositions "What the clock costs" (a), "The clock's energy is a lottery", "Strong converse with a reusable controller", "How large the clock must be" (b), (d); Appendices "What the clock costs", "A strong converse with a reusable controller", "How large the clock must be", "Finite horizons" |
+| `lean/Sinc.lean` | `1 − sin y/y ≥ min{y², 1}/8` for every real `y ≠ 0`; `\|e^{ix} − 1\|² = 2 − 2cos x ≤ 2\|x\|`; `1 − cos^n x ≤ n x²/2` | Appendices "A strong converse with a reusable controller", "Unbalanced channels need a broad clock", "How large the clock must be" (d) |
+| `lean/NoProgramming.lean` | The eigenphase inequality `max(\|f − z e^{iφ/2}\|, \|f − z e^{−iφ/2}\|) ≥ f sin(φ/2)` for `f ≥ 0`, all complex `z` and real `φ`, and its equality at `z = f cos(φ/2)` | Appendix "How large the clock must be", (d) |
+| `lean/Permutations.lean` | For all `n` and ladder sizes: the Stage 2 swap `\|a,z,j⟩ ↦ \|z,a,j+\|a\|−\|z\|⟩` conserves energy and is an involution, also on a finite ladder with the identity off it, and never leaves a ladder of `2n+L` levels from the levels `n..n+L−1`; the seed erasure of (c) is an energy-conserving involution for every environment Hamiltonian and battery gap; the recovery of the code of (d) is a permutation | Appendices "A channel that reaches its capacity", "How large the clock must be" (c), (d) |
+| `lean/Ladder.lean` | The payment swap of the paying ladder, exchanging `\|k+j⟩_L\|0⟩` with `\|j⟩_L\|1⟩` for `1 ≤ j ≤ N`: it conserves energy, is an involution, and never leaves the ladder of levels `1..k+N`; for the classical ladder with `N = ⌈k/η⌉₊`, the shift `k/N ≤ η`, `N ≥ k` when `η ≤ 1`, and the range `k + N − 1 ≤ (1 + 1/η)k`; for the pure ladder, the recurrence `a_{j−1} + a_{j+1} = 2cos θ · a_j` of the sine coefficients and, with vanishing ends, `2Σ a_j a_{j+1} = 2cos θ · Σ a_j²` (`θ = π/(N+1)`), `2 − 2cos θ ≤ θ²`, and with `N = ⌈kπ/η⌉₊`, `kπ/(N+1) ≤ η` and `k + N − 1 ≤ (1 + π/η)k` | Corollary "A controller returned only in state is a second battery" (c) and its appendix proof |
+| `lean/ExactIdentities.lean` | The qutrit channel `N` in the basis `\|+⟩,\|−⟩,\|2⟩` with symbolic `a, b`: change of basis, POVM, Gibbs preservation, `D`, `⟨+\|H − N^*(H)\|−⟩ = −a/2`, and the dual certificate `D − Ψ^*(Y) = −(a/2)[[t,−1,0],[−1,1/t,0],[0,0,0]]` with its positivity for every `t > 0`; the θ family (POVM, Gibbs preservation, `⟨u\|H\|v⟩ = a sin θ cos θ`) for all θ; the Gibbs-preserving qutrit (completeness, Gibbs preservation, fixed point, equal environment states, `Tr ρD = y²E₁`); the reach channel (`det σ₀ = 1/6`, `det σ₁ = 0`, `(3/4)σ₀ + (1/4)σ₁ = γ`, capacity `E(3/4 − ln2/ln3)`); the X-dephasing excess `β^{-1} ln[2/(1+e^{−βE})]`; the Bell example `Φ^*(H) = (3/4)E I`, `H\|Φ⁺⟩ = 0`; the flat bank for every `L` (branch weights, the common law after the step, total rank `L(L+1)(L+2)/3`, a fair branch, return distance `6/((L+1)(L+2))`, equal means, variance drop of one level squared) | Propositions "A process and its reverse can cost differently", "The asymmetry is not generic", "Gibbs preservation is not enough", "A Gibbs-preserving channel that reaches its capacity", "Which channels reach the capacity in batch", Theorem "For X-dephasing, batch costs as much as real time", the flat bank in the appendix proof of Proposition "Strong converse with a reusable controller" |
+
+Every theorem is audited with `#print axioms` and may use only `propext`, `Classical.choice` and `Quot.sound`.
+
+## Exact and numerical computations (Python)
+
+| Script | What is checked | Manuscript |
+|---|---|---|
+| `check_clock_costs.py` | `g > 0` (the identity `Σ\|U_ji\|²(h_j − h_i)² = −2Σ h_i d_i`, `Tr D = 0`, barely non-commuting `U`); the witness of Theorem "Exact and approximate return" (a); the Hadamard `D`, `λ_max(D) = E/√2`, `g = E`; the rare-excitation rotation (energy `B` taken up, disturbance `≤ 3‖B‖/(2M)` by SDP); the capital lemma with `A = Λ^*(L)` for covariant `Λ`; the Hadamard tester and the constant 256 in exact rationals; decoupling `T(σ_a, σ_b) ≤ 2√(2ε)`; the exponential moments of the heat for bounded-span interactions; the step from these two facts to the bound on `A_n`; the lottery's Hoeffding exponent, two-window lemma and Hellinger step; the cheaper clock's emission counts and qubit blocks | Sections 2–4, Appendices "The range of the baths", "The clock's energy", "What the clock costs" |
+| `check_capital_converse.py` | the log-likelihood law and `Ξ`; `s_n ≤ D(α‖γ) + 2/e`, pure and stationary controllers; acceptance, continuity (general and commuting), the Taylor step, the reuse lemma (`m` runs within `mη`), the tail lemma; every constant of (a), (b), (c); stationary maximizers for covariant channels; the flat bank in exact rationals (branch weights, fair branch, return distance, means, entropies, variance `A²`, error exactly 1/2 by SDP, spread) | Proposition "Strong converse with a reusable controller", its appendix proof, the flat bank |
+| `check_batch_law.py` | conventions for `Ψ`, `Ψ^*`; B(Φ) from both sides and by a second engine (supergradient ascent), weak duality for random `Y`, `B ≥` capacity with equality for balanced channels and for gates, strict for unbalanced qutrits; `B(Φ⊗Φ) = 2B(Φ)` with entangled inputs; subadditivity of the entropy decrease; Gibbs-preserving qubit channels; the relative-entropy identity of the balanced construction; Lemma "Active-dimension continuity" and the converse's constants; the faithful auxiliary balance, stationarity, residual bounds and the conditional free energy on entangled inputs; the kernel `k`; at small `N` the uniform test (Duhamel, pinching, weighted certificates, acceptance); Hayashi–Nagaoka, the decoder contraction, the Halmos square; the mechanical factory's counts, energies and rounding; the rare-excitation gain `w₀I + E_n`; the bank lift and the sine packet | Section 6.1–6.2, Appendices "The single-letter bound", "A returned clock reaches the capacity", "Physical construction for the batch law and the noise horizon" |
+| `check_embezzle.py` | the payment swap (permutation, involution, energy conserved in integers, `ρ_L⊗\|0⟩⟨0\| ↦ ρ_L'⊗\|1⟩⟨1\|` and `ψ⊗\|0⟩ ↦ φ⊗\|1⟩`); the classical ladder in exact rationals (trace distance exactly `k/N`, energy drop `kω`, entropy unchanged, the choice `N = ⌈k/η⌉`, the range); the pure ladder's sine packet in 40 digits (normalization, recurrence, `⟨ψ\|Jψ⟩ = cos(π/(N+1))`) and shift (`φ = J^kψ`, `T(φ, ψ) ≤ ‖φ − ψ‖ ≤ kπ/(N+1)`, nearly attained); the continuity bound `F(α) − F(α') ≤ kT[xK + r_0(x)]` on random and near-extremal pairs; sharpness on X-dephasing at the capacity, where each ladder meets the bound of part (b) applied to itself within `(1 + η)(nΔ + ω)/(nΔ − kT r_0(η))` (classical) or `(π + η)(nΔ + ω)/(nΔ − kT r_0(η))` (pure) | Section 8, Corollary "A controller returned only in state is a second battery", its appendix proof |
+| `check_examples.py` | X-dephasing (`B = E/2` with its certificates, capacity `β^{-1} ln cosh(βE/2)`, excess); phase noise (diagonal Kraus operators, `B = w` for commuting mixtures, the criterion on random, constructed and pinching channels, Hadamard ⊗ energy dephasing); a protected subsystem (`B = L`, capacity `= L` iff `H` additive, the Bell example at four temperatures, 0.072E, the gain `(3/4)EI − 2zH`); the Gibbs-preserving qutrit (symbolic identities, `B ≥ y²E₁`, capacity 0); the reach channel (states, `Φ∘Δ = Φ`, `Δ∘Φ = γTr`, capacity and `B` zero, the covariant `Ψ` with capacity 0.119E, the Stage 2 swap, the clock increments, the return bound, the qubit family) | Section 6.3, Appendices "The two families", "A channel that reaches its capacity" |
+| `check_clock_size.py` | the rotation bound; the generator `iΣA_i^*Ȧ_i = D`; the code from the fibre (Knill–Laflamme conditions, recovered derivative `−i[D_L, ·]`, orthogonal GHZ phases); the probe steps and the X-dephasing constants `N = 64`, `b = p/8192`, `c = 9p³E/(4096√2)` against the proof's chain; (a) and (b) chains; (c): balance with a seed, `R_n^*R_n = Σ_i(R^*R)_i`, the exact ladder lift and its vector error, the slab profile, equidistribution of the Gram coefficients, the seeds; (d): the logical channel, `½‖Δ_r − id‖_◇ = (1−r)/2`, the lower-bound chain, Stinespring continuity, the programmable phase gate, the construction's gain, disturbance and constants; the replacement stock `βE√(n/(2π))`; Table 2 (clock-size bounds) | Propositions "Unbalanced channels need a broad clock" and "How large the clock must be", Table 2 (clock-size bounds), their appendices |
+| `check_arrow.py` | the qutrit pair in exact arithmetic; the Kraus span (dimension 7), the kernel of `Ψ`, the reverse's diagonal `D`; the reduction to three variables; the unique positive solution `t = 1.02099`, `z = 0.16236`; Euler's relation and `c = 0.15471030022`; strict concavity; the interval bracket `0.1547103002210 < c < 0.1547103002225`; the dual certificate (symbolic) and stationarity at `σ_*` to 40 digits; `B(N) = c`, `B(N#) = 0`; the rewritten reverse test against the direct one on 120 Gibbs-preserving channels; both/one/neither; full Kraus rank; the θ family | Section 7, Appendix "A process and its reverse" |
+| `check_noise_horizon.py` | `B(Φ_δ) = 0` for fixed `δ > 0` against `B(N) = 0.1547`; the noise dilation identities and residual bounds, the Gibbs mean `βe_δ ≤ ln R`, `r ≤ Z_E ≤ R`; the rates of Theorem "Diverging noise horizon"; the free replacement module; padding (SDP); `x_*` and the envelope bound; the monotonicity steps | Proposition "Noise horizon", Appendices "Uniform noise construction", "Finite horizons" |
+| `check_lean.py` | compiles the Lean files and audits their axioms | — |
+
+## What is not checked by machine
+
+The general converse arguments are proved in the manuscript and are not formalized: the accounting and entropy
+arguments behind Proposition "A single-letter batch bound" and Proposition "A finite-error lower bound with explicit budgets"
+(Stinespring continuity, Uhlmann alignment and the continuity lemma are tested on instances only), part (a) of Corollary "A controller returned only in state is a second battery", which reruns that accounting with the controller's free energy kept, the decoupling and
+Wigner–Araki–Yanase arguments of Proposition "What the clock costs" (the decoupling bound and the exponential moments
+are tested on instances), the constant `g/2048` for a general unitary, the capital of the cheaper clock and its
+`n^{1+3a/2}` scaling, the Hellinger affinity `√(1−16ε)` and the coherent-input variance bound of the lottery, the
+asymptotic statements of the batch-law construction (position-based decoding, the postselection technique, the
+diagonal selection of `Y_j`), the metrological lower bounds of Propositions "Unbalanced channels need a broad clock" and
+"How large the clock must be" beyond their constant chains, the equidistribution argument for incommensurate gaps
+(tested numerically for one pair of frequencies), and the envelope theorem of the noise horizon beyond its arithmetic.
+Strong duality for B(Φ) is checked numerically on the instances above. Theorem "Exact and approximate return" and the constructions
+quoted from the companion paper are checked in its own repository; here only the witness of part (a) is recomputed.
+
+## Lean setup
+
+The proofs build with Lean 4.30.0 and Mathlib v4.30.0. Either point `MATHLIB_DIR` at a Mathlib v4.30.0 checkout whose
+cache has been fetched (`lake exe cache get`), or fetch Mathlib into this folder:
+
+    cd verification/lean
+    lake exe cache get
+    lake build
+
+`check_lean.py` then compiles each file with `lake env lean` and checks the axiom report.

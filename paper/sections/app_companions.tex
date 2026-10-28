@@ -1,0 +1,52 @@
+\section{Results from the companion papers}\label{app:companions}
+
+Most of the results of this paper first appeared, with complete proofs, in four companion papers~\cite{Order,SaveWork,Answering,KeepingTime}, and Appendices~\ref{app:law}--\ref{app:batch} reproduce those proofs. Table~\ref{tab:companions} gives, for every numbered definition, result and remark taken from them, its number there, so that a reader can match the two texts and the machine checks of the companion repositories. Numbers refer to the versions cited in the bibliography: version 1.0.2 of the first three papers and version 1.1.0 of~\cite{KeepingTime}. Cross-references now point to the appendices of this paper, and a few statements are reworded without a change of content, as when Theorem~\ref{to:thm:law} names its range of temperatures. Every other change from the cited versions is recorded here or in the last column of Table~\ref{tab:companions}.
+
+Four of these changes correct the companion papers.
+\begin{itemize}[leftmargin=*]
+\item Definition~2 of~\cite{Order} lets $Z$ be everything the tester holds at the end, without requiring the tester to be purified. Read that way, a tester that discards the reference of its input would charge the identity channel one bit per use. Definition~\ref{to:def:functional} takes the supremum over purified testers, as the contract of~\cite[App.~B.1]{Order} and its proofs already do.
+\item In Lemma~10 and equation~(6) of~\cite{Order}, the normalization $\Tr Z_1=1$ stands among the equations that define the space $V$ of testers. With it, $V$ is not a linear space, and $V\cap\mathrm{PSD}$ is not the homogeneous cone that the lemma names: for a single qubit arrival it contains $I/2$ but neither $0$ nor $I$. Here $V$ is defined by the homogeneous causal equations~\eqref{to:sc-eq:tester} alone, the normalization is imposed on the separate section $n(Z)=1$, and the cone consists of the nonnegative multiples of normalized testers (Lemma~\ref{to:sc-lem:tester}). This is what the positive representative of Lemma~\ref{to:sc-lem:dual} needs, since its proof projects onto $V$.
+\item Lemma~13 of~\cite{Order} states one faithful $q$ for every $s$, while its proof, and Lemma~\ref{to:sc-lem:tangent} here, choose $q$ for each $s$, which is all the law uses.
+\item The sentence that introduces Theorem~2 of~\cite{SaveWork}, that the term in which the real-time and batch costs differ vanishes for classical channels, holds only on inputs diagonal in the channel's basis; the optimized rates of Theorem~\ref{sw:thm:classical}(a) are unaffected (Appendix~\ref{sw:app:classical}).
+\end{itemize}
+
+Two results are used from our earlier work rather than proved here: the pointwise smoothing identity of Lemma~\ref{sw:lem:smoothing}, which is~\cite[Thm.~4.1 and Cor.~4.3]{Douglas26closed}, and, in the proof of Theorem~\ref{sw:thm:undecidable}, the zero-Hamiltonian closure theorem~\cite[Thm.~3.2(a)]{Memory}, which that proof uses in place of the hard direction of Theorem~\ref{sw:thm:free}. The zero-Hamiltonian forms of several results are earlier work; Section~\ref{sec:channel-statements} and Appendices~\ref{app:module} and~\ref{app:channels} say which.
+
+\begin{small}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.40\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\caption{Statements taken from the companion papers, with their numbers here and there.}\label{tab:companions}\\
+\toprule
+Here & Source & Note\\
+\midrule
+\endfirsthead
+\toprule
+Here & Source & Note\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Definitions~\ref{to:def:schedule}, \ref{to:def:functional}, Theorem~\ref{to:thm:law} & \cite[Defs.~1, 2, Thm.~1]{Order} & the testers of Definition~\ref{to:def:functional} are purified (see above); the module is cited here as Appendix~\ref{app:module}\\
+Proposition~\ref{to:prop:extreme} & \cite[Prop.~2]{Order}, \cite[Prop.~8]{SaveWork} & main-text statement of Proposition~\ref{sw:prop:extreme}; it says what is paid, free energy drawn from the battery and controller at no less than the real-time rate, where~\cite[Prop.~2]{Order} says that the implementation pays that rate\\
+Proposition~\ref{to:prop:rank}, Theorem~\ref{to:thm:batchlaw} & \cite[Prop.~3, Thm.~4]{Order} & \\
+Proposition~\ref{to:prop:certificate}, Lemma~\ref{to:lem:release} & \cite[Prop.~6, Lemma~5]{Order} & \\
+Theorem~\ref{to:sc-thm:scope}, Lemma~\ref{to:sc-lem:account}, Definition~\ref{to:sc-def:window}, Lemmas~\ref{to:sc-lem:windows}--\ref{to:sc-lem:diagonal} & \cite[Thm.~7, Lemma~8, Def.~3, Lemmas~9--15]{Order} & Lemma~\ref{lem:identity} restates Lemma~\ref{to:sc-lem:account}; Lemmas~\ref{to:sc-lem:tester} and~\ref{to:sc-lem:tangent} carry the corrections above\\
+Appendix~\ref{app:module}: Theorems~\ref{ar:thm:law}, \ref{ar:thm:free}, Proposition~\ref{ar:prop:order}, Lemma~\ref{ar:lem:realization}, Remark~\ref{ar:rem:cov} & \cite[Thms.~1, 2, Prop.~3, Lemma~4, Remark~1]{Answering} & \\
+Definition~\ref{ar:def:cost}, Proposition~\ref{ar:prop:basic}, Lemmas~\ref{ar:lem:minimax}, \ref{ar:lem:accumulation} & \cite[Def.~1, Prop.~5, Lemmas~6, 7]{Answering} & \\
+Theorems~\ref{ar:thm:converse}, \ref{ar:thm:noncov}, \ref{ar:thm:noncovapp}, Lemmas~\ref{ar:lem:cap}, \ref{ar:lem:module} & \cite[Thms.~8, 9, 11, Lemmas~10, 12]{Answering} & \\
+Theorems~\ref{sw:thm:law}--\ref{sw:thm:werner}, Definition~\ref{sw:def:rtcost} & \cite[Thms.~1--3, Def.~1]{SaveWork} & in Theorem~\ref{sw:thm:werner} the batch entry reads $o(n)$ where~\cite{SaveWork} has $O(\log n)$\\
+Lemmas~\ref{sw:lem:accounting}, \ref{sw:lem:accumulation}, Theorem~\ref{sw:thm:fixed-error}, Lemma~\ref{sw:lem:invertible} & \cite[Lemmas~4, 5, Thm.~6, Lemma~7]{SaveWork} & \\
+Proposition~\ref{sw:prop:extreme}, Theorem~\ref{sw:thm:free}, Proposition~\ref{sw:prop:clock}, Theorem~\ref{sw:thm:clock} & \cite[Prop.~8, Thm.~9, Prop.~10, Thm.~11]{SaveWork} & \\
+Proposition~\ref{sw:prop:qutrit}, Theorem~\ref{sw:thm:undecidable} & \cite[Prop.~12, Thm.~13]{SaveWork} & \\
+Lemmas~\ref{sw:lem:minimax}--\ref{sw:lem:postproj}, Theorem~\ref{sw:thm:replacement} & \cite[Lemmas~14--17, Thm.~18]{SaveWork} & \\
+Lemmas~\ref{sw:lem:coherence}--\ref{sw:lem:loguniform}, Proposition~\ref{sw:prop:support} & \cite[Lemmas~19--21, Prop.~22]{SaveWork} & \\
+Lemma~\ref{sw:fd-lem:gram}, Theorem~\ref{sw:fd-thm:fixed} & \cite[Lemma~23, Thm.~24]{SaveWork} & \\
+Remarks~\ref{sw:rem:battery}, \ref{sw:rem:horizon}, \ref{sw:rem:batch}, \ref{sw:rem:meanwork}, \ref{sw:rem:thermal-controller}, \ref{sw:rem:attained}, \ref{sw:rem:counted}, \ref{sw:rem:wernermean} & \cite[Remarks~1--8]{SaveWork} & the open question of Remark~\ref{sw:rem:thermal-controller} names its controller, one whose capital has spread $o(n/\sqrt\eta)$\\
+Lemma~\ref{sw:lem:smoothing} & \cite[Thm.~4.1, Cor.~4.3]{Douglas26closed} & stated here as a lemma; quoted in~\cite{SaveWork}\\
+Theorem~\ref{kt:thm:dichotomy}, Propositions~\ref{kt:prop:clockcost}--\ref{kt:prop:single} & \cite[Thm.~1, Props.~2--5]{KeepingTime} & \\
+Theorems~\ref{kt:thm:balanced}, \ref{kt:thm:batchlaw}, Propositions~\ref{kt:prop:broadclock}, \ref{kt:prop:clocksize}, Theorem~\ref{kt:thm:batch} & \cite[Thms.~6, 7, Props.~8, 9, Thm.~10]{KeepingTime} & for time-covariant channels, Theorems~\ref{kt:thm:balanced} and~\ref{kt:thm:batchlaw} credit~\cite{FBB21} with the rate, which is stated there with an information battery\\
+Propositions~\ref{kt:prop:families}--\ref{kt:prop:noise-horizon}, Corollary~\ref{kt:cor:embezzle} & \cite[Props.~11--16, Cor.~17]{KeepingTime} & Proposition~\ref{kt:prop:noise-horizon} says ``mean absolute deviation'', as the contract of Appendix~\ref{kt:bp-contract} does, where~\cite[Prop.~16]{KeepingTime} says ``mean deviation''\\
+Lemma~\ref{kt:bp-continuity}, Proposition~\ref{kt:bp-lower}, Theorem~\ref{kt:bp-batch}, Remark~\ref{kt:bp-rem:eraser}, Theorems~\ref{kt:bp-noisesuff}, \ref{kt:bp-envelopes} & \cite[Lemma~18, Prop.~19, Thm.~20, Remark~1, Thms.~21, 22]{KeepingTime} & here the dual infimum of Section~\ref{kt:app:batchphys} is shown to be attained, which shortens the proof of Theorem~\ref{kt:bp-batch}\\
+Theorems~\ref{thm:main-realtime}--\ref{thm:main-undecidable} & \cite{SaveWork,KeepingTime} & main-text statements of Theorems~\ref{sw:thm:law}, \ref{sw:thm:classical}, \ref{sw:thm:werner}, \ref{sw:thm:free}, \ref{sw:thm:undecidable} and~\ref{kt:thm:balanced}--\ref{kt:thm:batch}; Theorem~\ref{thm:main-undecidable} states the data hypothesis for batch decidability\\
+Theorem~\ref{thm:classes}, Appendix~\ref{app:classes}, Section~\ref{sec:protocol} & new here & Section~\ref{sec:protocol} designs a test of the classical witness of Section~\ref{to:sec:measure}, which is from~\cite[Sec.~8]{Order}\\
+\end{longtable}
+\end{small}

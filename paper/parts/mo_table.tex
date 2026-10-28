@@ -1,0 +1,33 @@
+\section{One functional, many schedules}\label{to:sec:table}
+
+Most rows of Table~\ref{to:tab:corollaries} are Theorem~\ref{to:thm:law} evaluated on one schedule; the rows on exact return and on zero error lie outside its hypotheses, and the capital, bath range and lottery in the row on a clock returned approximately are not rates; these entries are listed for comparison. For a clock returned in batch, Theorem~\ref{to:thm:batchlaw} gives the same optimal rate in single-letter form, $B(\Phi)$, so the two agree. The rates in the rows on real-time channels and on a clock returned approximately are proved directly in Appendix~\ref{app:channels}, with the signed battery deviation of Table~\ref{tab:exceptions}.
+
+\begin{table}[tbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{6.2cm}}
+\toprule
+Result & Schedule & Value\\
+\midrule
+Landauer erasure~\cite{Landauer61} & any & $\kB T\ln2$ per bit, degenerate levels\\
+Batch capacity, covariant channels & hold all outputs & the capacity of~\cite{FBB21}\\
+Real-time channels & release each output & $\kB T\ln2\,\Trt(\Phi)$; equal to the capacity for classical channels (Appendix~\ref{app:channels})\\
+Processes with memory & interleaved & $\kB T\ln2\,K_\beta(\mathcal P)$ for every finite process (Appendix~\ref{app:module})\\
+Order alone & two-step classical process & $\kB T\ln2\,[1-h_2(p)]$ per episode if released early, $0$ if held, with $p$ the bias of the process's coin (Appendix~\ref{app:module})\\
+Which carriers to hold & linear task, carriers $L$ released early & $\operatorname{rank}(F_L)\,\kB T\ln2$ per use; deciding whether holding $m$ of them lowers it is NP-complete (Proposition~\ref{to:prop:rank})\\
+Delayed channel & ground state first, $\Phi$ of the first input one slot later, second input discarded & $\Trt(\Phi)+\log_2\Tr e^{-\beta(H-E_0)}$ bits; the second term pays for discarding the second input (Appendix~\ref{app:module})\\
+Clock returned exactly & non-covariant target & impossible at any work, with a stationary battery (Appendix~\ref{app:channels})\\
+Clock returned approximately & non-covariant target & real-time rate $\Trt$; capital, bath range and lottery for gates (Appendix~\ref{app:channels} and Appendix~\ref{app:batch})\\
+Batch with a returned clock & hold all, clock returned & $B(\Phi)$; the capacity when $H-\Phi^*H\in\mathrm{span}\{A_i^*A_j\}$ (Appendix~\ref{app:batch})\\
+$X$-dephasing & hold all, clock returned & $E/2$, as in real time; capacity $\beta^{-1}\ln\cosh(\beta E/2)$ (Appendix~\ref{app:batch})\\
+Gibbs preservation & hold all, clock returned & a positive rate per use at zero capacity (Appendix~\ref{app:batch})\\
+Process vs.\ time reverse & hold all, clock returned & qutrit: $0.1547\,\kB T$ against $0$ (Appendix~\ref{app:batch})\\
+Zero error, extreme channels & hold all & the full real-time rate (Appendix~\ref{app:channels})\\
+\bottomrule
+\end{tabular}
+\caption{One functional, many schedules. Values are work per use unless marked per episode. $\Trt$, $K_\beta$ and the capacity $\mathcal T$ are in bits, to be multiplied by $\kB T\ln2$; $B(\Phi)$ and quantities written with $E$ are energies.}\label{to:tab:corollaries}
+\end{table}
+
+The real-time rate is $\Trt(\Phi)=\sup_\rho[S(\rho)-S(\Phi(\rho))+m_\rho+\beta\Tr H(\Phi(\rho)-\rho)/\ln2]$, where $m_\rho$ is the least mutual information any exact dilation must leave between the released output and what stays in the device; the thermodynamic capacity of Faist, Berta and Brand\~ao is the same expression with $m_\rho=0$~\cite{FBB19,FBB21} (Appendix~\ref{app:channels}). For processes, $K_\beta$ is an entropy change plus an energy change measured against the same adaptive observer and minimized over implementations that respect the order in which outputs are due (Appendix~\ref{app:module}). The batch quantity $B(\Phi)$ is defined in Section~\ref{to:sec:clock}.
+
+% =====================================================================

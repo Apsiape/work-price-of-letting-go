@@ -1,0 +1,50 @@
+\input{sections/00_front}
+\input{sections/01_intro}
+\input{sections/02_contract}
+\input{parts/main_law_section}
+\input{parts/mo_table}
+\input{sections/05_channels_main}
+\input{parts/mo_waiting_clock}
+\input{sections/07_classes}
+\input{parts/mo_computability}
+\input{parts/mo_measure}
+\input{sections/09_protocol}
+\input{parts/mo_beyond}
+\input{sections/11_related_discussion}
+
+\appendix
+\clearpage
+\input{parts/part1_law}
+\input{parts/part1_order_proofs}
+
+\clearpage
+\section{Processes with memory, and the physical module}\label{app:module}
+This part states and proves the real-time work law for every finite interactive process whose outputs carry the same Hamiltonians as its inputs, characterizes the free processes, proves the classical order cost of Table~\ref{to:tab:corollaries}, and supplies the physical module (source formation, phase lift and ledger) on which the attainability of Theorem~\ref{to:thm:law} rests. Internal references of the form ``Section~X.Y'' refer to the subsections of this part.
+\input{parts/part2_thms}
+\input{parts/part2_body}
+\input{parts/part2_apps}
+
+\clearpage
+\section{Memoryless channels: the real-time law, the dichotomy, the free set and undecidability}\label{app:channels}
+This part proves Theorems~\ref{thm:main-realtime}, \ref{thm:main-dichotomy} and~\ref{thm:main-undecidable} with every hypothesis explicit, together with the fixed-error converse, the free-set theorem and the results on clocks that return exactly or approximately.
+\input{parts/part3_eqs}
+\input{parts/part3_thms}
+\input{parts/part3_body}
+\input{parts/part3_discussion}
+\input{parts/part3_apps}
+
+\clearpage
+\renewcommand{\D}{\mathsf D}
+\section{Batch with a returned clock}\label{app:batch}
+This part proves Theorem~\ref{thm:main-heisenberg} and the rows of Table~\ref{to:tab:corollaries} that concern a returned clock: the batch law $B(\Phi)$, its dual form and construction, the size of the clock, the lottery of its energy, a process and its time reverse, the noise horizon, and the controller that returns only in state.
+\input{parts/part4_body}
+\input{parts/part4_apps}
+
+\clearpage
+\input{sections/app_classes}
+\input{sections/app_glossary}
+\input{sections/app_companions}
+
+\bibliographystyle{unsrturl}
+\bibliography{refs}
+\end{document}

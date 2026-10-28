@@ -1,0 +1,18 @@
+Write $H$ for the Hamiltonian and $\beta=1/\kB T$, and measure work in units of $\kB T\ln2$. For a time-covariant channel, the batch cost is a maximum over inputs $\rho$ of an entropy cost and an energy cost,
+\begin{equation}\label{sw:eq:batch}
+  \Tcap(\Phi)=\max_\rho\Bigl[S(\rho)-S(\Phi(\rho))+\tfrac{\beta}{\ln 2}\Tr H\bigl(\Phi(\rho)-\rho\bigr)\Bigr],
+\end{equation}
+in bits; Faist, Berta and Brand\~ao use nats. The entropy that the process removes from the system has to go somewhere, and the energy it adds has to come from somewhere. We show that the real-time cost has the same form,
+\begin{equation}\label{sw:eq:realtime}
+  \Trt(\Phi)=\sup_{\rho>0}\Bigl[s_\rho(\Phi)+\tfrac{\beta}{\ln 2}\Tr H\bigl(\Phi(\rho)-\rho\bigr)\Bigr],
+\end{equation}
+with one change. The entropy cost $S(\rho)-S(\Phi(\rho))$ is replaced by the \emph{real-time entropy cost} $s_\rho(\Phi)$: the least entropy that one use on input $\rho$ must leave behind in a device that held no information about that input beforehand (Definition~\ref{sw:def:rtcost}). Equivalently,
+\begin{equation}\label{sw:eq:mutual}
+  s_\rho(\Phi)=S(\rho)-S(\Phi(\rho))+m_\rho(\Phi),
+\end{equation}
+where $m_\rho(\Phi)\ge0$ is the least mutual information that an implementation of $\Phi$ must leave between the output and what stays behind in the device (Section~\ref{sw:sec:setting}). So $\Trt\ge\Tcap$. For time-covariant channels the difference is the price of real time; for other channels, a device whose clock must return can pay more than $\Tcap$ even in batch (Appendix~\ref{app:batch}). We call $\Trt(\Phi)$ the \emph{real-time work rate}.
+
+The extra term has a simple source. A process leaves entropy in its bath, correlated with its output. The batch device of Faist, Berta and Brand\~ao removes that correlation by erasing the environments with the outputs as side information, up to an error that can be made arbitrarily small for large $n$~\cite[Thm.~7.1]{FBB21}; the conditioning in~\cite{FDOR15} has the same origin. A real-time device has already released its outputs, so it cannot use them to recover this correlation. The term $m_\rho$ is a cost at a fixed input. The surcharge between the optimal rates of a time-covariant channel, the difference between the maxima in~\eqref{sw:eq:realtime} and~\eqref{sw:eq:batch}, is generally neither the largest $m_\rho$ nor $m_\rho$ at either optimal input, because the two maxima can sit at different inputs: for amplitude damping at $p=1/2$ and $\beta\Delta=\ln2$ the surcharge is $0.431$ bits per use, while $m_\rho$ is $0.918$ bits at the real-time optimum and $0.197$ bits at the batch optimum (Section~\ref{sec:law}).
+
+Partial reset shows the mechanism. Let a qubit with energy gap $\Delta$ decay to its ground state with probability $p$. The natural dilation sends $|1\rangle|0\rangle_E$ to $\sqrt{1-p}\,|1\rangle|0\rangle_E+\sqrt p\,|0\rangle|1\rangle_E$, so for $0<p<1$ the output stays entangled with the environment, which records whether the decay happened. A batch device can erase that record later, using the output it still holds; a real-time device has released the output and cannot, and no other implementation avoids the correlation (Theorem~\ref{sw:thm:classical}). For full reset, $p=1$, the output is always the ground state, nothing is correlated with it, and timing costs nothing.
+

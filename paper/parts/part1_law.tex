@@ -1,0 +1,234 @@
+\section{The law for general schedules: contract, lower bound and attainability}\label{to:app:schedules}\label{app:law}
+
+This appendix proves Theorem~\ref{to:thm:law} for general schedules. Section~\ref{to:app:schedules}.1 fixes the contract. Section~\ref{to:app:schedules}.2 proves the lower bound for every schedule by an accounting identity. Section~\ref{to:app:schedules}.3 shows that balanced windows reduce exactly to the interleaved processes of Appendix~\ref{app:module}. Section~\ref{to:app:schedules}.4 keeps a record of the observer's strategy on the actual carriers and builds a positive dual correction, and Section~\ref{to:app:schedules}.5 turns this into a physical device with the module of Appendix~\ref{app:module}. Section~\ref{to:app:schedules}.6 treats orders across copies and regularization, and ends with the scope of the theorem. Entropies here are in nats, so $S/\beta$ is $(\ln2/\beta)S$ with entropies in bits, as in the main text.
+
+\subsection{The contract}
+Distances are half trace norm and half complete strategy norm, and work is energy. A block indexed by $N$ has finite hardware, permitted to depend on $N$, and one fixed additive physical Hamiltonian. Each gate is a full square unitary conserving the Hamiltonian of the systems it actually touches. The initial controller $C$, sharp mechanical battery $W$, genuine independent Gibbs stocks $R$, and observer are mutually independent. Every routing register, cache, flag, clock, record, phase bank and coding workspace belongs to $C$ unless explicitly charged to $W$; every used, idle, retired or failed stock remains part of the physical rest.
+
+The return contract requires, uniformly over every compatible coherent adaptive tester,
+\begin{align*}
+d_{\rm tr}(\rho_{C\mathrm{rest}},\alpha_C\otimes\rho_{\mathrm{rest}})&\longrightarrow0,\qquad
+|\Delta E_C|=o(N),\quad |\Delta S_C|=o(N),\\
+S(W_f)&=o(N),\qquad
+\Pr[W_f\ne\text{declared nominal vector}]\longrightarrow0,\\
+v_N:=\Tr|H_W-E_{W,\mathrm{nom}}|\rho_{W_f}&=o(N).
+\end{align*}
+The absolute-tail condition is slightly stronger than a condition on the signed mean; the lower bound uses it, and the construction supplies it. Capital is unrestricted but must be declared.
+
+We use the schedules of Definition~\ref{to:def:schedule}, with two precisions: every visit closes within the block, and ties between events are resolved by a declared order unless the simultaneous events act on distinct carriers and are explicitly interchangeable. We call these schedules \emph{conservative}.
+The compatible tester is any quantum protocol using only already released outputs, its private memory and references, and its lawful future input carriers. It may entangle inputs across visits and blocks, adapt across all earlier outputs, discard only into its retained purification, and act on a loan before returning it. It cannot read the device's inert initial purifier. Promises of product inputs, restrictions on loans or frozen external fuel would be additional contract data; the tester class here has none of them. A task may restrict its admissible inputs by a promise that is part of the task, as the task of Theorem~\ref{thm:classes} does; its bounds are proved directly in Appendix~\ref{app:classes}.
+
+\paragraph{Loans and borrowed catalysts.}
+A loan here is an observer-owned payload that the device sees again: its incoming state may be correlated with every observer reference and earlier output. A borrowed catalyst whose initial state is correlated with the controller, and whose joint initial state must be returned, is a different problem. Its registers would have to be modelled jointly with the controller, and the product initial state used below would fail; we do not treat it. For loans the observer starts independent of the device, so any correlation a loan carries with the device's record was created through earlier releases, and the purity identity $S(Z|F)=S(\omega_B)-S(\tau_B)$ still holds.
+
+For a finite target $T_N$ on its actual schedule $S_N$, a private extension has a finite initially input-independent state $\tau_B$, an inert mathematical purification $F$ initialized before every arrival, and full square quantum gates on $B$ and currently held payloads. Energy conservation is not required of this mathematical object, and every initial ancilla and retained record is included in $\tau_B$. The marginal strategy is within $\eps$ of $T_N$. For a purified tester $t$, let $Z$ be its final physical output systems and entire retained memory, with no duplicate copy of a carrier loaned again, and put
+\begin{align}
+E_t&=\sum_v\bigl[\Tr H_v\rho_{v,r}-\Tr H_v\rho_{v,a}\bigr],\label{to:sc-eq:flux}\\
+G_{\mathcal E}(t)&=\frac{S(\omega_{B,t})-S(\tau_B)}{\beta}+E_t
+=\frac{S(Z|F)_t}{\beta}+E_t,\label{to:sc-eq:score}\\
+k_{S_N,\eps}(T_N)&=\inf_{\mathcal E}\sup_tG_{\mathcal E}(t),\qquad
+\bar k^S(T)=\inf_{\eps_N\to0}\limsup_N\frac{k_{S_N,\eps_N}(T_N)}{N}.\label{to:sc-eq:rate}
+\end{align}
+The equality in \eqref{to:sc-eq:score} follows from purity of $BZF$ and $S(F)=S(\tau_B)$. It remains valid when the same physical carrier appears at several times. Temporal Choi indices are not extra physical copies.
+
+\paragraph{The physical module.}
+We use the following module, supplied with full proofs in Appendix~\ref{app:module}: for every fixed finite retained-body source $\tau$, faithful $q$ with $T=-\beta^{-1}\ln q$, and finite sequence of full square gates on genuinely held systems, if a terminal contact makes the initialized total external energy gain $w+r(t)$ uniformly in testers, then the following steps give nominal work: forming the source from Gibbs supplies, keeping it in an invested cyclic cache, lifting the whole history to energy-conserving gates with a phase reference, pumping the battery, and resetting with a Gibbs swap at the same temperature. They give
+\[
+\beta^{-1}D(\tau\|q)+w+o(1),
+\]
+with complete error $o(1)$, whole-$C$/all-physical-rest product error $o(1)$, actual controller energy and entropy changes $o(1)$, battery entropy and absolute nominal tail $o(1)$, as $r\to0$ and the module parameters are selected. The source need not commute with $T$. All constants are fixed for the finite block before cache length and phase widths. The module is applied block by block; it is not an asymptotic law for a growing process. Its proof is the finite-source module of Appendix~\ref{app:module}, with the factory, cache, phase-lift and ledger steps that follow it there, applied with one source call per block ($p=1/m$) and with the extension's gate list in place of the slot contacts; that part does not use square slots.
+
+\begin{theorem}[Work law for general schedules]\label{to:sc-thm:scope}
+For every conservative schedule, the finite-block lower bound below holds, and the real-carrier recorder and positive terminal dual below exist. Balanced no-feedback windows reduce exactly to square same-carrier slots, preserving every smoothed $k$. With this module, every finite conservative block has an implementation meeting the contract of a private extension of value $g$ at nominal work $g+o(1)$, with the extension's error plus $o(1)$. Hence, for arbitrary specified growing conservative schedule families,
+\[
+W^S(T)=\bar k^S(T).
+\]
+\end{theorem}
+
+\subsection{The lower bound, for every schedule}
+The identity below is a multipartite form of the finite-reservoir entropy-production identity of Esposito, Lindenberg and Van den Broeck and of Reeb and Wolf~\cite{EspositoLindenbergVandenBroeck10,ReebWolf14}.
+\begin{lemma}[Whole-block identity]\label{to:sc-lem:account}
+Let $D=CWR$ start in $\alpha_C\otimes|w\rangle\langle w|\otimes\gamma_R$. For every purified legal tester let $A=S(D_f)-S(D_i)$. Then
+\begin{equation}\label{to:sc-eq:identity}
+-\Delta E_W-\Delta E_C+\frac{\Delta S_C+S(W_f)}{\beta}
+=E_t+\frac{A+D(\rho_{R_f}\|\gamma_R)+I(C{:}W{:}R)_f}{\beta}
+\ge G_{\mathrm{engine}}(t).
+\end{equation}
+Consequently, if the uniform endpoint budgets are $u,s,b,v$ for $|\Delta E_C|$, $|\Delta S_C|$, $S(W_f)$ and absolute nominal tail, then
+\begin{equation}\label{to:sc-eq:lower}
+d_{\mathrm{nom}}\ge k_{S,\eps}(T)-u-v-(s+b)/\beta.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Every actual conserving engine, including preparation and cleanup, becomes a legal mathematical private extension when energy conservation is forgotten. Purify all initial device systems by an inert $F_0$, and purify the tester. At the final ownership cut all payloads are outside; global purity gives $A=S(Z|F_0)$. If $I_f=S(C_f)+S(W_f)+S(R_f)-S(D_f)$, then
+\[
+A=\Delta S_C+S(W_f)+\Delta S_R-I_f,
+\quad
+\Delta S_R=\beta\Delta E_R-D(\rho_{R_f}\|\gamma_R).
+\]
+Exact conservation is $\Delta E_C+\Delta E_W+\Delta E_R+E_t=0$. Combining these equations gives \eqref{to:sc-eq:identity}. Nonnegativity of relative entropy and total correlation proves the inequality. The actual mean battery debit differs from its nominal debit by at most $v$; use the uniform budgets and take the supremum over $t$ to obtain \eqref{to:sc-eq:lower}. Held-carrier energy is counted only at actual handoffs. Contributions telescope even if another carrier is released meanwhile or the observer later loans a carrier back. The argument needs no continuity estimate in $\|H_C\|$ or $\|H_R\|$.
+\end{proof}
+
+\subsection{The exact balanced-window reduction}
+\begin{definition}[Balanced no-feedback window]\label{to:sc-def:window}
+A window contains all arrivals of a physical bundle before its first visible release, and no new arrival during its release phase. Its aggregate output is that same bundle with the same sum Hamiltonian, up to a declared Hamiltonian-preserving identification. There is no unreported receipt. The unrestricted observer can prepare the window's inputs jointly; if a frozen external input resource becomes available only later, that availability must instead remain in the schedule and the aggregation is not claimed.
+\end{definition}
+\begin{lemma}[Contract-preserving aggregation]\label{to:sc-lem:windows}
+Consecutive balanced no-feedback windows are exactly a square-port process with the aggregate bundle and its additive Hamiltonian in each slot. The correspondence preserves the compatible tester set up to harmless purifying isometries, terminal $ZF$ state, every true handoff energy, complete strategy distance, and $k_{S,\eps}$ for every $\eps$.
+\end{lemma}
+\begin{proof}
+Before the first output of a window, the observer receives no feedback. Its successive preparation operations act on its own memory and not-yet-delivered inputs, while device gates act on its memory and already-delivered inputs. These operations commute whenever interchanged because their physical supports are disjoint. Move observer preparations to a single joint preparation and move device operations after all arrivals. Arbitrary initial entanglement with past memory and future inputs is retained, not replaced by a product state.
+
+During the release phase no further input enters. Each observer operation on already released carriers is disjoint from each remaining device gate. Commute them so all device gates are performed before the first release. The outputs can then be parked on their actual incoming payload carriers until their original deadlines. The observer receives no output early; its original release-by-release operations are still available. This produces one joint square gate on the aggregate bundle and the retained body, with any initially allocated pure dilation registers counted in the source.
+
+Conversely, prepare the aggregate input and deliver its factors at their original arrivals, apply the aggregate gate after the last arrival and before the first release, and park each actual output factor until its deadline. These inverse reorderings preserve the complete purified circuit for every tester, including all reference systems. They therefore preserve $ZF$ and distinguishability of any pair of strategies, not just their marginal channel outputs. Each carrier's energy at arrival and release is unchanged, and the sum Hamiltonian is the original one. Purifiers are not touched. No pure external dummy, new output carrier, or separate uncharged buffer is introduced. Applying the same reorderings to every private extension proves equality of the feasible infimum and tester supremum at each smoothing.
+\end{proof}
+
+\paragraph{Schedules that are not windows.}
+The order $a_A,a_B,r_A,a_C,r_B,r_C$, with a real observer response between $r_A$ and $a_C$, has rectangular bursts and is not a balanced-window square-slot process. Equal aggregate input and output dimensions over the entire block do not make its intermediate slots square. Adding a pure dummy input changes the source ledger; omitting a classical receipt changes the tester set. Loans cannot be identified with fresh independent copies. The next proof handles such schedules directly.
+
+\subsection{General conservative schedules: coherent recorder and terminal dual}
+Group maximal arrival bursts and maximal release bursts as $I_1,O_1,\ldots,I_q,O_q$. Empty groups represent absence of an event, not an actual one-dimensional port. Let
+\[
+a=\prod_{j=1}^q\dim I_j,\quad
+c=\prod_{j<q}\dim O_j.
+\]
+Choose the tester-Choi convention whose positive prefixes $Z_j$ act on $I_1O_1\cdots O_{j-1}I_j$ and obey the homogeneous causal equations
+\begin{equation}\label{to:sc-eq:tester}
+\Tr_{I_j}Z_j=I_{O_{j-1}}\otimes Z_{j-1}\qquad(2\le j\le q).
+\end{equation}
+Each prefix is determined by the next one, and the scalar $\Tr Z_1$ is left free. The equations give $\Tr Z_q=c\Tr Z_1$, so $n(Z)=\Tr Z_q/c=\Tr Z_1$ is linear; a normalized tester has $n(Z)=1$, and then $\Tr Z_q=c$. The final release burst cannot affect input generation. A terminal observer isometry does not change the body marginal or $S(Z|F)$.
+
+\begin{lemma}[Tester realization and full-rank point]\label{to:sc-lem:tester}
+The homogeneous cone of unrestricted input-generating testers, the nonnegative multiples of normalized ones, is $V\cap\mathrm{PSD}$, with $V$ the real space of Hermitian $Z=Z_q$ whose prefixes satisfy the homogeneous causal equations \eqref{to:sc-eq:tester}. Its normalized section is $n(Z)=1$, and it contains $Z_0=I/a>0$.
+\end{lemma}
+\begin{proof}
+Tracing the output of each observer isometry gives \eqref{to:sc-eq:tester}, and normalization gives $\Tr Z_1=1$. Conversely take positive prefixes satisfying those equations with $n(Z)=1$; a positive multiple is the same protocol rescaled, and $n(Z)=0$ forces $Z=0$. Purify $Z_1$ as an input and a private memory. Inductively, $Z_j$ and the state obtained by adjoining the identity Choi wire $O_{j-1}$ to a purification of $Z_{j-1}$ have the same required reduced state. An isometry between their purifications acts only on the observer's previous memory and the newly delivered $O_{j-1}$, and produces $I_j$ and a new memory. Enlarge memory if necessary. This is a causal observer protocol and gives every positive solution. Its initial memory is independent of the device. The dimension factors in the partial traces give $\Tr Z_q=c$. Direct substitution of flat input preparations that ignore prior outputs gives $Z_0=I/a$.
+\end{proof}
+
+\begin{lemma}[Recorder on actual visits]\label{to:sc-lem:recorder}
+Preallocate and count one EPR pair $A_vR_v$ with the dimension of the actual carrier for every visit. At its true arrival SWAP $P_v$ with $A_v$; keep $P_v$ untouched while held and release that same physical $P_v$ at its true deadline. On a later loan use a new pair. Just before the final output burst, the accessible stored inputs and partners of prior outputs have state
+\begin{equation}\label{to:sc-eq:record}
+\chi_t=Z_q(t)/c.
+\end{equation}
+The construction preserves every history Gram entry, including observer-correlated loans.
+\end{lemma}
+\begin{proof}
+At arrival, the entire incoming state and all its correlations move into $A_v$; the actual physical carrier becomes the EPR half previously in $A_v$. The release therefore uses a real carrier, not a new observer wire. No released carrier is operated on until it lawfully returns. A returned loan carries the observer's intervening operation and quantum correlations, and its next SWAP records those correlations unchanged.
+
+Expand the observer's purified causal isometries in physical input indices $i$, prior-output indices $o$, and terminal memory index $m$, with amplitudes $C_{i,o,m}$. Every normalized released EPR half contributes the factor $1/\sqrt{\dim O_j}$ and identifies its output index with the retained partner. Every arrival SWAP identifies its generated input index with a stored input register. Tracing only terminal observer memory gives
+\[
+(\chi_t)_{i,o;i',o'}=c^{-1}\sum_m C_{i,o,m}\overline{C_{i',o',m}}.
+\]
+The numerator is precisely the positive tester Gram $Z_q$ of \eqref{to:sc-eq:tester}; tracing successive observer isometries proves its prefix constraints and trace $c$. Partners of the last output burst supply an independent flat factor and are not needed in $Z_q$. Stored registers are present before that final release, so the correction time is lawful. This is an identity of coherent circuits: no history is measured and nothing is postselected. It uses neither equal burst dimensions nor independent loans.
+\end{proof}
+
+\begin{lemma}[Positive accessible representative]\label{to:sc-lem:dual}
+If $L$ is linear on $V$ and nonnegative on $V\cap\mathrm{PSD}$, there is $D_{\rm hist}\ge0$ such that $\Tr(D_{\rm hist}Z)=L(Z)$ for all $Z\in V$. In particular, if $L(Z)=w n(Z)-J(Z)$, then
+\[
+\|D_{\rm hist}\|\le\Tr D_{\rm hist}=a\,[w-J(Z_0)].
+\]
+\end{lemma}
+\begin{proof}
+Let $P_V$ be orthogonal projection in the real Hilbert space of Hermitian matrices. The cone $P_V(\mathrm{PSD})$ is closed. Indeed, if $P_VD_n$ converges and $D_n\ge0$, then $\Tr(D_nZ_0)=\Tr D_n/a$ is bounded since $Z_0\in V$. Hence $D_n$ has bounded trace and norm and a convergent PSD subsequence. Its projected limit is the desired limit. The dual of this projected cone within $V$ is $V\cap\mathrm{PSD}$, by self-duality of the full PSD cone. Taking the dual again and using closedness gives $(V\cap\mathrm{PSD})^*=P_V(\mathrm{PSD})$. Represent $L$ by a Hermitian vector of $V$ and choose its PSD lift. Finally evaluate on $Z_0=I/a$ and use the normalization $n(Z_0)=1$ and PSD norm bounded by trace.
+\end{proof}
+
+\subsection{Joint tangent and transfer to the physical module}
+Fix one finite private extension, of value $g$. Put all block constants before all asymptotic choices. Add a classical input-independent source flag with probability $\delta$ of the recorder branch. The full EPR stock is in that branch; on the ordinary branch the added record stock is flat. Every EPR pair and flag is counted in the new source $\tau'$. All flag-controlled contacts are full squares on genuinely held systems. The complete strategy changes by at most $\delta$. Flag entropy cancels between initial and final body entropy. Since this finite block has bounded effective tester dimension and handoff energy ranges, the new score satisfies $g'\le g+\delta C_0$ for a finite block-dependent constant $C_0$.
+
+\begin{lemma}[One joint entropy--energy tangent]\label{to:sc-lem:tangent}
+Let $\omega_t$ be the new final body marginal and $E'_t$ its true handoff energy. For each $0<s<1$ there is a faithful $q_s$ such that, with $T_s=-\beta^{-1}\ln q_s$ and
+\[
+F_{\tau,s}=\beta^{-1}D(\tau'\|q_s),\quad
+J_s(t)=E'_t+\Tr T_s(\omega_t-\tau'),\quad w_s=\max_tJ_s(t),
+\]
+\begin{equation}\label{to:sc-eq:tangent}
+F_{\tau,s}+w_s\le g'+\frac{-\ln(1-s)}\beta.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Maximize $S(\omega_t)/\beta+E'_t$ on the compact tester section and denote the body marginal at a maximizer by $\zeta$; it does not depend on $s$. Every reachable $\omega_t$ is supported in $\operatorname{supp}\zeta$: if it had weight outside, mixing it into the maximizer would gain entropy of order $-x\ln x$, exceeding the bounded linear energy loss of order $x$. On that common support, the directional derivative at the maximizer gives
+\[
+E'_t-\beta^{-1}\Tr\omega_t\ln\zeta-\beta^{-1}S(\tau')\le g'.
+\]
+Given $s$, set $q_s=(1-s)\zeta+sI/R$, where $R$ is the finite body dimension. Operator monotonicity of logarithm and $q_s\ge(1-s)\zeta$ imply the same bound with $-\ln q_s$ plus $-\ln(1-s)$. Expanding $F_{\tau,s}+J_s(t)$ cancels the $\Tr T_s\tau'$ terms and proves \eqref{to:sc-eq:tangent}. Entropy and energy were optimized on one and the same tester.
+\end{proof}
+
+The construction uses the lemma at one value of $s$ only: the order of choices at the end of this subsection fixes $s$ before $q$, $T$ and everything that depends on them. From here on $s$ is that fixed value, and we write $q$, $T$, $F_\tau$, $J$ and $w$ for $q_s$, $T_s$, $F_{\tau,s}$, $J_s$ and $w_s$.
+
+$J$ is affine in the normalized tester Choi matrix. Homogenize it on $V$ and apply Lemma~\ref{to:sc-lem:dual} to $L(Z)=w n(Z)-J(Z)$. At the terminal correction time use
+\[
+D=|1\rangle\langle1|_{\rm flag}\otimes(c/\delta)D_{\rm hist},
+\]
+with identities on unused body factors. Lemma~\ref{to:sc-lem:recorder} gives the exact same-tester identity $\langle D\rangle_t=w-J(t)$. $D$ acts only on accessible retained records. This step is what general schedules need beyond the construction for square slots.
+
+\begin{lemma}[Full hot-qubit contact]\label{to:sc-lem:hot}
+Let $M\ge2\|D\|$ and let a genuine independent Gibbs qubit of gap $M$ have excited probability $z=(1+e^{\beta M})^{-1}$. The Halmos dilation
+\[
+U_D=\begin{pmatrix}C&-F\\F&C\end{pmatrix},\qquad
+C=\sqrt{I-D/M},\quad F=\sqrt{D/M},
+\]
+is unitary. Its initialized hot-energy gain is $(1-2z)\langle D\rangle_t$. If the span of the nonhot touched Hamiltonian $Q$ is $h$, its other gain has absolute value at most $3h\|D\|/M$. Thus the complete initialized gain after the bare witness is $w+r(t)$ with
+\begin{equation}\label{to:sc-eq:hot}
+|r(t)|\le r_M=3h\|D\|/M+2z\|D\|\longrightarrow0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+$C,F$ are commuting functions of $D$, $C^2+F^2=I$, so both columns and both rows are orthonormal. Tracing the initially diagonal hot qubit yields $\Lambda(\rho)=C\rho C+F\rho F$; both Gibbs columns are included. The excited population changes by $(1-2z)\Tr(F\rho F)$, giving the hot gain. Shift $Q$ by its lowest eigenvalue, so $\|Q\|=h$, and use $\|I-C\|\le\|D\|/M$ and $\|F\|^2=\|D\|/M$ to bound $\|CQC+FQF-Q\|\le3h\|D\|/M$. Add $J(t)$ and the exact correction $w-J(t)$; the finite thermal excited-column correction is bounded by $2z\|D\|$. The contact comes after all bare target gates and before the final deadline, and it never acts on a released carrier.
+\end{proof}
+
+\paragraph{The physical construction.}
+Apply the named finite-source module to this finite circuit, $\tau',q,T,w$. It supplies factories with $a_m\to F_\tau$, reduced $m$-source error $e_m\to0$, four mechanical helper registers and an auxiliary in whole $W$, fixed source-dependent helper span at most $mA$, and controllable failure $f_m$. The invested cache is
+\[
+\sigma_m=\frac1m\sum_{k=0}^{m-1}|k\rangle\langle k|\otimes(\tau')^{\otimes k}\otimes q^{\otimes(m-1-k)},
+\quad H_{\rm clock}(k)=(m-1-k)a_m.
+\]
+One source call serves the entire block. Its boundary probability is $p=1/m$; whole-rest correlation is $O(p)$, while cache marginal error is $p e_m$. The actual cache energy and entropy defects are bounded by
+\[
+e_m(\operatorname{span}T+|a_m|),\qquad
+h(e_m/m)+(e_m/m)\ln[mR^{m-1}],
+\]
+and the weighted helper absolute tail is $Af_m$. The phase modules prescribe full finite columns on all initialized paths, including rare flags, excited Gibbs sources and factory failure, and complete them in exact energy shells. One whole-history bank preserves adaptive Gram entries. A sine width $L$ in $r$ coordinates has purified-history error $d_P\le\pi^2\sqrt r K_*/[2(L+1)]$, entropy at most $h(d_P^2)+d_P^2\ln\dim P$, and product defect at most $2d_P$. Actual service-bank mean drift is bounded using conservation and a finite touched-external-energy constant $Q_*$ by
+\[
+r_M+C Q_*(p+d_P).
+\] Body reset after the final release is a full same-$T$ SWAP with an independent genuine $q$ stock; all displaced states remain physical.
+
+Choose, in order, the finite extension; $\delta$ with $\delta C_0$ small and the tangent parameter $s$ with $-\ln(1-s)/\beta$ small; $q=q_s$, $T=T_s$, then $D,h,Q_*$; $M$ making \eqref{to:sc-eq:hot} small; factory constants; $m$ making $|a_m-F_\tau|$, the displayed actual cache refunds, $Q_*/m$, helper tail and $h(1/m)+\ln32/m$ small; then phase buffers and widths. All constraints are finite and chosen pointwise, before another block is considered. This yields cost $a_m+w\le g+o(1)$, the extension's error plus $o(1)$ and the stated full ledger. The cache's startup price is
+\[
+\frac{m-1}{2}(F_\tau+a_m)+\beta^{-1}\ln(Z_{\rm clock}/m),
+\]
+plus each pure bank's actual initial energy and $\beta^{-1}\ln Z_P$, and counted pure counter/flag preparation. These can be enormous; they are invested capital, and the initial EPR stock is part of it.
+
+\subsection{Cross-copy orders and regularization}
+The full event order across copies is part of $S_N$. Sequential $N$ fixed episodes, all $N$ inputs followed by all outputs, and a sliding-window or cross-copy interleaving are distinct schedules with distinct tester and extension sets. Under Theorem~\ref{to:sc-thm:scope}'s pointwise module, choose a near-optimal finite extension at each $N$ and compile it at a tolerance $\nu_N\to0$. Equation~\eqref{to:sc-eq:lower} and this construction prove the rate identity with the quantifiers of \eqref{to:sc-eq:rate}.
+
+The costs here are nonnegative. One legal observer feeds an independent Gibbs state at every arrival, storing old loan outputs before reinitializing that physical carrier. Regard the resulting sequence of fresh Gibbs input factors as time wires in the purified circuit. Unitarity, unchanged carrier Hamiltonians and equality of the products of input/output Gibbs partition functions give
+$\beta G_{\mathcal E}(t)=D(\rho_{O B,f}\|\gamma_O\otimes\omega_{B,f})\ge0$.
+All stored observer systems remain in its purification. This is only a selected lower-bound tester; the service claim still covers all testers.
+
+\begin{lemma}[Joint smoothing]\label{to:sc-lem:diagonal}
+For the monotone smoothed finite-block costs, whenever the expressions are interpreted in the extended real sense,
+\[
+\inf_{\eps_N\to0}\limsup_N k_{S_N,\eps_N}/N
+=\lim_{\eps\downarrow0}\limsup_N k_{S_N,\eps}/N.
+\]
+\end{lemma}
+\begin{proof}
+For any vanishing $\eps_N$ and fixed $\eps>0$, eventually $\eps_N\le\eps$, so the left sequence is at least $k_{S_N,\eps}/N$. Taking limits gives one inequality. For the reverse, write the finite right-hand value as $L$; for each integer $j$ choose a cutoff $N_j$ after which $k_{S_N,1/j}/N\le L+1/j$. Increase cutoffs strictly and set $\eps_N=1/j$ between $N_j$ and $N_{j+1}$. This sequence tends to zero and has limsup at most $L$. If $L=+\infty$ the first inequality suffices; nonnegativity excludes $-\infty$. The diagonal sequence gives no rate of convergence.
+\end{proof}
+
+\paragraph{Scope.}
+If only the fixed-process theorem of Appendix~\ref{app:module} is used, without the pointwise physical module, equality is justified only for fixed balanced-window episodes repeated sequentially, and arbitrary interleaving across copies is not reduced to sequential repetitions; the lower bound still holds for every conservative schedule. The theorem gives the optimal rate. It asserts no exact or branch-by-branch return, no converse at fixed error for a controller that starts in its Gibbs state, no efficient construction and no bound on the tails of the heat. Unrestricted conservative visits are covered by the direct proof. General new-output/retired-input inventories have a separate partition correction
+\[
+\frac{\sum_{\rm new}\ln Z_O-\sum_{\rm retired}\ln Z_I}{\beta}
+\]
+and need real stocks; the balanced-window theorem does not manufacture them. Restricted tester sets require their own positive-cone and recorder proof. A retained actuator coupled to a released carrier is not a free change of $H$. For the fixed controlled Hamiltonian
+\[
+H_{\rm tot}=\sum_f|f\rangle\langle f|\otimes(H_f(P)+K_f(R)),
+\]
+a rest-only conserving gate with block $U_{gf}$ obeys
+\[
+(H_g-H_f)\otimes U_{gf}+I\otimes(K_gU_{gf}-U_{gf}K_f)=0.
+\]
+Subtracting the normalized $P$ trace shows that $U_{gf}\ne0$ requires $H_g-H_f$ to be scalar. Nonscalar modes cannot be cyclically reset after release by operations on retained rest. Scalar offsets still require their actual energy payment. Thus neither arbitrary Hamiltonian switching nor arbitrary exact endpoints inherit this upper bound.
+
