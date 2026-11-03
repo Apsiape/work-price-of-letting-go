@@ -1,0 +1,939 @@
+\subsection{Proofs}\label{kt:app:proofs}
+
+\subsubsection{The range of the baths}\label{kt:pf:baths}
+
+Suppose an implementation of $n$ uses of a unitary $U$ has error $\varepsilon$. For orthogonal inputs $a,b$, let $\sigma_a,\sigma_b$ be the final states of everything except the outputs. Feeding the superposition $(|0\rangle a+|1\rangle b)/\sqrt2$ with a kept qubit, and using that the ideal outputs are pure, the device's state must nearly factor off, which gives $d_{\rm tr}(\sigma_a,\sigma_b)\le2\sqrt{2\varepsilon}$~\cite{KSW08}. Take $a$ and $b$ to be $n$-fold products of eigenvectors of $D$ for its largest and smallest eigenvalues. The delivered energies differ by at least $n(\lambda_{\max}-\lambda_{\min})(D)-2n\varepsilon\,\mathrm{span}(H)$. The work is input-independent and the controller's mean energy changes by $o(n)$ in both runs, so by energy conservation the mean energies of the heat baths differ by the same amount up to $o(n)$. For any bath Hamiltonian of total span $R$, $|\Tr H_{\mathrm{baths}}(\sigma_a-\sigma_b)|\le R\,d_{\rm tr}(\sigma_a,\sigma_b)$. Hence
+\[
+R\ \ge\ \frac{n(\lambda_{\max}-\lambda_{\min})(D)-2n\varepsilon\,\mathrm{span}(H)-o(n)}{2\sqrt{2\varepsilon}},
+\]
+which grows faster than $n$ as $\varepsilon\to0$ whenever $U$ is not time-covariant. Rare, large heat transfers are therefore unavoidable, as in the construction.
+
+
+
+\subsubsection{What the clock costs}\label{kt:pf:costs}
+
+\paragraph{Capital.} Let $\Lambda$ be a time-covariant channel from the controller $C$ to a system $Y$, $L$ a contraction on $Y$ with $[H_Y,L]=-qL$ for some $q>0$, and $A=\Lambda^*(L)$. Then $A^*A\le I$, $[H_C,A]=-qA$, and $\Tr\gamma_CA^*A=e^{-\beta q}\Tr\gamma_CAA^*\le e^{-\beta q}$. Measuring the effect $A^*A$ and using $\Tr\alpha_CA^*A\ge|\Tr\alpha_CA|^2$,
+\[
+D_{\mathrm{nat}}(\alpha_C\|\gamma_C)\ \ge\ \beta q\,|\Tr\alpha_CA|^2-\ln2,
+\]
+with no dependence on any dimension. For the Hadamard gate, let an observer feed $K$ uses the state $(|0\rangle^{\otimes K}|q_0\rangle+|1\rangle^{\otimes K}|q_1\rangle)/\sqrt2$, where a kept qubit has energies $0$ and $-KE$, so that the whole tester is stationary. The ideal output is $(|+\rangle^{\otimes K}|q_0\rangle+|-\rangle^{\otimes K}|q_1\rangle)/\sqrt2$, and $L=Z^{\otimes K}\otimes|q_1\rangle\langle q_0|$ lowers energy by $KE$ and has expectation $1/2$ there. If the actual output is within $\delta$, then $|\Tr\rho L|\ge1/2-2\delta$. Everything except the controller starts stationary, so the whole experiment is a covariant channel from $C$, and the lemma gives $\beta^{-1}D(\alpha_C\|\gamma_C)\ge KE(1/2-2\delta)^2-\ln2/\beta$.
+
+A controller that returns approximately can serve $m$ consecutive blocks of $n$ uses, with fresh reservoirs for each block, at total error at most $m\varepsilon+(m-1)\eta$. To see this, compare with a mathematical hybrid in which the controller is replaced by a fresh copy of $\alpha_C$ at block boundaries. Each replacement costs at most $\eta$ by approximate product return, and the hybrid with all replacements runs $m$ independent blocks, each within $\varepsilon$ of ideal. Take $m=\lfloor1/(8(\varepsilon+\eta))\rfloor$ and $K=mn$; then $\delta\le1/8$ and (a) follows for the Hadamard gate. \emph{General unitaries.} The lemma above needs only that every matrix element of $L$ between energy eigenspaces lowers the energy by at least $q$. Then $A=\Lambda^*(L)$ has the same property, $A^*A\le I$, and detailed balance still gives $\Tr\gamma_CA^*A\le e^{-\beta q}\Tr\gamma_CAA^*\le e^{-\beta q}$. For a general $U$, pick energy eigenvectors $|a\rangle,|b\rangle$, of energies $h_a,h_b$, whose diagonal values of $D$ are extreme, $d_b-d_a=g$. The observer feeds $K$ uses the state $(|a\rangle^{\otimes K}|q_a\rangle+|b\rangle^{\otimes K}|q_b\rangle)/\sqrt2$, where the kept states $|q_a\rangle,|q_b\rangle$ are orthogonal, with energies $-Kh_a$ and $-Kh_b$, so that the tester is stationary. The ideal output is $(\psi_a+\psi_b)/\sqrt2$ with $\psi_x=(U|x\rangle)^{\otimes K}|q_x\rangle$. On $\psi_x$ the total energy is the kept energy plus a sum of $K$ independent payload energies, each of range $\mathrm{span}(H)$, and its mean is $Kd_x$. Let $P_x$ project, within the label $q_x$, onto total energies in $[Kd_x-Kg/4,\,Kd_x+Kg/4]$. Hoeffding's inequality~\cite{Hoeffding63} gives $p_x=\|P_x\psi_x\|^2\ge1-h_K$ with $h_K=2e^{-Kg^2/(8\,\mathrm{span}(H)^2)}$. With $u_x=P_x\psi_x/\sqrt{p_x}$, the contraction $L=|u_a\rangle\langle u_b|$ lowers energy by at least $Kg/2$, because the bottom of the window of $b$ lies $Kg/2$ above the top of the window of $a$, and its expectation on the ideal output is $\sqrt{p_ap_b}/2\ge(1-h_K)/2$. The lemma gives
+\[
+\beta^{-1}D(\alpha_C\|\gamma_C)\ \ge\ \frac{Kg}2\Bigl[\frac{1-h_K}2-2\delta\Bigr]^2-\frac{\ln2}\beta .
+\]
+With the same reuse, $K=mn$ and $\delta\le1/8$; once $h_n\le1/4$, which holds for all large $n$ since $h_K\le h_n$, the bracket is at least $1/8$, and $K\ge n/(16(\varepsilon+\eta))$ gives the constant $g/2048$.
+
+\paragraph{Baths.} Record the baths' initial energies in an inert purification and let $Q$ be the heat they absorb. For the two product inputs of~(b), the decoupling argument above makes the two laws of $Q$ within $\delta=2\sqrt{2\varepsilon}$, while energy conservation, the deterministic work and the controller's mean return make their means differ by $L_n$. If the laws are supported in an interval of length $R$, then $L_n\le R\delta$, which gives the range bound; and a circuit of $m$ interactions, each changing the baths' energy by at most $q_0$, has $R\le2q_0m$. For the integrated strength, an interaction built from terms of span at most $q_0$ and total strength $A$ gives the exponential moments $\mathbb E\,e^{\pm Q/(2q_0)}\le e^{2(\sqrt e-1)A}$, by a Dyson expansion in the style of~\cite{AKL16}. Write $M=e^{2(\sqrt e-1)A_n}$, and write the difference of the two laws $P,P'$ of $Q$ as $\mu_+-\mu_-$ with $\mu_+\le P$, $\mu_-\le P'$ and common mass $\delta'\le\delta$. Jensen's inequality for $\mu_+/\delta'$ gives $\int Q\,d\mu_+\le2q_0\delta'\ln\bigl(\mathbb E_Pe^{Q/(2q_0)}/\delta'\bigr)\le2q_0\delta'\ln(M/\delta')$, and in the same way $-\int Q\,d\mu_-\le2q_0\delta'\ln(M/\delta')$. Since $x\mapsto x\ln(M/x)$ increases for $x\le M/e$, and $\delta\le1/e\le M/e$ when $\varepsilon\le1/(8e^2)$, the means differ by at most $4q_0\delta\ln(M/\delta)$, so $L_n\le4q_0\delta\bigl[2(\sqrt e-1)A_n+\ln(1/\delta)\bigr]$, which is the bound on $A_n$. All three bounds use only the two product inputs and energy conservation, so they hold in batch as well.
+
+\paragraph{A cheaper clock.} In the construction of Appendix~\ref{app:channels} for the Hadamard gate, the reference's widths were chosen against the worst case, in which every one of the $n$ contacts emits rare heat. Given the past, a contact emits it with probability at most $b/M$, so the number $J$ of emissions has $\mathbb EJ^2\le nb/M+(nb/M)^2$, and $J$ exceeds a cutoff $K_c$ only with probability at most $(nb/M)^{K_c+1}/(K_c+1)!$. Factoring the phase of each emission into an orthogonal record of the bath, the reference's phase sensitivity becomes $O(n+\sqrt{nm})$ instead of $O(nm)$, and the reference's box needs a buffer of only $n+m(K_c+2)+2$, with the rare histories beyond the cutoff handled by a coherent comparison with the ideal circuit and no guard. With errors $O(1/\log n)$ the capital is then $\Theta(E\,n\log^2n/\log\log n)$; with errors $O(n^{-a})$ it is $\Theta(E\,n^{1+3a/2})$. The work is still exactly $nE/\sqrt2$, and the controller returns its energy and entropy up to $o(1)$ on average. Finally, a qubit of large gap $M$ can be replaced by a block of $k=\lceil M/(E\tanh(\beta E/2))\rceil$ Gibbs qubits of gap $E$ flipped together by $iX^{\otimes k}$: a flip always moves a block to an orthogonal state, so the heat effect and the disturbance of the payload are as before.
+
+
+% =====================================================================
+\subsubsection{The clock's energy}\label{kt:pf:lottery}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:lottery}]
+First, $g>0$: in an energy eigenbasis with energies $h_i$, $\sum_{i,j}|U_{ji}|^2(h_j-h_i)^2=-2\sum_ih_id_i$, and if every $d_i$ vanished this would force $[U,H]=0$.
+
+Let $R$ be everything except the controller and the payload outputs, including the heat baths and the battery. Since $R$ and the input $|i\rangle^{\otimes n}$ start in states that commute with their Hamiltonians, measuring their total energy at the start does not disturb anything, and comparing it with a final measurement defines a positive instrument on the controller whose outcomes shift its energy by definite amounts $q$. By energy conservation, $q$ is minus the change of energy of $R$ and the payload. Its first two moments are those of $V^*H_CV-H_C$ on these inputs; its higher moments in general are not.
+
+Accurate service makes the final states of $R$ on the two feeds within $\delta=2\sqrt{2\varepsilon}$ in trace distance (the range of the baths, above). On the feed $|i\rangle^{\otimes n}$ the payload gains energy $nd_i$ up to $n\varepsilon\,\mathrm{span}(H)$, and the sum of the $n$ independent output energies concentrates around its mean, with Hoeffding tails $e^{-n(g-2a)^2/(2\,\mathrm{span}(H)^2)}$. If $|q|\le an$ with high probability on both feeds, the energy change of $R$ would concentrate on two windows centred about $ng$ apart, each of width less than $ng$. Two distributions within $\delta$ in total variation cannot do this, which gives the sum bound. For the standard deviation, the comparison is made in Hellinger distance; this is where the factor $\varepsilon^{-1/2}$ enters. Feed the two product inputs in superposition, marked by a kept qubit. By Uhlmann's theorem there is a pure state $e$ of everything except the outputs such that the actual final state has fidelity at least $1-\varepsilon$ with the ideal output tensored with $e$, so on each feed its branch has overlap at least $1-2\varepsilon$ with that product. Let $\ell_x$ be the energy change of $R$ on feed $x$, read off from the same energy measurements, and $p_x$ its law. Both laws have Bhattacharyya coefficient at least $1-2\varepsilon$ with the law of the same measurement on $e$, so $\|\sqrt{p_a}-\sqrt{p_b}\|_2\le4\sqrt\varepsilon$. For every function $f$, the Cauchy--Schwarz inequality gives the classical comparison
+\[
+|\mathbb E_af-\mathbb E_bf|\ \le\ \|\sqrt{p_a}-\sqrt{p_b}\|_2\,\bigl(2\,\mathbb E_af^2+2\,\mathbb E_bf^2\bigr)^{1/2}.
+\]
+Take $f=\ell$ minus the midpoint of its two means, and let $\Delta$ be the distance between the means. Then $\mathbb E_xf^2=\mathrm{Var}_x\ell+\Delta^2/4$, so $\Delta^2\le16\varepsilon(\Delta^2+2\,\mathrm{Var}_a\ell+2\,\mathrm{Var}_b\ell)$, and
+\[
+\max_x\mathrm{Var}_x\ell\ \ge\ \frac{\Delta^2(1-16\varepsilon)}{64\varepsilon}.
+\]
+By energy conservation $\ell_x=-q_x-\Delta S_x$, where $\Delta S_x$ is the energy gained by the payload. Its means on the two feeds differ by at least $ng-2n\varepsilon\,\mathrm{span}(H)$, while those of $q$ differ by at most $2u$, so $\Delta\ge ng-2n\varepsilon\,\mathrm{span}(H)-2u$. Finally $\sigma(q_x)\ge\sigma(\ell_x)-\sigma(\Delta S_x)$, and $\sigma(\Delta S_x)\le(\sqrt n/2+\sqrt\varepsilon\,n)\,\mathrm{span}(H)$: the ideal output energies are $n$ independent variables, each with standard deviation at most $\mathrm{span}(H)/2$, and the actual law differs from the ideal one with probability at most $\varepsilon$, on an interval of length $n\,\mathrm{span}(H)$. This gives the stated bound. The variance bound on a coherent input follows from the uncertainty relation between $V^*H_CV-H_C$ and an output observable that detects the relative phase of the ideal output.
+\end{proof}
+
+\subsubsection{A strong converse with a reusable controller}\label{kt:pf:capital}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:capital-converse}]
+Write $\sigma=\Phi(\rho)$, $D_{\rm in}=D(\rho\|\gamma)$ and $D_{\rm out}=D(\sigma\|\gamma)$, so that $\beta\mathcal T(\Phi)=D_{\rm out}-D_{\rm in}$, and let $W=E_i-E_f$.
+
+\emph{(a)} Choose a smoothed input $\tau_n\le e^{n(D_{\rm in}+\kappa)}\gamma^{\otimes n}$ with $\|\tau_n-\rho^{\otimes n}\|_1\le f_n$, and an output test $P_n$ with $\Tr P_n\sigma^{\otimes n}\ge1-f_n$ and $\Tr P_n\gamma^{\otimes n}\le e^{-n(D_{\rm out}-\kappa)}$. Let $\mathcal M$ be the success instrument on the controller: run the device on $\tau_n$, apply $P_n\otimes|f\rangle\langle f|$, and trace out everything except $C$. It is completely positive. Because the dilation conserves energy, it fixes the global Gibbs state, so $\mathcal M(\gamma_C)\le r\,\gamma_C$ with $r=e^{\beta W-n(\beta\mathcal T(\Phi)-2\kappa)}\le e^{-bn}$ for $\kappa=\beta\Delta/8$. Since $\alpha_C\le e^{D_{\max}(\alpha_C\|\gamma_C)}\gamma_C$, $\Tr\mathcal M(\alpha_C)\le e^{D_{\max}(\alpha_C\|\gamma_C)-bn}$, while $\Tr\mathcal M(\alpha_C)\ge1-\varepsilon_n-q_n-2f_n$.
+
+\emph{(b)} For a density $X=\sum_ax_a|a\rangle\langle a|$ and a positive definite $\Gamma=\sum_bg_b|b\rangle\langle b|$, the weights $x_a|\langle a|b\rangle|^2$ form a probability law for $L=\ln(x_a/g_b)$, whose characteristic function is $\Xi(X;\Gamma,t)=\Tr X^{1+it}\Gamma^{-it}$~\cite{NussbaumSzkola09}. Its mean is $D(X\|\Gamma)$ when $\Gamma$ is normalized. Two properties are used.
+
+\emph{Acceptance.} If a projection $A$ commutes with $\Gamma$, then for every real $x$,
+\begin{equation}\label{kt:eq:accept}
+\Tr AX\le e^x\,\Tr A\Gamma+\Pr(L\ge x).
+\end{equation}
+Indeed, in a joint eigenbasis of $A$ and $\Gamma$, $\Tr AX=\sum_{b\in A}\sum_ax_a|\langle a|b\rangle|^2$, and the terms with $L<x$ have $x_a<e^xg_b$.
+
+\emph{Continuity.} For densities $A,B$ and every positive definite $\Gamma$,
+\[
+|\Xi(A;\Gamma,t)-\Xi(B;\Gamma,t)|\le2\sqrt{1+t^2}\,\|A-B\|_1^{1/2}.
+\]
+Put $z=(1+it)/2$. The map $u\mapsto u^{1+it}$ is $\sqrt{1+t^2}$-Lipschitz on $u\ge0$, so expanding in eigenbases and using the Powers--St{\o}rmer inequality~\cite{PowersStormer70},
+\[
+\|A^z-B^z\|_2^2\le(1+t^2)\|\sqrt A-\sqrt B\|_2^2\le(1+t^2)\|A-B\|_1.
+\] Then $A^{1+it}-B^{1+it}=A^z(A^z-B^z)+(A^z-B^z)B^z$, H\"older's inequality with $\|A^z\|_2=\|B^z\|_2=1$, and unitarity of $\Gamma^{-it}$ give the claim.
+
+\emph{Conservation.} Let $\Gamma=\gamma_C\otimes\gamma^{\otimes n}\otimes\gamma_G\otimes e^{-\beta H_W}$ and let $\Gamma_R$ be the same without $\gamma_C$. The dilation $V$ conserves energy, so it commutes with $\Gamma$ and leaves $\Xi$ unchanged. The baths contribute $\Xi(\gamma_G;\gamma_G,t)=1$, so the final state $\Omega$ has
+$\Xi(\Omega;\Gamma,t)=\Xi(\alpha_C;\gamma_C,t)\,\Xi(\rho;\gamma,t)^n\,e^{it\beta E_i}$, while $\Xi(\alpha_C\otimes\Omega_R;\Gamma,t)=\Xi(\alpha_C;\gamma_C,t)\,\Xi(\Omega_R;\Gamma_R,t)$. Centering the controller's law at a minimizing $c$ gives $|\Xi(\alpha_C;\gamma_C,t)|\ge1-|t|s_n\ge\tfrac12$ for $|t|\le1/(2B)$, $B=\max\{1,s_n\}$. With $v$ the variance of the one-copy law of $(\rho,\gamma)$, $|\Xi(\rho;\gamma,t)^n-e^{itnD_{\rm in}}|\le nvt^2/2$. Dividing by the controller's factor and using continuity with $\|\Omega-\alpha_C\otimes\Omega_R\|_1\le2\eta_n$, for $|t|\le1/(2B)$,
+\begin{equation}\label{kt:eq:charclose}
+\bigl|\Xi(\Omega_R;\Gamma_R,t)-e^{itc_R}\bigr|\le4\sqrt{2\eta_n}\sqrt{1+t^2}+nvt^2/2,\qquad c_R=\beta E_i+nD_{\rm in}.
+\end{equation}
+
+\emph{Test.} Let $\kappa=\beta\Delta/2$. Pinching $\sigma^{\otimes n}$ in the at most $(n+1)^{d}$ eigenspaces of $\gamma^{\otimes n}$ gives a projection $P_n$ that commutes with $\gamma^{\otimes n}$, with $\Tr P_n\sigma^{\otimes n}\ge1-f_n$ and $\Tr P_n\gamma^{\otimes n}\le e^{-n(D_{\rm out}-\kappa)}$~\cite{Hayashi02}. Take $A=P_n\otimes I_G\otimes|f\rangle\langle f|$. It commutes with $\Gamma_R$, $\Tr A\Gamma_R\le e^{-\beta E_f-n(D_{\rm out}-\kappa)}$, and $\Tr A\Omega_R\ge1-\varepsilon_n-q_n-f_n$.
+
+\emph{Combination.} Put $g=n(D_{\rm out}-D_{\rm in}-\kappa)-\beta W\ge n\beta\Delta/2$ and $x=c_R+g/2$ in~\eqref{kt:eq:accept}; the first term is at most $e^{-g/2}$. For the second, let $h=\min\{1/(2B),2/g\}$ and average~\eqref{kt:eq:charclose} over $t\in[-h,h]$: $\mathbb E[1-\operatorname{sinc}(h(L_R-c_R))]\le4\sqrt{2\eta_n}\sqrt{1+h^2}+nvh^2/6$. Since $1-\operatorname{sinc}y\ge\min\{y^2,1\}/8$,
+\[
+\Pr(L_R\ge x)\le\Pr\bigl(|L_R-c_R|\ge g/2\bigr)\le51\sqrt{\eta_n}\max\{1,16B^2/g^2\}+\frac{16nv}{3g^2}.
+\]
+The last term is $O(1/n)$, and $\max\{1,16B^2/g^2\}\le\max\{1,(8s_n/(\beta\Delta n))^2\}$ whenever $s_n\ge1$ or $n\ge8/(\beta\Delta)$; for the finitely many remaining $n$ we put $f_n=1$. Collecting $e^{-g/2}$, the test error and $16nv/(3g^2)$ into $f_n$ proves (b). Finally, $s_n\le\mathbb E|L_C|=D(\alpha_C\|\gamma_C)+2\,\mathbb E(L_C)_-$, and $\mathbb E(L_C)_-\le1/e$ because $x\ln(1/x)\le1/e$.
+
+\emph{(c), general case.} As in the reuse argument of Chiribella, Yang and Renner~\cite{ChiribellaYangRenner21}, run the same device $m$ times on the input $\rho^{\otimes n}$, reusing only the controller: each run gets a fresh input block, fresh Gibbs stocks and a fresh battery in $|i\rangle$, and earlier blocks are never touched again. This is a composition of energy-conserving unitaries, so it commutes with $\Gamma_m=\gamma_C\otimes\Gamma_R^{\otimes m}$. After $k$ runs, compare the actual state with $\alpha_C\otimes\Omega_R^{\otimes k}$, tensored with the untouched fresh blocks. The next run contracts their distance, and it maps the comparison state, whose controller is exactly $\alpha_C$ and independent of everything else, to $\Omega_R^{\otimes k}\otimes\Omega_{C,\mathrm{rest}}$, which the return condition puts within $\eta_n$ of $\alpha_C\otimes\Omega_R^{\otimes(k+1)}$. So the final state $\Omega^{(m)}$ satisfies $\tfrac12\|\Omega^{(m)}-\alpha_C\otimes\Omega_R^{\otimes m}\|_1\le m\eta_n$. Conservation and factorization give $\Xi(\Omega^{(m)};\Gamma_m,t)=\Xi(\alpha_C;\gamma_C,t)\,\Xi(\rho;\gamma,t)^{nm}e^{itm\beta E_i}$ and $\Xi(\alpha_C\otimes\Omega_R^{\otimes m};\Gamma_m,t)=\Xi(\alpha_C;\gamma_C,t)\,\Xi(\Omega_R;\Gamma_R,t)^m$. With $\phi(t)=e^{-itc_R}\Xi(\Omega_R;\Gamma_R,t)$ and $\psi(t)=e^{-itnD_{\rm in}}\Xi(\rho;\gamma,t)^n$, continuity and division by the controller's factor give $|\phi^m-\psi^m|\le4\sqrt{2m\eta_n}\sqrt{1+t^2}$ for $|t|\le1/(2B)$.
+
+Let $0<\eta_n\le2^{-14}$, $m=\lfloor1/(8192\eta_n)\rfloor$, $a=n\beta\Delta/4\ge1$ and
+\[
+h=\min\{1/2,\,1/(2B),\,(8mnv)^{-1/2},\,1/(2a)\}.
+\]
+On $[-h,h]$, $|\psi^m-1|\le mnvt^2/2\le1/16$, so $r=\phi/\psi$ is continuous, $r(0)=1$, and, since $\sqrt{1+t^2}\le\sqrt{5/4}$ for $|t|\le h$, $|r^m-1|\le\tau=(16/3)\sqrt{2m\eta_n}\le1/12$; in particular $r$ has no zero. The continuous logarithm of $r$ that vanishes at $0$ satisfies $m\,\mathrm{Log}\,r=\mathrm{Log}(r^m)$ on the whole interval, because the difference is continuous, takes values in $2\pi i\mathbb Z$ and vanishes at $0$. Hence $|\mathrm{Log}\,r|\le12\tau/(11m)$ and $|\phi-\psi|\le2\tau/m$: continuity for one block that is linear in $\eta_n$. Averaging over $[-h,h]$ gives $\mathbb E[1-\operatorname{sinc}(h(L_R-c_R))]\le nvh^2/6+2\tau/m$, and since $ha\le1/2$,
+\[
+\Pr(L_R-c_R\ge a)\le\frac{12nv}{a^2}+\frac{16}{3m}\max\Bigl\{1,\frac{B^2}{a^2}\Bigr\}\le\frac{192v}{n\beta^2\Delta^2}+2^{17}\eta_n\max\Bigl\{1,\Bigl(\frac{4B}{n\beta\Delta}\Bigr)^2\Bigr\}.
+\]
+With the test of (b), $g\ge n\beta\Delta/2$ and $x=c_R+g/2$, the first term of~\eqref{kt:eq:accept} is at most $e^{-a}$ and the second is bounded by this tail. For $\eta_n>2^{-14}$ the claim is trivial, and for $\eta_n=0$ any $m$ gives $\tau=0$. Since $\max\{1,(4B/(n\beta\Delta))^2\}\le\max\{1,(8s_n/(n\beta\Delta))^2\}$ once $n\beta\Delta\ge4$ (for the finitely many $n$ with $n\beta\Delta<4$ put $f_n=1$), this proves (c) with $C=2^{17}$.
+
+\emph{(c), commuting case.} The initial state $\alpha_C\otimes\rho^{\otimes n}\otimes\gamma_G\otimes|i\rangle\langle i|$ commutes with every local Hamiltonian, hence with $\Gamma$, and so does $\Omega$. Since $\Tr_C[\Omega,H_C\otimes I]=0$, the partial trace of $[\Omega,H_C+H_R]=0$ gives $[\Omega_R,H_R]=0$, so $\alpha_C\otimes\Omega_R$ commutes with $\Gamma$ too. Both are block diagonal in the eigenspaces of $\Gamma$, on which $\Gamma^{-it}$ is a scalar. For positive semidefinite $X,Y$ and $f_\delta(x)=(x+\delta)^{1+it}$, $\frac{d}{ds}\Tr f_\delta(Y+s(X-Y))=\Tr f_\delta'(Y+s(X-Y))(X-Y)$ and $|f_\delta'|=\sqrt{1+t^2}$, so $|\Tr f_\delta(X)-\Tr f_\delta(Y)|\le\sqrt{1+t^2}\|X-Y\|_1$; letting $\delta\to0$ and summing over blocks gives $|\Xi(\Omega;\Gamma,t)-\Xi(\alpha_C\otimes\Omega_R;\Gamma,t)|\le2\sqrt{1+t^2}\,\eta_n$. In~\eqref{kt:eq:charclose} the term $4\sqrt{2\eta_n}$ becomes $4\eta_n$, and the combination step of (b) gives $32\sqrt{5/4}\,\eta_n\le36\,\eta_n$ in place of $51\sqrt{\eta_n}$, which is (c) with $C=36$. A maximizer that commutes with $H$ exists for time-covariant $\Phi$: writing $D(\rho\|\gamma)=D(\mathcal P\rho\|\gamma)+A(\rho)$, with $\mathcal P$ the pinching in energy and $A$ the relative entropy of asymmetry, which does not increase under covariant channels, the objective at $\rho$ is at most its value at $\mathcal P\rho$.
+
+The proof is a statement about one implementation; no controller is measured and nothing is postselected.
+\end{proof}
+
+\paragraph{The flat bank.} A bank with levels $jA$, $A=\lceil n/2\rceil\ln2/\beta$, $j=0,\dots,L+1$, in the flat state on a subspace of rank $2j(L+1-j)-2$ at interior levels and $L$ at the two ends, together with about $n$ pure seed qubits that it returns and a fresh Gibbs bit, runs $n$ resets of zero-Hamiltonian qubits at work $\lceil n/2\rceil\ln2/\beta$ with error exactly $1/2$. Its mean energy and entropy return exactly, its joint state with all physical systems (not the purifications of the Gibbs reservoirs) is within $\eta_n=6/((L+1)(L+2))$ of the product, and its spread is $s_n=\lceil n/2\rceil\ln2\;\mathbb E|j-(L+1)/2|$ over the bank's level $j$, which is $\bigl(3\sqrt6\ln2/32+O(1/L)\bigr)\,2\lceil n/2\rceil\,\eta_n^{-1/2}$, about $0.159\,n\eta_n^{-1/2}$ for even $n$ and within $1.5\%$ of that for every $L\ge10$. What the bank lends is energy variance, $A^2$, not energy or entropy. If $L$ grows faster than $n$, for instance $L=n^2$, its return error weighted by its size, $\eta_nK$ with $K=\beta\,\mathrm{span}(H_C)+\ln\dim C$, tends to zero.
+
+\subsubsection{The single-letter bound}\label{kt:pf:single}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:single}]
+(a) The lower bound is Proposition~\ref{kt:bp-lower}, with error and budgets $o(1)$ and $o(n)$, applied to product pairs. If $\Psi^{\otimes N}(\rho)=\Psi^{\otimes N}(\sigma)$, equality passes to every pair of marginals; the energy term is additive, and the entropy decrease is subadditive because local channels cannot increase the total correlation $D(\sigma\|\sigma_1\otimes\cdots\otimes\sigma_N)$. So $B(\Phi^{\otimes N})\le NB(\Phi)$, and products attain it. If the environment states differ by $\delta_N\to0$ in trace distance, let $B_\delta$ be the same maximum over pairs whose environment states are within $\delta$; compactness in finite dimension gives $B_\delta\to B(\Phi)$ as $\delta\to0$, and marginalization, additivity of energy and subadditivity of the entropy decrease give the bound up to $o(N)$.
+
+(b, c) Taking $\rho=\sigma$ gives $B\ge$ the capacity. If $D=\Psi^*(Y)$, then $\Tr\rho D=\Tr Y\Psi(\rho)=\Tr\sigma D$ on every fibre, and the objective is the capacity's. If $\Phi(\gamma)=\gamma$ but $D\notin\operatorname{range}\Psi^*$, there is a Hermitian $X\in\ker\Psi$ with $\Tr XD\neq0$; then $\rho=\gamma\pm tX$ and $\sigma=\gamma$ are admissible for small $t$ and give $B>0$. For a qubit, suppose $\Psi(X)=0$ for a nonzero traceless $X$. Uhlmann's theorem applied to the two eigenvectors of $X$ gives an isometry relation that, with orthogonality, forces $\Phi$ to be unital. A unital Gibbs-preserving qubit channel with $E>0$ and $\beta<\infty$ is phase-covariant.
+
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:gpqutrit}]
+Completeness and Gibbs preservation follow from $x^2\gamma_{11}=y^2\gamma_{00}$. With $\gamma_0'=(1+e^{-\beta E_1})^{-1}$, $\gamma_{01}'=\mathrm{diag}(\gamma_0',1-\gamma_0',0)$ and $a=1/(2\gamma_0')\le1$, the input $\rho=|0\rangle\langle0|$ and the fixed point $\sigma=a\gamma_{01}'+(1-a)|2\rangle\langle2|$ both leave the environment in $\mathrm{diag}(1-y^2,y^2)$. Since $\Phi(\sigma)=\sigma$ and $\Tr\rho D=y^2E_1$, the necessary condition gives $ny^2E_1-o(n)$. The channel is not covariant: on the input $(|0\rangle+e^{i\phi}|1\rangle)/\sqrt2$ the two Kraus operators carry the output coherence with opposite phases.
+\end{proof}
+
+\subsubsection{A returned clock reaches the capacity}\label{kt:pf:balanced}
+
+\begin{proof}[Proof of Theorem~\ref{kt:thm:balanced}]
+The lower bound is Proposition~\ref{kt:prop:single}(b). For the construction, let $V$ be the dilation and $K$ the environment Hamiltonian with $V^*(H\otimes I+I\otimes K)V=H$; add a level of energy zero to $K$ if needed, and take the environment $F$ from the reservoir. Stage 1 prepares $F$ in a zero-energy eigenstate of $K$, at work $\kB T\ln Z_F$ per use with $Z_F=\Tr e^{-\beta K}$, by the deterministic protocols of~\cite{HorodeckiOppenheim13}. Stage 2 applies $V$ to each input, lifted to an exactly energy-conserving unitary by one shared ladder clock in a flat superposition of $L=\lceil n^8\rceil$ levels: each matrix element between energy eigenstates of $S F$ moves the clock by the energy difference, which is bounded. By exact conservation and the balance identity, the clock's mean energy change equals minus that of $O^nF^n$, which vanishes for every joint input; its joint state with everything else is within $O(n/\sqrt L)$ of its initial state tensored with the rest, and its entropy changes by $o(1)$. Stage 3 holds the outputs and erases $F^n$ conditionally on $O^n$, by position-based decoding~\cite[Prop.~7.1]{FBB21} with the universal conditional and relative typical smoothing operator of~\cite[Prop.~6.1]{FBB21} for $\Gamma_{OF}=e^{-\beta(H+K)}$ and $\Gamma_O=e^{-\beta H}$. Since these commute, it can be chosen to be a projector commuting with both~\cite[Prop.~6.1]{FBB21}, hence with the physical Hamiltonian, although $\Phi$ need not be covariant, and in~\cite[Thm.~7.1]{FBB21} covariance is used only to make the dilation energy-conserving, which here the clock does: on each input $\rho$ the environment carries $D(\omega^\rho_{OF}\|\gamma_F\otimes\omega^\rho_O)=\ln Z_F+q(\rho)$ nats with $q(\rho)=\beta[F(\rho)-F(\Phi\rho)]$, so the erasure returns $n\kB T[\ln Z_F+\inf_\rho q(\rho)]-o(n)$ uniformly over product inputs, and the postselection technique~\cite{ChristandlKonigRenner09} extends this to arbitrary inputs with polynomial overhead. The outputs and their correlations with any reference are untouched. Converting purity back to mechanical work with~\cite{HorodeckiOppenheim13} gives the net rate $-\kB T\inf_\rho q(\rho)$, which is the capacity. For incommensurate gaps, a finite product of clock ladders handles a rational basis of the energy differences.
+
+For a Gibbs-preserving channel the capacity is zero, so the rate is zero exactly when $D$ lies in the range of $\Psi^*$, by Proposition~\ref{kt:prop:single}(c). For a qubit, Proposition~\ref{kt:prop:single}(c) shows that Gibbs preservation already implies this.
+\end{proof}
+
+\subsubsection{The batch law}\label{kt:pf:batchlaw}
+
+\begin{proof}[Proof of Theorem~\ref{kt:thm:batchlaw}]
+The lower bound is Proposition~\ref{kt:bp-lower}; the construction, with its complete physical ledger, is Theorem~\ref{kt:bp-batch}.
+\end{proof}
+
+\subsubsection{Unbalanced channels need a broad clock}\label{kt:pf:broad}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:broadclock}]
+Write $U_t=e^{-itH}$, $\Phi_t=\mathrm{Ad}_{U_t}\circ\Phi\circ\mathrm{Ad}_{U_t^*}$, $\alpha_t=e^{-itH_C}\alpha_Ce^{itH_C}$, $h=\mathrm{span}(H)$, and let $\Theta_n$ be the implemented channel on $n$ uses.
+
+\emph{Programming.} The dilation conserves energy and the reservoirs and battery start stationary, so starting the controller in $\alpha_t$ implements $\mathrm{Ad}_{U_t^{\otimes n}}\circ\Theta_n\circ\mathrm{Ad}_{U_t^{*\otimes n}}$, which is $\varepsilon_n$-close to $\Phi_t^{\otimes n}$; by uniform return, the controller started in $\alpha_t$ also returns within $\eta_n$.
+
+\emph{Rotating the controller.} $\tfrac12\|\alpha_t-\alpha_C\|_1\le\sqrt{2|t|s_n/\beta}$. Purify $\alpha_C=\sum_a\lambda_a|a\rangle\langle a|$ as $\sum_a\sqrt{\lambda_a}|a\rangle|a\rangle$, let $c$ minimize the spread, and compare $e^{-itH_C}$ on the first factor with the phases $e^{-ith_a}$, $\beta h_a=c-\ln\lambda_a-\ln Z_C$, on the second. With $\gamma_C=\sum_b\mu_b|b\rangle\langle b|$, $\mu_b=e^{-\beta E_b}/Z_C$, the squared distance of the two purifications is $\sum_{a,b}\lambda_a|\langle a|b\rangle|^2|e^{-itE_b}-e^{-ith_a}|^2\le(2|t|/\beta)\sum_{a,b}\lambda_a|\langle a|b\rangle|^2|\ln(\lambda_a/\mu_b)-c|$, since $|e^{ix}-1|^2\le2|x|$.
+
+\emph{A code from the fibre, as in~\cite[Sec.~V]{ZhouJiang21}.} Since $D$ is not in the range of $\Psi^*$, there is a Hermitian $X$ with $\Psi(X)=0$ and $\Tr XD\ne0$; its normalized positive and negative parts $\rho_\pm$ leave the same environment state, and after relabelling $a=\Tr D(\rho_+-\rho_-)>0$. For a fixed $M\ge2$, let $\rho_j$, $j=0,\dots,M-1$, interpolate linearly from $\rho_-$ to $\rho_+$, and purify each with an orthogonal reference flag, giving orthonormal $|c_j\rangle$. Equality of the environment states gives the Knill--Laflamme conditions $\langle c_j|A_i^*A_k\otimes I|c_{j'}\rangle=c_{ik}\delta_{jj'}$, so a recovery isometry undoes the Kraus operators on the code. Since $\sum_iA_i^*\dot A_i=-iD$, the encoded and recovered channel $\Lambda_t$ has $\Lambda_0=\mathrm{id}$ and $\dot\Lambda_0=-i[D_L,\cdot\,]$ with $D_L=\mathrm{diag}(\Tr\rho_jD)$, and it is within $C_0t^2$ of $\mathrm{Ad}_{e^{-itD_L}}$, with $C_0$ depending only on $\Phi$ and $H$.
+
+\emph{Reading the clock.} Encode the logical GHZ state $M^{-1/2}\sum_j|j\rangle^{\otimes n}$ into $n$ uses. At the phases $t_k=2\pi(M-1)k/(Mna)$, $k<M$, the ideal outputs after recovery are orthogonal up to $C_0K_M^2/n$, where $K_M=2\pi(M-1)^2/(Ma)$, so a fixed measurement identifies $k$ from the implemented outputs $\sigma_n(t_k)$ with probability at least $1-\varepsilon_n-C_0K_M^2/n$. Replacing every $\sigma_n(t_k)$ by $\sigma_n(0)$ leaves success $1/M$ and changes it by at most $\max_k\tfrac12\|\alpha_{t_k}-\alpha_C\|_1\le\sqrt{2K_Ms_n/(\beta n)}$, so $\varepsilon_n\ge1-1/M-C_0K_M^2/n-\sqrt{2K_Ms_n/(\beta n)}$; if $s_n=o(n)$, letting $n\to\infty$ and then $M\to\infty$ gives $\varepsilon_n\to1$, with no return condition. For the second statement, suppose $\varepsilon_n\le1-\delta$ along a subsequence, and take $M=\lceil4/\delta\rceil$. For large $n$ the success exceeds $1/M$ by $\delta/2$, so some $\sigma_n(t_k)$ is at trace distance at least $\delta/2$ from $\sigma_n(0)$, and since $t_k\le K_M/n$ there is a phase $t_*$ with $\|\sigma_n'(t_*)\|_1\ge\delta n/K_M$. The orbit acts on $n$ ports only, so $\|\sigma_n''\|_1\le4n^2h^2$. For $t=1/(2hn\sqrt m)$ with $m\ge(4hK_M/\delta)^2$, a two-outcome measurement therefore separates $\sigma_n(t_*)$ from $\sigma_n(t_*+t)$ by at least $c_\delta/\sqrt m$, $c_\delta=\delta/(8hK_M)$, and by multiplicativity of fidelity their $m$-fold products are at trace distance at least $p_\delta=1-e^{-c_\delta^2/2}$.
+
+\emph{Reuse.} Run the same device $m$ times, as in the proof of Proposition~\ref{kt:prop:capital-converse}(c), once with the controller started in $\alpha_{t_*}$ and once in $\alpha_{t_*+t}$, with identical fresh inputs, reservoirs and batteries. Each run is within $m\eta_n$ of $m$ independent copies, and the two runs differ only in the controller's initial state, so
+\[
+p_\delta\ \le\ 2m\eta_n+\sqrt{\frac{s_n}{\beta hn\sqrt m}}.
+\]
+Put $A_n=\max\{1,(s_n/n)^2\}$ and $R_n=\eta_nA_n\to0$. If $\eta_n>0$ take $m=\lceil A_n/\sqrt{R_n}\rceil$, and if $\eta_n=0$ take $m=\lceil nA_n\rceil$; then $m\to\infty$, $m\eta_n\to0$ and $s_n/(n\sqrt m)\to0$, a contradiction. For the reliable bound, take $M=2$ in the code from the fibre and encode one logical qubit into the repetition code $|j\rangle\mapsto|c_j\rangle^{\otimes n}$; the ideal logical block is within $nC_0t^2$ of $\mathrm{Ad}_{e^{-itnD_L}}$, and the implemented block $F_t$ is within $\varepsilon_n$ of it. Pass the same logical qubit through $k$ consecutive blocks, re-encoding it each time and keeping every syndrome, so that $\Gamma_t=F_t^k$ is within $k\varepsilon_n+knC_0t^2$ of $\mathrm{Ad}_{e^{-itknD_L}}$. With logical input $|+\rangle$ and $t_0=\pi/(kna)$, the outputs $\sigma(0)$ and $\sigma(t_0)$ are at trace distance at least $1/2$ once $k\varepsilon_n\le1/64$ and $n$ is large, so some $\theta_*\le t_0$ has $\|\sigma'(\theta_*)\|_1\ge kna/\pi$, while $\|\sigma''\|_1\le4k^2n^2h^2$. For $\sqrt g\ge\max\{16,4\pi h/a\}$ and $t=1/(2knh\sqrt g)$ a two-outcome measurement separates $\sigma(\theta_*)$ from $\sigma(\theta_*+t)$ by at least $a/(8\pi h\sqrt g)$, so their $g$-fold products are at trace distance at least a constant $p>0$. Running the device for $kg$ blocks, with every logical system and syndrome kept, independent return costs $2kg\eta_n$, and as above $p\le2kg\eta_n+\sqrt{s_n/(\beta hkn\sqrt g)}$. Taking $k\asymp1/(\varepsilon_n+\eta_n)$ and $g\asymp1/(k\eta_n)$, with constants depending only on $\Phi$ and $H$, gives $s_n\ge c\,\beta n/\sqrt{\eta_n(\varepsilon_n+\eta_n)}$. For $X$-dephasing the code is exact, the logical channel being $\mathrm{Ad}_{e^{-itD_L}}$ followed by dephasing by $\cos(Et)$, and one may take $N=64$, $b=p/8192$ and $c=9p^3E/(4096\sqrt2)$ with $p=1-e^{-1/(128\pi^2)}$. For the third statement, if $D$ lies in the span, equal environment states force $\Tr\rho D=\Tr\sigma D$, so $B(\Phi)$ is the capacity and Proposition~\ref{kt:prop:capital-converse}(c) applies.
+\end{proof}
+
+\subsubsection{How large the clock must be}\label{kt:pf:clocksize}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:clocksize}]
+We use the notation and the first two steps of the proof of Proposition~\ref{kt:prop:broadclock}: starting the controller in $\alpha_t$ implements the channel rotated along the orbit $\Phi_t$, and $\tfrac12\|\alpha_t-\alpha_C\|_1\le\sqrt{2|t|s_n/\beta}$. The first step uses that the battery and the reservoirs start in states that commute with their Hamiltonians; neither step uses return. Since the complete strategy error bounds the batch error, the lower bounds hold in real time as well.
+
+\emph{(a)} Since $\Phi_{t+u}=\mathrm{Ad}_{U_t}\circ\Phi_u\circ\mathrm{Ad}_{U_t^*}$, a vanishing derivative $\dot\Phi_0$ would make $\Phi_t$ constant, so $\dot\Phi_0\ne0$. Choose an input $\rho$ with a reference such that $B=\frac{d}{dt}(\Phi_t\otimes\mathrm{id})(\rho)|_{t=0}\neq0$, let $P$ project onto the positive part of $B$, and measure $M=(I+P)/3$. Its probability $p(t)$ on $(\Phi_t\otimes\mathrm{id})(\rho)$ lies in $[1/3,2/3]$, and $p'(0)=\Tr PB/3=\|B\|_1/6=:\lambda>0$. Since $\|\ddot\Phi_t\|_\diamond\le4h^2$, $p'(t)\ge\lambda/2$ for $|t|\le\tau=\lambda/(8h^2)$. Feed $\rho$, each with its own reference, to the $n$ uses and measure $M$ on every output. For an integer $J\ge2$ and $v>0$ put $t_j=jv/\sqrt n$, $j<J$, and let $n\ge((J-1)v/\tau)^2$. Under $\Phi_{t_j}^{\otimes n}$ the outcomes are independent, adjacent means differ by at least $\lambda v/(2\sqrt n)$, and the sample mean has variance at most $1/(4n)$, so by Chebyshev's inequality the nearest mean identifies $j$ with error at most $\delta=4/(\lambda v)^2$. The device started in $\alpha_{t_j}$ is within $\varepsilon_n$ of $\Phi_{t_j}^{\otimes n}$, so it identifies $j$ with probability at least $1-\delta-\varepsilon_n$. With every $\alpha_{t_j}$ replaced by $\alpha_C$ the outputs no longer depend on $j$ and the average success is $1/J$, while the replacement changes it by at most $\max_j\frac12\|\alpha_{t_j}-\alpha_C\|_1$. Hence
+\[
+\varepsilon_n\ \ge\ 1-\frac4{(\lambda v)^2}-\frac1J-\sqrt{\frac{2(J-1)v\,s_n}{\beta\sqrt n}}.
+\]
+If $s_n=o(\sqrt n)$, let $n\to\infty$ at fixed $J$ and $v$, and then let $J$ and $v$ grow.
+
+\emph{(b)} Put $\zeta=\varepsilon_n+\eta_n\le1/32$ and $k=\lfloor1/(16\zeta)\rfloor\ge1/(32\zeta)$. As in the proof of Proposition~\ref{kt:prop:capital-converse}(c), run the same device on $k$ blocks of $n$ uses, with fresh inputs, reservoirs and batteries for every block, and keep all old outputs, reservoirs, batteries and references aside. By uniform return the run is within $(k-1)\eta_n$ of $k$ runs with independent controllers, so it implements $\Phi^{\otimes kn}$ within $(k-1)\eta_n+k\varepsilon_n\le1/16$, and started in $\alpha_t$ it implements $\Phi_t^{\otimes kn}$ within the same error, since uniform return holds at $\alpha_t$ too. Apply the test of (a) with $J=2$ and $v=8/\lambda$ to these $kn$ uses, taking $n\ge N=\lceil(v/\tau)^2\rceil$. The ideal outputs at the phases $0$ and $v/\sqrt{kn}$ are then at distance at least $7/8$, so
+\[
+\tfrac78-\tfrac18\ \le\ \tfrac12\|\alpha_{v/\sqrt{kn}}-\alpha_C\|_1\ \le\ \sqrt{\frac{2vs_n}{\beta\sqrt{kn}}},
+\]
+and $s_n\ge9\beta\sqrt{kn}/(32v)\ge\frac{9\beta\lambda}{1024\sqrt2}\sqrt{n/(\varepsilon_n+\eta_n)}$.
+
+\emph{(c), errors that cancel between uses.} Balance gives a Stinespring isometry $V:A\to A\otimes E$ and a Hermitian $K$ on $E$ with $V^*(H\otimes I+I\otimes K)V=H$. Add to $E$ a seed level $|0\rangle$, from which $V$ starts, and put $H_E=K+e_0I$, giving the seed the energy $e_0$, with $e_0$ large enough that $H_E$ is positive; with $W=H\otimes I+I\otimes H_E$ this reads $V^*WV=H+e_0I$. Put $R=WV-V(H+e_0I)$ and $\kappa=\|R\|$. Then $V^*R=0$, and $\kappa>0$, since $\kappa=0$ would make $\Phi$ time-covariant. For $n$ copies, $R_n=W_nV^{\otimes n}-V^{\otimes n}(H_n+ne_0I)$ is the sum of the terms with $R$ in one factor and $V$ in the others. Every cross term of $R_n^*R_n$ contains $V^*R$ or $R^*V$, so $R_n^*R_n=\sum_i(R^*R)_i$ and $\|R_n\|\le\sqrt n\,\kappa$ on all inputs, entangled ones included. The energy orbit $V_t=e^{-itW_n}V^{\otimes n}e^{it(H_n+ne_0)}$ therefore satisfies $V_t^*W_nV_t=H_n+ne_0I$ for every $t$, and, since its derivative is a unitary conjugate of $R_n$,
+\[
+\|V_t-V^{\otimes n}\|\ \le\ |t|\sqrt n\,\kappa.
+\]
+
+\emph{(c), the clock.} Suppose first that all energy differences lie in $\omega\mathbb Z$. Lift $V^{\otimes n}$ to a ladder clock of spacing $\omega$ by $\hat V=\sum_{x,y}\Pi_xV^{\otimes n}\Pi_y\otimes T_{(e_y-e_x)/\omega}$, with $\Pi_x$ the energy projections and $T$ the shifts of the ladder. $\hat V$ is an isometry that conserves energy exactly; complete it, in each total-energy eigenspace, to a full square energy-conserving unitary. Start the clock in a sine packet on $\ell$ consecutive levels, with $nu$ empty levels on each side, where $u$ bounds the shift of one use. In the Fourier representation of the clock the lift acts as $V_{\theta/\omega}$ at phase $\theta$, and the phase law of a sine packet has $\mathbb E\theta^2\le\pi^4/(4(\ell+1)^2)$ (Appendix~\ref{app:channels}). So the vector error from $V^{\otimes n}$ tensored with the packet is at most $\pi^2\kappa\sqrt n/(2\omega(\ell+1))$, which is at most $a/4$ for $\ell=\lceil2\pi^2\kappa\sqrt n/(\omega a)\rceil$, and the spread of the pure clock is at most $\beta\omega(\ell+1)/2\le C\sqrt n/a$. Since $V_t^*W_nV_t=H_n+ne_0I$ for every $t$, the clock's mean energy does not change, and its final state lies in the span of the $2nu+1$ translates of the packet, so its entropy is at most $\log(2nu+1)$.
+
+If the energy differences generate a group of rank $m\ge2$, with basis $\omega_1,\dots,\omega_m$, narrow clocks on each coordinate do not suffice: balance of the energy does not give balance of each coordinate. Use instead one clock on $\mathbb Z^m$ with Hamiltonian $\omega\cdot q$ and the packet $\phi_\Lambda(q)\propto f_L(\omega\cdot q)\,G(q/\Lambda)$, where $f_L(x)=L^{-1/2}\cos(\pi x/(2L))$ on $|x|\le L$ and $G$ is a smooth, even, nonnegative bump on $(-1,1)^m$. Its energy lies in an interval of length $2L$, so $s_n\le\beta L$ however large $\Lambda$ is. For each fixed $z\in\mathbb Z^m$, $\langle\phi_\Lambda|T_z\phi_\Lambda\rangle\to\int f_L(x)f_L(x-\omega\cdot z)\,dx$ as $\Lambda\to\infty$, by equidistribution of $(\omega_2q_2+\dots+\omega_mq_m)/\omega_1$ modulo one: approximate the periodized profile by trigonometric polynomials; each nonzero harmonic carries an irrational ratio $\omega_j/\omega_1$ and its sums stay bounded, while the zero harmonic is a Riemann sum. With the continuous profile $f_L$, for which $\|f_L'\|_2=\pi/(2L)$, the same estimate gives squared vector error at most $n\kappa^2\pi^2/(4L^2)$ and exact mean balance. Take $L=2\pi\kappa\sqrt n/a$, $M_n=d^n(d\,d_E)^n$, and $\Lambda$ so large that the finitely many Gram coefficients that enter are within $\zeta_n=\min\{a^2/(32M_n),\,E_0/(2n^2\|W\|M_n^2)\}$ of their limits, for a fixed energy $E_0$. The squared vector error is then at most $a^2/8$, and the finite clock's mean energy changes by at most $n\|W\|M_n^2\zeta_n\le E_0/n$. Its entropy is at most $m\log(2nu+1)$. No rate in $\Lambda$ is claimed.
+
+\emph{(c), returning the seeds.} The $n$ seeds belong to the controller and must return. After the lift, erase each seed with its own fresh Gibbs record cell $R$ and its own sharp two-level battery $W$ of gap $w>\mathrm{span}(H_E)$. Let $R$ have a ground level of energy $0$ and levels $r_j$ of energy $w+e_j-e_0$, start $W$ in $|1\rangle$, and swap $|j\rangle_E|1\rangle_W|g\rangle_R$ with $|0\rangle_E|0\rangle_W|r_j\rangle_R$ for every $j$, acting as the identity elsewhere. Each swap conserves energy, so this is a full energy-conserving unitary; it fails only if $R$ starts excited, with probability $q\le d_Ee^{-\beta(w-\mathrm{span}H_E)}$ independent of the input. Choose $w$ so that $q\le\min\{a^2/(4n),n^{-2}\}$; then $w=O(\log(n/a))$. With probability at least $1-nq$ every seed returns to $|0\rangle$; this costs at most $\sqrt{nq}\le a/2$ in trace distance and never touches the outputs. So the error is at most $a/2$ and the return error at most $2a$. The seeds' entropy and energy change by at most $n[h(q)+q\log(d_E-1)]$ and $nq\,\mathrm{span}(H_E)$, both $o(1)$, so the controller's mean energy changes by $o(1)$ and its entropy by $O(\log n)$. The battery starts sharp and ends at a fixed level except with probability $nq\le1/n$.
+
+\emph{(d), lower bound.} Encode a logical qubit as $|1\rangle_S|0\rangle_A$ and $|0\rangle_S|1\rangle_A$, with $A$ held by the observer, and recover with the permutation that writes the logical bit and the syndrome. On this code $\Phi_{X,t}$ acts after recovery as $\mathrm{Ad}_{e^{-itD_L}}\circ\Delta_{\cos Et}$, where $D_L=\mathrm{diag}(-E/2,E/2)$ and $\Delta_r$ multiplies the off-diagonal entries by $r$. With the $n$-fold repetition code, the decoded implemented channel $F_t$ is within $\varepsilon_n+nE^2t^2/4$ of the unitary $U_t=e^{-itnD_L}$, because $\frac12\|\Delta_r-\mathrm{id}\|_\diamond=(1-r)/2$ and $1-\cos^nx\le nx^2/2$. Take $t=64\sqrt{\varepsilon_n}/(nE)$. For $n\ge4096$, $F_0$ is within $\varepsilon_n$ of the identity and $F_t$ within $2\varepsilon_n$ of $U_t$, whose eigenvalues are $e^{\pm i\varphi/2}$ with $\varphi=64\sqrt{\varepsilon_n}\le1$.
+
+Let $|p\rangle$ and $|q\rangle$ purify $\alpha_C$ and $\alpha_t$ with overlap $f$, their root fidelity, and let $W_p$ and $W_q$ be the resulting Stinespring isometries of the logical channel, keeping everything else as environment. They differ only in the program, so $W_p^*W_q=fI$. If a qubit channel is within $\delta$ of a unitary $U$, each of its Stinespring isometries $W$ has $\|W-U\otimes e\|\le2\sqrt\delta$ for some unit vector $e$: the Bell state of the channel has overlap at least $1-\delta$ with that of $U$, Uhlmann's theorem aligns the environment within $\sqrt{2\delta}$, and the operator norm is at most $\sqrt2$ times that distance. With $z=\langle e_p|e_q\rangle$ this gives $\|fI-zU_t\|\le2\sqrt{\varepsilon_n}+2\sqrt{2\varepsilon_n}<8\sqrt{\varepsilon_n}$. On the two eigenvectors of $U_t$ one of $|f-ze^{\pm i\varphi/2}|$ is at least $f\sin(\varphi/2)$, so $f\sin(32\sqrt{\varepsilon_n})\le8\sqrt{\varepsilon_n}$ and $f\le\pi/8$. Hence $\frac12\|\alpha_t-\alpha_C\|_1\ge1-f>1/2$, the rotation bound gives $1/4<2ts_n/\beta$, and $s_n\ge\beta/(8t)=\beta En/(512\sqrt{\varepsilon_n})$. No return, work bound or variance enters.
+
+\emph{(d), construction.} Let
+\begin{gather*}
+\tau=\min\{\eta,\sqrt\varepsilon,\tfrac14\},\qquad L=\Bigl\lceil\frac{100\pi^2n}{\tau}\Bigr\rceil,\qquad M=mE,\qquad z=\frac1{1+e^{\beta M}},\\
+m=\Bigl\lceil\max\Bigl\{2,\frac{10^4n}{\tau^2},\frac1{\beta E}\ln\frac{10^4n}{\tau^2}\Bigr\}\Bigr\rceil.
+\end{gather*} Each use takes a fresh program bit $B$ in the state $I/2$ and a fresh Gibbs qubit $G$ of gap $M$, and applies $(U\otimes I_G)J$, where $U=|0\rangle\langle0|_B\otimes I+|1\rangle\langle1|_B\otimes X$ and $J$ is the rotation between the system and $G$ with blocks $A=\sqrt{I-H/M}$ and $F=\sqrt{H/M}$, as in Appendix~\ref{app:channels}. Tracing $B$ and $G$ gives $\Phi_X$ composed with a map within $1/(2m)$ of the identity, and the initialized energy gain of the system, $B$ and $G$ is the operator $(E/2)I-2zH$. Lift each contact to a ladder clock $P$ of spacing $E/2$, prepared in a sine packet on $L$ levels in the middle of a ladder of $L+2b$ levels, $b=n(2m+3)+1$, a margin that no history, rare hot ones included, can exhaust; raise $P$ by one level per use while a sharp battery loses $E/2$; complete each stage shell by shell to a full energy-conserving unitary; schedule the stages with a zero-Hamiltonian counter that returns exactly; and swap each used program bit out with a fresh flat bit. At a fixed phase of $P$, tracing the stationary $G$ and $B$ leaves $\Phi_X$ conjugated by an energy phase, one phase for the whole strategy; the phase law is even with second moment at most $\pi^4/(4(L+1)^2)$, and the second derivative of the observer's state is at most $16n^2$. So the error is at most $\pi^4n^2/(L+1)^2+n/(2m)<\varepsilon$ for every adaptive observer. The energy of $P$ drifts by the operator $2zL_S(H)$, so $0\le\Delta E_C\le2nzE$. Compared with the same circuit without the contact $J$, which moves the clock by at most $3n$ levels in each Fourier fibre, the full state is within $v\le2\sqrt{nz}+\sqrt{n/m}+n/m+3\pi^2n/(2(L+1))<\tau/10$ of the packet tensored with the ideal rest. So the controller returns jointly with all physical systems within $2v<\eta$, and its entropy changes by at most $h(v^2)+v^2\ln\dim P=o(n)$. The battery moves from $nE/2$ to $0$ on every path, and the spread of the pure packet is at most $\beta EL/4=O(\beta En/\tau)$.
+\end{proof}
+
+\subsubsection{The two families}\label{kt:pf:families}
+
+\emph{(a)} The Kraus operators of a channel that fixes every state of a basis are diagonal in that basis, so its environment output depends only on the diagonal of the input. Apply the necessary condition of Section~\ref{kt:sec:batch} with $\rho=\psi$, a top eigenvector of $\Phi^*(H)-H$, and $\sigma$ its diagonal, so that $S(\sigma)=S(\Phi(\sigma))$. For a mixture of commuting unitaries, the upper bound applies the rare-excitation lift of Appendix~\ref{app:channels} to the controlled unitary $\sum_jV_j\otimes|j\rangle\langle j|$ with a Gibbs program register; this dilation leaves the device's entropy unchanged on every input. The criterion is the case of equality in the strict concavity of entropy.
+
+\emph{(b)} The lower bound takes $\sigma=\tau_A\otimes\rho_B$. The upper bound swaps $B$ with a flat cell and uses the returning-clock theorem of Appendix~\ref{app:channels}. The criterion is the optimality condition of the maximization defining $L$: a positive operator with zero partial trace must vanish. For the Bell example the finite construction gives the exact gain $\tfrac34EI-2zH$ with deterministic work, independently of that theorem.
+
+\subsubsection{A channel that reaches its capacity}\label{kt:pf:reach}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:reach}]
+Both $\sigma_0$ and $\sigma_1$ are states ($\det\sigma_0=1/6$, $\det\sigma_1=0$), and $\tfrac34\sigma_0+\tfrac14\sigma_1=\gamma$, so $\Phi$ is a Gibbs-preserving measure-and-prepare channel; it maps the stationary state $|0\rangle\langle0|$ to $\sigma_0$, which does not commute with $H$. Moreover $\Phi\circ\Delta=\Phi$ and $\Delta\circ\Phi(\rho)=\gamma$ for every $\rho$, where $\Delta$ removes coherences in the energy basis. Gibbs preservation and data processing give $F(\Phi\rho)\le F(\rho)$ with equality at $\gamma$, so the capacity is zero; by the accounting identity of Appendix~\ref{app:channels}, no implementation spends less than $-o(n)$. Directly: on the input $\gamma^{\otimes n}$ the output is $o(1)$-close to $\gamma^{\otimes n}$, so its energy and, by Fannes' inequality, its entropy change by $o(n)$; with the controller's energy and entropy refunds and the battery's entropy refund, conservation of entropy and subadditivity give $\Delta S_R\ge-o(n)$ for the reservoir, and $\Delta E_R\ge\beta^{-1}\Delta S_R$ because it starts in its Gibbs state, so $W_n=\Delta E_R+o(n)\ge-o(n)$.
+
+For the construction, take from the reservoir a qubit $D$ with zero Hamiltonian, in its Gibbs state $I/2$, and let $\Psi(\rho_{AD})=\gamma_A\otimes\Phi(\rho_A)_D$. Since $\Phi$ ignores input coherences and its output sits on a zero-Hamiltonian system, $\Psi$ is time-covariant. Using $S(\rho_{AD})\le S(\rho_A)+\ln2$ and $F(\Phi\rho_A)\le F(\rho_A)$, its capacity is $a=\beta^{-1}[\ln2-S(\gamma)]=E(\tfrac34-\ln2/\ln3)\approx0.119E$, attained at $\gamma\otimes I/2$. Stage 1 runs $\Psi^{\otimes n}$ with the thermal-operation construction for time-covariant channels of~\cite[Thm.~7.1]{FBB21}, at work $n(a+\delta)+o(n)$ for any $\delta>0$ and error tending to zero. That construction uses only energy-conserving unitaries and Gibbs ancillas (the dilation environments and the copies used for position-based decoding, all reservoir cells), and counts work in zero-Hamiltonian information batteries. We draw those registers from the reservoir in their Gibbs state and convert the purity they consume and return into mechanical work with the protocols for degenerate registers of~\cite{HorodeckiOppenheim13}, which give deterministic work at a loss $o(n)$ and vanishing error. So the controller holds only the clock. Stage 2 swaps $A^n$ and $D^n$ in the computational basis, mapping $|a\rangle_A|z\rangle_D|j\rangle_C\mapsto|z\rangle_A|a\rangle_D|j+|a|-|z|\rangle_C$ on a clock with levels of energy $jE$, which conserves energy. Stage 3 extracts the free energy $na-o(n)$ of the known state $\gamma^{\otimes n}$, now on the zero-Hamiltonian register $D^n$, which needs no coherence. The net work is $o(n)$. Each stage has deterministic work, and $\delta$ is arbitrary.
+
+Since $\Delta\circ\Phi=\gamma$, the computational labels $z$ of $\Phi^{\otimes n}(\rho)$ are independent with law $\gamma$ for every input $\rho$, including inputs entangled across uses and with a reference, and so are the labels $a$ of $\gamma^{\otimes n}$. The clock shift $K=|a|-|z|$ is therefore a sum of $n$ independent increments taking the values $\pm1$ with probability $3/16$ each and $0$ with probability $5/8$, so $\mathbb EK=0$ and $\mathbb EK^2=3n/8$. Take the clock on the ladder $j=0,\dots,2n+L-1$, starting in the uniform superposition of the levels $n,\dots,n+L-1$; on basis states that would leave the ladder, which carry no weight, the gate acts as the identity, which keeps it an energy-conserving unitary. The overlap of the clock with its translate by $k$ is $\max(0,1-|k|/L)$~\cite{Aberg14}, so, purifying everything, the joint state is within trace distance $\sqrt{2\,\mathbb E|K|/L}\le\sqrt{2\sqrt{3n/8}/L}$ of the exact output of Stage~1 tensored with the initial clock; the error of Stage~1 adds to this. The clock's marginal is a mixture of at most $2n+1$ translates of its initial state, so its entropy changes by $O(\log n)$. Its mean energy is unchanged on the exact output of $\Psi^{\otimes n}$, and by energy conservation of the gate it changes by $O(\varepsilon_1 nE)=o(n)$ on the implemented one, where $\varepsilon_1$ is the error of Stage~1.
+\end{proof}
+
+The proof uses only $\Phi\circ\Delta=\Phi$, $\Delta\circ\Phi=\gamma\Tr$ and $\Phi(\gamma)=\gamma$: every channel with these three properties, on a system with commensurate gaps, reaches capacity zero in the same way, with increments of mean zero and variance $2\operatorname{Var}_\gamma(H)$. On a qubit these channels form the family whose output coherences satisfy $c_1=-(\gamma_0/\gamma_1)c_0$ and $|c_1|^2\le\gamma_0\gamma_1$; the channel of the proposition is its extreme point, where $\sigma_1$ is pure.
+
+\subsubsection{A process and its reverse}\label{kt:pf:arrow}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:arrow}]
+The $M_i$ sum to the identity, and $\Tr(P_\pm\gamma)=\tfrac5{12}$, $\Tr(P_2\gamma)=\tfrac16$ give output populations $(\tfrac12,\tfrac13,\tfrac16)$, so $\mathcal N(\gamma)=\gamma$. The reverse is $\mathcal N^\sharp(\rho)=\sum_i\rho_{ii}\,\gamma^{1/2}M_i\gamma^{1/2}/\gamma_i$, which ignores input coherences; its Kraus products contain every $|i\rangle\langle i|$ and $\mathcal N^{\sharp*}(H)$ is diagonal, so Theorem~\ref{kt:thm:balanced} gives zero cost.
+
+The Kraus products of $\mathcal N$ span $\mathcal B(\mathrm{span}\{|+\rangle,|2\rangle\})+\mathcal B(\mathrm{span}\{|-\rangle,|2\rangle\})$, so two inputs leave the environment in the same state exactly when they differ only in their $|+\rangle\langle-|$ coherence. Dephasing $\sigma$ in the basis $|+\rangle,|-\rangle,|2\rangle$ raises its entropy without changing $\mathcal N(\sigma)$, and the coherence of $\rho$ between $|\pm\rangle$ and $|2\rangle$ can be removed without changing feasibility or energy. So the maximum in $B(\mathcal N)$ is attained at $\sigma=pP_++qP_-+rP_2$ and $\rho=(\sqrt p|+\rangle+\sqrt q|-\rangle)(\sqrt p\langle+|+\sqrt q\langle-|)+rP_2$, and with $a=\ln\frac32$, $b=\ln3$,
+\[
+\frac{B(\mathcal N)}{\kB T}=\max_{p+q+r=1}\Bigl[-\tfrac a2p+\bigl(\tfrac{3a}{10}+\tfrac b5\bigr)q-\tfrac b2r+a\sqrt{pq}+h(p,q,r)-h\bigl(p+\tfrac r2,\tfrac{4q}5,\tfrac q5+\tfrac r2\bigr)\Bigr],
+\]
+where $h$ is the Shannon entropy in nats. The objective is strictly concave, its maximum is interior, and equating the three partial derivatives gives, for $t=\sqrt{q/p}$ and $z=r/(2p)$,
+\[
+12z^2(1+z)\bigl(\tfrac32\bigr)^{t-1}=z+\tfrac{t^2}5,\qquad(1+z)^5=3\bigl(\tfrac45\bigr)^4\Bigl(\tfrac15+\tfrac z{t^2}\Bigr)\bigl(\tfrac32\bigr)^{4+\frac52(1/t-t)},
+\]
+whose positive solution is unique, $t\approx1.02099$ and $z\approx0.16236$. Euler's relation for the homogeneous extension gives the value $c=\ln(1+z)+\tfrac12\ln\tfrac32\,(t-1)$. Interval arithmetic at a rational point near the optimum certifies $0.1547103002210<c<0.1547103002225$. For the upper bound, put $X=\mathrm{diag}\bigl(\tfrac a2(t-1),\tfrac{3a+2b}{10}+\tfrac a{2t},-\tfrac b2\bigr)$ in the basis $|+\rangle,|-\rangle,|2\rangle$ and $Y_{(i,s)}=X_s/\beta$ on the five Kraus labels. Then $\beta(D-\Psi^*(Y))=-\tfrac a2\left(\begin{smallmatrix}t&-1&0\\-1&1/t&0\\0&0&0\end{smallmatrix}\right)\le0$, so $t_Y=0$, and $\beta g_Y=c$, attained at the faithful optimal $\sigma_*$. The construction of Theorem~\ref{kt:thm:batchlaw} with this $Y$ therefore attains $B(\mathcal N)=c\,\kB T$ with deterministic work; since $\sigma_*>0$, it needs no regularization of $\mathcal N$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:generic}]
+If the Choi matrix of $\Phi$ has full rank, its Kraus operators span all matrices, and so do their products $A_i^*A_j$; both tests then hold trivially. The map $A_i\mapsto\gamma^{1/2}A_i^*\gamma^{-1/2}$ is invertible, so $\Phi^\sharp$ also has full Kraus rank. The channel $\gamma\Tr$ has Choi matrix $I\otimes\gamma>0$, so every mixture $(1-\delta)\Phi+\delta\,\gamma\Tr$ with $\delta>0$ has full rank. For the family, the $M_i$ form a POVM because $\frac2{2+z}+\frac z{2+z}=1$, and $\langle u_\theta|\gamma|u_\theta\rangle=\frac12-\frac z6$ and $\langle v_\theta|\gamma|v_\theta\rangle=\frac{2+z}6$ give Gibbs preservation; the Kraus products have no matrix element between $u_\theta$ and $v_\theta$, while $\langle u_\theta|H|v_\theta\rangle=\kB T\ln\frac32\sin\theta\cos\theta\ne0$, and the reverse reads only populations.
+\end{proof}
+
+\subsubsection{The noise horizon}\label{kt:pf:noise}
+
+\begin{proof}[Proof of Proposition~\ref{kt:prop:noise-horizon}]
+Appendix~\ref{kt:app:batchphys} gives a lower bound at fixed error with explicit budgets, the uniform noise construction, and the envelopes.
+\end{proof}
+
+\subsubsection{A controller that returns only in state}\label{kt:pf:embezzle}
+
+\begin{proof}[Proof of Corollary~\ref{kt:cor:embezzle}]
+(a) Follow the proof of Proposition~\ref{kt:bp-lower}, with $m=n$, but keep the controller's actual changes $\Delta E_C$ and $\Delta S_C$ on the input $\rho$ of an exact-fibre pair instead of bounding them. Energy conservation, the battery budget $u_W$, the bath inequality $\beta\Delta E_{\rm bath}\ge\Delta S_{\rm bath}$ and $\Delta S_{\rm bath}\ge A_\rho-\Delta S_C-S(W_f)$ give
+\[
+W_{\rm nom}\ge\Delta E_{\rm payload}+\beta^{-1}A_\rho-\bigl(\beta^{-1}\Delta S_C-\Delta E_C\bigr)-u_W-\beta^{-1}b_W,
+\]
+and $\beta^{-1}\Delta S_C-\Delta E_C=F_C(\alpha_C)-F_C(\alpha_C')\le R_n$, where $\alpha_C'$ is the controller's final state on $\rho$. The payload term and $A_\rho$ refer to the same run on $\rho$, and the lower bound on $A_\rho$ in that proof uses no property of the controller beyond the independence of its initial state from the input. Hence, with $t=\min\{1,4\varepsilon^{1/4}\}$,
+\[
+W_{\rm nom}+R_n\ge nB(\Phi)-\beta^{-1}\bigl\{n[(2\beta h+\ln d)\varepsilon+4t\ln d]+r_0(\varepsilon)+r_0(t)\bigr\}-u_W-\beta^{-1}b_W.
+\]
+Under the budgets of Proposition~\ref{kt:bp-lower}, $R_n\le e_C+\beta^{-1}s_C$, so this contains~\eqref{kt:bp-fixederror}. With $\varepsilon\to0$ and $u_W,b_W=o(n)$ it gives (a).
+
+(b) On a given input, let $x\le\eta_n$ be the trace distance between $\alpha_C'$ and $\alpha_C$. Writing $\alpha_C-\alpha_C'=x(\tau_+-\tau_-)$ with states $\tau_\pm$ gives $|\Tr H_C(\alpha_C-\alpha_C')|\le x\,\mathrm{span}(H_C)$, and Lemma~\ref{kt:bp-continuity} gives $|S(\alpha_C)-S(\alpha_C')|\le x\ln d_C+r_0(x)$. Both bounds increase with $x$, since $r_0'(x)=\ln(1+1/x)>0$. So $F_C(\alpha_C)-F_C(\alpha_C')\le\kB T[\eta_nK+r_0(\eta_n)]$ on every input, which is the bound on $R_n$; together with (a) it gives the bound on $K$.
+
+(c) Take the family of Theorem~\ref{kt:bp-batch}, with controller $C_0$, battery $W$ and nominal work $nB(\Phi)+o(n)$, whose controller returns jointly within $\eta^0_n\to0$ with actual energy and entropy changes $o(n)$. Let $k=\lceil n[B(\Phi)-w]/\omega\rceil$; if $k=0$ the family itself serves. Otherwise let $N=\lceil k/\eta_n\rceil\ge k$, add to the controller a ladder $L$ with Hamiltonian $\omega\sum_{\ell=1}^{k+N}\ell\,|\ell\rangle\langle\ell|$ in the uniform mixture $\mu_L=N^{-1}\sum_{j=1}^N|k+j\rangle\langle k+j|$, and add to the battery a register $W_2$ with Hamiltonian $k\omega|1\rangle\langle1|$, starting in $|0\rangle$. Before anything else, apply the permutation that exchanges $|k+j\rangle_L|0\rangle_{W_2}$ with $|j\rangle_L|1\rangle_{W_2}$ for $j=1,\dots,N$ and fixes every other basis vector. It is an involution and conserves energy, since both vectors of each pair have energy $(k+j)\omega$, and it maps $\mu_L\otimes|0\rangle\langle0|$ to $\mu_L'\otimes|1\rangle\langle1|$, with $\mu_L'=N^{-1}\sum_{j=1}^N|j\rangle\langle j|$. Then run the device of Theorem~\ref{kt:bp-batch}, which does not act on $L$ or $W_2$.
+
+The error is that of the original family. The battery $W\otimes W_2$ starts in an energy eigenstate, and $W_2$ ends in $|1\rangle$ with certainty, so the battery reaches its new nominal endpoint except with the original vanishing probability, with the original entropy and mean deviation; its nominal work is $nB(\Phi)+o(n)-k\omega=nw+o(n)$, since $0\le k\omega-n[B(\Phi)-w]<\omega$. The ladder ends in $\mu_L'$, in a product with everything else, so by the triangle inequality the joint return error of $C_0\otimes L$ is at most $\eta^0_n+\D(\mu_L',\mu_L)$, with $\D=\frac12\|\cdot\|_1$. The two uniform distributions share $N-k$ levels and differ on $k$ levels each, so $\D(\mu_L',\mu_L)=k/N\le\eta_n$. The ladder's entropy is $\ln N$ before and after, and it loses exactly the energy $k\omega$. So the controller's entropy changes by $o(n)$ and its free energy drops by $k\omega+o(n)=n[B(\Phi)-w]+o(n)$ on every input. The ladder's energy range is $(k+N-1)\omega\le(1+1/\eta_n)k\omega\le(1+1/\eta_n)(n[B(\Phi)-w]+\omega)$.
+
+Applied to the ladder alone, the bound of (b) requires $\beta k\omega\le\eta_n[\beta\,\mathrm{span}(H_L)+\ln(k+N)]+r_0(\eta_n)$, that is, a range of at least $k\omega/\eta_n$ up to terms of order $\kB T[\ln(k+N)+r_0(\eta_n)/\eta_n]$; the range $(k+N-1)\omega\le(1+\eta_n)k\omega/\eta_n$ exceeds this by at most the factor $1+\eta_n$ and those terms.
+
+If the ladder must be pure, take instead $\psi=\sum_{j=1}^Na_j|k+j\rangle$ with $a_j=\sqrt{2/(N+1)}\,\sin(j\pi/(N+1))$, so that $\sum_ja_j^2=1$, and $N=\lceil k\pi/\eta_n\rceil$. The same permutation maps $\psi\otimes|0\rangle$ to $\varphi\otimes|1\rangle$ with $\varphi=\sum_ja_j|j\rangle$, and for pure states $\D(\varphi,\psi)\le\|\varphi-\psi\|$. Let $J$ lower the ladder by one level, $J|\ell\rangle=|\ell-1\rangle$ for $\ell\ge2$ and $J|1\rangle=0$. It is isometric on vectors supported on levels $\ge2$, which every vector it acts on below is, and $\varphi=J^k\psi$. Telescoping, $\|\psi-J^k\psi\|\le\sum_{i=0}^{k-1}\|J^i(\psi-J\psi)\|=k\|\psi-J\psi\|$. With $\theta=\pi/(N+1)$ and $a_0=a_{N+1}=0$, the coefficients satisfy $a_{j-1}+a_{j+1}=2\cos\theta\,a_j$, so $2\langle\psi|J\psi\rangle=2\sum_{j=1}^{N-1}a_ja_{j+1}=\sum_{j=1}^Na_j(a_{j-1}+a_{j+1})=2\cos\theta$ and $\|\psi-J\psi\|^2=2-2\cos\theta\le\theta^2$. Hence $\D(\varphi,\psi)\le k\pi/(N+1)\le\eta_n$. The pure ladder also loses exactly $k\omega$, stays pure and stays in a product with everything else, and the range bound holds with $\pi/\eta_n$ in place of $1/\eta_n$.
+\end{proof}
+
+\subsection{Physical construction for the batch law and the noise horizon}\label{kt:app:batchphys}
+
+This appendix proves Theorem~\ref{kt:thm:batchlaw} and Proposition~\ref{kt:prop:noise-horizon} with every physical resource counted. Section~\ref{kt:app:batchphys}.1 states the contract and Section~\ref{kt:app:batchphys}.2 proves the lower bound with explicit finite budgets. Section~\ref{kt:app:batchphys}.3 builds the device for a fixed channel, and Sections~\ref{kt:app:batchphys}.4 and~\ref{kt:app:batchphys}.5 treat noisy channels, first at a uniform rate and then over finite horizons.
+
+\subsubsection{The operational contract}\label{kt:bp-contract}
+All logarithms and entropies are natural. Input and output have
+dimension $d$ and the same Hamiltonian $H$, shifted to ground zero.
+Write $h=\osc H=\|H\|$ and fix $\beta>0$. Every implemented gate is a full
+finite-dimensional unitary conserving the fixed additive Hamiltonian.
+Every reservoir supply starts in its Gibbs state, independently of
+the controller, inputs, other supplies and battery. Used, failed, idle and
+retired supplies remain part of the physical rest. Mathematical purifications are
+inert: they are neither manipulated nor required to be returned.
+
+The whole controller $C$ includes the phase bank, initially pure environment
+seeds, flat routing label, dilation flag and scheduling counter. Its initial
+state $\alpha_C$ is independent of the inputs. The mechanical battery
+$W$ starts in a sharp energy eigenstate. Debit is initial minus nominal
+final battery energy. Uniformly over every joint input and reference,
+require half diamond error $\varepsilon_n\to0$ and
+\[
+ \D(\omega_{C R_{\rm phys}},\alpha_C\otimes\omega_{R_{\rm phys}})\to0,
+ \qquad |\Delta E_C|=o(n),\quad |\Delta S_C|=o(n).
+\]
+Here $\D=\frac12\|\cdot\|_1$, $R_{\rm phys}$ is all physical systems other
+than $C$, and the endpoint changes are actual and unconditional.
+The battery has a common nominal sharp endpoint with vanishing failure,
+$S(W_f)=o(n)$ and $\Tr|H_W-E_{W,\rm nom}|\omega_W=o(n)$.
+Startup capital $\beta^{-1}D(\alpha_C\|\gamma_C)$ is declared separately,
+unrestricted, and not charged as operating work.
+
+This is a batch contract: all outputs are held until cleanup, and one device
+covers inputs entangled across all uses and with a reference. Real-time
+release and efficient resources are outside its scope.
+
+\subsubsection{The lower bound with explicit budgets}
+Let $V:S\to OE$ be a minimal Stinespring isometry, with channel $\Phi$,
+complement $\Psi$, and $\dim E=r$. Put
+\[
+ D=\Phi^*H-H,\quad h_\Phi(\sigma)=S(\sigma)-S(\Phi\sigma),\quad
+ B(\Phi)=\max_{\Psi\rho=\Psi\sigma}
+       [\Tr\rho D+\beta^{-1}h_\Phi(\sigma)].
+\]
+$h_\Phi(\sigma)=S(E|O)_{V\sigma V^*}$ is concave. The faithful feasible
+pair $\rho=\sigma=I/d$ gives Slater strong duality after removal of
+redundant affine constraints:
+\begin{equation}\label{kt:bp-dual}
+ B(\Phi)=\inf_{Y=Y^*}(t_Y+g_Y),\quad
+ t_Y=\lambda_{\max}(D-\Psi^*Y),\quad
+ g_Y=\max_\sigma[\beta^{-1}h_\Phi(\sigma)+\Tr\sigma\Psi^*Y].
+\end{equation}
+Indeed, add $\Tr Y(\Psi\sigma-\Psi\rho)$ to the objective and maximize
+independently over the two states. The entropy and energy in $g_Y$
+use the same $\sigma$. The primal value is finite, and the faithful
+feasible pair lies in the relative interior of the set of state pairs,
+so the same condition also gives dual attainment: the infimum in
+\eqref{kt:bp-dual} is attained by some Hermitian $Y$.
+
+Exact complement equality for a block implies marginal equalities.
+Relative-entropy data processing for total correlation gives
+\[
+ S(\sigma_n)-S(\Phi^{\otimes n}\sigma_n)
+ \le\sum_i[S(\sigma_i)-S(\Phi\sigma_i)].
+\]
+The energy is additive; hence $B(\Phi^{\otimes n})=nB(\Phi)$, with
+products attaining the reverse bound. With complement tolerance $\zeta$,
+marginal contraction gives $nB_1(0)\le B_n(\zeta)\le nB_1(\zeta)$.
+Compactness of the single-copy state-pair set gives
+$B_1(\zeta)\downarrow B_1(0)$ as $\zeta\downarrow0$.
+
+
+\begin{lemma}[Active-dimension continuity]\label{kt:bp-continuity}
+Set $r_0(x)=(1+x)\ln(1+x)-x\ln x$, $r_0(0)=0$.
+For states at half trace distance $x\le1$,
+\[
+ |S(A|F)_\rho-S(A|F)_\sigma|\le2x\ln d_A+r_0(x),\qquad
+ |S(A)_\rho-S(A)_\sigma|\le x\ln d_A+r_0(x).
+\]
+No dimension of $F$ enters.
+\end{lemma}
+\begin{proof}
+The Jordan decomposition is $\rho-\sigma=x(\tau_+-\tau_-)$.
+The common state $(\rho+x\tau_-)/(1+x)=(\sigma+x\tau_+)/(1+x)$ is a
+mixture of weight $p=x/(1+x)$. Conditional entropy of a mixture lies
+between its averaged value and that average plus $\h(p)$: use concavity
+and then append the classical mixture label. Subtract the bounds and
+use the range $[-\ln d_A,\ln d_A]$. For ordinary entropy the range is
+$[0,\ln d_A]$. Finally $(1+x)\h(x/(1+x))=r_0(x)$.
+\end{proof}
+
+\begin{proposition}[A finite-error lower bound with explicit budgets]\label{kt:bp-lower}
+A finite device implements $\Phi^{\otimes m}$ with half diamond error
+$\varepsilon\le1$. Suppose uniformly
+$|\Delta E_C|\le e_C$, $|\Delta S_C|\le s_C$, $S(W_f)\le b_W$, and
+$|\langle H_W\rangle_f-E_{W,\rm nom}|\le u_W$. Define
+$t=\min\{1,4\varepsilon^{1/4}\}$ and
+$b=e_C+u_W+\beta^{-1}(s_C+b_W)$. Then
+\begin{equation}\label{kt:bp-fixederror}
+ W_{\rm nom}\ge mB(\Phi)-\beta^{-1}
+ \{m[(2\beta h+\ln d)\varepsilon+4t\ln d]+r_0(\varepsilon)+r_0(t)\}-b.
+\end{equation}
+Controller and reservoir dimensions, gaps and athermal capital may grow
+arbitrarily.
+\end{proposition}
+\begin{proof}
+Let $I$ be all final physical hardware except visible outputs. We may assume that the outputs occupy the input registers, appending a conserving swap otherwise, so that $I$ consists of the same systems at the start and at the end; and $F$
+purify its initial product state. Purify input $\tau$ by $Q$, $\dim Q\le
+d^m$. The actual $QOIF$ state is pure; $QF$ remains product. Thus
+$A_\tau=S(QO|F)_{\rm act}\ge S(\tau)-S(O_{\rm act}(\tau))$.
+Stinespring continuity \cite[Thm.~1]{KSW08} gives a common environmental
+embedding of actual and ideal channels at operator distance at most
+$a=\sqrt{2\varepsilon}$. For an exact-fibre pair, that is, inputs with $\Psi(\rho)=\Psi(\sigma)$, the aligned ideal $IF$
+marginals coincide, so the actual $IF$ marginals are at half trace
+distance at most $2a$. Uhlmann aligns their actual purifications by a
+mathematical unitary on $QO$ at half trace distance at most $2\sqrt a$.
+Conditional entropy is invariant under that unitary. Lemma~\ref{kt:bp-continuity}
+on dimension at most $d^{2m}$ gives
+$A_\rho\ge A_\sigma-4mt\ln d-r_0(t)$; the cap $t=1$ follows from
+the entropy range. These alignments are comparisons, not physical
+operations on $F$. Output entropy continuity then gives
+\[
+ A_\rho\ge h_{\Phi^{\otimes m}}(\sigma)
+       -m\varepsilon\ln d-r_0(\varepsilon)-4mt\ln d-r_0(t).
+\]
+Initial $S(F)=S(I_{\rm initial})$ and final purity give
+$\Delta S_I=A_\rho$. Endpoint subadditivity implies
+$\Delta S_{\rm bath}\ge A_\rho-\Delta S_C-S(W_f)$.
+The initial product Gibbs bath obeys
+$\beta\Delta E_{\rm bath}\ge\Delta S_{\rm bath}$ by relative entropy
+positivity, with no bath dimension or span bound. Conservation and
+the nominal-to-mean battery budget give
+$W_{\rm nom}\ge\Delta E_{\rm payload}+\beta^{-1}A_\rho-b$.
+The actual payload gain differs from its ideal gain by at most
+$mh\varepsilon$; \eqref{kt:bp-fixederror} uses the looser $2mh\varepsilon$.
+Maximize over exact-fibre pairs and apply additivity.
+\end{proof}
+
+\subsubsection{The device for a fixed channel}
+\begin{theorem}[The batch law]\label{kt:bp-batch}
+For every finite channel whose input and output carry the same Hamiltonian, one family of
+implementations meets the contract of Appendix~\ref{kt:bp-contract} for all inputs, including inputs
+entangled across uses and with a reference, with nominal mechanical work $nB(\Phi)+o(n)$. Every admissible family has $\liminf W_n/n\ge B(\Phi)$.
+For each fixed $Y$ in \eqref{kt:bp-dual}, the construction below attains
+$W_n\le n(t_Y+g_Y)+o(n)$.
+\end{theorem}
+We describe the design of the eraser before the contact that feeds it, so the order of the subsections is not the order in which the device runs. The physical device runs as follows: it starts with the invested environment seeds and the phase bank initialized; it pumps the sharp work budget into the bank; it runs the $n$ lifted contacts, each preceded by its rare-excitation rotation; it decodes the environment's position using the held outputs; it converts the resulting label into mechanical work in the factory; it resets the routing label by a swap with a fresh Gibbs stock; and it closes the counter's cycle. The auxiliary Hamiltonians and the band filter below are tools for designing one uniform, energy-conserving test; they are not physical resources supplied to the device. All nonstandard physical steps are proved below. The only standard
+mathematical imports are the finite Hayashi--Nagaoka inequality,
+Stinespring continuity and Uhlmann's theorem; no asymptotic eraser
+or general source compiler is assumed.
+
+\subsubsection{Faithful auxiliary balance}
+Fix $Y$, $\eta=(n+1)^{-6}$ and
+$\Phi_n=(1-\eta)\Phi+\eta\Tr(\cdot)I/d$. Use Kraus list
+$\sqrt{1-\eta}K_j$ and $\sqrt{\eta/d}|a\rangle\langle b|$, with fixed
+size $r'=r+d^2$. On its environment put
+\[
+ Y_n=(1-\eta)^{-1}Y\oplus0,\quad X=\Psi_n^*Y_n=\Psi^*Y,\quad
+ p=\lambda_{\max}Y_n,\quad H_E=pI-Y_n,\quad Z_E=\Tr e^{-\beta H_E}.
+\]
+Write $D_n=\Phi_n^*H-H$, $t_n=\lambda_{\max}(D_n-X)$,
+$g_n=\max_\sigma[\beta^{-1}h_{\Phi_n}(\sigma)+\Tr X\sigma]$ and
+$a=p-g_n$. Physical $H_E$ has bounded span for fixed $Y$.
+The maximizer $\sigma_n$ is faithful: adding a small full-rank
+component to a state with a kernel increases input entropy by a
+positive $-u\ln u$ term, while $\Phi_n(\sigma)\ge\eta I/d$ makes the
+output entropy change only linear, as is the $X$ term. Stationarity,
+with $\omega_n=\Phi_n(\sigma_n)$, therefore gives
+\[
+ -\ln\sigma_n+\Phi_n^*\ln\omega_n+\beta X=\beta g_n I.
+\]
+For auxiliary, never supplied Hamiltonians
+$H_{\rm in}'=-\beta^{-1}\ln\sigma_n$, $H_O'=-\beta^{-1}\ln\omega_n$,
+\begin{equation}\label{kt:bp-auxbalance}
+ V_n^*(H_O'+H_E)V_n=H_{\rm in}'+aI.
+\end{equation}
+The expectation in $\sigma_n$ identifies the stationary scalar.
+The bounds $\|\ln\omega_n\|\le\ln(d/\eta)$ and
+$\|\ln\sigma_n\|\le\ln(d/\eta)+2\beta\|X\|+\ln d$ follow directly.
+For $R=(H_O'+H_E)V_n-V_n(H_{\rm in}'+a)$, $V_n^*R=0$ and
+$\|R\|\le C_Y\ln(n+2)$, where
+$C_Y=20[\beta^{-1}(1+\ln d)+\|Y\|]$ suffices.
+Tensor residual ranges are orthogonal; hence
+$\|R^{(n)}\|\le\sqrt n\|R\|$.
+
+\subsubsection{Uniform test and two pinchings}
+Use the positive normalized kernel
+\[
+ k(s)=\frac3{8\pi}\left[\frac{\sin(s/4)}{s/4}\right]^4,\quad
+ k_w(t)=wk(wt),\quad w=100C_Y(n+1)^{3/4}\ln(n+2).
+\]
+Its Fourier support is $[-1,1]$ before scaling and
+$\int |s|k(s)\,ds=12\ln2/\pi\le12/\pi$. The finite matrix
+\[
+ A=\int k_w(t)e^{-it(H_O'+H_E)^{(n)}}V_n^{\otimes n}
+                  e^{it((H_{\rm in}')^{(n)}+na)}dt
+\]
+is a contraction, with exact energy-shift band $na\pm w$.
+Duhamel gives
+$\delta_A=\|A-V_n^{\otimes n}\|\le12\sqrt n\|R\|/(\pi w)=O(n^{-1/4})$.
+The integral defines a matrix, not a physical filter.
+
+Pinch in auxiliary output energy, with at most $\nu'\le(n+1)^{dr'}$
+shells. Set $\alpha=\theta=(n+1)^{-(dr'+6)}$ and
+$Q=1_{[\alpha,\infty)}(\mathcal P'(AA^*))$.
+The pinching inequality $AA^*\le\nu'\mathcal P'(AA^*)$ yields
+$\|(I-Q)A\|\le\sqrt{\nu'\alpha}$. In shell $b$, the exact band gives
+\[
+ \Pi_bA\sigma_n^{\otimes n}A^*\Pi_b
+ \ge e^{-\beta(b-na+w)}\Pi_bAA^*\Pi_b.
+\]
+Therefore
+\[
+ e^{-\beta(H_O'+H_E)^{(n)}}Q
+ \le\alpha^{-1}e^{-\beta(na-w)}
+                  \mathcal P'(A\sigma_n^{\otimes n}A^*).
+\]
+Positive-kernel operator Jensen bounds $A\sigma_n^{\otimes n}A^*$
+by $\int k_w(t)U_tV_n^{\otimes n}\sigma_n^{\otimes n}
+V_n^{*\otimes n}U_t^*dt$. Its environment partial trace is
+$\omega_n^{\otimes n}$, also after auxiliary pinching.
+Sandwiching by $\omega_n^{-1/2}$ proves
+\begin{equation}\label{kt:bp-auxcertificate}
+ \Tr_{E^n}[e^{-\beta H_E^{(n)}}Q]
+       \le\alpha^{-1}e^{-\beta(na-w)}I.
+\end{equation}
+This uses total-energy commutation and cyclicity only on the traced
+environment.
+
+Now let $Z=\mathcal P_{\rm phys}(Q)$ pinch in the physical energy
+$H_O^{(n)}+H_E^{(n)}$, and put $P=1_{[\theta,\infty)}(Z)$.
+The number of shells is $\nu\le(n+1)^{dr'}$.
+Since $Q\le\nu Z$, $\|(I-P)Q\|\le\sqrt{\nu\theta}$.
+Since $P\le Z/\theta$, physical pinching preserves the weighted
+partial-trace bound in \eqref{kt:bp-auxcertificate}. Thus
+\begin{align}
+ [P,H_O^{(n)}+H_E^{(n)}]&=0,\nonumber\\
+ \Tr PV_n^{\otimes n}\rho V_n^{*\otimes n}
+ &\ge1-\kappa,\quad
+ \kappa=(\delta_A+\sqrt{\nu'\alpha}+\sqrt{\nu\theta})^2,\label{kt:bp-test}\\
+ \Tr_{E^n}[e^{-\beta H_E^{(n)}}P]
+ &\le(\alpha\theta)^{-1}e^{-\beta(na-w)}I.\nonumber
+\end{align}
+All bounds act on the entire code and survive any reference extension.
+
+
+\subsubsection{Conserving position decoder}
+Set $\varepsilon'=(n+1)^{-4}$ and
+$L_{\rm pos}=\varepsilon'\alpha\theta Z_E^n e^{\beta(na-w)}$.
+When $L_{\rm pos}\ge2$, set $q=\lfloor L_{\rm pos}\rfloor$.
+Controller $J$ is a zero-energy $q$-level system initially in its
+true Gibbs state $\pi_q$. A separate zero-energy qubit $K$ starts
+pure $0$ and is invested controller capital. Supply $q$ independent
+Gibbs blocks $A_j\simeq E^n$ in $\gamma_E^{\otimes n}$.
+First swap $E^n$ with $A_j$ conditioned on $J=j$, a conserving
+unitary $W_1$. Define $P_j=P_{O^nA_j}$,
+$\Sigma=\sum_jP_j$, and
+$\Omega_j=\Sigma^{-1/2}P_j\Sigma^{-1/2}$ on its support.
+All effects commute with total energy. The finite
+Hayashi--Nagaoka inequality~\cite[Lemma~2, with $c=1$]{HayashiNagaoka03} is
+\[
+ I-(A+B)^{-1/2}A(A+B)^{-1/2}\le2(I-A)+4B
+ \quad(0\le A\le I,\ B\ge0).
+\]
+The correct slot obeys \eqref{kt:bp-test}; each wrong slot is independent
+Gibbs. Its weighted rejection bound gives
+$\langle\Omega_j\rangle\ge1-b$,
+$b=2\kappa+4\varepsilon'=O(n^{-1/2})$.
+
+For cyclic shifts $S_J$, the operator
+$D_{\rm dec}=\sum_j\Omega_j\otimes S_J(-j)$ is a contraction:
+compress the block-diagonal shifts with the isometry having columns
+$\sqrt{\Omega_j}$ and the unused complement.
+For $T=D_{\rm dec}W_1$ the full Halmos square
+\[
+ U_T=\begin{pmatrix}T&\sqrt{I-TT^*}\\
+                 \sqrt{I-T^*T}&-T^*\end{pmatrix}_K
+\]
+is unitary; $T\sqrt{I-T^*T}=\sqrt{I-TT^*}T$ proves this, and
+functional calculus preserves energy commutation.
+An input branch $J=j,K=0$ has overlap at least $1-b$ with its
+post-swap vector and $J=K=0$. Purify $\pi_q$ by an inert orthogonal
+$j$ label and sum these amplitudes. The full purified overlap remains
+at least $1-b$, retaining all cross-history Gram matrices.
+Half trace error is at most $\sqrt{2b}$ and
+$\Pr[J\ne0\text{ or }K\ne0]\le2b$.
+No factorization of the post-decoder environment is needed next.
+
+\subsubsection{Exact mechanical factory}\label{kt:bp-factory}
+The factory works on every $E^n$ state, including coherences and
+entanglement with all retained systems, when $J=0$.
+Take positive frequencies $\omega_1=\beta^{-1}$ and each nonzero
+eigenenergy of $H_E$ as separate further coordinates; redundant or
+rationally dependent frequencies are allowed. Let $s\le r'+1$.
+An environment eigenvector $l$ has a coordinate charge $v_l$ in
+$\{0,\ldots,n\}^s$ and energy $\omega\cdot v_l$. Put
+\[
+ C_{\rm tile}=(n+1)^2,\quad
+ k=\lfloor\ln q-n\ln Z_E-\ln(1+C_{\rm tile}^{-1})\rfloor,\quad
+ T_{\rm tile}=\lceil(n+1)^8+4(n+|k|+1)\rceil.
+\]
+Stock $F$ has tiles $t\in\{0,\ldots,T_{\rm tile}-1\}^s$ of energy
+$\omega\cdot t$ and integer degeneracy
+$d_t=\lceil C_{\rm tile}e^{\beta\omega\cdot t}\rceil$.
+Its true Gibbs partition satisfies
+$C_{\rm tile}T_{\rm tile}^s\le Z_F\le(C_{\rm tile}+1)T_{\rm tile}^s$.
+A coordinate-interior tile with margin $n+|k|+1$ has bad probability
+\[
+ f\le2s(1+C_{\rm tile}^{-1})(n+|k|+1)/T_{\rm tile}=O(n^{-7}).
+\]
+The extraction battery has distinct orthogonal labels $W_i,W_f$
+even at $k=0$, with energies
+\[
+ E_i=\max\{0,-k/\beta\},\qquad E_f=\max\{0,k/\beta\}.
+\]
+Its extraction is $k/\beta$, of either sign.
+
+At coordinate-sum $u$, count all source columns
+$E_l,J0,W_i,F_{u-v_l}$ simultaneously:
+\[
+ \sum_l d_{u-v_l}
+ \le(1+C_{\rm tile}^{-1})C_{\rm tile}e^{\beta\omega\cdot u}Z_E^n.
+\]
+The target $E_{\rm ground},J_{\rm any},W_f,F_{u-ke_1}$ has dimension
+at least $qC_{\rm tile}e^{\beta\omega\cdot u-k}$, dominating the
+entire source dimension by the choice of $k$.
+Restrict initialized source columns to good tiles. Their target
+tiles exist. Inject these columns into target basis columns,
+pair-swap each source with its target, include reverse swaps, and
+leave unmatched columns unchanged.
+Distinct battery labels make source and target orthogonal.
+Different $u$ have disjoint target tiles even when scalar energies
+coincide, so redundant frequencies cause no collision.
+Every pair has equal total scalar energy. This is a full conserving
+square, not postselection. Linearity proves reset and extraction on
+arbitrary coherent entangled environment inputs. All initialized
+bad-tile and $J\ne0$ columns are unchanged. Thus failure is at most
+$2b+f$. The factory never touches $O^n$ or the bank.
+
+Always swap $J$ with a fresh independent zero-energy Gibbs $\pi_q$ stock.
+Then $J=\pi_q$ exactly independently of physical rest; old correlations
+are declared reservoir residue. $K$ is not discarded.
+If $L_{\rm pos}<2$, use $q=1$, omit decoding, unconditionally swap
+$E^n$ with a fresh Gibbs environment block, and run this factory,
+extracting $-n\ln Z_E/\beta-O(1)$.
+At the optimizing state
+$a=\Tr H_E\Psi_n(\sigma_n)-\beta^{-1}S(E|O)$.
+Conditional entropy and the Gibbs variational inequality show
+$c=\ln Z_E+\beta a\ge0$. The fallback condition gives
+$nc<\beta w-\ln(\varepsilon'\alpha\theta)+\ln2=o(n)$;
+hence it has the same asymptotic rate bound.
+
+\subsubsection{Rare excitation and a finite conserving bank}
+Complete the pure-ground column $V_n$ to a full $U_{SE}$.
+Let $B_{\rm hot}=t_nI-(D_n-X)\ge0$ and $w_0=p+t_n$.
+Its initialized gain effect is $pI+(D_n-X)$. Testing a payload
+ground state in the nonnegative output energies proves $w_0\ge0$.
+Supply a true Gibbs qubit of gap
+$M=100[\beta^{-1}+\|H\|+\|Y\|](n+1)^3$ and excited probability
+$z=(1+e^{\beta M})^{-1}$. Before $U_{SE}$ apply
+\[
+ J_{\rm hot}=\begin{pmatrix}C_0&-F_0\\F_0&C_0\end{pmatrix},
+ \quad C_0=\sqrt{I-B_{\rm hot}/M},\quad F_0=\sqrt{B_{\rm hot}/M}.
+\]
+For either Gibbs eigenstate the preprocessing is
+$\Lambda(\rho)=C_0\rho C_0+F_0\rho F_0$, with half diamond disturbance
+at most $3\|B_{\rm hot}\|/(2M)$.
+For $Q_0=\Phi_n^*H+\Psi_n^*H_E$, exact external gain is
+\[
+ \begin{aligned}
+ \text{gain}&=w_0I+E_n,\\
+ E_n&=C_0Q_0C_0+F_0Q_0F_0-Q_0-2zB_{\rm hot},\\
+ \|E_n\|&\le\chi_n
+ =3\osc(Q_0)\|B_{\rm hot}\|/M+2z\|B_{\rm hot}\|=O(n^{-3}).
+ \end{aligned}
+\]
+The actual energy is controlled by this direct calculation of the effect;
+a bound by the channel error times the hot gap would not suffice. Before cleanup, the bare state is still in
+the exact $V_n^{\otimes n}$ code, after preprocessing, with all
+other systems treated as a reference.
+
+Assign separate bank coordinates to distinct nonzero payload energies,
+environment energies, $M$ and $w_0$; dependencies are harmless and
+$\ell\le d+r'+2$ is fixed. On a bilateral mathematical bank,
+\[
+ \mathcal L(U)=\sum_{x,y}U_{xy}|x\rangle\langle y|
+                         \otimes T_{a_y-a_x}
+\]
+is a unital norm-preserving $*$-homomorphism, by matrix multiplication
+and translation addition. It makes unitaries exactly conserving.
+Use an actual finite box of side $D_P=L+8(n+1)$, $L=(n+1)^8$,
+with product sine packet
+\[
+ |\xi\rangle=\bigotimes_{j=1}^{\ell}
+ \sqrt{\frac2{L+1}}\sum_{u=0}^{L-1}
+ \sin\frac{\pi(u+1)}{L+1}|4(n+1)+u\rangle_j .
+\]
+Pump $nw_0$ from a two-level sharp battery into the bank, then execute
+$n$ lifted contacts. External basis charges use at most one unit in
+each relevant coordinate. All initialized paths, including excited
+Gibbs paths, remain buffered. Prescribe the lift on all reachable
+columns and complete orthogonal complements in each exact finite
+energy shell. Initialized boundary error is zero.
+
+At torus phase $\vartheta$, each contact differs from its phase-zero
+version by at most $6\|\vartheta\|_2$ and the pump contributes
+$n\|\vartheta\|_2$. The sine packet has
+$\mathbb E\vartheta_j^2\le\pi^4/[4(L+1)^2]$. Telescoping the full
+purified history gives
+$k_{\rm front}\le10\pi^2\sqrt\ell(n+1)/(L+1)=O(n^{-7})$.
+The probability outside the initial bank vector is at most
+$k_{\rm front}^2$; no phase measurement or history dephasing occurs.
+
+For stationary fresh seeds and Gibbs qubits, expansion in equal
+source energy indices proves
+$\Tr_{EG}[\tau_{EG}\mathcal L(A)]
+=\mathcal L_S(\Tr_{EG}[\tau_{EG}A])$.
+This remains true for arbitrary payload--bank correlations.
+Conservation, the $nw_0$ pump and the initialized effect imply
+\begin{equation}\label{kt:bp-actualbank}
+ |\Delta E_P|\le n\chi_n.
+\end{equation}
+Cleanup never acts on the bank, so its growing span never multiplies
+a trace distance.
+
+\subsubsection{Whole-controller and battery refunds}
+A pure zero-energy counter of dimension $n+O(1)$ executes the pump,
+contacts, decoder, factory, unconditional label reset and closing
+identity through a cyclic controlled-unitary. Its full cycle returns
+the counter exactly. It is counted in $C$ and in startup capital.
+Set conservatively
+\[
+ p_E=2b+k_{\rm front}+f,\quad p_K=2b+k_{\rm front},\quad
+ p_C=k_{\rm front}^2+p_E+p_K=O(n^{-1/2}).
+\]
+The pure $PE^nK$ block has probability at least $1-p_C$ in its initial
+pure target; $J$ and counter are returned exactly and independently
+of physical rest. Projection implies whole-controller product error
+at most $2\sqrt{p_C}$. Dephasing in that initial pure vector gives
+\[
+ 0\le\Delta S_C\le\h(p_C)+p_C\ln(D_P^\ell(r')^n2-1)=O(\sqrt n).
+\]
+Together with \eqref{kt:bp-actualbank} and bounded seed energy,
+\[
+ |\Delta E_C|\le n\chi_n+n\|H_E\|p_E=O(\sqrt n).
+\]
+This bounds the entire block entropy, including cross-correlations.
+The pump battery is exactly sharp. The extraction battery fails
+with probability at most $p_E$, has entropy at most $\h(p_E)$ and
+absolute nominal energy tail at most $|k|p_E/\beta=O(\sqrt n)$.
+The composite battery dimension is four. Complete service error is
+\[
+ n\eta+\frac{3n\|B_{\rm hot}\|}{2M}
+               +k_{\rm front}+\sqrt{2b}=O(n^{-1/4}).
+\]
+The factory and reset act on the complement only, so cannot change
+the output marginal together with its reference.
+
+Rounding gives
+\[
+ W_{\rm nom}=nw_0-k/\beta
+ \le n(t_n+g_n)+w+\beta^{-1}
+ [-\ln(\varepsilon'\alpha\theta)+\ln2+
+              \ln(1+C_{\rm tile}^{-1})+1].
+\]
+Finite-dimensional continuity gives $t_n+g_n\to t_Y+g_Y$.
+Take for $Y$ a minimizer in \eqref{kt:bp-dual}, which exists; then
+$t_Y+g_Y=B$, and the construction for this one fixed $Y$ is a single
+family at rate $B$.
+Proposition~\ref{kt:bp-lower} gives the converse.
+
+Controller dimension is $D_P^\ell(r')^nq\,2(n+O(1))$.
+Capital is the actual packet mean plus
+$\beta^{-1}[\ln Z_P+n\ln Z_E+\ln2+\ln(n+O(1))]$;
+the Gibbs label $J$ adds no athermality. Bank span is $O(n^{11})$
+for fixed $Y$. Supplies are $n$ hot Gibbs qubits, $q$ Gibbs
+environment blocks, the explicit factory stock, one flat reset stock
+and, if needed, a fallback stock. All are finite and retained.
+
+\begin{remark}[The eraser]\label{kt:bp-rem:eraser}
+Equation~\eqref{kt:bp-test} verifies, on the whole code space, the hypotheses of the finite eraser of Faist, Berta and Brand\~ao~\cite[Prop.~7.1]{FBB21}: an energy-invariant effect that accepts every true state uniformly and rejects Gibbs decoys. We add an energy-conserving decoder and a mechanical factory that turns the erased label into work, with the whole controller counted.
+\end{remark}
+
+\subsubsection{Uniform noise construction}
+Assume $\Phi(\gamma)=\gamma$, $B=B(\Phi)>0$, and
+$\Phi_\delta=(1-\delta)\Phi+\delta\gamma\Tr$,
+$\gamma=e^{-\beta H}/\Tr e^{-\beta H}$.
+Write $D_\delta=\Phi_\delta^*H-H$,
+$p_\delta=\lambda_{\max}D_\delta\in[0,h]$ and
+$B_\delta=p_\delta I-D_\delta\ge0$, $\|B_\delta\|\le2h$.
+Use old Kraus labels $\sqrt{1-\delta}K_j$ and replacement labels
+$\sqrt{\delta\gamma_a}|a\rangle\langle b|$ in an energy basis.
+Environment dimension $R=r+d^2$ is fixed. Give old labels energy
+zero and replacement labels Hamiltonian $I_a\otimes B_\delta/\delta$.
+Expanding Kraus products gives exactly
+\[
+ \Psi_\delta^*H_{E,\delta}=B_\delta,\quad
+ V_\delta^*(H+H_{E,\delta})V_\delta=H+p_\delta I,\quad
+ V_\delta^*H_{E,\delta}^2V_\delta=B_\delta^2/\delta .
+\]
+The residual norm is at most $5h/\sqrt\delta$ and the $n$-copy norm
+at most $5h\sqrt{n/\delta}$, by orthogonal ranges.
+Although $\|H_{E,\delta}\|=O(\delta^{-1})$, its Gibbs mean
+$e_\delta$ satisfies $\beta e_\delta\le\ln R$.
+Also $r\ge2$: a Gibbs-preserving unitary commutes with $H$ and has
+$B=0$. Therefore $r\le Z_{E,\delta}\le R$.
+
+\begin{theorem}[Diverging noise horizon]\label{kt:bp-noisesuff}
+For every $t_n=n\delta_n\to\infty$, an admissible family has
+\[
+ W_n=O(nt_n^{-1/4}+\ln(n+1)),\quad
+ \varepsilon_n,\eta_{C,n}=O(t_n^{-1/4})+o(1),
+\]
+and actual controller energy, entropy and absolute battery tail
+$O(nt_n^{-1/2})+o(n)$. Constants depend on fixed $\Phi,H,\beta$,
+not on changing environment gaps.
+\end{theorem}
+\begin{proof}
+Use the physical bandfilter with
+$w=100\beta^{-1}(1+\beta h)n/t_n^{1/4}$,
+$\alpha=(n+1)^{-(dR+6)}$, $\varepsilon'=(n+1)^{-4}$.
+The residual estimate gives $\delta_A=O(t_n^{-1/4})$.
+Pinch $AA^*$ in physical energy and threshold: then
+$\kappa=O(t_n^{-1/2}+n^{-6})$ and
+\[
+ \Tr_{E^n}(e^{-\beta H_E^{(n)}}Q)
+       \le\alpha^{-1}e^{-\beta(np_\delta-w)}I.
+\]
+Positive-kernel partial trace is the physical Gibbs operator because
+$\Phi_\delta$ is Gibbs-preserving. Set
+$q=\lfloor\varepsilon'\alpha Z_E^n e^{\beta(np_\delta-w)}\rfloor$,
+eventually at least two since $Z_E\ge r\ge2$ and $w=o(n)$.
+Decoder failure uses $b=2\kappa+4\varepsilon'$.
+There is no hot qubit or extra regularization. The finite sine bank
+has fixed coordinate rank, width $n^8$, and
+$k_{\rm front}=O(n^{-7})$ independently of frequency magnitudes.
+Initialized mean gain is exactly $p_\delta I$, so the
+$np_\delta$ pump gives $\Delta E_P=0$ exactly.
+
+After decoding and before the factory, always swap $E^n$ with a
+fresh independent $\gamma_{E,\delta}^{\otimes n}$ stock.
+Old code, correlations and failures become physical reservoir rest.
+The new environment is Gibbs independently of physical rest, not
+independently of its inert purifier. The factory acts identically
+on all initialized $J\ne0$ and bad-tile columns.
+Good branches reset to ground; failed branches retain the fresh
+Gibbs environment. Those failure events are independent of it.
+Distinct battery labels remove cross-branch energy terms. Thus
+with $p_J\le2b+k_{\rm front}$ and $f=O(n^{-7})$,
+\[
+ \Delta E_{E^n}\le ne_\delta(p_J+f)
+      \le\beta^{-1}n\ln R(p_J+f)=O(nt_n^{-1/2})+o(n).
+\]
+This uses the actual Gibbs mean; a bound by
+$n\|H_E\|$ times the error could diverge.
+Set $p_E=p_J+f$, $p_K=2b+k_{\rm front}$,
+$p_C=k_{\rm front}^2+p_E+p_K$.
+The same pure-block projection and unconditional label reset give
+joint return at most $2\sqrt{p_C}$ and
+$\Delta S_C\le\h(p_C)+p_C\ln(D_P^\ell R^n2-1)=o(n)$.
+Factory rounding gives $np_\delta-k/\beta\le w+O(\ln n)$ and
+$|k|=O(n)$ uniformly since $Z_E\le R$, $p_\delta\le h$.
+Battery entropy and tail are bounded by $\h(p_E)$ and $|k|p_E/\beta$.
+Capital may grow as $O(n^8(1+h/\delta_n))$, and is declared rather
+than charged as operating work.
+\end{proof}
+
+\subsubsection{Finite horizons}
+A genuine Gibbs flag with probabilities $(1-\delta,\delta)$,
+controlling a swap with a fresh Gibbs payload, implements
+$(1-\delta)\id+\delta\gamma\Tr$ at zero mechanical work.
+The flag label does not change, so the square conserves energy.
+Retain flag and swap stocks as physical rest. Append this module
+to the fixed-channel engine to obtain $W_N\le NB+o(N)$ for every
+noise sequence.
+
+\subsubsection{Full-horizon padding and strict positivity}
+Feed $N-m$ ports of a horizon-$N$ device with independent genuine
+Gibbs payload supplies, retain their outputs as reservoir rest, and
+run the entire $N$-horizon device and cleanup.
+This implements $m$ visible ports with the original nominal work
+and the original full actual controller and battery budgets.
+There is no prefix controller refund.
+Error against $\Phi^{\otimes m}$ is at most
+\[
+ x_{N,m}=\min\{1,\varepsilon_N+1-(1-\delta_N)^m\}
+       \le\min\{1,\varepsilon_N+m\delta_N\}.
+\]
+Indeed, the product-channel mixture has an all-unreplaced branch
+of weight $(1-\delta_N)^m$. This proves the diamond bound.
+
+Define $t(x)=\min\{1,4x^{1/4}\}$ and
+$f_0(x)=(2\beta h+\ln d)x+4t(x)\ln d$.
+The explicit converse gives
+\begin{equation}\label{kt:bp-padding}
+ \frac{W_N}{N}\ge\frac mN[B-\beta^{-1}f_0(x_{N,m})]
+ -\frac{r_0(x_{N,m})+r_0(t(x_{N,m}))}{\beta N}
+ -\frac{b_N}{N},
+\end{equation}
+where $b_N$ is the full-horizon actual budget in Proposition~\ref{kt:bp-lower}.
+For $m/N\to\theta>0$, $b_N=o(N)$ is also enough per visible port.
+With $c=\beta B$, choose explicitly
+\[
+ x_*=\min\left\{\frac12,
+       \left(\frac{c}{64\ln d}\right)^4,
+       \frac{c}{4(2\beta h+\ln d)}\right\}>0.
+\]
+$B>0$ implies $d\ge2$, and $f_0(x_*)\le c/2$.
+On a bounded subsequence of $N\delta_N$, choose fixed $\theta>0$
+so that $\theta\sup N\delta_N<x_*/2$ and $m=\lfloor\theta N\rfloor$.
+Vanishing service error and full $o(N)$ budgets then give a strictly
+positive rate on that subsequence.
+Thus $o(N)$ work requires $N\delta_N\to\infty$; the preceding
+construction proves sufficiency.
+If $N\delta_N\to0$, take $m=N$ to get $W_N\ge NB-o(N)$,
+matched by $NB+o(N)$.
+
+\subsubsection{Envelopes}
+There is no finite-horizon optimum at vanishing error without an
+error and refund schedule. Let $\mathcal F_\lambda$ be all
+implementation families for $\Phi_{\lambda/N}^{\otimes N}$
+(ignore finitely many $N<\lambda$) satisfying the contract of Appendix~\ref{kt:bp-contract}.
+Define
+\[
+ L(\lambda)=\inf_{\mathcal F_\lambda}\liminf W_N/N,\qquad
+ U(\lambda)=\inf_{\mathcal F_\lambda}\limsup W_N/N,
+ \qquad L(0)=U(0)=B.
+\]
+These optimize over families with vanishing error and actual budgets;
+they do not identify targets at a fixed prescribed finite error.
+
+\begin{theorem}[The finite-noise statement]\label{kt:bp-envelopes}
+For finite $\lambda>0$, $0<L(\lambda)\le U(\lambda)\le B$.
+Both envelopes are nonincreasing, and both
+$\lambda L(\lambda)$ and $\lambda U(\lambda)$ are nondecreasing.
+They are unchanged on replacing $\lambda/N$ by any sequence with
+$N\delta_N\to\lambda$, and tend to $B$ as $\lambda\downarrow0$.
+This does not prove $L=U$ or a single limiting rate $w(\lambda)$.
+\end{theorem}
+\begin{proof}
+Full-horizon padding gives for every $\theta\in(0,1]$ the common bound
+\[
+ L(\lambda),U(\lambda)\ge
+ \theta[B-\beta^{-1}f_0(1-e^{-\theta\lambda})].
+\]
+Choose $\theta$ so that $1-e^{-\theta\lambda}\le x_*$; the bound
+is at least $\theta B/2$. The free replacement module gives upper
+bound $B$. Ordinary Gibbs-input accounting also bounds every
+admissible noisy-channel rate below by zero up to $o(1)$.
+
+Two noise sequences with $N|\delta_N-\delta_N'|\to0$ have product
+target half diamond distance at most $N|\delta_N-\delta_N'|\to0$.
+The same family is admissible for either, with identical actual
+endpoint and battery budgets. For $\lambda_2\ge\lambda_1$ append
+free replacement probability $(\delta_2-\delta_1)/(1-\delta_1)$
+to each output. It changes $\Phi_{\delta_1}$ exactly to
+$\Phi_{\delta_2}$ and preserves the controller marginal, actual
+endpoints and mechanical work. Contractivity preserves joint return.
+Thus both envelopes are nonincreasing.
+
+Let $0<\mu=\theta\lambda\le\lambda$.
+Padding gives $m=\lfloor\theta N\rfloor$ visible ports,
+$m\delta_N\to\mu$, vanishing error, and original budgets $o(N)=o(m)$.
+For an upper envelope, select one $N_m$ for every large $m$
+(every $m$ occurs as $\lfloor\theta N\rfloor$), obtaining
+$U(\mu)\le U(\lambda)/\theta$.
+For a lower envelope, select a subsequence attaining a family's
+lower rate; after removing repeated $m$ values it is increasing.
+Fill absent $m$ with the bounded-rate fixed-channel engine and
+free replacement. The filled family's lower rate is no greater
+than the selected subsequence rate, so
+$L(\mu)\le L(\lambda)/\theta$. Apply these arguments to families
+approaching the respective infima; no minimizing family is assumed.
+This proves the scaling monotonicity.
+The lower bound with $\theta=1$ tends to $B$ as $\lambda\downarrow0$,
+and both envelopes are bounded above by $B$.
+\end{proof}
+
+% =====================================================================

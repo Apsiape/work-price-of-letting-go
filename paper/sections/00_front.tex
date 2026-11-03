@@ -1,9 +1,17 @@
+\newcommand{\DoNotLoadEpstopdf}{}
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
 \usepackage[margin=1in]{geometry}
 \usepackage{array,longtable}
+\usepackage{etoolbox}
+% The output box may be split by the page builder. Use stretch-only fill
+% in longtable's two output branches, avoiding infinite shrink in that box.
+\makeatletter
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}{\PackageError{manuscript}{Longtable output patch failed}{}}
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}{\PackageError{manuscript}{Longtable output patch failed}{}}
+\makeatother
 \usepackage{enumitem,booktabs,graphicx,tikz,placeins}
 \usepackage[protrusion=false,expansion=false]{microtype}
 \setlength{\emergencystretch}{1.5em}
@@ -44,19 +52,23 @@
 \providecommand{\T}{\tfrac12\|\cdot\|_1}
 \providecommand{\D}{D_{\mathrm{nat}}}
 
+\input{parts/precision_heat/macros}
+
 \title{\textbf{\papertitle}\ifx\papersubtitle\empty\else\\[6pt]\large\papersubtitle\fi}
 \author{Seth Douglas \and Nidhal Mghirbi}
-\date{October 2026 \\[2pt] {\small Version 1.0.0}}
+\date{Version 1.1.0, November 2026}
 
 \ifdefined\pdftrailerid\pdftrailerid{}\fi
 \begin{document}
 \maketitle
 
 \begin{abstract}
-A quantum channel says what happens to each input, not when inputs arrive, when outputs leave for good, or what must be handed back. We show that for every finite schedule in which each carrier returns with its Hamiltonian and the controller comes back, the optimal work per use at vanishing error is the least entropy one implementation must add to its own record, plus the energy it hands over, against the most demanding observer. Landauer's bound, the thermodynamic capacity of Faist, Berta and Brand\~ao in the time-covariant case, and the real-time costs of channels and processes are this law on different schedules. The cost survives arbitrarily slow operation: order, not speed, sets it. Releasing each output of a repeated memoryless channel before the next input arrives costs nothing extra for classical channels, a positive amount for partial reset at every temperature, and $k_{\mathrm B}T\ln3$ per use for the Werner--Holevo qutrit at zero Hamiltonian, which is essentially free in batch. For a classical task with zero Hamiltonians that releases a past and later answers a question about it, the real-time and held prices are logarithms of two fiber counts; for reversible questions they differ by the logarithm of the number of classes of pasts that later questions tell apart. With a returned clock, the batch cost of every channel is a single-letter quantity, equal to the capacity when the environment can carry the channel's energy change; otherwise the clock's spread must grow at least linearly with the number of uses. Freeness is decidable in batch for exact algebraic data and undecidable in real time, already in a fixed dimension. A two-qubit process that is free when held costs every early-release device at least $0.87\,k_{\mathrm B}T\ln2$ per episode at one percent error and budgets of $0.025\,k_{\mathrm B}T\ln2$; for a classical version we propose a three-arm feedback-trap protocol.
+A quantum channel specifies what happens, but the work cost also depends on when inputs arrive, outputs leave and hardware must return. For every finite schedule in which carriers return with their Hamiltonians and the controller comes back, we prove that the optimal asymptotic work rate is the least record entropy plus transferred energy against the most demanding observer. Landauer erasure, thermodynamic capacity and the costs of real-time channels and processes are this law on different schedules. For each positive limit-computable ($\Delta^0_2$) real $\alpha$, a fixed finite nonlocal game has bounded joint-reset work and local-reset work $2\alpha\log_2(1/\varepsilon)+o(\log(1/\varepsilon))$ in units of $k_BT\ln2$, with hardware allowed to grow as precision improves. The precision-reset bounds are proved directly under a separate contract. Thus a reset deadline can force an uncomputable logarithmic cost coefficient, related to Kolchinsky and Wolpert's noncomputable Turing-machine heat functions. We prove the reset sandwich, the quantum/classical recovery tradeoff, a paired heat gap, the four-unit magic-square floor, and exact sector-allocation and access-obstruction results, using explicitly cited game-demand inputs. Early release adds no cost for classical memoryless channels, but has a quantum surcharge; tasks with memory have a fiber-count price. A returned clock has a single-letter batch cost and a separate size requirement. Freeness is decidable in batch and undecidable in real time, already in fixed dimension. Proofs, finite checks and a two-qubit work certificate connect these results to a proposed three-arm experiment. Lean certifies the schedule law for finite-dilation targets, including its physical compiler. The costs survive arbitrarily slow operation: the order of access and reset sets the price.
 \end{abstract}
 
-\noindent\emph{The authors developed this work with AI models from more than one developer and take responsibility for every claim. The whole paper has been reviewed nine times by a model from a developer other than that of the models that helped write it, and the fixes from those reviews, and from a review of the experimental design, are applied. How the work was done, and what the machine checks cover, is described at the end of the paper.}
+\noindent\emph{The authors developed this work with AI models from more than one developer and take responsibility for every claim. Author roles and the scope of the mathematical and computational verification are described at the end of the main text.}
+
+\noindent{\scriptsize Incorporates \emph{The heat price of precision} (\href{https://doi.org/10.5281/zenodo.23701732}{10.5281/zenodo.23701732}). Concept DOI of this paper: \href{https://doi.org/10.5281/zenodo.23719179}{10.5281/zenodo.23719179}.}\par
 
 \setcounter{tocdepth}{1}
 {\small\tableofcontents}

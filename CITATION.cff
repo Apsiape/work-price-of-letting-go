@@ -2,31 +2,12 @@ cff-version: 1.2.0
 message: "Please cite the manuscript; this repository supplies its source and verification artifacts."
 type: software
 title: "The thermodynamics of deadlines: one law for the work cost of acting in time"
-version: 1.0.0
-doi: "10.5281/zenodo.23719180"
-date-released: 2026-10-27
+version: 1.1.0
+doi: "10.5281/zenodo.23719179"
 license:
   - CC-BY-4.0
   - MIT
-abstract: >-
-  A quantum channel says what happens to each input, not when inputs arrive, when outputs leave for good, or
-  what must be handed back. We show that for every finite schedule in which each carrier returns with its
-  Hamiltonian and the controller comes back, the optimal work per use at vanishing error is the least entropy
-  one implementation must add to its own record, plus the energy it hands over, against the most demanding
-  observer. Landauer's bound, the thermodynamic capacity of Faist, Berta and Brandão in the time-covariant case,
-  and the real-time costs of channels and processes are this law on different schedules. The cost survives
-  arbitrarily slow operation: order, not speed, sets it. Releasing each output of a repeated memoryless channel
-  before the next input arrives costs nothing extra for classical channels, a positive amount for partial reset
-  at every temperature, and k_B T ln 3 per use for the Werner–Holevo qutrit at zero Hamiltonian, which is
-  essentially free in batch. For a classical task with zero Hamiltonians that releases a past and later answers
-  a question about it, the real-time and held prices are logarithms of two fiber counts; for reversible
-  questions they differ by the logarithm of the number of classes of pasts that later questions tell apart. With
-  a returned clock, the batch cost of every channel is a single-letter quantity, equal to the capacity when the
-  environment can carry the channel's energy change; otherwise the clock's spread must grow at least linearly
-  with the number of uses. Freeness is decidable in batch for exact algebraic data and undecidable in real time,
-  already in a fixed dimension. A two-qubit process that is free when held costs every early-release device at
-  least 0.87 k_B T ln 2 per episode at one percent error and budgets of 0.025 k_B T ln 2; for a classical
-  version we propose a three-arm feedback-trap protocol.
+abstract: "A quantum channel specifies what happens, but the work cost also depends on when inputs arrive, outputs leave and hardware must return. For every finite schedule in which carriers return with their Hamiltonians and the controller comes back, we prove that the optimal asymptotic work rate is the least record entropy plus transferred energy against the most demanding observer. Landauer erasure, thermodynamic capacity and the costs of real-time channels and processes are this law on different schedules. For each positive limit-computable ($\\Delta^0_2$) real $\\alpha$, a fixed finite nonlocal game has bounded joint-reset work and local-reset work $2\\alpha\\log_2(1/\\varepsilon)+o(\\log(1/\\varepsilon))$ in units of $k_BT\\ln2$, with hardware allowed to grow as precision improves. The precision-reset bounds are proved directly under a separate contract. Thus a reset deadline can force an uncomputable logarithmic cost coefficient, related to Kolchinsky and Wolpert's noncomputable Turing-machine heat functions. We prove the reset sandwich, the quantum/classical recovery tradeoff, a paired heat gap, the four-unit magic-square floor, and exact sector-allocation and access-obstruction results, using explicitly cited game-demand inputs. Early release adds no cost for classical memoryless channels, but has a quantum surcharge; tasks with memory have a fiber-count price. A returned clock has a single-letter batch cost and a separate size requirement. Freeness is decidable in batch and undecidable in real time, already in fixed dimension. Proofs, finite checks and a two-qubit work certificate connect these results to a proposed three-arm experiment. Lean certifies the schedule law for finite-dilation targets, including its physical compiler. The costs survive arbitrarily slow operation: the order of access and reset sets the price."
 keywords:
   - "quantum thermodynamics"
   - "time order"
@@ -90,8 +71,28 @@ references:
       - family-names: Mghirbi
         given-names: Nidhal
     year: 2026
+  - type: generic
+    title: "The heat price of precision"
+    doi: 10.5281/zenodo.23701732
+    authors:
+      - family-names: Douglas
+        given-names: Seth
+      - family-names: Mghirbi
+        given-names: Nidhal
+    year: 2026
+  - type: generic
+    title: "The uncomputable price of precision"
+    version: 3.0.0
+    doi: 10.5281/zenodo.23736188
+    authors:
+      - family-names: Douglas
+        given-names: Seth
+      - family-names: Mghirbi
+        given-names: Nidhal
+    year: 2026
 preferred-citation:
-  doi: "10.5281/zenodo.23719180"
+  doi: "10.5281/zenodo.23719179"
+  version: 1.1.0
   type: generic
   title: "The thermodynamics of deadlines: one law for the work cost of acting in time"
   authors:

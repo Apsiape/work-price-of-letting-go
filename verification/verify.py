@@ -14,12 +14,18 @@ claim it checks, the script, the part of the paper and the result; Table 7 of th
 the scripts against the statements they support.
 """
 import subprocess, sys, time, pathlib, os, json
+for _name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS", "BLIS_NUM_THREADS"):
+    os.environ[_name] = "1"
+os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
+os.environ["PYTHONUTF8"] = "1"
+import psutil
 
 HERE = pathlib.Path(__file__).resolve().parent
 ARGS = set(sys.argv[1:])
 
 # (claim as stated in the paper, relative script path, approximate seconds, part of the paper)
 CHECKS = [
+    ("Precision-reset checks: erasure/CHSH, magic-square floor, recovery, sectors, weighted probes, multiphase clocks, access obstructions, reservoir ledger and continuity; all original heat checks", "parts/precision_heat/run_all.py", 30, "App. L--O"),
     ("Whole-block identity on random energy-conserving devices, one step and two-visit schedules with an adaptive observer; global purity with a mixed device and its purifier (Lemma 3.4)", "checks/check_identity.py", 5, "Section 3"),
     ("Protocol numbers, record-export, joint-record and blank-randomization examples, timing of Jun et al., the graded-control curve h2(eta), the held-arm camera frame, the endpoint rule, confidence endpoints, fresh probes, the per-stroke variance assumption and the flipped loan (Section 10); heat-form numbers of the certificate with randomized settings (Prop. 9.1(d)); m = 0.197 of Figure 3; the Gibbs-qubit reset of Section 5; embezzling trace distance sqrt(2/n) (Section 2)", "checks/check_protocol_numbers.py", 5, "Sections 2, 5, 9, 10"),
     ("Fiber law: constant-answer erasure, XOR, record-transfer circuit, steering observer, exhaustive searches, rank, record and exit (Thm 7.1, Prop. I.9)", "checks/check_classes.py", 10, "Section 7, App. I"),
@@ -79,8 +85,27 @@ def run(path, extra=(), timeout=1800):
     t0 = time.time()
     p = HERE / path
     try:
-        r = subprocess.run([sys.executable, p.name, *extra], cwd=p.parent, capture_output=True, text=True, timeout=timeout)
-        rc, out = r.returncode, (r.stdout + r.stderr)
+        child = subprocess.Popen([sys.executable, "-B", p.name, *extra], cwd=p.parent,
+                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+                                 encoding="utf-8", errors="replace")
+        process = psutil.Process(child.pid)
+        while True:
+            try:
+                memory = process.memory_info()
+                peak = max(getattr(memory, "peak_wset", memory.rss), getattr(memory, "peak_pagefile", memory.vms))
+                if peak >= 1_400_000_000:
+                    child.kill(); output, _ = child.communicate()
+                    return 137, output + "\nMemory ceiling exceeded", time.time() - t0
+            except psutil.NoSuchProcess:
+                pass
+            try:
+                out, _ = child.communicate(timeout=0.1)
+                rc = child.returncode
+                break
+            except subprocess.TimeoutExpired:
+                if time.time() - t0 > timeout:
+                    child.kill(); child.communicate()
+                    return 124, "timeout", time.time() - t0
     except subprocess.TimeoutExpired:
         rc, out = 124, 'timeout'
     return rc, out, time.time() - t0

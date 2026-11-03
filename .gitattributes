@@ -1,3 +1,2 @@
-* text=auto eol=lf
-*.pdf binary
-*.png binary
+# Store every file byte for byte: the Lean package manifest hashes exact bytes.
+* -text

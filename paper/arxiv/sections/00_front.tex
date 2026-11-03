@@ -1,0 +1,74 @@
+\newcommand{\DoNotLoadEpstopdf}{}
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{array,longtable}
+\usepackage{etoolbox}
+% The output box may be split by the page builder. Use stretch-only fill
+% in longtable's two output branches, avoiding infinite shrink in that box.
+\makeatletter
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}{\PackageError{manuscript}{Longtable output patch failed}{}}
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}{\PackageError{manuscript}{Longtable output patch failed}{}}
+\makeatother
+\usepackage{enumitem,booktabs,graphicx,tikz,placeins}
+\usepackage[protrusion=false,expansion=false]{microtype}
+\setlength{\emergencystretch}{1.5em}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\input{sections/title}
+\hypersetup{pdftitle={\papertitle},pdfauthor={Seth Douglas and Nidhal Mghirbi}}
+
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\kB}{k_{\mathrm B}}
+\newcommand{\Trt}{\kappa_\beta}
+\newcommand{\Tcap}{\mathcal T}
+\newcommand{\Pp}{\mathcal P}
+\newcommand{\Pt}{\widetilde{\mathcal P}}
+\newcommand{\Kb}{K_\beta}
+\newcommand{\Dil}{\mathcal C}
+\providecommand{\tr}{\operatorname{tr}}
+\providecommand{\R}{\mathcal R}
+\providecommand{\G}{\mathcal G}
+\providecommand{\K}{\mathcal K}
+\providecommand{\eps}{\varepsilon}
+\providecommand{\id}{\operatorname{id}}
+\newcommand{\PROV}[1]{}
+\providecommand{\supp}{\operatorname{supp}}
+\providecommand{\Span}{\operatorname{span}}
+\providecommand{\osc}{\operatorname{osc}}
+\providecommand{\h}{h_2}
+\providecommand{\T}{\tfrac12\|\cdot\|_1}
+\providecommand{\D}{D_{\mathrm{nat}}}
+
+\input{parts/precision_heat/macros}
+
+\title{\textbf{\papertitle}\ifx\papersubtitle\empty\else\\[6pt]\large\papersubtitle\fi}
+\author{Seth Douglas \and Nidhal Mghirbi}
+\date{Version 1.1.0, November 2026}
+
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A quantum channel specifies what happens, but the work cost also depends on when inputs arrive, outputs leave and hardware must return. For every finite schedule in which carriers return with their Hamiltonians and the controller comes back, we prove that the optimal asymptotic work rate is the least record entropy plus transferred energy against the most demanding observer. Landauer erasure, thermodynamic capacity and the costs of real-time channels and processes are this law on different schedules. For each positive limit-computable ($\Delta^0_2$) real $\alpha$, a fixed finite nonlocal game has bounded joint-reset work and local-reset work $2\alpha\log_2(1/\varepsilon)+o(\log(1/\varepsilon))$ in units of $k_BT\ln2$, with hardware allowed to grow as precision improves. The precision-reset bounds are proved directly under a separate contract. Thus a reset deadline can force an uncomputable logarithmic cost coefficient, related to Kolchinsky and Wolpert's noncomputable Turing-machine heat functions. We prove the reset sandwich, the quantum/classical recovery tradeoff, a paired heat gap, the four-unit magic-square floor, and exact sector-allocation and access-obstruction results, using explicitly cited game-demand inputs. Early release adds no cost for classical memoryless channels, but has a quantum surcharge; tasks with memory have a fiber-count price. A returned clock has a single-letter batch cost and a separate size requirement. Freeness is decidable in batch and undecidable in real time, already in fixed dimension. Proofs, finite checks and a two-qubit work certificate connect these results to a proposed three-arm experiment. Lean certifies the schedule law for finite-dilation targets, including its physical compiler. The costs survive arbitrarily slow operation: the order of access and reset sets the price.
+\end{abstract}
+
+\noindent\emph{The authors developed this work with AI models from more than one developer and take responsibility for every claim. Author roles and the scope of the mathematical and computational verification are described at the end of the main text.}
+
+\noindent{\scriptsize Incorporates \emph{The heat price of precision} (\href{https://doi.org/10.5281/zenodo.23701732}{10.5281/zenodo.23701732}). Concept DOI of this paper: \href{https://doi.org/10.5281/zenodo.23719179}{10.5281/zenodo.23719179}.}\par
+
+\setcounter{tocdepth}{1}
+{\small\tableofcontents}

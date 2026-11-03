@@ -37,7 +37,7 @@ def places(title):
         ("README.md", r"\A# .*$", f"# {title}"),
         ("verification/README.md", r"\A# Verification package for \*.*\*$", f"# Verification package for *{title}*"),
         ("CITATION.cff", r"^title: \".*\"$", f'title: "{q}"'),
-        ("CITATION.cff", r"^(preferred-citation:\n  type: generic\n  title: )\".*\"$", None),
+        ("CITATION.cff", r"^(preferred-citation:\n(?:[ \t]+[^\n]*\n)*?[ \t]+title: )\".*\"$", None),
         (".zenodo.json", r"\A\{\n  \"title\": \".*\",$", '{\n  "title": "' + q + '",'),
     ], q
 

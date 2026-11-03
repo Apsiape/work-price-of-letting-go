@@ -32,6 +32,16 @@ from combs import (Realization, TesterLP, bath_functional, energy_matrix, flat_r
                    random_tester, simulate, strategy_distance)
 
 R = Report("Without time covariance: recorder, tangent, heat effect, heat contact")
+
+
+def pure_reduced(vector, dimensions, keep):
+    """Trace a pure tensor without allocating its full outer product."""
+    kept = sorted(keep)
+    traced = [j for j in range(len(dimensions)) if j not in kept]
+    rows = math.prod(dimensions[j] for j in kept)
+    matrix = np.asarray(vector).reshape(dimensions).transpose(kept + traced).reshape(rows, -1)
+    return matrix @ matrix.conj().T
+
 rng = np.random.default_rng(34)
 LN2 = math.log(2)
 beta = 1.0
@@ -225,11 +235,9 @@ for Mfac in (2, 20, 200):
         st = np.einsum("omia,itafgh->otmfgh", U2p.reshape(2, DBp, 2, DBp), st)
         full = st.reshape(-1)
         dl = [2, sh[1], DBp, DBp, 2, 2]
-        rho_all = np.outer(full, full.conj())
-        from qtools import ptrace
-        rO2 = ptrace(rho_all, dl, [0])
-        omp = ptrace(rho_all, dl, [2])
-        rG = ptrace(rho_all, dl, [4])
+        rO2 = pure_reduced(full, dl, [0])
+        omp = pure_reduced(full, dl, [2])
+        rG = pure_reduced(full, dl, [4])
         payload = float(np.trace(H[0] @ (rO1 - rI1) + H[1] @ (rO2 - rI2)).real)
         bath = float(np.trace(T @ (omp - taup)).real)
         hq = M * (rG[1, 1].real - z)

@@ -1,0 +1,138 @@
+\section{Continuation classes and fibers}\label{app:classes}
+
+This appendix proves Theorem~\ref{thm:classes} and Proposition~\ref{prop:nonsubmodular}. Entropies are in bits. The upper bounds are explicit devices; the real-time lower bound is an information-flow argument that holds uniformly at small error, with an explicit dimension-independent small-error loss per episode, the same for every number of episodes.
+
+\subsection{Setting}
+
+Fix nonempty finite sets $X,Y,Z$ and $g:X\times Y\to Z$. One episode of the task $T_g$ has two visits. The first carrier $P_1$, with computational basis $\{|x\rangle\}$, arrives, is dephased in that basis, and is released holding the same $x$. The second carrier $P_2$ has dimension $d_2=\max\{|Y|,|Z|\}$. Its admissible input states, together with the observer's references, are supported on $\operatorname{span}\{|y\rangle:y\in Y\}$ tensored with the references; its output uses designated orthonormal states $\{|z\rangle:z\in Z\}$ of the same carrier. This input-subspace promise is part of the task contract. $P_2$ arrives after $P_1$ has left and is released holding $g(x,y)$: as a channel, $T_g$ measures $x$ and $y$ in their bases and prepares $|x\rangle$ and $|g(x,y)\rangle$. All Hamiltonians are zero, so $K_\beta^S(T_g)$ is a pure entropy rate. For lower bounds we use admissible classical observers, which are included in the supremum. For upper bounds we exhibit an extension implementing the full dephased target on carriers and references. The device is fully quantum: its record may be any state of any finite system.
+
+Classes (the causal states of the $\varepsilon$-transducer of $T_g$~\cite{BarnettCrutchfield15}), $K(g)$, $c(x)$, $g(c,y)$, $F(g)$ and $F'(g)$ are as in Section~\ref{sec:classes}. For an answer $z$ let $\Phi(z)=\{(c,y):g(c,y)=z\}$ be its fiber, so $F'(g)=\max_z|\Phi(z)|$.
+
+\subsection{Dephasing}
+
+The target measures both inputs. A device that only permutes basis states does not: for $X$ a singleton and $g(y)=y$ the identity permutation is a correct classical computation, yet it returns $|+\rangle\langle+|$ where the target returns $I/2$, at trace distance $1/2$. So every construction below dephases each arriving carrier first, and the following lemma says that this is free.
+
+\begin{lemma}[Dephasing with a reservoir coin]\label{lem:dephase}
+Let a carrier of dimension $d$ arrive, possibly entangled with the observer's references, and let a coin $K$ of dimension $d$ be drawn from the reservoir, which at zero Hamiltonian is maximally mixed. The controlled phase $\sum_{y,k}e^{2\pi iyk/d}|y\rangle\langle y|\otimes|k\rangle\langle k|$ dephases the carrier exactly, and it leaves the coin's marginal maximally mixed.
+\end{lemma}
+\begin{proof}
+On the carrier and everything the observer holds, the gate acts as $\rho\mapsto d^{-1}\sum_k Z^k\rho Z^{-k}$ with $Z$ the clock matrix on the carrier, which removes every off-diagonal term in the computational basis. The gate is diagonal in the coin's basis and the coin starts diagonal, so its diagonal, and hence its marginal, does not change.
+\end{proof}
+
+Coins enter the accounting through $S(Z|F)=S(D_f)-S(D_i)$: by subadditivity $S(D_f)$ is at most the sum of the coins' final entropies, which equal their initial ones by Lemma~\ref{lem:dephase}, and the entropy of the remaining registers. Dephasing therefore adds nothing to the functional, and in the physical device the coins are thermal systems that need not be returned.
+
+\subsection{Upper bounds}
+
+\begin{lemma}[Real time]\label{lem:classes-upper}
+$K_\beta^S(T_g)\le\log_2F'(g)$ in real time, attained by a classical device.
+\end{lemma}
+\begin{proof}
+Label the classes $0,\dots,K-1$. The device holds a register $M$ with at least $\max\{K,F'\}$ levels $0,1,\dots$, initialized to $0$. When $P_1$ arrives it dephases $P_1$ with a reservoir coin (Lemma~\ref{lem:dephase}), computes $c(x)$ into $M$ by a permutation of $P_1M$ extending $(x,0)\mapsto(x,c(x))$, and releases $P_1$. Fix for each answer $z$ an enumeration $\iota_z:\Phi(z)\to\{0,\dots,|\Phi(z)|-1\}$. When $P_2$ arrives the device dephases it with a second coin and applies to $MP_2$ a permutation extending the injection $(c,y)\mapsto(\iota_{g(c,y)}(c,y),\,g(c,y))$ from $\{0,\dots,K-1\}\times Y$ into $\{0,\dots,F'-1\}\times Z$; it is an injection because an answer together with an index within its fiber determines the pair, and an injection between finite sets extends to a permutation of a common padded register. The device releases $P_2$, which holds $g(x,y)$, and keeps $M$, which holds an index with at most $F'$ values.
+
+Because both inputs are dephased before any permutation acts, the device's action on the carriers and everything the observer holds is exactly $T_g$, for every observer, including observers that entangle the carriers with references. Over $n$ episodes the registers end diagonal on at most $F'$ levels each and the coins' entropies are unchanged, so $S(Z|F)\le n\log_2F'$ against every observer, and no energy is handed over. The infimum in the functional is therefore at most $\log_2F'$. The physical module of Appendix~\ref{app:module} turns this extension into an energy-conserving device at the same rate, with the registers swapped at the end into fresh thermal cells at the Landauer price of their entropy.
+\end{proof}
+
+\begin{lemma}[Held]\label{lem:classes-upper-held}
+If $x$ may be held until $y$ arrives, $K_\beta^S(T_g)\le\log_2F(g)$, attained by a classical device.
+\end{lemma}
+\begin{proof}
+Hold $P_1$, and dephase each carrier on arrival with its own reservoir coin. When $P_2$ arrives apply to $P_1MP_2$ a permutation extending
+\[
+(x,0,y)\ \mapsto\ \bigl(x,\ \iota_{x,g(x,y)}(y),\ g(x,y)\bigr),
+\]
+with $\iota_{x,z}$ an enumeration of $\{y:g(x,y)=z\}$; the index has at most $F$ values. Release both carriers and keep $M$. As in Lemma~\ref{lem:classes-upper}, the action is exactly $T_g$ on the held schedule for every observer, and $S(Z|F)\le n\log_2F$.
+\end{proof}
+
+\subsection{Records at the moment the question arrives}
+
+From here on we consider any private extension of $n$ episodes of $T_g$ on the real-time schedule. Its device $B$ (everything the extension holds) starts in $\tau_B$, independent of the observer, and evolves by unitaries on $B$ and the carrier present. A \emph{deterministic observer} sends a fixed sequence of basis states. We say the extension has error at most $\varepsilon$ against an observer if the final state of everything that observer holds is within trace distance $\varepsilon$ of the target's; an extension with strategy error $\varepsilon$ has error at most $\varepsilon$ against every observer.
+
+\begin{lemma}[Distinguishable records]\label{lem:classes-orth}
+Suppose the extension has error at most $\varepsilon$ against every deterministic observer. Fix an episode $i$, and for a class $c$ let $\rho_c$ be the device's state just after $P_{1,i}$ has been released, when the observer has sent the representative $x_c$ in episode $i$ and earlier inputs drawn from any distribution that does not depend on $c$. If $c\ne c'$, then $\tfrac12\|\rho_c-\rho_{c'}\|_1\ge1-2\varepsilon$; for an exact extension, $\rho_c\perp\rho_{c'}$.
+\end{lemma}
+\begin{proof}
+Choose $y^*$ with $g(c,y^*)\ne g(c',y^*)$. Let $\mathcal N$ be the channel on $B$ that appends $P_{2,i}$ in $|y^*\rangle$, applies the extension's gates from the release of $P_{1,i}$ to the release of $P_{2,i}$, which form one fixed unitary on $B\otimes P_{2,i}$, discards $B$, and measures $P_{2,i}$ in the output basis. For each fixed earlier history, the deterministic observer who sends that history, then $x_c$, then $y^*$ receives an answer within trace distance $\varepsilon$ of $|g(c,y^*)\rangle$; averaging over the earlier histories, $\mathcal N(\rho_c)$ is within total variation $\varepsilon$ of the point mass at $g(c,y^*)$, and likewise $\mathcal N(\rho_{c'})$ of the point mass at $g(c',y^*)$. The two point masses are at total variation $1$, so $\tfrac12\|\mathcal N(\rho_c)-\mathcal N(\rho_{c'})\|_1\ge1-2\varepsilon$, and trace distance does not increase under $\mathcal N$.
+\end{proof}
+
+\begin{remark}
+The argument must go through a common continuation. Orthogonality of two purifications says nothing about their marginals: the Bell states $(|00\rangle\pm|11\rangle)/\sqrt2$ are orthogonal and have the same marginal $I/2$. What forces the device's records apart is that one fixed later operation tells them apart.
+\end{remark}
+
+In the language of Thompson et al., distinct classes are causal states that a single question tells apart with certainty, so no two of them form a causally wasteful pair~\cite{Thompson25}. Consistently with their Result~2, quantum memory brings no saving here: the lower bound below uses classical observers only and holds against every quantum device, and a classical device attains it (Lemmas~\ref{lem:classes-upper} and~\ref{lem:classes-lower}).
+
+\subsection{Information flow}
+
+The lower bound tracks how much the device knows about the observer's choices, visit by visit. Let $H$ be a classical register holding the observer's choices. At a visit a carrier $C$ arrives in a basis state $|\mathrm{in}(h)\rangle$ fixed by the choices, the device applies a unitary to $BC$, and $C$ leaves as $C'$; write $B$ and $B'$ for the device before and after.
+
+\begin{lemma}[Information flow]\label{lem:flow}
+At every visit,
+\[
+I(H{:}B')=I(H{:}B)+H(\mathrm{IN}\,|\,B)-I(H{:}C'\,|\,B'),
+\qquad
+S(B'|H)\ge S(B|H)-S(C'|H),
+\]
+where $H(\mathrm{IN}|B)$ is the conditional entropy of the classical input label given the device.
+\end{lemma}
+\begin{proof}
+Mutual information with $H$ is unchanged by a unitary on $BC$, so $I(H{:}B'C')=I(H{:}BC)$. Expanding both sides by the chain rule gives $I(H{:}B')+I(H{:}C'|B')=I(H{:}B)+I(H{:}C|B)$. Given $H=h$ the carrier is pure and independent of $B$, so $S(C|BH)=0$ and $I(H{:}C|B)=S(C|B)$, which for a basis-state input is $H(\mathrm{IN}|B)$. For the inequality, fix $h$: $S(B')\ge S(B'C')-S(C')=S(B)-S(C')$, because the input carrier is pure and the gate is unitary; average over $h$.
+\end{proof}
+
+The identity has a plain reading. A visit can teach the device at most what the arriving carrier holds that the device does not already know, and the departing carrier can take away what the device does not keep. The XOR circuit $(a,y)\mapsto(y,a\oplus y)$ of Section~\ref{sec:classes} shows that the second term can be large: the departing answer carries away the record of the past. The observer in the next lemma closes that exit by making every answer the same.
+
+\subsection{Lower bounds}
+
+For $d\ge2$ and $0\le t\le1-1/d$ write $f_d(t)=t\log_2(d-1)+h_2(t)$, the continuity bound of~\cite{Audenaert07}: a state within trace distance $t$ of a pure state on $\mathbb C^d$ has entropy at most $f_d(t)$; $f_d$ is concave and increasing on this range. For $d=1$ set $f_1(t)=0$, since every state on $\mathbb C^1$ is pure. Let $d_1=|X|$ and $d_2=\max\{|Y|,|Z|\}$ be the carrier dimensions, and
+\[
+p_\varepsilon=2(K-1)\sqrt\varepsilon,\qquad
+\delta_g(\varepsilon)=h_2(p_\varepsilon)+p_\varepsilon\log_2(K-1)+3f_{d_1}(\varepsilon)+3f_{d_2}(\varepsilon),
+\]
+defined for $\varepsilon\le1/2$ with $p_\varepsilon\le1-1/K$. For $K=1$ the class-decoding term $h_2(p_\varepsilon)+p_\varepsilon\log_2(K-1)$ is set to zero, so that $\delta_g(\varepsilon)=3f_{d_1}(\varepsilon)+3f_{d_2}(\varepsilon)$ for every $\varepsilon\le1/2$. Then $\delta_g(\varepsilon)\to0$ as $\varepsilon\to0$, and $\delta_g$ depends on $g$ only through $K$ and the alphabet sizes.
+
+\begin{lemma}[Real time, uniformly at small error]\label{lem:classes-lower}
+Let $z_0$ attain $F'=|\Phi(z_0)|$, fix a representative $x_c$ of each class, and let the \emph{steering observer} draw, independently in each episode, a pair $(c_i,y_i)$ uniformly from $\Phi(z_0)$ and send $x_{c_i}$ and then $y_i$. If a private extension of $n$ episodes on the real-time schedule has error at most $\varepsilon$ against every deterministic observer and against the steering observer, with $\varepsilon$ in the range where $\delta_g$ is defined, then against the steering observer
+\[
+S(Z|F)\ \ge\ n\bigl[\log_2F'(g)-\delta_g(\varepsilon)\bigr].
+\]
+The bound does not depend on $n$ or on the dimension of the device. Consequently $K_\beta^S(T_g)\ge\log_2F'(g)$ in real time.
+\end{lemma}
+\begin{proof}
+By global purity $S(Z|F)=S(B_f)-S(\tau_B)=I(H{:}B_f)+S(B_f|H)-S(\tau_B)$, where $H=(c_i,y_i)_{i\le n}$ is the steering observer's record; gates on $B$ alone between visits change neither $I(H{:}B)$ nor $S(B|H)$. Write $X'_i$ and $Z'_i$ for $P_{1,i}$ and $P_{2,i}$ on release, whose targets are $|x_{c_i}\rangle$ and $|z_0\rangle$, and $B^+_{1,i}$, $B^+_{2,i}$ for the device just after each release. For each fixed history $h$ the steering observer acts as the deterministic observer who sends $h$, whose final state is within trace distance $\varepsilon$ of the target's by hypothesis, and by contractivity so is each released carrier; the bound holds history by history, so no probability of a history enters. Averaging over $H$, concavity and monotonicity of $f_d$ give $S(X'_i|H)\le f_{d_1}(\varepsilon)$, $S(Z'_i|H)\le f_{d_2}(\varepsilon)$, and, because the target $|z_0\rangle$ is the same in every history, $S(Z'_i)\le f_{d_2}(\varepsilon)$.
+
+\emph{Entropy given the history.} By the inequality of Lemma~\ref{lem:flow}, applied at all $2n$ visits, $S(B_f|H)\ge S(\tau_B)-n[f_{d_1}(\varepsilon)+f_{d_2}(\varepsilon)]$.
+
+\emph{Information about the history.} Apply the identity of Lemma~\ref{lem:flow} at every visit, starting from $I(H{:}B_0)=0$. At the arrival of $P_{1,i}$ the device's state depends only on earlier choices, which are independent of $c_i$, so $H(\mathrm{IN}|B)=H(C_i)$. At the arrival of $P_{2,i}$, given $c_i$ the question $y_i$ is independent of everything else the device's state depends on, so $H(\mathrm{IN}|B)\ge H(Y_i|C_i)$. Their sum is $H(C_i,Y_i)=\log_2F'$. It remains to bound what the released carriers take away. For the answer, $I(H{:}Z'_i|B^+_{2,i})=S(Z'_i|B^+_{2,i})-S(Z'_i|B^+_{2,i}H)\le S(Z'_i)+S(Z'_i|H)\le2f_{d_2}(\varepsilon)$, using $S(A|BH)\ge-S(A|H)$ for classical $H$. For the past,
+\[
+I(H{:}X'_i|B^+_{1,i})\le S(X'_i|B^+_{1,i})+S(X'_i|H)\le H(C_i|B^+_{1,i})+S(X'_i|C_i)+f_{d_1}(\varepsilon)\le H(C_i|B^+_{1,i})+2f_{d_1}(\varepsilon),
+\]
+where the middle step adds the classical $C_i$ to the conditioned system and uses strong subadditivity.
+
+\emph{The device knows the class.} If $K=1$ the single class is known with certainty, $H(C_i|B^+_{1,i})=0$ and $F'=F$, and the rest of this step is not needed. For $K\ge2$, by Lemma~\ref{lem:classes-orth} the states $\rho_c$ of $B^+_{1,i}$ given $C_i=c$ are pairwise at trace distance at least $1-2\varepsilon$, hence at fidelity $F(\rho_c,\rho_{c'})=\|\sqrt{\rho_c}\sqrt{\rho_{c'}}\|_1\le2\sqrt\varepsilon$ by the Fuchs--van de Graaf inequality~\cite{FuchsvandeGraaf99}. The pretty-good measurement for the ensemble $\{p_c,\rho_c\}$ errs with probability at most $\sum_{c\ne c'}\sqrt{p_cp_{c'}}F(\rho_c,\rho_{c'})$, by the proof of Theorem~5 of~\cite{BarnumKnill02} (Eq.~(39) of arXiv version~2; Theorem~4 and Eq.~(14) in version~1), and this is at most $2(K-1)\sqrt\varepsilon=p_\varepsilon$, since $\sum_{c\ne c'}\sqrt{p_cp_{c'}}=(\sum_c\sqrt{p_c})^2-1\le K-1$. A measurement on $B^+_{1,i}$ can only increase the conditional entropy of $C_i$, so by Fano's inequality $H(C_i|B^+_{1,i})\le h_2(p_\varepsilon)+p_\varepsilon\log_2(K-1)$.
+
+Collecting the terms, $I(H{:}B_f)\ge n\log_2F'-n[h_2(p_\varepsilon)+p_\varepsilon\log_2(K-1)+2f_{d_1}(\varepsilon)+2f_{d_2}(\varepsilon)]$, and adding the entropy given the history proves the bound. Zero Hamiltonians make the energy term of the functional vanish, so every extension with strategy error $\varepsilon$ has value at least $\log_2F'-\delta_g(\varepsilon)$ per episode; letting $\varepsilon\to0$ along the regularization gives the rate.
+\end{proof}
+
+At $\varepsilon=0$ the proof gives more. Every visit then preserves the device's entropy given the history, so $S(B_f|H)=S(\tau_B)$ and $I(H{:}B_f)=n\log_2F'=H(H)$: the device's final states for distinct histories of the steering observer are pairwise orthogonal. The proof also shows why it needs both kinds of observer. The deterministic observers who might ask a distinguishing question force the device to know the class when the past leaves; the steering observer forces it to keep that knowledge, by leaving no answer that could carry it away. Neither suffices alone. For $g(x,y)=x\wedge y$ on bits, $K=2$ and $F'=3$, and a device that keeps no record of $x$ and swaps each question into its register while emitting $0$ serves the steering observer perfectly while adding only $H(Y)=h_2(1/3)\approx0.918$ bits per episode, below $\log_2 3$; it fails the observer who sends $x=y=1$.
+
+\begin{lemma}[Held]\label{lem:classes-lower-held}
+If $x$ may be held until $y$ arrives, let the observer fix $x_0$ and $z_0$ attaining $F=|\{y:g(x_0,y)=z_0\}|$ and send $x_0$ and a uniform $y$ from that set in every episode. Every private extension with error at most $\varepsilon$ against this observer has $S(Z|F)\ge n[\log_2F(g)-\varepsilon\log_2(d_1d_2)]-1$ against it. Consequently $K_\beta^S(T_g)\ge\log_2F(g)$.
+\end{lemma}
+\begin{proof}
+The device and all carriers evolve unitarily from $\tau_B$ and the classical mixture of inputs, whose entropy is $n\log_2F$, so the final device and released carriers have entropy $S(\tau_B)+n\log_2F$, and $S(B_f)\ge S(\tau_B)+n\log_2F-S(\mathrm{OUT})$. The target output is the same pure state, $x_0$ and $z_0$ in every episode, and the actual output is within trace distance $\varepsilon$ of it on a space of dimension $(d_1d_2)^n$, so $S(\mathrm{OUT})\le n\varepsilon\log_2(d_1d_2)+1$.
+\end{proof}
+
+Lemmas~\ref{lem:classes-upper}--\ref{lem:classes-lower-held} prove Theorem~\ref{thm:classes}. The bounds $F\le F'\le KF$ give the range of the order price; for reversible questions each fiber $\Phi(z)$ contains exactly one pair per class, so $F'=K$ and $F=1$; for a constant answer $F=F'=|Y|$.
+
+\subsection{The order price is not submodular}
+
+For a task whose past is a string $x=(x_1,\dots,x_k)$ of bits, some of which may be held until $y$ arrives, write $P(L)$ for the real-time price when exactly the coordinates in $L$ are released. For reversible questions, Theorem~\ref{thm:classes} applied for each value $h$ of the held coordinates gives $P(L)=\log_2\max_hK_h$, where $K_h$ is the number of classes among the pasts that agree with $h$: the device knows $h$, so it needs only the class of $x_L$ relative to $h$, and the observer who fixes the worst $h$ forces it.
+
+\begin{proposition}[A three-bit violation]\label{prop:nonsubmodular}
+Let $X=\{0,1\}^3$, $Y=Z=\mathbb Z_3$ and $g(x,y)=y+f(x)\bmod3$, where $f(011)=1$, $f(100)=2$ and $f(x)=0$ for the other six pasts. The questions are reversible, and
+\[
+P(\{3\})=1,\qquad P(\{1,3\})=1,\qquad P(\{2,3\})=1,\qquad P(\{1,2,3\})=\log_23,
+\]
+so $P(\{1,3\})+P(\{2,3\})<P(\{1,2,3\})+P(\{3\})$ by $\log_2(3/2)$ bits. No task of this form on three bits violates submodularity by more.
+\end{proposition}
+\begin{proof}
+For a reversible task $g=y+f(x)$ the classes are the level sets of $f$, so $K_h$ is the number of values $f$ takes on the pasts agreeing with $h$. With all three bits released $f$ takes three values. The two special pasts $011$ and $100$ differ in every coordinate, so when any coordinate is held, at most one of them agrees with the held value and $f$ takes at most two values; holding bits $1$ and $2$ at $(0,1)$ leaves $f(010)=0$ and $f(011)=1$, so $P(\{3\})=1$, and similarly for the other two. The last sentence is the exhaustive search over all $3^8$ functions $f$ in the script \texttt{check\_classes.py} of the verification package, which also recomputes the four prices.
+\end{proof}

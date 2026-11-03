@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-02",
+  "certified": true,
+  "packageManifestSHA256": "BD876A72A57DBCCAD7D232022239BF2B1369CD8CCA52FCF70EE01467E3FA4617",
+  "freshVendorModules": 58,
+  "freshOwnedModules": 359,
+  "kernels": [
+    "Lean 4.30 Environment.replay",
+    "Rust nanoda"
+  ],
+  "permittedAxioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "exportFormat": "lean4export NDJSON 3.1.0",
+  "exportSHA256": "FFE939E88D712B6C5AA6E4E5DB21B68BAF1AAB16821A15423D4E7DF058753963",
+  "exportBytes": 638240667,
+  "wallSeconds": 11347.154,
+  "peakProcessTreeRSSBytes": 4009721856,
+  "threadsPerLeanProcess": 1,
+  "memoryLimitMBPerLeanProcess": 6144,
+  "command": "python -B replay.py --mathlib MATHLIB_PATH --lean-root LEAN_430_ROOT --work-dir EMPTY_SCRATCH_PATH",
+  "note": "Fresh build of every packaged source from this package, then both kernels on the identical newly exported bytes. A fresh build may export different bytes than an earlier build; both kernels must accept the same bytes.",
+  "packageReadmeReferences": "verification/lean/README.md mentions a release-preparation report and package summary; this file is that record. It gives the SHA-256 of MANIFEST.sha256, which cannot hash itself."
+}

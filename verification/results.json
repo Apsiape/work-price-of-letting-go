@@ -1,12 +1,12 @@
 {
  "checks/check_identity.py": {
   "result": "PASS",
-  "seconds": 0.2,
+  "seconds": 0.3,
   "last_line": "All checks passed."
  },
  "checks/check_protocol_numbers.py": {
   "result": "PASS",
-  "seconds": 2.0,
+  "seconds": 1.9,
   "last_line": "All checks passed."
  },
  "checks/check_classes.py": {
@@ -16,17 +16,17 @@
  },
  "checks/check_fiber.py": {
   "result": "PASS",
-  "seconds": 1.0,
+  "seconds": 1.2,
   "last_line": "All checks passed."
  },
  "checks/check_span_criterion.py": {
   "result": "PASS",
-  "seconds": 4.5,
+  "seconds": 4.0,
   "last_line": "All checks passed."
  },
  "parts/law/check_certificate.py": {
   "result": "PASS",
-  "seconds": 0.8,
+  "seconds": 0.9,
   "last_line": "All checks passed."
  },
  "parts/law/check_release_rank.py": {
@@ -36,153 +36,153 @@
  },
  "parts/law/check_beyond_thermo.py": {
   "result": "PASS",
-  "seconds": 1.7,
+  "seconds": 1.5,
   "last_line": "All checks passed."
  },
  "parts/law/check_rates.py": {
   "result": "PASS",
-  "seconds": 3.8,
+  "seconds": 3.9,
   "last_line": "All checks passed."
  },
  "parts/law/check_speed_order.py": {
   "result": "PASS",
-  "seconds": 1.3,
+  "seconds": 1.5,
   "last_line": "All checks passed."
  },
  "parts/module/check_setting.py": {
   "result": "PASS",
-  "seconds": 8.3,
+  "seconds": 12.6,
   "last_line": "All checks passed."
  },
  "parts/module/check_law.py": {
   "result": "PASS",
-  "seconds": 12.6,
+  "seconds": 13.2,
   "last_line": "All checks passed."
  },
  "parts/module/check_converse.py": {
   "result": "PASS",
-  "seconds": 25.3,
+  "seconds": 24.6,
   "last_line": "All checks passed."
  },
  "parts/module/check_free.py": {
   "result": "PASS",
-  "seconds": 19.4,
+  "seconds": 19.0,
   "last_line": "All checks passed."
  },
  "parts/module/check_delay.py": {
   "result": "PASS",
-  "seconds": 12.3,
+  "seconds": 13.5,
   "last_line": "All checks passed."
  },
  "parts/module/check_factory.py": {
   "result": "PASS",
-  "seconds": 2.6,
+  "seconds": 2.7,
   "last_line": "All checks passed."
  },
  "parts/module/check_hidden_bit.py": {
   "result": "PASS",
-  "seconds": 4.4,
+  "seconds": 5.4,
   "last_line": "All checks passed."
  },
  "parts/module/check_noncov.py": {
   "result": "PASS",
-  "seconds": 5.9,
+  "seconds": 3.7,
   "last_line": "All checks passed."
  },
  "parts/module/check_order.py": {
   "result": "PASS",
-  "seconds": 6.0,
+  "seconds": 6.2,
   "last_line": "All checks passed."
  },
  "parts/module/check_agents.py": {
   "result": "PASS",
-  "seconds": 0.8,
+  "seconds": 0.9,
   "last_line": "All checks passed."
  },
  "parts/channels/check_law.py": {
   "result": "PASS",
-  "seconds": 2.3,
+  "seconds": 2.5,
   "last_line": "All checks passed."
  },
  "parts/channels/check_classical.py": {
   "result": "PASS",
-  "seconds": 2.9,
+  "seconds": 3.0,
   "last_line": "All checks passed."
  },
  "parts/channels/check_werner.py": {
   "result": "PASS",
-  "seconds": 5.1,
-  "last_line": "  warnings.warn("
+  "seconds": 4.9,
+  "last_line": "All checks passed."
  },
  "parts/channels/check_extreme.py": {
   "result": "PASS",
-  "seconds": 10.5,
+  "seconds": 10.6,
   "last_line": "All checks passed."
  },
  "parts/channels/check_finite_saving.py": {
   "result": "PASS",
-  "seconds": 3.9,
-  "last_line": "  warnings.warn("
+  "seconds": 4.6,
+  "last_line": "All checks passed."
  },
  "parts/channels/check_fixeddim.py": {
   "result": "PASS",
-  "seconds": 2.3,
+  "seconds": 2.7,
   "last_line": "All checks passed."
  },
  "parts/channels/check_free.py": {
   "result": "PASS",
-  "seconds": 3.0,
+  "seconds": 3.3,
   "last_line": "All checks passed."
  },
  "parts/channels/check_invertible.py": {
   "result": "PASS",
-  "seconds": 3.6,
-  "last_line": "  warnings.warn("
+  "seconds": 4.5,
+  "last_line": "All checks passed."
  },
  "parts/channels/check_clock.py": {
   "result": "PASS",
-  "seconds": 25.7,
-  "last_line": "  warnings.warn("
+  "seconds": 32.0,
+  "last_line": "All checks passed."
  },
  "parts/channels/check_qutrit.py": {
   "result": "PASS",
-  "seconds": 174.0,
+  "seconds": 199.4,
   "last_line": "All checks passed."
  },
  "parts/channels/check_reset.py": {
   "result": "PASS",
-  "seconds": 133.6,
+  "seconds": 142.0,
   "last_line": "All checks passed."
  },
  "parts/batch/check_capital_converse.py": {
   "result": "PASS",
-  "seconds": 45.7,
-  "last_line": "  warnings.warn("
+  "seconds": 66.9,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_clock_costs.py": {
   "result": "PASS",
-  "seconds": 7.8,
-  "last_line": "  prob.solve(solver=\"CLARABEL\")"
+  "seconds": 10.2,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_clock_size.py": {
   "result": "PASS",
-  "seconds": 14.4,
-  "last_line": "  prob.solve(solver=\"CLARABEL\")"
+  "seconds": 19.4,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_batch_law.py": {
   "result": "PASS",
-  "seconds": 49.8,
-  "last_line": "  prob.solve(solver=\"CLARABEL\")"
+  "seconds": 65.0,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_examples.py": {
   "result": "PASS",
-  "seconds": 20.1,
-  "last_line": "  warnings.warn("
+  "seconds": 25.2,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_arrow.py": {
   "result": "PASS",
-  "seconds": 88.1,
-  "last_line": "  prob.solve(solver=\"CLARABEL\")"
+  "seconds": 119.0,
+  "last_line": "All checks passed."
  },
  "parts/batch/check_embezzle.py": {
   "result": "PASS",
@@ -191,12 +191,17 @@
  },
  "parts/batch/check_noise_horizon.py": {
   "result": "PASS",
-  "seconds": 31.0,
-  "last_line": "  cp.Problem(cp.Maximize(cp.real(cp.trace(Rm @ J))), cons).solve(solver=\"CLARABEL\")"
+  "seconds": 42.4,
+  "last_line": "All checks passed."
  },
  "parts/channels/check_repeatable.py": {
   "result": "PASS",
-  "seconds": 4.9,
+  "seconds": 5.4,
   "last_line": "All checks passed."
+ },
+ "parts/precision_heat/run_all.py": {
+  "result": "PASS",
+  "seconds": 3.9,
+  "last_line": "All checks passed"
  }
 }

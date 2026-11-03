@@ -1,4 +1,5 @@
 /paper/build/
+/verification/parts/precision_heat/build/
 __pycache__/
 *.pyc
 *.olean

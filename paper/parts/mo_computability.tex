@@ -7,3 +7,36 @@ The source of the undecidability is the absence of a computable bound on the siz
 What the results show is operational. Being able to describe every event at once does not mean being able to act on every event at once. The difference has a price, and in thermodynamics whether that price is zero cannot be computed.
 
 % =====================================================================
+
+\subsection{One fixed finite game, bounded reunion and a prescribed local-reset rate}\label{sec:precision-headline}
+The reset deadline gives a stronger contrast than a positive constant surcharge. Fix a finite two-player game $G$ with rational question probabilities and a finite strategy of loss at most $\eps$. Prepare its state before the questions, release classical answers permanently, and restore all working hardware to pure blanks. Logical endpoints are degenerate, question labels remain read-only controls, thermal answer ports are independent, and every discarded record and communication carrier is charged. At fixed strategy and $\eps$, take the reversible rate on independent copies with whole-block error tending to zero and $o(N)$ return budgets; optimize over finite strategies afterwards. This is the contract of Appendix~\ref{hp:sec:model}, not an additivity assertion about arbitrary correlated plays. Write $w=W/(\kB T\ln2)$ and $K=|\mathcal A||\mathcal B|$. The local schedule forbids communication until both devices are blank; the joint schedule allows quantum reunion after answer release and before reset.
+
+This result is also stated in~\cite[Corollary~13.1]{HPuncomputable}; its reset argument is proved here, using only that paper's game-resource theorem.
+
+\begin{corollary}[A prescribed precision cost from the reset order]\label{cor:precision-deadline}
+For every positive $\Delta^0_2$ real $\alpha$, there is one fixed finite rational Boolean constraint-system game $G_\alpha$ of quantum value one, with no finite-dimensional perfect strategy, such that, as $\eps\downarrow0$ and $L=\log_2(1/\eps)$,
+\begin{equation}\label{eq:precision-deadline}
+ 0\le w_{{\rm joint},G_\alpha}(\eps)\le2\log_2K,
+ \qquad
+ w_{{\rm local},G_\alpha}(\eps)=2\alpha L+o(L).
+\end{equation}
+The game, answer alphabets, endpoint Hamiltonians and task are fixed as precision varies. Only whether communication precedes the blank deadline changes between these two schedules. Choosing a noncomputable $\alpha$ gives a noncomputable logarithmic cost rate; compare the noncomputable Turing-machine heat functions of Kolchinsky and Wolpert~\cite{HPKW20}.
+\end{corollary}
+\begin{proof}
+Theorem~1.1 of \emph{The uncomputable price of precision}~\cite{HPuncomputable} supplies $G_\alpha$ with
+\[
+ \log_2 D_{G_\alpha}(\eps)=\alpha L+o(L),\qquad
+ d_{G_\alpha}(\eps)=\alpha L+o(L),
+\]
+where $d_G$ is the infimum one-way distillable entanglement of the original mixed strategy state. These game and entanglement laws are the sole input from that theorem. A successful mixed strategy has a successful pure component with the same measurements, since score is affine in the state. Hence its pure-strategy entropy demand obeys $E_G\le\log_2D_G$.
+
+For reset, the local entropy balance includes state formation, independent thermal answer ports and the erasure of both working marginals. It charges at least $I(A:B)$ per play; one-way distillation satisfies $2E_D^{\to}(\rho)\le I(A:B)_\rho$. Reversible formation, retained coherent measurement pointers and separate erasure attain at most $2E_G+2\log_2K$. The complete mixed-state lower bound and constructions are proved in Theorem~\ref{hp:thm:local}, giving
+\[
+ 2d_G\le C_G\le w_{{\rm local},G}\le2E_G+2\log_2K\le2\log_2D_G+2\log_2K.
+\]
+Substitution proves the local law. For reunion, choose a successful pure component and form it unitarily. After coherent measurement and answer copying, at most $K$ orthogonally flagged pure residual branches remain for each question pair. A joint pointer-controlled unitary maps each normalized residual to one product blank. Erasing the pointer costs at most $\log_2K$, and resetting the two thermal answer ports to pure answer blanks costs the other $\log_2K$, uniformly in the strategy dimension. The complete cycle has nonnegative entropy-balance boundary $\log_2K-H(ab|XY)$. This proves the joint bound.
+\end{proof}
+
+This reset task uses the game-preparation and answer-release contract of Appendix~\ref{hp:sec:model}. Its reset bounds are proved directly here; they are not obtained by applying Theorem~\ref{to:thm:law} to a game score. The conclusion concerns a limiting precision coefficient and does not decide the computability of a finite-precision heat function. The comparison with Kolchinsky--Wolpert~\cite{HPKW20} is between distinct thermodynamic tasks.
+
+The intermediate schedules are quantified by Theorem~\ref{hp:thm:return}: each coherently returned qubit can remove at most two entropy units, and each physically moved dephased bit at most one, with all communication hardware charged. Appendix~\ref{app:precision-heat} also proves the paired precision gap, the exact magic-square cost $4\,\kB T\ln2$, the finite-error conversion, exact matching and sector allocation, and the $W$-state access obstruction. Appendices~\ref{hp:app:weighted}--\ref{hp:app:rounding} give the weighted-observer theorem, multiphase calibration and the limits of approximate matching. These proofs make the reset schedule, rather than entanglement demand alone, part of the operational specification.

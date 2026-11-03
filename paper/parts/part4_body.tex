@@ -24,7 +24,7 @@ Free-energy ledger (Corollary~\ref{kt:cor:embezzle}) & in any declared state & n
 \FloatBarrier
 \subsection{The dichotomy}\label{kt:sec:dichotomy}
 
-\begin{theorem}[Exact and approximate return (Appendix~\ref{app:channels}); (a) after~\cite{MarvianSpekkens19,LostaglioMuller19}]\label{kt:thm:dichotomy}
+\begin{theorem}[Exact and approximate return (Appendix~\ref{app:channels}); (a) after~\cite{MarvianSpekkens19,LostaglioMuller19}]\label{kt:thm:dichotomy}\leavevmode
 \begin{enumerate}[label=(\alph*)]
 \item If the controller returns exactly and the battery is stationary, every implementation of a channel $\Phi$ has error at least $\frac14\sup_t\|J_\Phi-e^{-\mathrm itG}J_\Phi e^{\mathrm itG}\|_1$, with $J_\Phi$ the Choi state and $G=H_O-H_I^T$; this is positive exactly when $\Phi$ is not time-covariant.
 \item If the controller returns approximately, the optimal real-time work per use at vanishing error is $\kB T\ln2\,\Trt(\Phi)$ for every channel $\Phi$. For a unitary it is exactly $\lambda_{\max}(D)$, with the battery reaching its target on every branch.
@@ -179,7 +179,7 @@ Table~\ref{kt:tab:clocksize} collects the bounds. For $X$-dephasing with $\varep
 \begin{table}[ht]
 \centering
 \small
-\begin{tabular}{p{3.0cm}p{2.6cm}p{8.4cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}p{2.6cm}p{8.4cm}}
 \toprule
 Channel & Fixed error & Vanishing error, controller returned\\
 \midrule

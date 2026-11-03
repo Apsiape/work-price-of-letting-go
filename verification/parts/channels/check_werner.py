@@ -24,6 +24,16 @@ from qtools import (Report, choi_of_map, cond_entropy, diamond_norm_herm, dm, en
                     random_density, random_unitary, trace_norm)
 
 R = Report("Werner-Holevo channel")
+
+
+def pure_reduced(vector, dimensions, keep):
+    """Trace a pure tensor without allocating its full outer product."""
+    kept = sorted(keep)
+    traced = [j for j in range(len(dimensions)) if j not in kept]
+    rows = math.prod(dimensions[j] for j in kept)
+    matrix = np.asarray(vector).reshape(dimensions).transpose(kept + traced).reshape(rows, -1)
+    return matrix @ matrix.conj().T
+
 rng = np.random.default_rng(20261014)
 LOG3 = math.log2(3)
 
@@ -109,7 +119,7 @@ for n in (1, 2, 3):
         psi = np.moveaxis(psi, [0, 1], [a, a + 1])
     vec = psi.reshape(-1)
     devE = [3 * t + 2 for t in range(n)]
-    rho_dev = ptrace(np.outer(vec, vec.conj()), dims, devE)
+    rho_dev = pure_reduced(vec, dims, devE)
     rank = int(np.sum(np.linalg.eigvalsh(rho_dev) > 1e-10))
     ok &= abs(entropy(rho_dev) - n * LOG3) < 1e-9 and rank == 3 ** n
 R.check("the exact device (V with one pure qutrit per round) adds exactly log2 3 bits per round on Bell inputs and its "

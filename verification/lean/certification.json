@@ -1,0 +1,55 @@
+{
+  "scope": "Historical frozen round-28 certification; a new clean package replay is a separate result.",
+  "ownedModules": 359,
+  "selectedGraphAdmissions": {},
+  "root_axioms": {
+    "finite_factory_of_small_residue_coding": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "source_factory_circuits": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "cyclic_cache_protocol": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "finite_conserving_phase": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "corrected_joint_tangent": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "pointwise_physical_compiler": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "work_law_for_schedules": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "exportSHA256": "FCCCCD6EA210475EA11C599E3A0A0F982215EF998B5360C7F73EB09DC4FA5B94",
+  "exportBytes": 638242758,
+  "acceptedConstants": 73310,
+  "kernels": [
+    "Lean 4.30 Environment.replay, fresh empty environment",
+    "Rust nanoda, one thread, hard axiom whitelist"
+  ],
+  "excluded": [
+    "Theorems 4.1-4.4, 6.1, 7.1 as complete statements",
+    "heat Appendices L-O and Corollary 8.1",
+    "general finite-strategy dilation equivalence",
+    "anything outside selected graph"
+  ]
+}

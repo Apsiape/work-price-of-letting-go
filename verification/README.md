@@ -49,11 +49,11 @@ take three to four minutes each.
   python verify.py --lean
   ```
 
-* **Not checked by machine**: the attainability half of the schedule law (Appendix A), the physical
-  module (Appendix F), the general accounting arguments, and the robust release lemma are proved in
-  the manuscript only. The pointwise smoothing lemma (Lemma G.6) and the zero-Hamiltonian closure theorem used in
-  Step 1 of the undecidability proof are used from our earlier preprints (class Earlier preprint in
-  the paper's Table 7).
+* **Selected schedule-law certificate**: `lean/` covers the finite-dilation
+  schedule law, its physical compiler, joint tangent and finite factory/cache/
+  phase constructions, including circuit-derived accounting. See the exact
+  scope, replay prerequisites and exclusions below. The robust release lemma
+  and other statements outside that graph remain text proofs. The schedule-law arguments import the pointwise smoothing lemma (Lemma G.6) and [Memory, Theorem 3.2(a)], the zero-Hamiltonian closure theorem. The precision-reset arguments additionally import Theorem 1.1 of The uncomputable price of precision v3.0.0 (Corollary 8.1), and Theorem 11.9 and Corollary 11.11 of The price of precision (Corollary L.2 and Proposition L.9). Every reset argument is proved in the manuscript; these game-demand inputs are not certified by finite checks (class Earlier preprint in Table 7).
   The pretty-good-measurement bound used in Lemma I.7 is cited (Barnum and Knill 2002) and
   tested numerically on random ensembles in `checks/check_fiber.py`.
   The undecidability theorem combines arguments in the manuscript with cited results of Fu, Miller
@@ -103,11 +103,13 @@ checks/check_protocol_numbers.py  Section 10 protocol numbers, record-export, jo
 checks/check_classes.py   Theorem 7.1 prices, Proposition I.9, record transfer             [new]
 checks/check_fiber.py     Lemmas I.1-I.8: dephasing, distinguishable records, information flow, robust bound   [new]
 checks/check_span_criterion.py  Theorem 4.3: the span condition is sufficient, not necessary   [new]
+parts/precision_heat/     Appendices L--O: reset, recovery, sectors, calibration, access, weighted/multiphase prices and rounding
 parts/law/                Sections 5, 9, 11; Appendices B--E (certificate, release rank, release lemma, collision model)
 parts/module/             Appendix F (processes with memory; the physical module)
 parts/channels/           Appendix G (memoryless channels; free set; undecidability filters); Section 12 (repeatable channels)
 parts/batch/              Appendix H (returned clock; batch law; clock size; time reverse; noise horizon)
-parts/*/lean/             formal proofs (Lean 4 + Mathlib)
+parts/*/lean/             older finite formal proofs (Lean 4 + Mathlib)
+lean/                     selected schedule-law certificate, manifest and replay runner
 parts/*/qtools.py         shared numerical helpers used by that part's scripts
 ```
 
@@ -120,3 +122,42 @@ Open `SCORECARD.md`. Every row is a script and the claim from the paper that it 
 content of that sentence was recomputed on this machine from scratch, deterministically, with the
 random seeds fixed inside the scripts. If a row says FAIL, the script prints which sub-check failed
 and the numbers it saw; that line is reproducible and is the right thing to quote in a report.
+
+## Precision-reset checks
+
+The integrated runner also calls `parts/precision_heat/run_all.py`: 6,378 deterministic finite assertions with five fixed sanity assertions, covering the reset appendices. These assertions reject fixed wrong arithmetic assignments; they do not simulate faulty protocols and differ from the deliberate script corruptions of `verify.py --negative`. See that directory’s README for scope and recorded outputs. No added reset result is claimed to be formalized in Lean; existing formal files are unchanged. Every Python child is run sequentially with one numerical thread and a monitored 1.4 GB memory ceiling.
+
+## Formal verification
+
+The selected development in [lean/](lean/) certifies
+`ScheduleLaw.Blueprint.work_law_for_schedules`, proving both `WorkLaw` (universal
+lower bound, equality and attainment) and `WorkLawBits`. It includes the
+`pointwise_physical_compiler`, `corrected_joint_tangent`,
+`finite_factory_of_small_residue_coding`, `source_factory_circuits`,
+`cyclic_cache_protocol` and `finite_conserving_phase` roots in the same namespace.
+The 359 selected owned modules have no admissions; the exported closure uses
+only `propext`, `Classical.choice` and `Quot.sound`.
+
+The pins are Lean 4.30.0 (`d024af099ca4bf2c86f649261ebf59565dc8c622`),
+Mathlib v4.30.0 (`c5ea00351c28e24afc9f0f84379aa41082b1188f`) and the selected
+Physlib sources (`f5242c99d796b59a390d26cd7d1a8057e04c46b5`). The same
+lean4export NDJSON 3.1.0 export was accepted by Lean 4.30 `Environment.replay`
+in a fresh empty environment and independently by Rust nanoda, with the three
+standard axioms whitelisted. Runtime exporter/parser sources are compiled
+against 4.30, outside the proof graph. Package instructions identify exact
+source, dependency, tool and export hashes.
+
+The formal targets are finite unitary dilations; equivalence to every abstract
+finite strategy is not proved in this graph. The definitions impose the paper's
+same-carrier, same-Hamiltonian, independent-initial-state and universal-observer
+contract, whole-controller/all-rest return, separate energy/entropy refunds,
+and the battery entropy, failure and absolute-tail budgets. Lean indexes blocks
+by n+1 and supplies the explicit nats-to-bits normalization. The current Lemma
+3.4 is the whole-block identity; the joint tangent is in Appendix A and chooses
+q separately for each smoothing parameter, as does the certified statement.
+
+This certificate does not cover Theorems 4.1–4.4, 6.1 or 7.1 as complete statements,
+Corollary 8.1, heat/reset Appendices L–O, imported game-demand or smoothing/closure
+theorems, experimental claims, efficient implementation, or anything outside
+the selected graph. Older finite Lean checks are separate.
+

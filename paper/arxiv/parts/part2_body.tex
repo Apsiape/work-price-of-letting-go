@@ -1,0 +1,321 @@
+\subsection{Setting}\label{ar:sec:setting}
+
+Throughout, $\beta=1/\kB T$ with $0<T<\infty$, and entropies are in bits unless stated otherwise.
+
+\paragraph{Processes.} A process with $n$ slots takes an input in slot $1$ and releases an output, then takes an input in slot $2$, and so on; it may keep memory between slots. Slot $j$ has an input $I_j$ and an output $O_j$, both of dimension $d_j$ and with Hamiltonian $H_j$. Write $d=\prod_jd_j$. Such a process is a quantum comb~\cite{Chiribella08,CDP09,GutoskiWatrous07}: a sequence of channels, each from $I_j$ and a memory to $O_j$ and a new memory. Its Choi operator $R_\Pp$ on $\bigotimes_jI_jO_j$ satisfies the causal constraints
+\begin{equation}\label{ar:eq:causal}
+\Tr_{O_j}R^{(j)}=I_{I_j}\otimes R^{(j-1)},\qquad R^{(0)}=1,
+\end{equation}
+where $R^{(j)}$ is the Choi operator of the first $j$ slots and $R^{(n)}=R_\Pp$. We compare processes with the strategy distance: the largest trace distance $\frac12\|\cdot\|_1$ that an observer can reach between them, choosing each input after seeing the earlier outputs and keeping quantum references~\cite{Chiribella08,GutoskiWatrous07}. Faist, Berta and Brand\~ao suggested such measures for implementations with memory effects~\cite{FBB19}.
+
+\paragraph{Time covariance.} Let $D_j(u)=e^{-\mathrm iuH_j}$. A process commutes with the common time translation if shifting every input by the same time $u$ shifts every output by $u$. In terms of its Choi operator,
+\begin{equation}\label{ar:eq:cov}
+\Bigl[R_\Pp,\ \bigotimes_j D_j(u)_{O_j}\otimes\overline{D_j(u)}_{I_j}\Bigr]=0\qquad\text{for all real }u.
+\end{equation}
+This does not require each slot to be covariant on its own. The delay process releases the ground state in slot~$1$, releases the first input in slot~$2$ and discards the second input. It carries coherence from slot~$1$ to slot~$2$, and it satisfies~\eqref{ar:eq:cov} only for the common translation.
+
+\begin{lemma}[Covariant realization]\label{ar:lem:realization}
+A process satisfies~\eqref{ar:eq:cov} if and only if it can be realized by isometries $V_j$ from $I_j$ and a memory $M_{j-1}$ to $O_j$ and $M_j$ that conserve energy exactly, for suitable Hamiltonians on the memories. No assumption on the rank of $R_\Pp$ is needed.
+\end{lemma}
+
+For a compact symmetry group this is the covariant minimal dilation of Chiribella, D'Ariano and Perinotti~\cite[Eq.~(15)]{CDPcov09}; we include the short proof because the time translations form a non-compact group and the memory Hamiltonians are needed explicitly.
+
+\begin{proof}
+A sequence of energy-conserving isometries gives a process that satisfies~\eqref{ar:eq:cov}, since the time translations pass through each $V_j$. Conversely, every prefix $R^{(j)}$ inherits~\eqref{ar:eq:cov} by partial trace. Take the minimal realization~\cite{CDP09}, in which $M_j$ is the support $A_j$ of $\overline{R^{(j)}}$ and
+\[
+V_j=\Bigl(I_{O_j}\otimes\overline{R^{(j)}}^{\,1/2}\,\overline{R^{(j-1)}}^{\,-1/2}\Bigr)\bigl(|I\rangle\!\rangle_{O_jO_j'}\otimes\mathrm{id}_{I_j\to I_j'}\bigr),
+\]
+with inverses taken on supports. The prefix constraint~\eqref{ar:eq:causal} gives $V_j^*V_j=I$. By~\eqref{ar:eq:cov} the square roots commute with the time translations, the maximally entangled vector is invariant under $D_j(u)\otimes\overline{D_j(u)}$, and the wire $I_j\to I_j'$ intertwines the input translation. So $V_j$ conserves energy when $A_j$ carries the restriction of $\sum_{l\le j}(H_l-H_l^T)$, with $H_l$ on the copy $I_l'$ and $-H_l^T$ on the copy $O_l'$. The supports are invariant, so rank deficiency causes no difficulty.
+\end{proof}
+
+\paragraph{The device.} The device model is that of Appendix~\ref{app:channels}. A device consists of a controller $C$, a battery $B$ and a reservoir $R$. The controller holds all hardware: memory, clocks, catalysts and any work registers not charged to the battery. The reservoir is a finite collection of cells, each with its own Hamiltonian, all declared in advance and all starting in their Gibbs states at inverse temperature $\beta$, independent of each other and of everything else. Every operation is a unitary that conserves the total energy of the systems it acts on. Measurements and records are part of the dilation and are counted. There is no external coherence and no Gibbs-preserving map supplied as a black box.
+
+\paragraph{Real-time operation.} The device runs $N$ episodes of $\Pp$, one after another. Within an episode, input $j+1$ is supplied only after output $j$ has left, and the device never acts again on a delivered output. Between slots, and after the last one, it may act on its internal systems as it likes. The inputs come from an observer who may choose them adaptively, across slots and across episodes, and keep quantum references. The \emph{error} $\varepsilon_N$ is the strategy distance between the whole interaction and $N$ ideal episodes of $\Pp$.
+
+\paragraph{Work.} The controller must return. For the constructions of Theorems~\ref{ar:thm:law} and~\ref{ar:thm:free} it returns exactly to its initial state, independent of all other systems (Theorem~\ref{ar:thm:noncov} relaxes this); for the lower bounds it is enough that its free energy returns up to $o(N)$. The battery is mechanical: work is its mean loss of energy, and its entropy changes by $o(N)$. It is \emph{stationary} if it starts in a state that commutes with its Hamiltonian, as an energy eigenstate does; a stationary battery holds no phase reference. Work is \emph{deterministic} when the battery starts in an energy eigenstate, ends, with probability tending to one for every observer, in a fixed energy eigenstate, and its mean energy differs from that eigenvalue by $o(N)$. The last clause matters only for a controller that returns approximately, as in Sections~\ref{ar:sec:noncov} and~\ref{ar:sec:examples}: it prevents a broad reference from lending the device energy that the battery repays in one rare, large event. In the strong converse (Theorem~\ref{ar:thm:converse}) the controller also starts in a thermal state. For a family of implementations with $\varepsilon_N\to0$, the \emph{work rate} is $\limsup_NW_N/(N\kB T\ln2)$, in bits per episode, and the optimal real-time rate is the infimum over such families. These rates allow reservoirs, controllers and running times of any finite size. Table~\ref{ar:tab:contract} lists the conditions that each main result uses.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
+\toprule
+Result & Controller starts & Controller returns & Battery & Error and conclusion\\
+\midrule
+Rate law and free set (Theorems~\ref{ar:thm:law} and~\ref{ar:thm:free}) & in any declared state & in the constructions exactly, independent of everything else; for the lower bound, its free energy up to $o(N)$ & mechanical, entropy change $o(N)$ & error tending to zero; optimal work $\Kb$ per episode, zero exactly for the free processes\\
+Strong converse (Theorem~\ref{ar:thm:converse}) & in a Gibbs state, independent of the reservoirs & not required & starts in an energy eigenstate; deterministic work below $N(\Kb-\delta)$ & error tending to one, exponentially fast if the battery never misses its target\\
+Without covariance (Theorem~\ref{ar:thm:noncov}) & in any declared state; its free energy is invested capital & approximately: jointly within $\eta_N\to0$, with actual mean energy and entropy changes $o(N)$ & ends in a fixed eigenstate except with vanishing probability; entropy and mean absolute deviation $o(N)$ & error $O(N^{-2})$; optimal work $\Kb$ per episode; no converse is claimed\\
+\bottomrule
+\end{tabular}
+\caption{The contracts of the main results. Every error is the strategy distance of the whole interaction, over all episodes, against observers that adapt and keep quantum references. When the controller returns only approximately, its energy and entropy refunds are separate requirements, since closeness in trace distance alone does not bound them. Startup capital is declared and is not part of the work. Throughout, the number $N$ of episodes is known in advance, and each output carries the same Hamiltonian as its input.}\label{ar:tab:contract}
+\end{table}
+
+\begin{remark}[Why covariance]\label{ar:rem:cov}
+With the controller returned exactly and a stationary battery, a device can only implement processes that satisfy~\eqref{ar:eq:cov}; for channels this is the familiar fact that thermal operations are time-covariant~\cite[Sec.~3]{FBB21}. The argument behind the returning-clock proposition of Appendix~\ref{app:channels} applies unchanged: the device as a whole commutes with time evolution, so when the inputs, the references and the battery are invariant, so is the final state of everything that is kept. Feeding energy-diagonal inputs in all other episodes isolates one episode, whose implemented process then satisfies~\eqref{ar:eq:cov}; its strategy distance to $\Pp$ is at least half the largest distance between $\Pp$ and its time translates. Common covariance is therefore necessary for vanishing error, and by Lemma~\ref{ar:lem:realization} it is all that is needed. The battery must be stationary: a battery in a broad superposition of energy levels is a phase reference of its own, which the device can spend while the controller returns exactly (Appendix~\ref{app:channels}). With a controller that returns only approximately, covariance is not needed (Theorem~\ref{ar:thm:noncov}).
+\end{remark}
+
+\paragraph{Ports.} We take each input and its output to have the same Hamiltonian; isospectral ports, identified by a fixed unitary, are the same. If $H_{I_j}\ne H_{O_j}$, a device must change the Hamiltonian of the system it hands back, and the answer depends on how that change is modelled. For instance, a qubit with energies $0$ and $E$ that is replaced by a maximally mixed qubit with zero Hamiltonian yields work if the device may switch the Hamiltonian itself, but not if it must emit a fresh qubit from its own supplies. We do not treat this case.
+
+\paragraph{The cost.} An \emph{$\varepsilon$-extension} of $\Pp$ is a process $\Pt$ with one extra output $F$, released before the first input and never acted on afterwards, such that discarding $F$ leaves a process within strategy distance $\varepsilon$ of $\Pp$, and such that $\Pt$ itself satisfies all the causal constraints~\eqref{ar:eq:causal}. A \emph{tester} is an observer for one episode: it starts in a pure state, prepares the inputs adaptively, keeps quantum references, and ends with a register $Z$ that holds everything it kept, including all outputs.
+
+\begin{definition}[Real-time cost of a process]\label{ar:def:cost}
+For a tester $t$ run against an extension $\Pt$, let $S(Z|F)_t$ be the conditional entropy of its final register given $F$, and let
+\[
+e_\beta(t)=\frac{\beta}{\ln2}\sum_j\Tr H_j\bigl(\rho_{O_j}-\rho_{I_j}\bigr)
+\]
+be the energy the process adds, in bits, where $\rho_{I_j}$ and $\rho_{O_j}$ are the states of the $j$-th input and output in this run. Set
+\[
+K_{\beta,\varepsilon}(\Pp)=\inf_{\Pt}\ \sup_t\ \bigl[S(Z|F)_t+e_\beta(t)\bigr],\qquad \Kb(\Pp)=\lim_{\varepsilon\downarrow0}K_{\beta,\varepsilon}(\Pp),
+\]
+with the infimum over $\varepsilon$-extensions and the supremum over testers.
+\end{definition}
+
+$F$ is an inert mathematical purifier of the device's initial state, not a message available to the tester. Formally the extension emits it first, so that the extension is itself a process, and never touches it again; none of it carries information about the coming inputs. The tester's operations act only on its own memory and the released outputs of $\Pp$, never on $F$; conditional entropy is used only to compute the device's entropy increase, and it does not authorize either party to operate on $F$. If $B$ is the device's retained body, the purified experiment ends in a pure state on $BZF$, so $S(Z|F)=S(B_{\mathrm{final}})-S(B_{\mathrm{initial}})$: after the episode, $S(Z|F)$ equals the entropy the episode has added to the device (Lemma~\ref{ar:lem:accumulation}). If the tester could read $F$, the value would change; in the example of Section~\ref{ar:sec:examples} with hidden memory, knowing $b$ would let the observer choose late inputs branch by branch. So $\Kb$ is the least entropy, plus energy, that one episode must add to a device that does not know its inputs in advance.
+
+Both terms are evaluated on the same tester, and this matters. For the delay process with $H=\mathrm{diag}(0,E)$, the entropy term alone is largest for a maximally mixed second input and the energy term alone is largest for a second input in its ground state; taking the two maxima separately would give $1$, while $\Kb=\log_2(1+e^{-\beta E})$ (Section~\ref{ar:sec:examples}).
+
+\begin{proposition}[Basic properties]\label{ar:prop:basic}
+\begin{enumerate}[label=(\alph*)]
+\item For one slot, $\Pp$ is a channel $\Phi$ and $\Kb(\Pp)$ is its real-time cost $\Trt(\Phi)$ from Appendix~\ref{app:channels}.
+\item For $n$ uses of a time-covariant channel $\Phi$, viewed as one process, $\Kb=n\,\Trt(\Phi)$.
+\item $\Kb(\Pp)\ge0$, and $|\Kb(\Pp)|\le2\log_2d+\frac{\beta}{\ln2}\sum_j2\|H_j\|$.
+\item At zero Hamiltonian, $\Kb$ involves entropy alone: it is the purity cost of answering in real time.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) A one-slot extension is a state $\sigma_{QOF}$ in which $F$ is independent of the reference $Q$ of the input, so Definition~\ref{ar:def:cost} becomes the definition of Appendix~\ref{app:channels} once two smoothings are compared. Smoothing input by input and smoothing in strategy distance have the same limit as $\varepsilon\to0$, and the limit commutes with the supremum over inputs by the minimax argument of Lemma~\ref{ar:lem:minimax}. (b) For the lower bound, apply the chain rule to $S(Z|F)$ across the $n$ uses: each use adds at least the one-use cost on its own input. For the upper bound, take a product of one-use extensions; each use's entropy and energy then depend only on that use's average input. (c) Feed every slot a Gibbs input. Every extension is itself a finite process, so it has an exact dilation with $F$ as the purifier of the bath. Against this tester, $S(Z|F)+e_\beta$ is the sum over slots of the relative entropies $D(\rho_{O_jB_j}\|\gamma_j\otimes\rho_{B_j})\ge0$, where $B_j$ is the bath after slot $j$ (Section~\ref{ar:sec:free}); here the equal input and output Hamiltonians are used. So every extension has value at least $0$. The bound on $|\Kb|$ holds because a pure tester's final register has effective dimension at most $d^2$ (Appendix~\ref{ar:app:testers}). (d) is Definition~\ref{ar:def:cost} with $e_\beta=0$.
+\end{proof}
+
+% =====================================================================
+\subsection{The work law}\label{ar:sec:law}
+
+The lower bound comes from the bookkeeping identity of Appendix~\ref{app:channels} and a bound on the entropy each episode must add to the device. The upper bound is a construction. Section~\ref{ar:sec:converse} upgrades the lower bound to every fixed error.
+
+\subsubsection{Bookkeeping}
+
+Write $D=CBR$ for everything except the inputs and outputs, and let $A=S(D_{\mathrm{fin}})-S(D_{\mathrm{init}})$ be the entropy it gains. Let $\Delta E_{\mathrm{sys}}$ be the total energy delivered in the outputs minus the total energy taken from the inputs, and let $w$ be the free energy drawn from the battery and the controller, in units of $\kB T\ln2$. The accounting identity of Appendix~\ref{app:channels} holds verbatim:
+\begin{equation}\label{ar:eq:accounting}
+w=A+\tfrac{\beta}{\ln2}\,\Delta E_{\mathrm{sys}}+D(R_{\mathrm{fin}}\|\gamma_R)+I(C{:}B{:}R)_{\mathrm{fin}}\ \ge\ A+\tfrac{\beta}{\ln2}\,\Delta E_{\mathrm{sys}}.
+\end{equation}
+It concerns only the device, so correlations with the observer do not enter; a reservoir cell that is set aside stays in $R$, so discarding never helps.
+
+\subsubsection{What each episode must leave behind}
+
+\begin{lemma}[Minimax]\label{ar:lem:minimax}
+$K_{\beta,\varepsilon}(\Pp)=\sup_t\inf_{\Pt}\bigl[S(Z|F)_t+e_\beta(t)\bigr]$.
+\end{lemma}
+
+\begin{proof}
+For a fixed extension, $S(Z|F)_t+e_\beta(t)$ is concave in the tester: the bath state is affine in $t$, entropy is concave, and the payload energy is affine. Mixtures of extensions are realized by adding a classical flag to $F$, whose entropy cancels in $S(Z|F)$, and stay $\varepsilon$-close to $\Pp$. Given $\eta>0$, finitely many extensions $\Pt_1,\dots,\Pt_L$ have $\min_l[\cdot]_l<b+\eta$ at every tester, where $b$ is the right-hand side. The set of points $x\in\mathbb R^L$ dominated by $([\cdot]_1(t),\dots,[\cdot]_L(t))$ for some $t$ is closed, convex and downward closed, and excludes $(b+\eta,\dots,b+\eta)$. A separating hyperplane with non-negative normal gives flag probabilities whose mixture has value below $b+\eta$ at every tester.
+\end{proof}
+
+\begin{lemma}[Causal accumulation]\label{ar:lem:accumulation}
+Suppose the error is at most $\varepsilon$, and the observer runs a fixed tester $t$ in every episode, with a fresh copy each time and all earlier registers left alone. Then each episode raises $S(D)+\frac{\beta}{\ln2}E_{\mathrm{payload}}$ by at least $\inf_{\Pt}[S(Z|F)_t+e_\beta(t)]$, the infimum over $\varepsilon$-extensions. Hence
+\[
+A+\tfrac{\beta}{\ln2}\Delta E_{\mathrm{sys}}\ \ge\ N\,\inf_{\Pt}\bigl[S(Z|F)_t+e_\beta(t)\bigr].
+\]
+\end{lemma}
+
+\begin{proof}
+Let $D_k$ be the device before episode $k$ and let $F_k$ purify it; $F_k$ contains the earlier references and outputs. The fresh tester starts pure and independent of $D_kF_k$. The episode acts on the tester's inputs and on $D_k$, and $F_k$ is never touched, so the episode, seen from the observer with $F_k$ released first, is an extension of the process the device actually implements in episode $k$. That process is within $\varepsilon$ of $\Pp$: an observer could run this tester in episode $k$ and the ideal comparison elsewhere. After the episode the global state is pure, so $S(D_{k+1})-S(D_k)=S(Z_kF_k)-S(F_k)=S(Z_k|F_k)$, and the payload energy changes by exactly $e_\beta(t)$ in bits. Operations between episodes are unitary on $D$ and do not change $S(D)$, so the increments add up.
+\end{proof}
+
+The device's memory may be correlated with every earlier output; the lemma allows that. What it rules out is a memory that already knows the coming inputs.
+
+\subsubsection{The lower bound}
+
+Choose, by Lemma~\ref{ar:lem:minimax}, a tester $t$ whose value $\inf_{\Pt}[S(Z|F)_t+e_\beta(t)]$ is within $\eta$ of $K_{\beta,\varepsilon_N}(\Pp)$. Lemma~\ref{ar:lem:accumulation} and~\eqref{ar:eq:accounting} give
+\begin{equation}\label{ar:eq:converse}
+w\ \ge\ N\bigl[K_{\beta,\varepsilon_N}(\Pp)-\eta\bigr]
+\end{equation}
+for every $\eta>0$. For a mechanical battery the actual work is $\kB T\ln2\,(w-\Delta S_B)$ when the controller returns, and $\Delta S_B=o(N)$. Letting $\varepsilon_N\to0$ gives the lower half of Theorem~\ref{ar:thm:law}. Covariance is not used: the lower bound holds for every process and every controller.
+
+\subsubsection{The construction}\label{ar:sec:construction}
+
+The matching construction has four layers (Appendix~\ref{ar:app:construction}). At each $N$ it compiles one finite implementation of an approximate extension with error $N^{-3}$, so that the error accumulated over $N$ episodes still vanishes; every overhead depends only on $d$, the Hamiltonians, $\beta$ and $N$, never on the size or spectrum of the extension's bath.
+
+\emph{A covariant dilation.} A finite extension is realized by one bath, in a state $\tau$, and one unitary contact per slot. Averaging over a finite grid of phases of the torus generated by the energy gaps, controlled by a flag in the bath, makes the realization covariant under the common time translation without increasing its cost.
+
+\emph{What an observer can do to the bath.} Every tester is dominated by the flat tester, which feeds maximally mixed inputs: the bath state it leaves satisfies $\omega_t\le d^2\omega_0$. A pure tester's final register has effective dimension at most $d^2$, however large its references. These bounds involve only the ports.
+
+\emph{Paying for entropy and energy together.} A single sharp energy bank, shared by all episodes, records the energy that flows between the payload and the bath, without measuring the payload's energy. An analytic interpolation over a strip in the complex plane, applied to the whole episode at once, turns the port bounds into an operator inequality that holds even when the bank, the observer and the earlier baths are entangled. It charges entropy and energy on the same tester. Tracing out the bank averages the whole history over one common phase, never over separate phases at separate times.
+
+\emph{Paying the work.} Converters between subspaces of given Gibbs weight, built from reservoirs with exactly conserving swaps, form the baths at the start and reset them after the last output, moving the battery by the logarithm of the Gibbs-volume ratios. The bank's large starting energy is borrowed and returned, and the battery's entropy and energy variance tend to zero. A final swap with a thermal cell returns the controller exactly. The net debit is $N\kB T\ln2\,(\Kb(\Pp)+o(1))$.
+
+This proves the upper half of Theorem~\ref{ar:thm:law}. The same bank also handles processes whose Choi operator is not of full rank: it pays for changes of relative likelihood, so the target never has to be implemented exactly.
+
+% =====================================================================
+\subsection{The strong converse}\label{ar:sec:converse}
+
+The lower bound~\eqref{ar:eq:converse} is a rate statement. The following theorem covers every error below one, provided the work is deterministic. For batch implementations of channels, the converse of Faist, Berta and Brand\~ao already holds at fixed small error~\cite[Prop.~4.2]{FBB21}; Theorem~\ref{ar:thm:converse} is a real-time counterpart for processes that covers every error below one. For a battery projector $P_B$ that commutes with $H_B$, write
+\[
+b_\beta(P_B)=\frac{\beta E_{\mathrm{init}}}{\ln2}+\log_2\Tr\bigl(P_Be^{-\beta H_B}\bigr).
+\]
+
+\begin{theorem}[Strong converse]\label{ar:thm:converse}
+Let $\Pp$ satisfy~\eqref{ar:eq:cov} and let $\delta>0$. There are constants $a,b,c>0$, depending only on $\Pp$, the Hamiltonians, $\beta$ and $\delta$, with the following property. Consider any real-time implementation whose controller and reservoirs start in independent Gibbs states, of any size, and whose battery starts in a pure energy eigenstate of energy $E_{\mathrm{init}}$. Let $P_B$ satisfy $b_\beta(P_B)\le N(\Kb(\Pp)-\delta)$, and let $q_N$ be the probability that the battery ends outside $P_B$ when the observer of the proof is used. Then
+\[
+1-\varepsilon_N\ \le\ q_N+c\,e^{-bN}+2^{-aN}.
+\]
+\end{theorem}
+
+For a battery that ends in a single eigenstate of energy $E_{\mathrm{fin}}$, the condition on $P_B$ says exactly that the work $E_{\mathrm{init}}-E_{\mathrm{fin}}$ is at most $N\kB T\ln2\,(\Kb(\Pp)-\delta)$. So with deterministic work below the rate, the error tends to one, exponentially fast if the battery never misses its target. This is the second statement of Theorem~\ref{ar:thm:law}. A projector of rank $R_B$ whose energies are all at least $E_{\mathrm{init}}-W$ has $b_\beta(P_B)\le\beta W/\ln2+\log_2R_B$: the accepted degeneracy counts as work. Without this, a large degenerate battery in a pure state could supply purity at no energy cost. The hypothesis that the controller starts in a Gibbs state cannot simply be dropped. A controller that only returns approximately, with its actual energy and entropy changing by $o(N)$, can carry an incoherent energy bank whose loans depend on the branch and cancel in the mean; with it, a covariant reset runs at half the vanishing-error rate with error exactly $1/2$ (Appendix~\ref{app:batch}), while the battery's debit is the same on every branch. What decides this is how spread out the controller's capital is, not its size: spread $o(N/\sqrt\eta)$, where $\eta$ is the controller's return error, still forces a strong converse for every channel and without time covariance, but only at the thermodynamic capacity, which can lie below the real-time rate, and a bank of spread of order $N/\sqrt\eta$ can break even that (Appendix~\ref{app:batch}); whether a converse at the real-time rate survives such a controller is open.
+
+\begin{proof}[Outline of the proof]
+The proof follows the fixed-error converse for channels in Appendix~\ref{app:channels}, with one new ingredient: an observer that runs a whole episode adaptively and still conserves energy exactly. Details are in Appendix~\ref{ar:app:converse}.
+
+\emph{Step 1: an observer that conserves energy.} Before $N$ or the device is fixed, choose a tester whose value $\inf_{\Pt}[S(Z|F)_t+e_\beta(t)]$ is within a small margin of $\Kb(\Pp)$, that has full rank, and that commutes with the common time translation; averaging over the translations and mixing in a little of the flat tester achieves this, since the value is concave and invariant. Apply the construction of Lemma~\ref{ar:lem:realization} to the tester's own causal constraints. This realizes the tester by isometries that conserve energy when each stage of its memory carries the matching charge. Its final register $Z$, of dimension at most $d^2$, then carries the charge $H_Z=\sum_j(H_{O_j}-H_{I_j}^T)$, and $\Tr H_Z\nu_Z$ is exactly the energy delivered minus the energy injected in the episode.
+
+\emph{Step 2: a tradeoff valid for every device.} For this tester, the least $S(Z|F)$ over all extensions is a convex function of the observer's final state. A separating hyperplane gives an affine lower bound, which may be averaged over the charge so that it depends only on the energy-block pinching of $Z$. The observer measures a random fraction $\gamma$ of the episodes with an informationally complete measurement inside each energy block, built from rank-one effects and dilated so that it conserves charge. This turns the affine bound into a min-tradeoff function for entropy accumulation~\cite{DFR20}. It holds whatever the device's state, and its constants do not involve the device.
+
+\emph{Step 3: accumulation and an energy event.} Run this tester afresh in every episode, while the device may keep arbitrary correlations between episodes. Entropy accumulation bounds the smooth min-entropy of the observer's registers, given a purification $E$ of the initial hardware, from below by $N h-C\sqrt N$ on the event $G$ that the empirical score is high. In the ideal experiment the observer's total charge is at least $N(\Delta E-u)$, with $\Delta E=\Tr H_Z\nu_Z$ and any fixed $u>0$, except with exponentially small probability.
+
+\emph{Step 4: a Gibbs-weighted cap.} Every operation conserves the total charge, and the hardware starts thermal. So the same smooth min-entropy, after $G$, the energy event and $P_B$ have all passed with probability $p$, is at most $b_\beta(P_B)-\beta N(\Delta E-u)/\ln2+N\theta_\gamma+\log_2(1/p)+4$, where $\theta_\gamma\to0$ as $\gamma\to0$. The partition function of the hardware cancels exactly, whatever its size; with equal input and output Hamiltonians, swapping a carrier in or out does not change it. Comparing the two bounds with $b_\beta(P_B)\le N(\Kb-\delta)$ forces $p<2^{-aN}$, and the union bound $p\ge1-\varepsilon_N-q_N-ce^{-bN}$ gives the theorem.
+\end{proof}
+
+Covariance is used only in Step~1, to choose the tester and to give it an energy-conserving realization; per-slot covariance is never needed. The constants are not uniform as $\delta\to0$, as for channels.
+
+% =====================================================================
+\subsection{What is free}\label{ar:sec:free}
+
+A \emph{dilation} of a process is a finite realization of it: a bath $B$ in a state $\tau$, and for each slot a unitary $U_j$ on $I_jB$ (equivalently $O_jB$, since the ports are square). Its \emph{gain} is $g=\sup_t[S(Z|F)_t+e_\beta(t)]$, with $F$ the purifier of $\tau$. By Definition~\ref{ar:def:cost}, $\Kb(\Pp)$ is the limit, as $\varepsilon\to0$, of the least gain of dilations within $\varepsilon$ of $\Pp$.
+
+\subsubsection{Driving with Gibbs inputs}
+
+Feed every slot a fresh Gibbs state $\gamma_j=e^{-\beta H_j}/Z_j$, and let $\tau_j$ be the bath after slot $j$, with $\tau_0=\tau$. Entropy conservation and $\log_2\gamma_j=-\beta H_j/\ln2-\log_2Z_j$ give, for each slot,
+\begin{equation}\label{ar:eq:defect}
+a_j:=S(\tau_j)-S(\tau_{j-1})+\tfrac{\beta}{\ln2}\Tr H_j(\rho_{O_j}-\gamma_j)=D\bigl(U_j(\gamma_j\otimes\tau_{j-1})U_j^*\,\big\|\,\gamma_j\otimes\tau_j\bigr)\ \ge\ 0.
+\end{equation}
+The Gibbs tester is a legal tester, and its score is $\sum_ja_j\le g$. This proves $\Kb\ge0$ (Proposition~\ref{ar:prop:basic}).
+
+The slot-by-slot defects add up to a single relative entropy. Let registers $A_1,\dots,A_n$ start in $\gamma_1,\dots,\gamma_n$, and let slot $j$ act on $A_j$ and the bath, so that $A_j$ plays the role of the $j$-th input and then holds the $j$-th output. Let $\Omega_j$ be the joint state of the bath and all $A_l$ after slot $j$, and $\xi_j=\tau_j\otimes\gamma_{A_1}\otimes\dots\otimes\gamma_{A_n}$. Then
+\begin{equation}\label{ar:eq:prefix}
+D(\Omega_j\|\xi_j)=\sum_{l\le j}a_l\qquad\text{for every }j.
+\end{equation}
+Indeed $S(\Omega_j)$ equals the initial entropy, $\log\xi_j$ is a sum of the bath's $\log\tau_j$ and Gibbs terms, unused registers cancel, and each used one contributes its energy change. Equation~\eqref{ar:eq:prefix} includes every correlation with earlier outputs. It says that the gain against Gibbs inputs is small exactly when the released outputs stay close to Gibbs and the bath stays nearly uncorrelated with all of them. This is condition (ii) of Theorem~\ref{ar:thm:free}, and it shows that a single tester, the one that feeds Gibbs states, decides whether a process is free. The exact criterion of Lie et al.\ for one channel also uses the Gibbs input alone~\cite{LieEtAl26}, and so does the thermality condition of Milz et al.\ at the Gibbs-preserving level, which inserts only Gibbs states~\cite[Def.~8]{Milz26}.
+
+\subsubsection{Exact zero gain}
+
+Write $G_j$ for the inverse of the first $j$ contacts, acting on the bath and $A_1,\dots,A_j$, and let $\sigma=\tau\otimes\gamma_{A_1}\otimes\dots\otimes\gamma_{A_n}$. Regard the registers $A_l$ as part of an enlarged bath with source $\sigma$, and gauge the contacts by
+\begin{equation}\label{ar:eq:gauge}
+W_j=(I\otimes G_j)(U_j\otimes I_A)(I\otimes G_{j-1}^*).
+\end{equation}
+The internal gauges cancel between consecutive contacts and the last one acts on the bath alone, so the whole adaptive process, with every deadline, is unchanged. The point of the gauge is that one source now serves every contact. By~\eqref{ar:eq:prefix} and the inequality $\|\sqrt\rho-\sqrt\sigma\|_2^2\le D_{\mathrm{nat}}(\rho\|\sigma)$ (Appendix~\ref{app:channels}),
+\begin{equation}\label{ar:eq:common}
+\bigl\|[W_j,\sqrt{\gamma_j\otimes\sigma}]\bigr\|_2\ \le\ 3\sqrt{\ln2\,g}\qquad\text{for every }j.
+\end{equation}
+If $g=0$, every $W_j$ preserves $\gamma_j\otimes\sigma$. On the support of $\sigma$, which every $W_j$ leaves invariant, all $W_j$ then commute with $H_j+H_B$ for the bath Hamiltonian $H_B=-\beta^{-1}\ln\sigma$: this is an exact causally ordered thermal realization of the process. Conversely, a causally ordered thermal realization has $S(Z|F)_t+e_\beta(t)=-D(\omega_t\|\sigma)\le0$ for every tester, where $\omega_t$ is the final bath. So zero gain is attained exactly by thermal realizations. For one channel this is the argument of Lie et al.~\cite[Prop.~4]{LieEtAl26}; the gauge~\eqref{ar:eq:gauge} lets one source serve every contact.
+
+\subsubsection{Small gain}
+
+The difficulty is that a small gain may be achieved only with baths of unbounded size and arbitrarily small eigenvalues. Repairing each contact separately, against its own bath state, gives a different bath Hamiltonian at each slot, and the repairs do not compose. The common source~\eqref{ar:eq:common} removes this obstacle. The repair has four steps (Appendix~\ref{ar:app:free}).
+\begin{enumerate}[label=(\roman*)]
+\item Mix a small multiple of the identity into the source, and approximate each port Hamiltonian by one whose gaps are multiples of a mesh $h_E$.
+\item Round the logarithms of the source's eigenvalues to the mesh $\beta h_E$, with \emph{one} random offset for all contacts. Energy blocks of the rounded bath Hamiltonian then match bins of the source's logarithms, and with high probability over the offset each $W_j$ has little weight outside the blocks. Separately good offsets would not give one compatible bath Hamiltonian.
+\item Pinch each $W_j$ into the blocks and complete it to a unitary by its polar decomposition. Each completed contact conserves energy exactly for the rounded bath.
+\item Compare the original and repaired processes by replacing one contact at a time, along purified histories that keep all earlier outputs and references. Each replacement costs little, because the bath before contact $j$ is close to the source in the square-root distance, and the errors add up over the $n$ contacts.
+\end{enumerate}
+Irrational gaps are handled as in Appendix~\ref{app:channels}: they are approximated by commensurate ones with the same integer labels, and one Gibbs lattice register, shared by all contacts and retained throughout, absorbs the difference so that the original Hamiltonians are conserved exactly. Tracing out the lattice averages the whole history over one common phase. The result is a causally ordered thermal process within
+\begin{equation}\label{ar:eq:modulus}
+\varepsilon+C\,g^{1/(6\max\{1,r\})}
+\end{equation}
+of $\Pp$, where $\varepsilon$ is the distance of the dilation to $\Pp$, $r$ is the number of rationally independent gaps of all the port Hamiltonians together, and $C$ depends only on $n$, the dimensions, the Hamiltonians and $\beta$, possibly exponentially in $n$. It does not depend on the bath.
+
+\subsubsection{Covariance and the work rate}
+
+Each repaired process commutes with the common time translation of its approximating Hamiltonians, and these converge to the original ones. So every process with $\Kb=0$ commutes with the common time translation. For one channel and an exact equilibrating dilation, this is part~2 of~\cite[Prop.~4]{LieEtAl26}; what is new is that only the common translation is forced, and that the bound does not depend on the bath. It need not commute with the translations of each slot separately: the thermal delay process, which swaps the first input into a bath qubit and swaps it out at the second slot, is a causally ordered thermal process with this property.
+
+The operational statement (iv) follows from the work law in one direction: zero rate implies $\Kb=0$ by the lower bound~\eqref{ar:eq:converse}, which does not use covariance. In the other direction, take a thermal realization within $o(1/N)$ of $\Pp$, prepare $N$ independent Gibbs copies of its bath in advance, and retire one after each episode. No bath is ever reset, so no work is drawn; a controller clock that indexes the episodes is formed and returned at a cost of $O(\log N)$, which is sublinear. This completes the proof of Theorem~\ref{ar:thm:free}.
+
+\paragraph{Examples.} Werner--Holevo, used $n$ times, preserves equilibrium yet has $\Kb=n\log_23$; it is not free. The ordered process of Proposition~\ref{ar:prop:order} and the delay process have positive cost, so they are not free either, although the first is a thermal operation as one channel. The thermal delay process, and any sequence of thermal operations sharing one bath, are free.
+
+% =====================================================================
+\subsection{Without time covariance}\label{ar:sec:noncov}
+
+By Remark~\ref{ar:rem:cov}, a controller that returns exactly, with a stationary battery, can only implement processes that commute with the common time translation. As for single channels (Appendix~\ref{app:channels}), the restriction disappears if the controller need only return approximately: its final joint state with everything else close to its initial state tensored with the rest, and its mean energy and entropy changing by $o(N)$, uniformly over observers.
+
+\begin{theorem}[Real-time work law without covariance]\label{ar:thm:noncov}
+Let $\Pp$ be a fixed finite process whose slots return the same physical carrier with the same Hamiltonian, not necessarily commuting with any time translation. Consider implementations of $N$ episodes, with $N$ known in advance, by a controller in any declared initial state, whose free energy is counted as invested capital, independent Gibbs stocks and energy-conserving unitaries. Require, uniformly over all adaptive observers, including adaptation across episodes and entanglement with references, that the complete error tend to zero, that the controller return jointly with everything else within $\eta_N\to0$, that its actual mean energy and entropy change by $o(N)$, and that the battery end in a fixed energy eigenstate except with vanishing probability, with entropy and mean absolute deviation $\mathbb E|H_{W,\mathrm f}-E_{\mathrm{nom}}|$ both $o(N)$. Then the optimal work per episode is $\kB T\ln2\,\Kb(\Pp)$; at each $N$ it is attained by a single implementation that serves every observer, with error $O(N^{-2})$.
+\end{theorem}
+
+The lower bound is that of Section~\ref{ar:sec:law}, which uses no covariance; it needs only the weaker signed condition that the battery's mean energy end within $o(N)$ of its nominal endpoint, while the construction meets the stronger absolute one. The construction, given in full in Appendix~\ref{ar:app:noncov}, adds two ingredients to Appendix~\ref{ar:app:construction}. First, on a rare branch, of probability $\delta$, the device keeps each input before the last and emits half of a maximally entangled pair in its place. What it holds before the last output is then exactly the observer's tester operator, up to normalization. Second, a joint tangent, built as in Appendix~\ref{ar:app:construction} but for this enlarged dilation, bounds the energy $J(t)$ that one episode adds to the payload and the bath by a constant $w$ for every tester, with $w$ plus the cost of forming the source at most the gain. The slack $w-J(t)$ is linear in the tester and nonnegative on the tester cone. By conic duality it equals $\Tr(D_{\rm hist}t)$ for a positive operator $D_{\rm hist}$ whose norm depends only on the ports. The retained record holds the tester only with probability $\delta$, so the correction it must apply has norm $O(1/\delta)$; a heat contact of that norm moves exactly this slack, on average, into a thermal qubit of large gap, so that the phase reference's mean energy is refunded up to a remainder that vanishes as the gap grows. No released output is touched. A broad phase reference that approximates the whole history replaces the sharp energy bank of Appendix~\ref{ar:app:construction}; its width, the hot gap and the cache size depend on the chosen extension. The sources are prepared before the first input from a cache in the style of the correlated catalysts of Duan, Feng, Li and Ying and of Shiraishi and Sagawa~\cite{Duan05,ShiraishiSagawa21}.
+
+As for channels, the controller's energy comes back only on average: on typical branches the reference can end higher or lower by order $N$; on rare branches the reference and the cache move by far more, which balances the mean. Only the mean energy and the joint entropy are refunded. The theorem is a rate law: it bounds neither the capital nor the tails of the heat, refunds the controller's energy only on average, uses no efficient or local hardware, and assumes carriers whose dimension and Hamiltonian do not change. The clock, the cache and the heat baths must be very large. The delayed channels and the correlated process of Section~\ref{ar:sec:examples} are explicit instances with closed-form values.
+
+% =====================================================================
+\subsection{Examples}\label{ar:sec:examples}
+
+\subsubsection{Channels}
+
+By Proposition~\ref{ar:prop:basic}, a process with one slot is a channel and $\Kb$ is its real-time cost $\Trt$, and $n$ uses of a time-covariant channel cost $n\Trt$. So Theorem~\ref{ar:thm:law} contains the real-time work law for channels of Appendix~\ref{app:channels}, and Theorem~\ref{ar:thm:free} contains its characterization of the free channels. What is new for processes is that the task itself can force the device to keep correlations with what it has released.
+
+\subsubsection{Order costs work}
+
+\begin{proof}[Proof of Proposition~\ref{ar:prop:order}]
+\emph{Free as one channel.} The map $(a,q)\mapsto(a,V^{a\oplus r}q)$, with $A$ dephased, is a controlled-$V$ gate followed by a $V$ applied with probability $p$. Both act with two Gibbs coin qubits and no battery, and both conserve energy: controlled-$Z$ is diagonal for any diagonal Hamiltonians, and controlled-$X$ needs $Q$ to be degenerate.
+
+\emph{Lower bound.} In every episode feed $A$ a uniformly random bit $a$, keeping a copy, and feed $Q$ half of a fresh maximally entangled pair (for $V=Z$) or a fresh uniform bit (for $V=X$). Let $e_1$ be the probability of reading $a$ wrongly from the first output and $e_2$ the probability that the value of $a\oplus r$ read from the second output and the kept reference differs from $a$. Three facts hold in each episode, whatever the device's correlations with earlier ones. Releasing the first output lowers the device's entropy by at most $h(e_1)$, on average over $a$. After the release the device must still hold a record of $a$: the second slot, together with the fresh probe, is a channel acting on the device alone, so Holevo's bound and Fano's inequality give $\chi(a{:}D)\ge1-h(e_2)$. And the second slot cannot lower the device's entropy, because its input is locally maximally mixed. Together,
+\[
+S(D_{\mathrm{after}})-S(D_{\mathrm{before}})\ \ge\ 1-h(e_1)-h(e_2),
+\]
+with $e_1\le\varepsilon$ and $e_2\le p+\varepsilon$. Summing over episodes and using~\eqref{ar:eq:accounting}, with the energy change bounded by $\varepsilon$ times the spans of the Hamiltonians, gives the rate $1-h(p)$ as $\varepsilon\to0$. For $V=X$ every input and test is classical.
+
+\emph{Construction.} Prepare, before the episode, a bit $M$ that equals $1$ with probability $p$. At the first slot, add $a$ into $M$ and release $a$; at the second, apply $V^M$ to $Q$. Then $M=a\oplus r$ is a record of $a$ masked by the coin, and its correlation with the released $a$ is $1-h(p)$ bits. Forming $N$ such biased bits from Gibbs supplies costs $N[1-h(p)]+o(N)$ when they are formed collectively; forming them one episode at a time would cost more. The used bits are reset after the last episode. If $a$ could be withheld until $Q$ arrives, the device could apply the whole map at once, and the rate would be $0$.
+\end{proof}
+
+The mechanism is the Landauer--Bennett price of a record whose original has already left~\cite{Bennett73,BMC18}. What the proposition adds is the exact rate in a process that is free as a channel, against a coherent adaptive observer, with a converse that does not depend on the size of the device. The advance-committed bit $M$ is the point of the construction: it stores $a$ only up to the coin, which is all the second slot needs.
+
+\subsubsection{The delay process}
+
+Let both slots carry a qubit with $H=\mathrm{diag}(0,E)$. The delay process releases the ground state in slot~$1$, releases the first input in slot~$2$, and discards the second input. It commutes with the common time translation but not with the translation of each slot separately. A ground-state memory qubit and two swaps implement it: swap the first input into the memory and release the memory's ground state; then swap the second input into the memory and release the first input. For every tester this costs
+\[
+S(\rho_{I_2})-\tfrac{\beta E}{\ln2}\,\langle1|\rho_{I_2}|1\rangle,
+\]
+where $\rho_{I_2}$ is the second input: the device absorbs that input and must later reset it. The maximum over $\rho_{I_2}$ is attained at the Gibbs state and equals $\log_2(1+e^{-\beta E})$. Conversely, a tester that sends the ground state first and a purified Gibbs state second forces this value on every extension, since both outputs must then be close to pure. So
+\[
+\Kb=\log_2\bigl(1+e^{-\beta E}\bigr),\qquad\text{work per episode}=\kB T\ln\bigl(1+e^{-\beta E}\bigr).
+\]
+This is the free energy needed to prepare a ground state from a thermal one~\cite{HorodeckiOppenheim13,Brandao13}, the cost Zambon and Adesso use in their example of work investment~\cite{ZambonAdesso}. Here it is the exact real-time cost of a process that moves coherence from one time to another.
+
+\subsubsection{Delayed channels}
+
+The delay process generalizes to any channel. Let $\Phi$ be a channel on the port, and let $\Pp_\Phi$ release the ground state in slot~$1$, release $\Phi$ applied to the first input in slot~$2$, and discard the second input; take the ground energy to be $0$. Then
+\[
+\Kb(\Pp_\Phi)=\Trt(\Phi)+\log_2Z_H,
+\]
+where $\Trt$ is the real-time cost of Appendix~\ref{app:channels}. For the lower bound, feed a purified input $\rho$ in slot~$1$ and, independently, a purified Gibbs state in slot~$2$. The causal constraints make the second reference independent of everything that exists before slot~$2$, so it can join the side output $F$; and the first output is nearly pure. What remains is a one-slot extension of $\Phi$, whose score is at least the channel cost at $\rho$, while the second input contributes $\log_2Z_H$. For the upper bound, swap the first input into a ground-state cell, apply a dilation of $\Phi$ before the second slot, and swap the second input in. By subadditivity the score is at most the channel score at the first input plus $S(\rho_{I_2})-\frac{\beta}{\ln2}\Tr H\rho_{I_2}\le\log_2Z_H$, for every tester. The two terms add, because correlating the inputs can only lower this sum.
+
+If $\Phi$ is time-covariant, $\Pp_\Phi$ commutes with the common time translation, and Theorem~\ref{ar:thm:law} gives the work $\kB T\ln2\,\Trt(\Phi)+\kB T\ln Z_H$ per episode, with the strong converse. If $\Phi$ is not time-covariant, no device whose controller returns exactly and whose battery is stationary can run $\Pp_\Phi$ (Remark~\ref{ar:rem:cov}). With a controller that returns approximately, the same work is optimal. The lower bound of Section~\ref{ar:sec:law} does not use covariance, and it is attained by a device that runs $\Phi$ on the stored input with the returning clock of Appendix~\ref{app:channels} and resets the absorbed second inputs together at the end. For the Hadamard gate on a qubit with $H=E|1\rangle\langle1|$, this is $E/\sqrt2+\kB T\ln(1+e^{-\beta E})$ per episode. To our knowledge, these are the first exact real-time costs of processes with memory that do not commute with time translation. If slot~$1$ releases the Gibbs state instead of the ground state, the cost is $\Trt(\Phi)$ alone, and the process is free exactly when $\Phi$ is a limit of thermal operations; the thermal delay process of Section~\ref{ar:sec:free} is the case $\Phi=\mathrm{id}$, and the process of Fig.~2(a) of Zambon and Adesso, a thermal qubit swapped in, flipped and swapped out, is the case $\Phi=X(\cdot)X$~\cite{ZambonAdesso}.
+
+\subsubsection{A correlated process}
+
+A process can also correlate its slots through hidden memory. At the start of each episode let the process draw a hidden uniformly random bit $b$. In slot~$1$ it applies $U_b$, with $U_0=I$ and $U_1=e^{\mathrm i\vartheta Z}$; in slot~$2$ it applies $V_b$, with $V_0=X$ and $V_1$ the Hadamard gate; both slots carry $H=E|1\rangle\langle1|$, and $0<\vartheta<\pi/8$. The process does not commute with time translation, and its memory, the bit $b$, ties the two slots together. Its cost is $\Kb=\beta v_\vartheta/\ln2$ with
+\[
+v_\vartheta=\frac E2\sqrt{\frac32+\cos2\vartheta+\sin2\vartheta}.
+\]
+The calculation has two independent restrictions: the first output limits how well the observer can distinguish the two values of $b$, while causality limits how much of $b$ can be hidden in $F$. The first fixes the energy maximum and the second rules out a negative entropy credit. The pairs $(\rho_0,\rho_1)$ of second-slot inputs an observer can produce for the two values of $b$ are exactly those with root fidelity $\|\sqrt{\rho_0}\sqrt{\rho_1}\|_1\ge\cos\vartheta$. Maximizing the energy the second slot must supply over these pairs gives $v_\vartheta$. The entropy term drops out: because the second-slot gates of the two branches differ by more than a phase, the causal constraint at slot~$2$ allows $F$ only a classical correlation with $b$, so $S(Z|F)\ge0$, with equality for a classical copy of $b$. Appendix~\ref{ar:app:hidden} gives the three steps. For $\pi/8\le\vartheta\le7\pi/8$ the fidelity constraint no longer binds and the cost is $(E/2)(1+1/\sqrt2)$; the process depends on $\vartheta$ only modulo $\pi$.
+
+A device that runs each branch with a returning clock pays each branch's own worst case, $(E/2)(1+1/\sqrt2)>v_\vartheta$: the observer cannot produce both worst cases at once, and a device that ignores this overpays. Paying exactly $v_\vartheta$ needs an energy correction that depends on the observer's whole strategy, through the first input, the first output and the second input together. A device can obtain it without touching any released output. On a rare branch, of probability $\delta=N^{-3}$, it keeps the first input and emits half of a maximally entangled pair instead; the state it keeps is then exactly the observer's strategy operator. A heat effect of norm at most $8E/\delta$ on that state, routed to a thermal qubit of gap of order $EN^8$, makes the average energy exactly $v_\vartheta$ per episode. With a clock that returns approximately, the error is $O(N^{-2})$, the battery reaches its target on every branch, and the work is $Nv_\vartheta+O(E/N^2)$. As for channels, the controller's energy comes back only on average, and the clock's capital is large, of order $EN^{20}$. It is an explicit instance of Theorem~\ref{ar:thm:noncov}, with a closed-form value.
+
+\subsubsection{Classical agents}
+
+A classical agent that answers online is a process whose slots measure and prepare in an energy eigenbasis. Thompson et al.\ compare such an agent with batch execution, writing outputs onto a tape that keeps the inputs~\cite{Thompson25}. Their minimal online cost is proved for agents whose memory is a function of the observed past~\cite{Thompson25}: unifilar, or history-synchronized, agents. Our law places no such restriction.
+
+Take the classical case of Proposition~\ref{ar:prop:order}: $Y_1=A$, then $Y_2=B\oplus A\oplus R$ with a fresh coin $R$ equal to $1$ with probability $p<1/2$. A classical agent whose memory is a function of the past must keep the causal state, which here is $A$ itself. An unrestricted agent may instead keep $M=A\oplus R$, committing its randomness in advance; $M$ is not a function of the observed past: it is randomness sampled before the episode, and the identity $M=Y_2\oplus B$ holds only afterwards. $M$ carries no information about $B$, and none about $Y_2$ until $B$ arrives; but it fixes in advance how the device will answer each $B$, information about the future that is not contained in the past, which is what the causality assumption of~\cite{Thompson25} excludes and what makes $M$ retrodictive. Under two accounting conventions, the exact costs per episode, in units of $\kB T\ln2$ and with $h$ the binary entropy, are as follows.
+
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{6.2cm}>{\centering\arraybackslash}p{3.3cm}>{\centering\arraybackslash}p{3.6cm}}
+\toprule
+Interface & Unrestricted memory & Classical memory that is a function of the past\\
+\midrule
+In place (each output replaces its input) & $1-h(p)$ & $1$\\
+Copy-out (inputs kept, outputs on fresh mixed cells) & $2-h(p)$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The values in the left column are lower bounds against arbitrary quantum memory and correlated episodes; those in the right column are lower bounds for classical memory that is a function of the past. All four are attained by classical constructions with all supplies and resets counted. In the copy-out interface the agent writes $Y_1$ on a fresh blank and, at the second slot, releases its memory register itself as the cell that carries $Y_2$, after adding $B$ (and, for the agent whose memory is a function of the past, a fresh coin), keeping the incoming mixed cells; keeping the memory instead would cost one bit more. One-time-pad phase coins, which cost nothing, dephase the kept inputs against coherent observers. On their tape, the copy-out row, Thompson et al.\ show that quantum memory that is a function of the past can lower the right-column entry~\cite[Result~2]{Thompson25}; we do not compare our agent with their quantum agents. In both interfaces the classical agent whose memory is a function of the past pays $h(p)$ more. In the copy-out interface, which matches Thompson et al.'s tape, the unrestricted cost $2-h(p)$ equals the batch cost, so the excess $h(p)$ over batch of the agent whose memory is a function of the past is exactly their online cost, Eq.~(2) of~\cite{Thompson25}, evaluated episode by episode on this strategy with uniform independent inputs; an agent that commits its randomness in advance pays nothing for answering online. The in-place interface is that of the information ratchets of Boyd, Mandal and Crutchfield, whose modularity dissipation for arbitrary hidden states is~\cite[Eq.~(14)]{BMC18}; there the batch cost is $0$, and $1-h(p)$ is the online price.
+
+This does not contradict the theorem of Thompson et al., who assume throughout that agents are causal in their sense, that is, history-synchronized, with memory a function of the observed past. In their Supplementary Material, ``classical agent'' means a causal, unifilar agent, and the minimality of the $\varepsilon$-transducer is proved within that class~\cite{Thompson25}; this example lies outside it. Both agents obey the same deadlines and use no future input. Boyd, Mandal and Crutchfield found the same kind of gap for information ratchets: pattern generators whose hidden states are retrodictive avoid the modularity dissipation of predictive ones~\cite{BMC18}, and retrodictive generators also minimize transient costs~\cite{BMRC17}; Loomis and Crutchfield proved that a classical generator is efficient exactly when it is retrodictive~\cite{LoomisCrutchfield20}. The advance-committed memory $M=Y_2\oplus B$ is retrodictive in the same sense, for a transducer whose outputs depend on its inputs. In the copy-out interface it removes the online cost entirely; in the in-place interface, which is that of the ratchets, it still dissipates $1-h(p)$, so for a transducer with informative inputs retrodiction alone does not give efficiency. Two caveats apply to the comparison. Thompson et al.\ price a given input process, while $\Kb$ is a worst case over observers; the numbers above coincide for uniform independent inputs. And at $p=1/2$ the predictive states merge and the gap disappears.
+
+% =====================================================================
