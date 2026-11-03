@@ -3,7 +3,7 @@ message: "Please cite the manuscript; this repository supplies its source and ve
 type: software
 title: "The thermodynamics of deadlines: one law for the work cost of acting in time"
 version: 1.1.0
-doi: "10.5281/zenodo.23719179"
+doi: "10.5281/zenodo.23901247"
 license:
   - CC-BY-4.0
   - MIT
