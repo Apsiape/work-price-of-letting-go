@@ -48,11 +48,56 @@ release-preparation package summary. Verify it before replay. No file exceeds
 regenerates it in scratch. Native exporter/checker executables are built from
 source in scratch because they exceed 50 MB.
 
+## Reproduce with Lake
+
+Use the pinned Lean 4.30.0 toolchain and run from this directory:
+
+```sh
+export LEAN_NUM_THREADS=1
+lake exe cache get
+lake build
+lake env lean -j1 -M8192 -DmaxRecDepth=100000 -DmaxSynthPendingDepth=10000 src/Round28Audit.lean
+```
+
+The Git requirement and generated `lake-manifest.json` fix Mathlib to
+`c5ea00351c28e24afc9f0f84379aa41082b1188f` and its recorded transitive pins.
+The default libraries declare all 359 shipped owned modules and all 58 selected
+vendor modules, including `QuantumInfo.Entropy.DPI` outside the audit import
+closure. Mathematical source files are unchanged. Compare the seven headline
+roots printed by the audit with the axiom sets in `certification.json`: only
+`propext`, `Classical.choice` and `Quot.sound`.
+
+The package carries the original `replay.py` compiler settings:
+`maxRecDepth=100000` and `maxSynthPendingDepth=10000` for every source module.
+The latter is essential for `SupportBasis.joint_basis`: Lean's default value
+1 limits nested pending instance synthesis and its elaboration then exhausts
+the 20000-heartbeat synthesis budget. Raising only `maxRecDepth` does not fix
+that failure; supplying only `maxSynthPendingDepth=10000` does. No owned-source
+synthesis or heartbeat budget is increased. The direct `lake env lean` command
+repeats the two settings because it does not inherit library compiler options.
+
+The vendored `QuantumInfo` library also retains the replay's vendor-only
+options: `backward.isDefEq.respectTransparency=false`,
+`linter.unusedSimpArgs=false`, `synthInstance.maxHeartbeats=200000`, and
+`maxHeartbeats=2000000`. The package passes `-j1 -M6144`. The explicitly listed
+roots of `ReplayMemory` pass `-M8192` after measured Linux Lake compilation
+failures at 6144 MiB; all other owned and vendor modules retain 6144 MiB.
+Run one Lean compiler process on the machine at a time, with at least 8 GiB
+available memory. Compiler thread limits alone do not provide a machine-wide
+process lock; use an external serial launcher where that restriction applies.
+
+`lake build` checks the standard library targets, and the separate command
+prints the axiom audit. The original Windows replay below remains an optional
+additional procedure: it builds all packaged sources and performs the selected
+export and both independent kernel replays. Those replays are not run by
+`lake build`. Historical certification records describe the original release;
+this Lake configuration preserves the pinned proof and statement bytes.
+
 ## Clean replay (Windows x64)
 
 Requirements: Python 3.10+ with `psutil`; the pinned Lean installation including
 `leanc`; and a separately provisioned Mathlib v4.30.0 checkout with its pinned
-compiled dependency cache. No git or network commands are run by this package.
+compiled dependency cache. No git or network commands are run by this replay script.
 The Mathlib checkout is read-only during replay; its manifest, lakefile and
 toolchain must match the packaged pins. A clean replay rebuilds **all** 58
 packaged vendor modules and all 359 owned modules, and never reads historical
