@@ -1,0 +1,1384 @@
+\begin{thebibliography}{100}
+
+\bibitem{Landauer61}
+Rolf Landauer.
+\newblock Irreversibility and heat generation in the computing process.
+\newblock {\em IBM Journal of Research and Development}, 5:183--191, 1961.
+
+\bibitem{FBB19}
+Philippe Faist, Mario Berta, and Fernando G. S.~L. Brand{\~a}o.
+\newblock Thermodynamic capacity of quantum processes.
+\newblock {\em Physical Review Letters}, 122:200601, 2019.
+\newblock \href {https://arxiv.org/abs/1807.05610} {\path{arXiv:1807.05610}}.
+
+\bibitem{FBB21}
+Philippe Faist, Mario Berta, and Fernando G. S.~L. Brand{\~a}o.
+\newblock Thermodynamic implementations of quantum processes.
+\newblock {\em Communications in Mathematical Physics}, 384:1709--1750, 2021.
+\newblock Sections, results and equations are cited with the numbering of the
+  extended arXiv version~3, whose Section~8 is not in the journal version.
+\newblock \href {https://arxiv.org/abs/1911.05563} {\path{arXiv:1911.05563}}.
+
+\bibitem{SalamonBerry83}
+Peter Salamon and R.~Stephen Berry.
+\newblock Thermodynamic length and dissipated availability.
+\newblock {\em Physical Review Letters}, 51:1127--1130, 1983.
+
+\bibitem{Crooks07}
+Gavin~E. Crooks.
+\newblock Measuring thermodynamic length.
+\newblock {\em Physical Review Letters}, 99:100602, 2007.
+
+\bibitem{Proesmans20}
+Karel Proesmans, Jannik Ehrich, and John Bechhoefer.
+\newblock Finite-time {L}andauer principle.
+\newblock {\em Physical Review Letters}, 125:100602, 2020.
+
+\bibitem{BMC18}
+Alexander~B. Boyd, Dibyendu Mandal, and James~P. Crutchfield.
+\newblock Thermodynamics of modularity: structural costs beyond the {L}andauer
+  bound.
+\newblock {\em Physical Review X}, 8:031036, 2018.
+\newblock \href {https://arxiv.org/abs/1708.03030} {\path{arXiv:1708.03030}},
+  \href {https://doi.org/10.1103/PhysRevX.8.031036}
+  {\path{doi:10.1103/PhysRevX.8.031036}}.
+
+\bibitem{LoomisCrutchfield20}
+Samuel~P. Loomis and James~P. Crutchfield.
+\newblock Thermodynamically-efficient local computation and the inefficiency of
+  quantum memory compression.
+\newblock {\em Physical Review Research}, 2:023039, 2020.
+\newblock \href {https://arxiv.org/abs/2001.02258} {\path{arXiv:2001.02258}}.
+
+\bibitem{KolchinskyWolpert17}
+Artemy Kolchinsky and David~H. Wolpert.
+\newblock Dependence of dissipation on the initial distribution over states.
+\newblock {\em J. Stat. Mech.}, 2017:083202, 2017.
+\newblock \href {https://doi.org/10.1088/1742-5468/aa7ee1}
+  {\path{doi:10.1088/1742-5468/aa7ee1}}.
+
+\bibitem{Thompson25}
+Jayne Thompson, Paul~M. Riechers, Andrew J.~P. Garner, Thomas~J. Elliott, and
+  Mile Gu.
+\newblock Energetic advantages for quantum agents in online execution of
+  complex strategies.
+\newblock {\em Physical Review Letters}, 135:160402, 2025.
+\newblock Equations and results are cited with the numbering of arXiv
+  version~1.
+\newblock \href {https://arxiv.org/abs/2503.19896} {\path{arXiv:2503.19896}},
+  \href {https://doi.org/10.1103/dryx-l5rt} {\path{doi:10.1103/dryx-l5rt}}.
+
+\bibitem{HPKW20}
+Artemy Kolchinsky and David~H. Wolpert.
+\newblock Thermodynamic costs of {Turing} machines.
+\newblock {\em Physical Review Research}, 2:033312, 2020.
+\newblock URL: \url{https://arxiv.org/abs/1912.04685}, \href
+  {https://doi.org/10.1103/PhysRevResearch.2.033312}
+  {\path{doi:10.1103/PhysRevResearch.2.033312}}.
+
+\bibitem{HPuncomputable}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The uncomputable price of precision, 2026.
+\newblock Version 3.0.0, unrefereed preprint.
+\newblock \href {https://doi.org/10.5281/zenodo.23736188}
+  {\path{doi:10.5281/zenodo.23736188}}.
+
+\bibitem{delRio11}
+L{\'i}dia del Rio, Johan {\AA}berg, Renato Renner, Oscar Dahlsten, and Vlatko
+  Vedral.
+\newblock The thermodynamic meaning of negative entropy.
+\newblock {\em Nature}, 474:61--63, 2011.
+\newblock \href {https://arxiv.org/abs/1009.1630} {\path{arXiv:1009.1630}}.
+
+\bibitem{MarvianSpekkens19}
+Iman Marvian and Robert~W. Spekkens.
+\newblock No-broadcasting theorem for quantum asymmetry and coherence and a
+  trade-off relation for approximate broadcasting.
+\newblock {\em Physical Review Letters}, 123:020404, 2019.
+\newblock \href {https://arxiv.org/abs/1812.08766} {\path{arXiv:1812.08766}}.
+
+\bibitem{LostaglioMuller19}
+Matteo Lostaglio and Markus~P. M{\"u}ller.
+\newblock Coherence and asymmetry cannot be broadcast.
+\newblock {\em Physical Review Letters}, 123:020403, 2019.
+\newblock \href {https://arxiv.org/abs/1812.08214} {\path{arXiv:1812.08214}}.
+
+\bibitem{DFR20}
+Fr{\'e}d{\'e}ric Dupuis, Omar Fawzi, and Renato Renner.
+\newblock Entropy accumulation.
+\newblock {\em Communications in Mathematical Physics}, 379:867--913, 2020.
+
+\bibitem{ZhouJiang21}
+Sisi Zhou and Liang Jiang.
+\newblock Asymptotic theory of quantum channel estimation.
+\newblock {\em PRX Quantum}, 2:010343, 2021.
+
+\bibitem{ZhouZhangPreskillJiang18}
+Sisi Zhou, Mengzhen Zhang, John Preskill, and Liang Jiang.
+\newblock Achieving the {H}eisenberg limit in quantum metrology using quantum
+  error correction.
+\newblock {\em Nature Communications}, 9:78, 2018.
+
+\bibitem{DemkowiczCzajkowskiSekatski17}
+Rafa{\l} Demkowicz-Dobrza{\'n}ski, Jan Czajkowski, and Pavel Sekatski.
+\newblock Adaptive quantum metrology under general {M}arkovian noise.
+\newblock {\em Physical Review X}, 7:041009, 2017.
+
+\bibitem{Wilde18}
+Mark~M. Wilde.
+\newblock Entanglement cost and quantum channel simulation.
+\newblock {\em Physical Review A}, 98:042338, 2018.
+\newblock \href {https://arxiv.org/abs/1807.11939v3}
+  {\path{arXiv:1807.11939v3}}, \href
+  {https://doi.org/10.1103/PhysRevA.98.042338}
+  {\path{doi:10.1103/PhysRevA.98.042338}}.
+
+\bibitem{Order}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The price of time order.
+\newblock Preprint, version 1.0.2, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23323043}
+  {\path{doi:10.5281/zenodo.23323043}}.
+
+\bibitem{SaveWork}
+Seth Douglas and Nidhal Mghirbi.
+\newblock Only quantum channels save work by waiting.
+\newblock Preprint, version 1.0.2, Zenodo, 2026.
+\newblock The title concerns repeated uses of one memoryless channel; classical
+  tasks with memory can pay for early release.
+\newblock \href {https://doi.org/10.5281/zenodo.23323044}
+  {\path{doi:10.5281/zenodo.23323044}}.
+
+\bibitem{Answering}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The work cost of answering in real time.
+\newblock Preprint, version 1.0.2, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23323045}
+  {\path{doi:10.5281/zenodo.23323045}}.
+
+\bibitem{KeepingTime}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The price of keeping time.
+\newblock Preprint, version 1.1.0, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23325723}
+  {\path{doi:10.5281/zenodo.23325723}}.
+
+\bibitem{Letter}
+Seth Douglas and Nidhal Mghirbi.
+\newblock Order, not speed: the work price of letting go.
+\newblock Letter, version 1.1.0, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23325747}
+  {\path{doi:10.5281/zenodo.23325747}}.
+
+\bibitem{HPheat}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The heat price of precision, 2026.
+\newblock Unrefereed preprint; incorporated here with complete proofs.
+\newblock \href {https://doi.org/10.5281/zenodo.23701732}
+  {\path{doi:10.5281/zenodo.23701732}}.
+
+\bibitem{Memory}
+Seth Douglas and Nidhal Mghirbi.
+\newblock Causal quantum-channel simulation: memory beyond entropy.
+\newblock Preprint, version 1.1.2, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23070870}
+  {\path{doi:10.5281/zenodo.23070870}}.
+
+\bibitem{ImmediateDelivery}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The memory and purity cost of immediate delivery.
+\newblock Preprint, version 1.0.0, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23198907}
+  {\path{doi:10.5281/zenodo.23198907}}.
+
+\bibitem{Douglas26closed}
+Seth Douglas.
+\newblock Bath dimension and initial entropy for closed repeated use of a
+  quantum channel.
+\newblock arXiv:2609.18267, 2026.
+
+\bibitem{Flagship}
+Seth Douglas and Nidhal Mghirbi.
+\newblock No algorithm can tell how much memory a repeated quantum channel
+  needs.
+\newblock Preprint, version 1.1.0, Zenodo, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23204398}
+  {\path{doi:10.5281/zenodo.23204398}}.
+
+\bibitem{BarnettCrutchfield15}
+Nix Barnett and James~P. Crutchfield.
+\newblock Computational mechanics of input--output processes: structured
+  transformations and the $\epsilon$-transducer.
+\newblock {\em Journal of Statistical Physics}, 161:404--451, 2015.
+\newblock \href {https://doi.org/10.1007/s10955-015-1327-5}
+  {\path{doi:10.1007/s10955-015-1327-5}}.
+
+\bibitem{Jun14}
+Yonggun Jun, Mom{\v{c}}ilo Gavrilov, and John Bechhoefer.
+\newblock High-precision test of {L}andauer's principle in a feedback trap.
+\newblock {\em Physical Review Letters}, 113:190601, 2014.
+
+\bibitem{Bennett03}
+Charles~H. Bennett.
+\newblock Notes on {L}andauer's principle, reversible computation, and
+  {M}axwell's demon.
+\newblock {\em Studies in History and Philosophy of Modern Physics},
+  34:501--510, 2003.
+\newblock \href {https://arxiv.org/abs/physics/0210005}
+  {\path{arXiv:physics/0210005}}, \href
+  {https://doi.org/10.1016/S1355-2198(03)00039-X}
+  {\path{doi:10.1016/S1355-2198(03)00039-X}}.
+
+\bibitem{Orlov12}
+Alexei~O. Orlov, Craig~S. Lent, Cameron~C. Thorpe, Graham~P. Boechler, and
+  Gregory~L. Snider.
+\newblock Experimental test of {L}andauer's principle at the sub-{$k_{\mathrm
+  B}T$} level.
+\newblock {\em Japanese Journal of Applied Physics}, 51:06FE10, 2012.
+\newblock \href {https://doi.org/10.1143/JJAP.51.06FE10}
+  {\path{doi:10.1143/JJAP.51.06FE10}}.
+
+\bibitem{Gavrilov17}
+Mom{\v{c}}ilo Gavrilov, Rapha{\"e}l Ch{\'e}trite, and John Bechhoefer.
+\newblock Direct measurement of weakly nonequilibrium system entropy is
+  consistent with {G}ibbs--{S}hannon form.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  114:11097--11102, 2017.
+\newblock \href {https://arxiv.org/abs/1703.07601} {\path{arXiv:1703.07601}},
+  \href {https://doi.org/10.1073/pnas.1708689114}
+  {\path{doi:10.1073/pnas.1708689114}}.
+
+\bibitem{HPprecision}
+Seth Douglas and Nidhal Mghirbi.
+\newblock The price of precision: usable entanglement in nonlocal games and the
+  geometry of groups, 2026.
+\newblock Version 1.0.0, unrefereed preprint. Result numbers refer to this
+  version.
+\newblock \href {https://doi.org/10.5281/zenodo.23697346}
+  {\path{doi:10.5281/zenodo.23697346}}.
+
+\bibitem{PerarnauLlobet15}
+Mart\'{\i} Perarnau-Llobet, Karen~V. Hovhannisyan, Marcus Huber, Paul
+  Skrzypczyk, Nicolas Brunner, and Antonio Ac\'{\i}n.
+\newblock Extractable work from correlations.
+\newblock {\em Phys. Rev. X}, 5:041011, 2015.
+\newblock \href {https://doi.org/10.1103/PhysRevX.5.041011}
+  {\path{doi:10.1103/PhysRevX.5.041011}}.
+
+\bibitem{Chiribella08}
+Giulio Chiribella, Giacomo~Mauro D'Ariano, and Paolo Perinotti.
+\newblock Memory effects in quantum channel discrimination.
+\newblock {\em Physical Review Letters}, 101:180501, 2008.
+
+\bibitem{GutoskiWatrous07}
+Gus Gutoski and John Watrous.
+\newblock Toward a general theory of quantum games.
+\newblock In {\em Proceedings of the 39th Annual ACM Symposium on Theory of
+  Computing}, pages 565--574, 2007.
+
+\bibitem{FOR15}
+Philippe Faist, Jonathan Oppenheim, and Renato Renner.
+\newblock Gibbs-preserving maps outperform thermal operations in the quantum
+  regime.
+\newblock {\em New Journal of Physics}, 17:043003, 2015.
+\newblock \href {https://arxiv.org/abs/1406.3618} {\path{arXiv:1406.3618}}.
+
+\bibitem{Mausberg26}
+Samuel Mausberg.
+\newblock Memory return in quantum machines.
+\newblock Zenodo preprint, 2026.
+\newblock \href {https://doi.org/10.5281/zenodo.23143705}
+  {\path{doi:10.5281/zenodo.23143705}}.
+
+\bibitem{EspositoLindenbergVandenBroeck10}
+Massimiliano Esposito, Katja Lindenberg, and Christian {Van den Broeck}.
+\newblock Entropy production as correlation between system and reservoir.
+\newblock {\em New Journal of Physics}, 12:013013, 2010.
+\newblock \href {https://arxiv.org/abs/0908.1125} {\path{arXiv:0908.1125}},
+  \href {https://doi.org/10.1088/1367-2630/12/1/013013}
+  {\path{doi:10.1088/1367-2630/12/1/013013}}.
+
+\bibitem{ReebWolf14}
+David Reeb and Michael~M. Wolf.
+\newblock An improved {L}andauer principle with finite-size corrections.
+\newblock {\em New Journal of Physics}, 16:103011, 2014.
+\newblock \href {https://arxiv.org/abs/1306.4352} {\path{arXiv:1306.4352}},
+  \href {https://doi.org/10.1088/1367-2630/16/10/103011}
+  {\path{doi:10.1088/1367-2630/16/10/103011}}.
+
+\bibitem{Choi75}
+Man-Duen Choi.
+\newblock Completely positive linear maps on complex matrices.
+\newblock {\em Linear Algebra and its Applications}, 10(3):285--290, 1975.
+
+\bibitem{Wei91}
+Victor~K. Wei.
+\newblock Generalized {H}amming weights for linear codes.
+\newblock {\em IEEE Trans. Inf. Theory}, 37(5):1412--1418, 1991.
+
+\bibitem{Vardy97}
+Alexander Vardy.
+\newblock The intractability of computing the minimum distance of a code.
+\newblock {\em IEEE Trans. Inf. Theory}, 43(6):1757--1766, 1997.
+
+\bibitem{ChiribellaYangRenner21}
+Giulio Chiribella, Yuxiang Yang, and Renato Renner.
+\newblock Fundamental energy requirement of reversible quantum operations.
+\newblock {\em Physical Review X}, 11:021014, 2021.
+\newblock \href {https://arxiv.org/abs/1908.10884} {\path{arXiv:1908.10884}}.
+
+\bibitem{TSS20}
+Hiroyasu Tajima, Naoto Shiraishi, and Keiji Saito.
+\newblock Coherence cost for violating conservation laws.
+\newblock {\em Physical Review Research}, 2:043374, 2020.
+\newblock \href {https://arxiv.org/abs/1906.04076} {\path{arXiv:1906.04076}}.
+
+\bibitem{DSW13}
+Runyao Duan, Simone Severini, and Andreas Winter.
+\newblock Zero-error communication via quantum channels, noncommutative graphs,
+  and a quantum {L}ov{\'a}sz number.
+\newblock {\em IEEE Transactions on Information Theory}, 59(2):1164--1174,
+  2013.
+
+\bibitem{HaagerupMusat11}
+Uffe Haagerup and Magdalena Musat.
+\newblock Factorization and dilation problems for completely positive maps on
+  von {N}eumann algebras.
+\newblock {\em Communications in Mathematical Physics}, 303:555--594, 2011.
+\newblock \href {https://arxiv.org/abs/1009.0778} {\path{arXiv:1009.0778}}.
+
+\bibitem{Crooks08}
+Gavin~E. Crooks.
+\newblock Quantum operation time reversal.
+\newblock {\em Physical Review A}, 77:034101, 2008.
+
+\bibitem{KwonKim19}
+Hyukjoon Kwon and M.~S. Kim.
+\newblock Fluctuation theorems for a quantum channel.
+\newblock {\em Physical Review X}, 9:031029, 2019.
+
+\bibitem{TajimaTakagi25}
+Hiroyasu Tajima and Ryuji Takagi.
+\newblock Gibbs-preserving operations requiring infinite amount of quantum
+  coherence.
+\newblock {\em Physical Review Letters}, 134:170201, 2025.
+\newblock The Supplemental Material is cited with the numbering of arXiv
+  version~3.
+\newblock \href {https://arxiv.org/abs/2404.03479} {\path{arXiv:2404.03479}}.
+
+\bibitem{KushilevitzNisan96}
+Eyal Kushilevitz and Noam Nisan.
+\newblock {\em Communication Complexity}.
+\newblock Cambridge University Press, 1996.
+\newblock \href {https://doi.org/10.1017/CBO9780511574948}
+  {\path{doi:10.1017/CBO9780511574948}}.
+
+\bibitem{Still12}
+Susanne Still, David~A. Sivak, Anthony~J. Bell, and Gavin~E. Crooks.
+\newblock Thermodynamics of prediction.
+\newblock {\em Physical Review Letters}, 109:120604, 2012.
+\newblock \href {https://arxiv.org/abs/1203.3271} {\path{arXiv:1203.3271}},
+  \href {https://doi.org/10.1103/PhysRevLett.109.120604}
+  {\path{doi:10.1103/PhysRevLett.109.120604}}.
+
+\bibitem{Turgut09}
+S.~Turgut.
+\newblock Relations between entropies produced in nondeterministic
+  thermodynamic processes.
+\newblock {\em Physical Review E}, 79:041102, 2009.
+\newblock \href {https://arxiv.org/abs/cond-mat/0609198}
+  {\path{arXiv:cond-mat/0609198}}, \href
+  {https://doi.org/10.1103/PhysRevE.79.041102}
+  {\path{doi:10.1103/PhysRevE.79.041102}}.
+
+\bibitem{Maroney09}
+O.~J.~E. Maroney.
+\newblock Generalizing {L}andauer's principle.
+\newblock {\em Physical Review E}, 79:031105, 2009.
+\newblock \href {https://arxiv.org/abs/quant-ph/0702094}
+  {\path{arXiv:quant-ph/0702094}}, \href
+  {https://doi.org/10.1103/PhysRevE.79.031105}
+  {\path{doi:10.1103/PhysRevE.79.031105}}.
+
+\bibitem{KiyakSay24}
+F{\i}rat K{\i}yak and A.~C.~Cem Say.
+\newblock Energy complexity of regular languages.
+\newblock {\em Theoretical Computer Science}, 982:114291, 2024.
+\newblock \href {https://arxiv.org/abs/2204.06025} {\path{arXiv:2204.06025}},
+  \href {https://doi.org/10.1016/j.tcs.2023.114291}
+  {\path{doi:10.1016/j.tcs.2023.114291}}.
+
+\bibitem{Bennett73}
+Charles~H. Bennett.
+\newblock Logical reversibility of computation.
+\newblock {\em IBM Journal of Research and Development}, 17:525--532, 1973.
+
+\bibitem{HSR03}
+Michal Horodecki, Peter~W. Shor, and Mary~Beth Ruskai.
+\newblock Entanglement breaking channels.
+\newblock {\em Reviews in Mathematical Physics}, 15:629--641, 2003.
+
+\bibitem{BBCW13}
+Mario Berta, Fernando G. S.~L. Brand{\~a}o, Matthias Christandl, and Stephanie
+  Wehner.
+\newblock Entanglement cost of quantum channels.
+\newblock {\em IEEE Transactions on Information Theory}, 59(10):6779--6795,
+  2013.
+\newblock \href {https://arxiv.org/abs/1108.5357} {\path{arXiv:1108.5357}},
+  \href {https://doi.org/10.1109/TIT.2013.2268533}
+  {\path{doi:10.1109/TIT.2013.2268533}}.
+
+\bibitem{GallegoAolita15}
+Rodrigo Gallego and Leandro Aolita.
+\newblock Resource theory of steering.
+\newblock {\em Physical Review X}, 5:041008, 2015.
+
+\bibitem{CavalcantiSkrzypczyk17}
+Daniel Cavalcanti and Paul Skrzypczyk.
+\newblock Quantum steering: a review with focus on semidefinite programming.
+\newblock {\em Reports on Progress in Physics}, 80:024001, 2017.
+
+\bibitem{BCY11}
+Fernando G. S.~L. Brand{\~a}o, Matthias Christandl, and Jon Yard.
+\newblock Faithful squashed entanglement.
+\newblock {\em Communications in Mathematical Physics}, 306:805--830, 2011.
+
+\bibitem{Nulton85}
+J.~Nulton, P.~Salamon, B.~Andresen, and Qi~Anmin.
+\newblock Quasistatic processes as step equilibrations.
+\newblock {\em Journal of Chemical Physics}, 83:334--338, 1985.
+
+\bibitem{ScandiPerarnauLlobet19}
+Matteo Scandi and Mart{\'i} Perarnau-Llobet.
+\newblock Thermodynamic length in open quantum systems.
+\newblock {\em Quantum}, 3:197, 2019.
+
+\bibitem{Abiuso20}
+Paolo Abiuso, Harry J.~D. Miller, Mart{\'i} Perarnau-Llobet, and Matteo Scandi.
+\newblock Geometric optimisation of quantum thermodynamic processes.
+\newblock {\em Entropy}, 22:1076, 2020.
+
+\bibitem{Taranto23}
+Philip Taranto, Faraj Bakhshinezhad, Andreas Bluhm, Ralph Silva, Nicolai Friis,
+  Maximilian P.~E. Lock, Giuseppe Vitagliano, Felix~C. Binder, Tiago Debarba,
+  Emanuel Schwarzhans, Fabien Clivaz, and Marcus Huber.
+\newblock Landauer versus {N}ernst: What is the true cost of cooling a quantum
+  system?
+\newblock {\em PRX Quantum}, 4:010332, 2023.
+
+\bibitem{Berut12}
+Antoine B{\'e}rut, Artak Arakelyan, Artyom Petrosyan, Sergio Ciliberto, Raoul
+  Dillenschneider, and Eric Lutz.
+\newblock Experimental verification of {L}andauer's principle linking
+  information and thermodynamics.
+\newblock {\em Nature}, 483:187--189, 2012.
+
+\bibitem{Hoeffding63}
+Wassily Hoeffding.
+\newblock Probability inequalities for sums of bounded random variables.
+\newblock {\em Journal of the American Statistical Association},
+  58(301):13--30, 1963.
+\newblock \href {https://doi.org/10.1080/01621459.1963.10500830}
+  {\path{doi:10.1080/01621459.1963.10500830}}.
+
+\bibitem{Azuma67}
+Kazuoki Azuma.
+\newblock Weighted sums of certain dependent random variables.
+\newblock {\em Tohoku Mathematical Journal}, 19(3):357--367, 1967.
+\newblock \href {https://doi.org/10.2748/tmj/1178243286}
+  {\path{doi:10.2748/tmj/1178243286}}.
+
+\bibitem{Sekimoto98}
+Ken Sekimoto.
+\newblock Langevin equation and thermodynamics.
+\newblock {\em Progress of Theoretical Physics Supplement}, 130:17--27, 1998.
+\newblock \href {https://doi.org/10.1143/PTPS.130.17}
+  {\path{doi:10.1143/PTPS.130.17}}.
+
+\bibitem{DagoCilibertoBellon23}
+Salamb{\^o} Dago, Sergio Ciliberto, and Ludovic Bellon.
+\newblock Adiabatic computing for optimal thermodynamic efficiency of
+  information processing.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  120:e2301742120, 2023.
+\newblock \href {https://arxiv.org/abs/2302.09957} {\path{arXiv:2302.09957}},
+  \href {https://doi.org/10.1073/pnas.2301742120}
+  {\path{doi:10.1073/pnas.2301742120}}.
+
+\bibitem{DagoCilibertoBellon24}
+Salamb{\^o} Dago, Sergio Ciliberto, and Ludovic Bellon.
+\newblock Reliability and operation cost of underdamped memories during cyclic
+  erasures.
+\newblock {\em Advanced Physics Research}, 3:2300074, 2024.
+\newblock \href {https://arxiv.org/abs/2306.15573} {\path{arXiv:2306.15573}},
+  \href {https://doi.org/10.1002/apxr.202300074}
+  {\path{doi:10.1002/apxr.202300074}}.
+
+\bibitem{Cope21}
+Thomas Cope.
+\newblock Entanglement cost for steering assemblages.
+\newblock {\em Physical Review A}, 104:042220, 2021.
+
+\bibitem{SupicHoban16}
+Ivan {\v{S}}upi{\'c} and Matty~J. Hoban.
+\newblock Self-testing through {EPR}-steering.
+\newblock {\em New Journal of Physics}, 18:075006, 2016.
+
+\bibitem{BCCRR10}
+Mario Berta, Matthias Christandl, Roger Colbeck, Joseph~M. Renes, and Renato
+  Renner.
+\newblock The uncertainty principle in the presence of quantum memory.
+\newblock {\em Nature Physics}, 6:659--662, 2010.
+
+\bibitem{ChristandlWinter04}
+Matthias Christandl and Andreas Winter.
+\newblock ``{S}quashed entanglement'': an additive entanglement measure.
+\newblock {\em Journal of Mathematical Physics}, 45:829--840, 2004.
+
+\bibitem{KoashiWinter04}
+Masato Koashi and Andreas Winter.
+\newblock Monogamy of quantum entanglement and other correlations.
+\newblock {\em Physical Review A}, 69:022309, 2004.
+
+\bibitem{BCP14}
+Tillmann Baumgratz, Marcus Cramer, and Martin~B. Plenio.
+\newblock Quantifying coherence.
+\newblock {\em Physical Review Letters}, 113:140401, 2014.
+
+\bibitem{WinterYang16}
+Andreas Winter and Dong Yang.
+\newblock Operational resource theory of coherence.
+\newblock {\em Physical Review Letters}, 116:120404, 2016.
+
+\bibitem{CopeUola22}
+Thomas Cope and Roope Uola.
+\newblock Quantifying the high-dimensionality of quantum devices, 2022.
+\newblock \href {https://arxiv.org/abs/2207.05722v4}
+  {\path{arXiv:2207.05722v4}}.
+
+\bibitem{RBL18}
+Denis Rosset, Francesco Buscemi, and Yeong-Cherng Liang.
+\newblock Resource theory of quantum memories and their faithful verification
+  with minimal assumptions.
+\newblock {\em Physical Review X}, 8:021033, 2018.
+
+\bibitem{Berk21}
+Graeme~D. Berk, Andrew J.~P. Garner, Benjamin Yadin, Kavan Modi, and Felix~A.
+  Pollock.
+\newblock Resource theories of multi-time processes: {A} window into quantum
+  non-{M}arkovianity.
+\newblock {\em Quantum}, 5:435, 2021.
+
+\bibitem{MurugaGinotLoosBechinger26}
+Lokesh Muruga, Felix Ginot, Sarah A.~M. Loos, and Clemens Bechinger.
+\newblock The extraction of work from hidden degrees of freedom.
+\newblock {\em Nature Physics}, 2026.
+\newblock Published online 16 October 2026.
+\newblock \href {https://doi.org/10.1038/s41567-026-03442-w}
+  {\path{doi:10.1038/s41567-026-03442-w}}.
+
+\bibitem{NGP15}
+Miguel Navascu{\'e}s and Luis~Pedro Garc{\'i}a-Pintos.
+\newblock Nonthermal quantum channels as a thermodynamical resource.
+\newblock {\em Physical Review Letters}, 115:010405, 2015.
+
+\bibitem{FR18}
+Philippe Faist and Renato Renner.
+\newblock Fundamental work cost of quantum processes.
+\newblock {\em Physical Review X}, 8:021011, 2018.
+\newblock \href {https://arxiv.org/abs/1709.00506} {\path{arXiv:1709.00506}}.
+
+\bibitem{FDOR15}
+Philippe Faist, Fr{\'e}d{\'e}ric Dupuis, Jonathan Oppenheim, and Renato Renner.
+\newblock The minimal work cost of information processing.
+\newblock {\em Nature Communications}, 6:7669, 2015.
+
+\bibitem{Faist26}
+Philippe Faist.
+\newblock Universal thermodynamic implementation of a process with a variable
+  work cost, 2026.
+\newblock \href {https://arxiv.org/abs/2601.20155} {\path{arXiv:2601.20155}}.
+
+\bibitem{BadhaniDas26}
+Himanshu Badhani and Siddhartha Das.
+\newblock Conditional channel entropy sets fundamental limits on thermodynamic
+  quantum information processing, 2026.
+\newblock \href {https://arxiv.org/abs/2604.01217v2}
+  {\path{arXiv:2604.01217v2}}.
+
+\bibitem{DattaHircheWinter19}
+Nilanjana Datta, Christoph Hirche, and Andreas Winter.
+\newblock Convexity and operational interpretation of the quantum information
+  bottleneck function.
+\newblock In {\em 2019 IEEE International Symposium on Information Theory
+  (ISIT)}, pages 1157--1161, 2019.
+\newblock Sections and equations are cited with the numbering of arXiv
+  version~3.
+\newblock \href {https://arxiv.org/abs/1810.03644} {\path{arXiv:1810.03644}},
+  \href {https://doi.org/10.1109/ISIT.2019.8849518}
+  {\path{doi:10.1109/ISIT.2019.8849518}}.
+
+\bibitem{Lostaglio15}
+Matteo Lostaglio, Kamil Korzekwa, David Jennings, and Terry Rudolph.
+\newblock Quantum coherence, time-translation symmetry, and thermodynamics.
+\newblock {\em Physical Review X}, 5:021001, 2015.
+\newblock \href {https://arxiv.org/abs/1410.4572} {\path{arXiv:1410.4572}}.
+
+\bibitem{LieEtAl26}
+Seok~Hyung Lie, Jeongrak Son, Paul Boes, Nelly H.~Y. Ng, and Henrik Wilming.
+\newblock Thermal operations from informational equilibrium.
+\newblock {\em Physical Review Letters}, 137:030403, 2026.
+\newblock Definitions, results and equations are cited with the numbering of
+  arXiv version~1.
+\newblock \href {https://arxiv.org/abs/2507.16637v1}
+  {\path{arXiv:2507.16637v1}}, \href {https://doi.org/10.1103/lm3h-c5f5}
+  {\path{doi:10.1103/lm3h-c5f5}}.
+
+\bibitem{Milz26}
+Simon Milz, Kyrylo Simonov, Zolt{\'a}n Zimbor{\'a}s, Tamal Guha, Saptarshi Roy,
+  and Giulio Chiribella.
+\newblock Higher-order quantum thermodynamics: equilibrium and causal
+  structure, 2026.
+\newblock \href {https://arxiv.org/abs/2609.15829} {\path{arXiv:2609.15829}}.
+
+\bibitem{LuoTrinity26}
+Yutong Luo, Jakub Czartowski, Felix Hubmann, Simon Milz, and Felix~C. Binder.
+\newblock The trinity of {M}arkovian quantum thermodynamics: unifying the
+  axiomatic, microscopic, and operational paradigms, 2026.
+\newblock arXiv:2607.15376.
+
+\bibitem{RybarZiman}
+Tom{\'a}{\v s} Ryb{\'a}r and M{\'a}rio Ziman.
+\newblock Repeatable quantum memory channels.
+\newblock {\em Physical Review A}, 78:052114, 2008.
+\newblock \href {https://arxiv.org/abs/0808.3851} {\path{arXiv:0808.3851}}.
+
+\bibitem{Boes18}
+Paul Boes, Henrik Wilming, Rodrigo Gallego, and Jens Eisert.
+\newblock Catalytic quantum randomness.
+\newblock {\em Physical Review X}, 8:041016, 2018.
+\newblock \href {https://arxiv.org/abs/1804.03027} {\path{arXiv:1804.03027}},
+  \href {https://doi.org/10.1103/PhysRevX.8.041016}
+  {\path{doi:10.1103/PhysRevX.8.041016}}.
+
+\bibitem{Boes18err}
+Paul Boes, Henrik Wilming, Rodrigo Gallego, and Jens Eisert.
+\newblock Erratum: Catalytic quantum randomness [{Phys. Rev. X} 8, 041016
+  (2018)].
+\newblock {\em Physical Review X}, 10:029901, 2020.
+\newblock \href {https://doi.org/10.1103/PhysRevX.10.029901}
+  {\path{doi:10.1103/PhysRevX.10.029901}}.
+
+\bibitem{LieJeong21}
+Seok~Hyung Lie and Hyunseok Jeong.
+\newblock Catalytic quantum randomness as a correlational resource.
+\newblock {\em Physical Review Research}, 3:043089, 2021.
+\newblock \href {https://doi.org/10.1103/PhysRevResearch.3.043089}
+  {\path{doi:10.1103/PhysRevResearch.3.043089}}.
+
+\bibitem{Bisio12}
+Alessandro Bisio, Giacomo~Mauro D'Ariano, Paolo Perinotti, and Michal
+  Sedl{\'a}k.
+\newblock Memory cost of quantum protocols.
+\newblock {\em Physical Review A}, 85:032333, 2012.
+\newblock \href {https://arxiv.org/abs/1112.3853} {\path{arXiv:1112.3853}},
+  \href {https://doi.org/10.1103/PhysRevA.85.032333}
+  {\path{doi:10.1103/PhysRevA.85.032333}}.
+
+\bibitem{Strasberg20}
+Philipp Strasberg.
+\newblock Thermodynamics of quantum causal models: an inclusive, {H}amiltonian
+  approach.
+\newblock {\em Quantum}, 4:240, 2020.
+\newblock \href {https://arxiv.org/abs/1911.01730} {\path{arXiv:1911.01730}},
+  \href {https://doi.org/10.22331/q-2020-03-02-240}
+  {\path{doi:10.22331/q-2020-03-02-240}}.
+
+\bibitem{ZambonAdesso}
+Guilherme Zambon and Gerardo Adesso.
+\newblock Quantum processes as thermodynamic resources: the role of
+  non-{M}arkovianity.
+\newblock {\em Physical Review Letters}, 134:200401, 2025.
+\newblock \href {https://arxiv.org/abs/2411.05559} {\path{arXiv:2411.05559}}.
+
+\bibitem{HuangTOFE}
+Ruo~Cheng Huang, Isha Singh~Le Xue, Yuxuan Qu, Paul~M. Riechers, Varun
+  Narasimhachar, and Mile Gu.
+\newblock Time-ordered free energy in correlated quantum systems: An agentic
+  approach, 2026.
+\newblock \href {https://arxiv.org/abs/2608.12942} {\path{arXiv:2608.12942}}.
+
+\bibitem{Fiderer26}
+Lukas~J. Fiderer, Paul~C. Barth, Isaac~D. Smith, and Hans~J. Briegel.
+\newblock Information thermodynamics of agents: The work capacity of channels
+  with memory.
+\newblock {\em Physical Review X}, 16:041004, 2026.
+\newblock arXiv:2504.06209.
+\newblock \href {https://doi.org/10.1103/7nds-tjr8}
+  {\path{doi:10.1103/7nds-tjr8}}.
+
+\bibitem{BMRC17}
+Alexander~B. Boyd, Dibyendu Mandal, Paul~M. Riechers, and James~P. Crutchfield.
+\newblock Transient dissipation and structural costs of physical information
+  transduction.
+\newblock {\em Physical Review Letters}, 118:220602, 2017.
+\newblock \href {https://arxiv.org/abs/1612.08616} {\path{arXiv:1612.08616}}.
+
+\bibitem{KolchinskyWolpert21}
+Artemy Kolchinsky and David~H. Wolpert.
+\newblock Work, entropy production, and thermodynamics of information under
+  protocol constraints.
+\newblock {\em Physical Review X}, 11:041024, 2021.
+\newblock \href {https://arxiv.org/abs/2008.10764} {\path{arXiv:2008.10764}}.
+
+\bibitem{OuldridgeWolpert23}
+Thomas~E. Ouldridge and David~H. Wolpert.
+\newblock Thermodynamics of deterministic finite automata operating locally and
+  periodically.
+\newblock {\em New Journal of Physics}, 25:123013, 2023.
+\newblock \href {https://arxiv.org/abs/2208.06895} {\path{arXiv:2208.06895}},
+  \href {https://doi.org/10.1088/1367-2630/ad1070}
+  {\path{doi:10.1088/1367-2630/ad1070}}.
+
+\bibitem{ThumannSoloveichik26}
+Michael~C. Thumann and David Soloveichik.
+\newblock Energy-optimal scheduling for clocked reversible computing, 2026.
+\newblock \href {https://arxiv.org/abs/2610.24435} {\path{arXiv:2610.24435}}.
+
+\bibitem{BedinghamMaroney}
+Daniel Bedingham and Owen Maroney.
+\newblock The thermodynamic cost of quantum operations.
+\newblock {\em New Journal of Physics}, 18:113050, 2016.
+\newblock \href {https://arxiv.org/abs/1604.03749} {\path{arXiv:1604.03749}}.
+
+\bibitem{RiechersGu21}
+Paul~M. Riechers and Mile Gu.
+\newblock Impossibility of achieving {L}andauer's bound for almost every
+  quantum state.
+\newblock {\em Physical Review A}, 104:012214, 2021.
+\newblock \href {https://arxiv.org/abs/2103.02337} {\path{arXiv:2103.02337}}.
+
+\bibitem{LoomisCrutchfield20PRL}
+Samuel~P. Loomis and James~P. Crutchfield.
+\newblock Thermal efficiency of quantum memory compression.
+\newblock {\em Physical Review Letters}, 125:020601, 2020.
+\newblock \href {https://arxiv.org/abs/1911.00998} {\path{arXiv:1911.00998}},
+  \href {https://doi.org/10.1103/PhysRevLett.125.020601}
+  {\path{doi:10.1103/PhysRevLett.125.020601}}.
+
+\bibitem{Muller18}
+Markus~P. M{\"u}ller.
+\newblock Correlating thermal machines and the second law at the nanoscale.
+\newblock {\em Physical Review X}, 8:041051, 2018.
+\newblock \href {https://arxiv.org/abs/1707.03451} {\path{arXiv:1707.03451}},
+  \href {https://doi.org/10.1103/PhysRevX.8.041051}
+  {\path{doi:10.1103/PhysRevX.8.041051}}.
+
+\bibitem{LostaglioMullerPastena15}
+Matteo Lostaglio, Markus~P. M{\"u}ller, and Michele Pastena.
+\newblock Stochastic independence as a resource in small-scale thermodynamics.
+\newblock {\em Physical Review Letters}, 115:150402, 2015.
+\newblock \href {https://arxiv.org/abs/1409.3258} {\path{arXiv:1409.3258}},
+  \href {https://doi.org/10.1103/PhysRevLett.115.150402}
+  {\path{doi:10.1103/PhysRevLett.115.150402}}.
+
+\bibitem{Boes19}
+Paul Boes, Jens Eisert, Rodrigo Gallego, Markus~P. M{\"u}ller, and Henrik
+  Wilming.
+\newblock Von {N}eumann entropy from unitarity.
+\newblock {\em Physical Review Letters}, 122:210402, 2019.
+\newblock \href {https://arxiv.org/abs/1807.08773} {\path{arXiv:1807.08773}},
+  \href {https://doi.org/10.1103/PhysRevLett.122.210402}
+  {\path{doi:10.1103/PhysRevLett.122.210402}}.
+
+\bibitem{Wilming21}
+Henrik Wilming.
+\newblock Entropy and reversible catalysis.
+\newblock {\em Physical Review Letters}, 127:260402, 2021.
+\newblock \href {https://arxiv.org/abs/2012.05573} {\path{arXiv:2012.05573}},
+  \href {https://doi.org/10.1103/PhysRevLett.127.260402}
+  {\path{doi:10.1103/PhysRevLett.127.260402}}.
+
+\bibitem{Duan05}
+Runyao Duan, Yuan Feng, Xin Li, and Mingsheng Ying.
+\newblock Multiple-copy entanglement transformation and entanglement catalysis.
+\newblock {\em Physical Review A}, 71:042319, 2005.
+\newblock \href {https://arxiv.org/abs/quant-ph/0404148}
+  {\path{arXiv:quant-ph/0404148}}.
+
+\bibitem{ShiraishiSagawa21}
+Naoto Shiraishi and Takahiro Sagawa.
+\newblock Quantum thermodynamics of correlated-catalytic state conversion at
+  small scale.
+\newblock {\em Physical Review Letters}, 126:150502, 2021.
+\newblock \href {https://arxiv.org/abs/2010.11036} {\path{arXiv:2010.11036}}.
+
+\bibitem{MusatRordam}
+Magdalena Musat and Mikael R{\o}rdam.
+\newblock Non-closure of quantum correlation matrices and factorizable channels
+  that require infinite dimensional ancilla (with an appendix by {N}arutaka
+  {O}zawa).
+\newblock {\em Communications in Mathematical Physics}, 375:1761--1776, 2020.
+\newblock \href {https://arxiv.org/abs/1806.10242} {\path{arXiv:1806.10242}},
+  \href {https://doi.org/10.1007/s00220-019-03449-w}
+  {\path{doi:10.1007/s00220-019-03449-w}}.
+
+\bibitem{Musat25}
+Magdalena Musat.
+\newblock The {C}onnes--{K}irchberg problem and infinite-dimensional phenomena
+  in quantum information theory, 2025.
+\newblock To appear in M{\"u}nster Journal of Mathematics.
+\newblock \href {https://arxiv.org/abs/2512.00432} {\path{arXiv:2512.00432}}.
+
+\bibitem{FMS}
+Honghao Fu, Carl~A. Miller, and William Slofstra.
+\newblock The membership problem for constant-sized quantum correlations is
+  undecidable.
+\newblock {\em Communications in Mathematical Physics}, 406:96, 2025.
+\newblock \href {https://arxiv.org/abs/2101.11087} {\path{arXiv:2101.11087}}.
+
+\bibitem{KPS18}
+Se-Jin Kim, Vern Paulsen, and Christopher Schafhauser.
+\newblock A synchronous game for binary constraint systems.
+\newblock {\em Journal of Mathematical Physics}, 59:032201, 2018.
+\newblock \href {https://arxiv.org/abs/1707.01016} {\path{arXiv:1707.01016}}.
+
+\bibitem{Eriksson26}
+Lluis Eriksson.
+\newblock Undecidable projection costs for quantum channels with finite tracial
+  ancillas.
+\newblock AIRR.SCIENCE working paper ARR-2026-7WNWKBJVQ28KZAKA, version~1,
+  2026.
+\newblock URL:
+  \url{https://airr.science/papers/ARR-2026-7WNWKBJVQ28KZAKA/versions/v1/}.
+
+\bibitem{FujiwaraImai08}
+Akio Fujiwara and Hiroshi Imai.
+\newblock A fibre bundle over manifolds of quantum channels and its application
+  to quantum statistics.
+\newblock {\em J. Phys. A: Math. Theor.}, 41:255304, 2008.
+\newblock \href {https://doi.org/10.1088/1751-8113/41/25/255304}
+  {\path{doi:10.1088/1751-8113/41/25/255304}}.
+
+\bibitem{DKG12}
+Rafa{\l} Demkowicz-Dobrza{\'n}ski, Jan Ko{\l}ody{\'n}ski, and
+  M{\u{a}}d{\u{a}}lin Gu{\c{t}}{\u{a}}.
+\newblock The elusive {H}eisenberg limit in quantum-enhanced metrology.
+\newblock {\em Nature Communications}, 3:1063, 2012.
+\newblock \href {https://arxiv.org/abs/1201.3940} {\path{arXiv:1201.3940}},
+  \href {https://doi.org/10.1038/ncomms2067} {\path{doi:10.1038/ncomms2067}}.
+
+\bibitem{KD13}
+Jan Ko{\l}ody{\'n}ski and Rafa{\l} Demkowicz-Dobrza{\'n}ski.
+\newblock Efficient tools for quantum metrology with uncorrelated noise.
+\newblock {\em New Journal of Physics}, 15:073043, 2013.
+\newblock \href {https://arxiv.org/abs/1303.7271} {\path{arXiv:1303.7271}},
+  \href {https://doi.org/10.1088/1367-2630/15/7/073043}
+  {\path{doi:10.1088/1367-2630/15/7/073043}}.
+
+\bibitem{DemkowiczMaccone14}
+Rafa{\l} Demkowicz-Dobrza{\'n}ski and Lorenzo Maccone.
+\newblock Using entanglement against noise in quantum metrology.
+\newblock {\em Physical Review Letters}, 113:250801, 2014.
+\newblock \href {https://arxiv.org/abs/1407.2934} {\path{arXiv:1407.2934}},
+  \href {https://doi.org/10.1103/PhysRevLett.113.250801}
+  {\path{doi:10.1103/PhysRevLett.113.250801}}.
+
+\bibitem{SSKD17}
+Pavel Sekatski, Michalis Skotiniotis, Janek Ko{\l}ody{\'n}ski, and Wolfgang
+  D{\"u}r.
+\newblock Quantum metrology with full and fast quantum control.
+\newblock {\em Quantum}, 1:27, 2017.
+\newblock \href {https://arxiv.org/abs/1603.08944} {\path{arXiv:1603.08944}},
+  \href {https://doi.org/10.22331/q-2017-09-06-27}
+  {\path{doi:10.22331/q-2017-09-06-27}}.
+
+\bibitem{KubicaDemkowicz21}
+Aleksander Kubica and Rafa{\l} Demkowicz-Dobrza{\'n}ski.
+\newblock Using quantum metrological bounds in quantum error correction: a
+  simple proof of the approximate {E}astin--{K}nill theorem.
+\newblock {\em Physical Review Letters}, 126:150503, 2021.
+
+\bibitem{ZhouLiuJiang21}
+Sisi Zhou, Zi-Wen Liu, and Liang Jiang.
+\newblock New perspectives on covariant quantum error correction.
+\newblock {\em Quantum}, 5:521, 2021.
+
+\bibitem{Erker17}
+Paul Erker, Mark~T. Mitchison, Ralph Silva, Mischa~P. Woods, Nicolas Brunner,
+  and Marcus Huber.
+\newblock Autonomous quantum clocks: does thermodynamics limit our ability to
+  measure time?
+\newblock {\em Physical Review X}, 7:031022, 2017.
+
+\bibitem{SagawaUeda09}
+Takahiro Sagawa and Masahito Ueda.
+\newblock Minimal energy cost for thermodynamic information processing:
+  measurement and information erasure.
+\newblock {\em Physical Review Letters}, 102:250602, 2009.
+\newblock \href {https://arxiv.org/abs/0809.4098} {\path{arXiv:0809.4098}},
+  \href {https://doi.org/10.1103/PhysRevLett.102.250602}
+  {\path{doi:10.1103/PhysRevLett.102.250602}}.
+
+\bibitem{SagawaUeda11}
+Takahiro Sagawa and Masahito Ueda.
+\newblock Erratum: Minimal energy cost for thermodynamic information
+  processing: measurement and information erasure [{Phys. Rev. Lett.} 102,
+  250602 (2009)].
+\newblock {\em Physical Review Letters}, 106:189901, 2011.
+\newblock \href {https://doi.org/10.1103/PhysRevLett.106.189901}
+  {\path{doi:10.1103/PhysRevLett.106.189901}}.
+
+\bibitem{Minagawa25}
+Shintaro Minagawa, M.~Hamed Mohammady, Kenta Sakai, Kohtaro Kato, and Francesco
+  Buscemi.
+\newblock Universal validity of the second law of information thermodynamics.
+\newblock {\em npj Quantum Information}, 11:18, 2025.
+\newblock \href {https://arxiv.org/abs/2308.15558} {\path{arXiv:2308.15558}},
+  \href {https://doi.org/10.1038/s41534-024-00922-w}
+  {\path{doi:10.1038/s41534-024-00922-w}}.
+
+\bibitem{Sagawa14}
+Takahiro Sagawa.
+\newblock Thermodynamic and logical reversibilities revisited.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2014:P03025, 2014.
+\newblock \href {https://arxiv.org/abs/1311.1886} {\path{arXiv:1311.1886}},
+  \href {https://doi.org/10.1088/1742-5468/2014/03/P03025}
+  {\path{doi:10.1088/1742-5468/2014/03/P03025}}.
+
+\bibitem{HPexplicit}
+Nidhal Mghirbi and Seth Douglas.
+\newblock An explicit nonlocal game of quantum value one that needs exponential
+  entanglement, 2026.
+\newblock Version 1.0.0, unrefereed preprint.
+\newblock \href {https://doi.org/10.5281/zenodo.23697255}
+  {\path{doi:10.5281/zenodo.23697255}}.
+
+\bibitem{Slofstra17}
+William Slofstra.
+\newblock The set of quantum correlations is not closed.
+\newblock arXiv:1703.08618v2, 2017.
+\newblock URL: \url{https://arxiv.org/abs/1703.08618v2}.
+
+\bibitem{JNVWY20}
+Zhengfeng Ji, Anand Natarajan, Thomas Vidick, John Wright, and Henry Yuen.
+\newblock {MIP}$^* = ${RE}.
+\newblock arXiv:2001.04383, 2020.
+\newblock URL: \url{https://arxiv.org/abs/2001.04383}.
+
+\bibitem{MNY21}
+Hamoon Mousavi, Seyed~Sajjad Nezhadi, and Henry Yuen.
+\newblock Nonlocal games, compression theorems, and the arithmetical hierarchy.
+\newblock arXiv:2110.04651v2, 2021.
+\newblock URL: \url{https://arxiv.org/abs/2110.04651v2}.
+
+\bibitem{CPGW15}
+Toby~S. Cubitt, David Perez-Garcia, and Michael~M. Wolf.
+\newblock Undecidability of the spectral gap.
+\newblock {\em Nature}, 528:207--211, 2015.
+\newblock \href {https://doi.org/10.1038/nature16059}
+  {\path{doi:10.1038/nature16059}}.
+
+\bibitem{Zurek89}
+Wojciech~H. Zurek.
+\newblock Algorithmic randomness and physical entropy.
+\newblock {\em Physical Review A}, 40:4731--4751, 1989.
+\newblock \href {https://doi.org/10.1103/PhysRevA.40.4731}
+  {\path{doi:10.1103/PhysRevA.40.4731}}.
+
+\bibitem{BW19}
+{\"A}min Baumeler and Stefan Wolf.
+\newblock Free energy of a general computation.
+\newblock {\em Physical Review E}, 100:052115, 2019.
+\newblock \href {https://doi.org/10.1103/PhysRevE.100.052115}
+  {\path{doi:10.1103/PhysRevE.100.052115}}.
+
+\bibitem{HPdw}
+Igor Devetak and Andreas Winter.
+\newblock Distillation of secret key and entanglement from quantum states.
+\newblock {\em Proceedings of the Royal Society A}, 461:207--235, 2005.
+\newblock Theorem 10 in the arXiv text.
+\newblock URL: \url{https://arxiv.org/abs/quant-ph/0306078}, \href
+  {https://doi.org/10.1098/rspa.2004.1372} {\path{doi:10.1098/rspa.2004.1372}}.
+
+\bibitem{HPcs}
+Andrea Coladangelo and Jalex Stark.
+\newblock Robust self-testing for linear constraint system games.
+\newblock arXiv:1709.09267v2, 2019.
+\newblock Corrected version; Theorem 6.9 and Proposition 6.10.
+\newblock URL: \url{https://arxiv.org/abs/1709.09267v2}.
+
+\bibitem{HPwu}
+Xingyao Wu, Jean-Daniel Bancal, Matthew McKague, and Valerio Scarani.
+\newblock Device-independent parallel self-testing of two singlets.
+\newblock {\em Physical Review A}, 93:062121, 2016.
+\newblock URL: \url{https://arxiv.org/abs/1512.02074v2}, \href
+  {https://doi.org/10.1103/PhysRevA.93.062121}
+  {\path{doi:10.1103/PhysRevA.93.062121}}.
+
+\bibitem{BarnumKnill02}
+Howard Barnum and Emanuel Knill.
+\newblock Reversing quantum dynamics with near-optimal quantum and classical
+  fidelity.
+\newblock {\em J. Math. Phys.}, 43:2097--2106, 2002.
+\newblock \href {https://arxiv.org/abs/quant-ph/0004088}
+  {\path{arXiv:quant-ph/0004088}}, \href {https://doi.org/10.1063/1.1459754}
+  {\path{doi:10.1063/1.1459754}}.
+
+\bibitem{Winter16}
+Andreas Winter.
+\newblock Tight uniform continuity bounds for quantum entropies: conditional
+  entropy, relative entropy distance and energy constraints.
+\newblock {\em Communications in Mathematical Physics}, 347:291--313, 2016.
+
+\bibitem{DingFengHu21}
+Yuqiang Ding, Feng Ding, and Xueyuan Hu.
+\newblock Exploring the gap between thermal operations and enhanced thermal
+  operations.
+\newblock {\em Physical Review A}, 103:052214, 2021.
+\newblock \href {https://arxiv.org/abs/2101.05690} {\path{arXiv:2101.05690}}.
+
+\bibitem{Bennett82}
+Charles~H. Bennett.
+\newblock The thermodynamics of computation---a review.
+\newblock {\em International Journal of Theoretical Physics}, 21:905--940,
+  1982.
+
+\bibitem{CDP09}
+Giulio Chiribella, Giacomo~Mauro D'Ariano, and Paolo Perinotti.
+\newblock Theoretical framework for quantum networks.
+\newblock {\em Physical Review A}, 80:022339, 2009.
+\newblock arXiv:0904.4483.
+
+\bibitem{CDPcov09}
+Giulio Chiribella, Giacomo~Mauro D'Ariano, and Paolo Perinotti.
+\newblock Optimal covariant quantum networks.
+\newblock In {\em Quantum Communication, Measurement and Computing (QCMC
+  2008)}, volume 1110 of {\em AIP Conference Proceedings}, pages 47--56, 2009.
+\newblock arXiv:0812.3922.
+\newblock \href {https://doi.org/10.1063/1.3131375}
+  {\path{doi:10.1063/1.3131375}}.
+
+\bibitem{HorodeckiOppenheim13}
+Micha{\l} Horodecki and Jonathan Oppenheim.
+\newblock Fundamental limitations for quantum and nanoscale thermodynamics.
+\newblock {\em Nature Communications}, 4:2059, 2013.
+
+\bibitem{Brandao13}
+Fernando G. S.~L. Brand{\~a}o, Micha{\l} Horodecki, Jonathan Oppenheim,
+  Joseph~M. Renes, and Robert~W. Spekkens.
+\newblock Resource theory of quantum states out of thermal equilibrium.
+\newblock {\em Physical Review Letters}, 111:250404, 2013.
+
+\bibitem{LandauStreater93}
+L.~J. Landau and R.~F. Streater.
+\newblock On {B}irkhoff's theorem for doubly stochastic completely positive
+  maps of matrix algebras.
+\newblock {\em Linear Algebra and its Applications}, 193:107--127, 1993.
+
+\bibitem{Janzing00}
+Dominik Janzing, Pawel Wocjan, Robert Zeier, Rubino Geiss, and Thomas Beth.
+\newblock Thermodynamic cost of reliability and low temperatures: tightening
+  {L}andauer's principle and the second law.
+\newblock {\em International Journal of Theoretical Physics}, 39:2717--2753,
+  2000.
+
+\bibitem{vomEnde22}
+Frederik vom Ende.
+\newblock Which bath {H}amiltonians matter for thermal operations?
+\newblock {\em Journal of Mathematical Physics}, 63:112202, 2022.
+\newblock \href {https://arxiv.org/abs/2207.11189} {\path{arXiv:2207.11189}}.
+
+\bibitem{Cwiklinski15}
+Piotr {\'C}wikli{\'n}ski, Micha{\l} Studzi{\'n}ski, Micha{\l} Horodecki, and
+  Jonathan Oppenheim.
+\newblock Limitations on the evolution of quantum coherences: towards fully
+  quantum second laws of thermodynamics.
+\newblock {\em Physical Review Letters}, 115:210403, 2015.
+\newblock \href {https://arxiv.org/abs/1405.5029} {\path{arXiv:1405.5029}}.
+
+\bibitem{Aberg14}
+Johan {\AA}berg.
+\newblock Catalytic coherence.
+\newblock {\em Physical Review Letters}, 113:150402, 2014.
+\newblock \href {https://arxiv.org/abs/1304.1060} {\path{arXiv:1304.1060}}.
+
+\bibitem{KLOJ16}
+Kamil Korzekwa, Matteo Lostaglio, Jonathan Oppenheim, and David Jennings.
+\newblock The extraction of work from quantum coherence.
+\newblock {\em New Journal of Physics}, 18:023045, 2016.
+\newblock \href {https://arxiv.org/abs/1506.07875} {\path{arXiv:1506.07875}}.
+
+\bibitem{HHO03}
+Micha{\l} Horodecki, Pawe{\l} Horodecki, and Jonathan Oppenheim.
+\newblock Reversible transformations from pure to mixed states and the unique
+  measure of information.
+\newblock {\em Physical Review A}, 67:062104, 2003.
+\newblock \href {https://arxiv.org/abs/quant-ph/0212019}
+  {\path{arXiv:quant-ph/0212019}}.
+
+\bibitem{MullerHermesPerry}
+Alexander M{\"u}ller-Hermes and Christopher Perry.
+\newblock All unital qubit channels are 4-noisy operations.
+\newblock {\em Letters in Mathematical Physics}, 109:1--9, 2019.
+\newblock \href {https://arxiv.org/abs/1802.01337} {\path{arXiv:1802.01337}}.
+
+\bibitem{KSW08}
+Dennis Kretschmann, Dirk Schlingemann, and Reinhard~F. Werner.
+\newblock The information-disturbance tradeoff and the continuity of
+  {S}tinespring's representation.
+\newblock {\em IEEE Transactions on Information Theory}, 54(4):1708--1717,
+  2008.
+\newblock \href {https://arxiv.org/abs/quant-ph/0605009}
+  {\path{arXiv:quant-ph/0605009}}, \href
+  {https://doi.org/10.1109/TIT.2008.917696}
+  {\path{doi:10.1109/TIT.2008.917696}}.
+
+\bibitem{Watrous18}
+John Watrous.
+\newblock {\em The Theory of Quantum Information}.
+\newblock Cambridge University Press, 2018.
+
+\bibitem{TYTK25}
+Hiroyasu Tajima, Koji Yamaguchi, Ryuji Takagi, and Yui Kuramochi.
+\newblock Universal tradeoff relations between resource cost and
+  irreversibility of channels: General-resource {W}igner--{A}raki--{Y}anase
+  theorems and beyond, 2025.
+\newblock \href {https://arxiv.org/abs/2507.23760} {\path{arXiv:2507.23760}}.
+
+\bibitem{BrandaoSecondLaws15}
+Fernando Brand{\~a}o, Micha{\l} Horodecki, Nelly Ng, Jonathan Oppenheim, and
+  Stephanie Wehner.
+\newblock The second laws of quantum thermodynamics.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  112:3275--3279, 2015.
+
+\bibitem{NgCatalysis15}
+Nelly Huei~Ying Ng, Laura Man{\v{c}}inska, Cristina C{\^\i}rstoiu, Jens Eisert,
+  and Stephanie Wehner.
+\newblock Limits to catalysis in quantum thermodynamics.
+\newblock {\em New Journal of Physics}, 17:085004, 2015.
+
+\bibitem{AnshuJainWarsi19}
+Anurag Anshu, Rahul Jain, and Naqueeb~Ahmad Warsi.
+\newblock Building blocks for communication over noisy quantum networks.
+\newblock {\em IEEE Transactions on Information Theory}, 65(2):1287--1306,
+  2019.
+
+\bibitem{NielsenChuang97}
+Michael~A. Nielsen and Isaac~L. Chuang.
+\newblock Programmable quantum gate arrays.
+\newblock {\em Phys. Rev. Lett.}, 79:321--324, 1997.
+
+\bibitem{KubickiPalazuelosPerezGarcia19}
+Aleksander~M. Kubicki, Carlos Palazuelos, and David P{\'e}rez-Garc{\'i}a.
+\newblock Resource quantification for the no-programing theorem.
+\newblock {\em Phys. Rev. Lett.}, 122:080505, 2019.
+
+\bibitem{AWWW18}
+{\'A}lvaro~M. Alhambra, Stephanie Wehner, Mark~M. Wilde, and Mischa~P. Woods.
+\newblock Work and reversibility in quantum thermodynamics.
+\newblock {\em Physical Review A}, 97:062114, 2018.
+
+\bibitem{AwZawBalanzoScarani24}
+Clive~Cenxin Aw, Lin~Htoo Zaw, Maria Balanz{\'o}-Juand{\'o}, and Valerio
+  Scarani.
+\newblock Role of dilations in reversing physical processes: Tabletop
+  reversibility and generalized thermal operations.
+\newblock {\em PRX Quantum}, 5:010332, 2024.
+
+\bibitem{AKL16}
+Itai Arad, Tomotaka Kuwahara, and Zeph Landau.
+\newblock Connecting global and local energy distributions in quantum spin
+  models on a lattice.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2016:033301, 2016.
+\newblock \href {https://arxiv.org/abs/1406.3898} {\path{arXiv:1406.3898}}.
+
+\bibitem{NussbaumSzkola09}
+Michael Nussbaum and Arleta Szko{\l}a.
+\newblock The {C}hernoff lower bound for symmetric quantum hypothesis testing.
+\newblock {\em Ann. Statist.}, 37:1040--1057, 2009.
+
+\bibitem{PowersStormer70}
+Robert~T. Powers and Erling St{\o}rmer.
+\newblock Free states of the canonical anticommutation relations.
+\newblock {\em Commun. Math. Phys.}, 16:1--33, 1970.
+
+\bibitem{Hayashi02}
+Masahito Hayashi.
+\newblock Optimal sequence of quantum measurements in the sense of {S}tein's
+  lemma in quantum hypothesis testing.
+\newblock {\em J. Phys. A}, 35:10759--10773, 2002.
+
+\bibitem{ChristandlKonigRenner09}
+Matthias Christandl, Robert K{\"o}nig, and Renato Renner.
+\newblock Postselection technique for quantum channels with applications to
+  quantum cryptography.
+\newblock {\em Physical Review Letters}, 102:020504, 2009.
+
+\bibitem{HayashiNagaoka03}
+Masahito Hayashi and Hiroshi Nagaoka.
+\newblock General formulas for capacity of classical-quantum channels.
+\newblock {\em IEEE Transactions on Information Theory}, 49(7):1753--1768,
+  2003.
+\newblock \href {https://arxiv.org/abs/quant-ph/0206186v4}
+  {\path{arXiv:quant-ph/0206186v4}}, \href
+  {https://doi.org/10.1109/TIT.2003.813556}
+  {\path{doi:10.1109/TIT.2003.813556}}.
+
+\bibitem{Audenaert07}
+Koenraad M.~R. Audenaert.
+\newblock A sharp continuity estimate for the von {N}eumann entropy.
+\newblock {\em J. Phys. A}, 40:8127--8136, 2007.
+\newblock \href {https://doi.org/10.1088/1751-8113/40/28/S18}
+  {\path{doi:10.1088/1751-8113/40/28/S18}}.
+
+\bibitem{FuchsvandeGraaf99}
+Christopher~A. Fuchs and Jeroen van~de Graaf.
+\newblock Cryptographic distinguishability measures for quantum-mechanical
+  states.
+\newblock {\em IEEE Trans. Inf. Theory}, 45:1216--1227, 1999.
+\newblock \href {https://doi.org/10.1109/18.761271}
+  {\path{doi:10.1109/18.761271}}.
+
+\bibitem{HPlocalnonlocal}
+Micha{\l} Horodecki, Pawe{\l} Horodecki, Ryszard Horodecki, Jonathan Oppenheim,
+  Aditi {Sen(De)}, Ujjwal Sen, and Barbara Synak-Radtke.
+\newblock Local versus nonlocal information in quantum-information theory:
+  formalism and phenomena.
+\newblock {\em Physical Review A}, 71:062307, 2005.
+\newblock Result labels refer to the arXiv text.
+\newblock URL: \url{https://arxiv.org/abs/quant-ph/0410090}, \href
+  {https://doi.org/10.1103/PhysRevA.71.062307}
+  {\path{doi:10.1103/PhysRevA.71.062307}}.
+
+\bibitem{HPschumacher}
+Benjamin Schumacher.
+\newblock Quantum coding.
+\newblock {\em Physical Review A}, 51:2738--2747, 1995.
+\newblock \href {https://doi.org/10.1103/PhysRevA.51.2738}
+  {\path{doi:10.1103/PhysRevA.51.2738}}.
+
+\bibitem{HPpsstw}
+Vern~I. Paulsen, Simone Severini, Daniel Stahlke, Ivan~G. Todorov, and Andreas
+  Winter.
+\newblock Estimating quantum chromatic numbers.
+\newblock {\em Journal of Functional Analysis}, 270:2188--2222, 2016.
+\newblock \href {https://doi.org/10.1016/j.jfa.2016.01.010}
+  {\path{doi:10.1016/j.jfa.2016.01.010}}.
+
+\bibitem{HPhorodeckichsh}
+Ryszard Horodecki, Pawe{\l} Horodecki, and Micha{\l} Horodecki.
+\newblock Violating {Bell} inequality by mixed spin-$\frac12$ states: necessary
+  and sufficient condition.
+\newblock {\em Physics Letters A}, 200:340--344, 1995.
+\newblock \href {https://doi.org/10.1016/0375-9601(95)00214-N}
+  {\path{doi:10.1016/0375-9601(95)00214-N}}.
+
+\bibitem{HPlpw}
+Noah Linden, Sandu Popescu, and William~K. Wootters.
+\newblock Almost every pure state of three qubits is completely determined by
+  its two-particle reduced density matrices.
+\newblock {\em Physical Review Letters}, 89:207901, 2002.
+\newblock \href {https://doi.org/10.1103/PhysRevLett.89.207901}
+  {\path{doi:10.1103/PhysRevLett.89.207901}}.
+
+\bibitem{HPconditionaldecoupling}
+Mario Berta, Fernando G. S.~L. Brand{\~a}o, Christian Majenz, and Mark~M.
+  Wilde.
+\newblock Conditional decoupling of quantum information.
+\newblock {\em Physical Review Letters}, 121:040504, 2018.
+\newblock URL: \url{https://arxiv.org/abs/1808.00135}, \href
+  {https://doi.org/10.1103/PhysRevLett.121.040504}
+  {\path{doi:10.1103/PhysRevLett.121.040504}}.
+
+\bibitem{HPdeconstruction}
+Mario Berta, Fernando G. S.~L. Brand{\~a}o, Christian Majenz, and Mark~M.
+  Wilde.
+\newblock Deconstruction and conditional erasure of quantum correlations.
+\newblock {\em Physical Review A}, 98:042320, 2018.
+\newblock URL: \url{https://arxiv.org/abs/1609.06994}, \href
+  {https://doi.org/10.1103/PhysRevA.98.042320}
+  {\path{doi:10.1103/PhysRevA.98.042320}}.
+
+\bibitem{HPdeficit}
+Jonathan Oppenheim, Micha{\l} Horodecki, Pawe{\l} Horodecki, and Ryszard
+  Horodecki.
+\newblock Thermodynamical approach to quantifying quantum correlations.
+\newblock {\em Physical Review Letters}, 89:180402, 2002.
+\newblock \href {https://doi.org/10.1103/PhysRevLett.89.180402}
+  {\path{doi:10.1103/PhysRevLett.89.180402}}.
+
+\bibitem{HPdevetak}
+Igor Devetak.
+\newblock Distillation of local purity from quantum states.
+\newblock {\em Physical Review A}, 71:062303, 2005.
+\newblock \href {https://doi.org/10.1103/PhysRevA.71.062303}
+  {\path{doi:10.1103/PhysRevA.71.062303}}.
+
+\bibitem{HPkrovi}
+Hari Krovi and Igor Devetak.
+\newblock Local purity distillation with bounded classical communication.
+\newblock {\em Physical Review A}, 76:012321, 2007.
+\newblock \href {https://doi.org/10.1103/PhysRevA.76.012321}
+  {\path{doi:10.1103/PhysRevA.76.012321}}.
+
+\bibitem{HPgpw}
+Berry Groisman, Sandu Popescu, and Andreas Winter.
+\newblock Quantum, classical, and total amount of correlations in a quantum
+  state.
+\newblock {\em Physical Review A}, 72:032317, 2005.
+\newblock URL: \url{https://arxiv.org/abs/quant-ph/0410091}, \href
+  {https://doi.org/10.1103/PhysRevA.72.032317}
+  {\path{doi:10.1103/PhysRevA.72.032317}}.
+
+\bibitem{HPalimuddin}
+Mir Alimuddin, Nathan Shettell, Raja Yehia, Antonio Ac{\'i}n, and Federico
+  Centrone.
+\newblock Exclusive control of quantum memory erasure.
+\newblock {\em Physical Review Research}, 8:043078, 2026.
+\newblock URL: \url{https://arxiv.org/abs/2512.05761}, \href
+  {https://doi.org/10.1103/6jtz-g59p} {\path{doi:10.1103/6jtz-g59p}}.
+
+\bibitem{HPszilard}
+Piotr {\'C}wikli{\'n}ski.
+\newblock Thermodynamic value of {XOR}-game-induced side information in a
+  {Szilard} engine.
+\newblock arXiv:2605.12044v4, 2026.
+\newblock URL: \url{https://arxiv.org/abs/2605.12044v4}.
+
+\bibitem{HPbattery}
+Piotr {\'C}wikli{\'n}ski.
+\newblock Battery-explicit thermodynamic witnesses of {Bell} post-quantumness.
+\newblock {\em New Journal of Physics}, 28:084509, 2026.
+\newblock URL: \url{https://arxiv.org/abs/2605.09149v4}, \href
+  {https://doi.org/10.1088/1367-2630/ae98a4}
+  {\path{doi:10.1088/1367-2630/ae98a4}}.
+
+\bibitem{HPthermodetection}
+Koji Maruyama, Fumiaki Morikoshi, and Vlatko Vedral.
+\newblock Thermodynamical detection of entanglement by {Maxwell}'s demons.
+\newblock {\em Physical Review A}, 71:012108, 2005.
+\newblock URL: \url{https://arxiv.org/abs/quant-ph/0311083}, \href
+  {https://doi.org/10.1103/PhysRevA.71.012108}
+  {\path{doi:10.1103/PhysRevA.71.012108}}.
+
+\bibitem{HPtodd}
+Ian Todd.
+\newblock Informational hardness: unifying {Bell} non-locality and {Landauer}
+  cost, 2025.
+\newblock Preprint.
+\newblock \href {https://doi.org/10.5281/zenodo.15251934}
+  {\path{doi:10.5281/zenodo.15251934}}.
+
+\bibitem{HPvidick}
+Thomas Vidick.
+\newblock Almost synchronous quantum correlations.
+\newblock {\em Journal of Mathematical Physics}, 63:022201, 2022.
+\newblock Corrected arXiv version, 2023.
+\newblock URL: \url{https://arxiv.org/abs/2103.02468v3}, \href
+  {https://doi.org/10.1063/5.0056512} {\path{doi:10.1063/5.0056512}}.
+
+\end{thebibliography}
